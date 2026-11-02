@@ -1,0 +1,86 @@
+---
+title: "Project"
+subtitle: "General objectives, work packages and activities"
+---
+
+The project is organised into five work packages (WP), each aligned with a General Objective (GO). Each WP sets out Specific Objectives (SO) and Activities (A). A cross-cutting activity covers this website:
+
+- **A1.** Update the project's interactive website to disseminate results, share data and code, and support reproducibility.
+
+## WP1 · Bias diagnosis and correction
+
+::: {.wp-card}
+### GO1. Identify, predict and correct the bias of Theil index estimators
+
+<p class="meta">Researchers: E. Álvarez, R. Cano, R.M. García, P.J. Moya, A.J. López, J.F. Muñoz</p>
+
+- **SO1.** Quantify the bias of the estimators and the data features that cause it, comparing the sensitivity of $T_0$ and $T_1$.
+    - A2. Design the Monte Carlo experiment.
+    - A3. Relative bias (RB) and bias ratio (BR) of $T_0$ and $T_1$ (H1, H2).
+- **SO2.** Predict the bias from observable sample features, as a diagnostic tool.
+    - A4. GAM models for the bias.
+    - A5. Qualitative bias scale: negligible, mild, moderate, severe (H3).
+- **SO3.** New bias-correction techniques and their impact on the MSE.
+    - A6. Jackknife and GAM-based corrected estimators.
+    - A7. Comparison with analytical and semiparametric corrections (H4, H5).
+- **SO4.** Bias in the between- and within-group decomposition.
+    - A8. Bias of the decomposition components (H6).
+:::
+
+## WP2 · Reliable inference
+
+::: {.wp-card}
+### GO2. Reliable inference for Theil indices under strong skewness and inequality
+
+<p class="meta">Researchers: E. Álvarez, J. Chica, R.M. García, P.J. Moya, J.F. Muñoz, F. Vendrell</p>
+
+- **SO5.** Bias of variance estimators and coverage of confidence intervals.
+    - A9. Evaluation of asymptotic, bootstrap, semiparametric and jackknife variances.
+    - A10. Scenarios where inference becomes unreliable (H7).
+- **SO6.** New variance estimators and confidence intervals.
+    - A11. Jackknife variances and new confidence intervals.
+    - A12. Comparison and recommendations (H8).
+:::
+
+## WP3 · Computationally efficient inference
+
+::: {.wp-card}
+### GO3. Reduce the computational cost of the jackknife
+
+<p class="meta">Researchers: E. Álvarez, J. Chica, I. García, A.J. López, P.J. Moya, J.F. Muñoz</p>
+
+- **SO7.** Computational cost of the standard jackknife compared with alternative methods.
+    - A13. Execution times (H9).
+- **SO8.** Efficient jackknife expressions with no loss of accuracy.
+    - A14. Analytical jackknife expressions.
+    - A15. Implementation and validation (H10).
+:::
+
+## WP4 · The R package theil
+
+::: {.wp-card}
+### GO4. Open, efficient and reproducible software
+
+<p class="meta">Researchers: E. Álvarez, J. Chica, A.J. López, P.J. Moya, J.F. Muñoz</p>
+
+- **SO9.** R package **theil**, with a C++ core (Rcpp).
+    - A16. Development of the package.
+    - A17. Documentation with vignettes and release on CRAN.
+:::
+
+## WP5 · Multidisciplinary transfer
+
+::: {.wp-card}
+### GO5. Transfer to the Social Sciences
+
+<p class="meta">Researchers: all team members (coordinated by both PIs)</p>
+
+- **SO10.** Water: inequality in household water consumption and expenditure between and within municipalities.
+    - A18 (H13).
+- **SO11.** Tourism: effect of tourism on income inequality within and between destinations.
+    - A19 (H14).
+- **SO12.** Firms: servitization, digital transformation and AI adoption.
+    - A20 (H15).
+- **SO13.** Global convergence in per capita consumption with bias-corrected estimators.
+    - A21 (H16).
+:::

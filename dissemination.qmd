@@ -1,0 +1,29 @@
+---
+title: "Dissemination"
+subtitle: "Seminars, conferences and research stays"
+---
+
+## Seminars
+
+::: {.pending}
+To be completed.
+:::
+
+## Conferences
+
+::: {.pending}
+To be completed. Upcoming conferences of interest: ECINEQ, IARIW, ISI World Statistics Congress, COMPSTAT, EcoSta.
+:::
+
+## Research stays
+
+::: {.pending}
+To be completed.
+:::
+
+## Inequality in the news
+
+- **2025 · Eurostat.** [Inequality in enlargement countries](https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Inequality_in_enlargement_countries&oldid=681506).
+- **2024 · World Bank.** [The geography of high inequality: monitoring the World Bank's new indicator](https://blogs.worldbank.org/en/opendata/the-geography-of-high-inequality--monitoring-the-world-bank-s-ne).
+- **2023 · World Bank.** [2023 in nine charts: a growing inequality](https://www.worldbank.org/en/news/feature/2023/12/18/2023-in-nine-charts-a-growing-inequality).
+- **2023 · World Economic Forum.** [Global inequality is a failure of imagination](https://www.weforum.org/agenda/2023/01/global-inequality-is-a-failure-of-imagination/).

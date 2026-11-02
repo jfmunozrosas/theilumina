@@ -1,0 +1,172 @@
+---
+title: "Interactive bias explorer"
+subtitle: "How skewness, inequality and sample size affect the bias of Theil index estimators"
+---
+
+This page runs a small Monte Carlo experiment **in your browser**. For each true value of the index, it draws `R` samples of size `n` from the selected distributions, computes the plug-in estimator and reports the empirical relative bias:
+
+$$
+RB(\%) = 100 \times \frac{\frac{1}{R}\sum_{r=1}^{R}\widehat{T}^{(r)} - T}{T}.
+$$
+
+The parameters of each distribution are set so that the true index ($T_0$ or $T_1$) takes the value on the horizontal axis. Pareto is the most skewed distribution, Gamma the least.
+
+```{ojs}
+//| echo: false
+viewof params = Inputs.form({
+  index: Inputs.radio(["T0", "T1"], {label: "Index", value: "T0"}),
+  n:     Inputs.select([25, 50, 100, 200, 500, 1000], {label: "Sample size (n)", value: 50}),
+  R:     Inputs.select([200, 500, 1000, 2000], {label: "Replications (R)", value: 500}),
+  dists: Inputs.checkbox(["Pareto", "Lognormal", "Gamma"], {label: "Distributions", value: ["Pareto", "Lognormal", "Gamma"]}),
+  correction: Inputs.toggle({label: "Add jackknife-corrected estimator", value: false})
+})
+```
+
+```{ojs}
+//| echo: false
+Plot.plot({
+  height: 380,
+  marginLeft: 55,
+  x: {label: `True ${params.index}`, grid: true},
+  y: {label: "Relative bias (%)", grid: true},
+  color: {legend: true, domain: series, range: palette},
+  marks: [
+    Plot.ruleY([0], {stroke: "#888", strokeDasharray: "4,3"}),
+    Plot.line(results, {x: "T", y: "RB", stroke: "series", strokeWidth: 2.5}),
+    Plot.dot(results, {x: "T", y: "RB", fill: "series", r: 3.5, tip: true})
+  ]
+})
+```
+
+```{ojs}
+//| echo: false
+Inputs.table(results.map(d => ({Series: d.series, "True T": d.T, "RB (%)": d.RB.toFixed(2)})), {rows: 12})
+```
+
+::: {.callout-note}
+## How to read the results
+With symmetric or moderately skewed data (Gamma), the relative bias is small and shrinks quickly as `n` grows. With strong skewness (Pareto) and high inequality, the plug-in estimator **underestimates** inequality, and the bias remains large even for moderate sample sizes. The jackknife correction reduces, but does not always remove, this bias. These are the scenarios studied in WP1 and WP2.
+:::
+
+```{ojs}
+//| echo: false
+//| output: false
+
+Tgrid = [0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50]
+
+series = params.correction
+  ? params.dists.flatMap(d => [d, `${d} (jackknife)`])
+  : params.dists
+
+palette = {
+  const base = {"Pareto": "#E07B20", "Lognormal": "#1F4E7A", "Gamma": "#4FA383"};
+  const out = [];
+  for (const d of params.dists) {
+    out.push(base[d]);
+    if (params.correction) out.push(d3.color(base[d]).brighter(1.2).formatHex());
+  }
+  return out;
+}
+
+// ---------- special functions ----------
+function digamma(x) {
+  let r = 0;
+  while (x < 6) { r -= 1 / x; x += 1; }
+  const f = 1 / (x * x);
+  return r + Math.log(x) - 0.5 / x
+    - f * (1/12 - f * (1/120 - f * (1/252 - f * (1/240 - f / 132))));
+}
+
+function bisect(fn, lo, hi, target) {
+  // fn is monotone decreasing on [lo, hi]
+  for (let i = 0; i < 200; i++) {
+    const mid = Math.sqrt(lo * hi);
+    if (fn(mid) > target) lo = mid; else hi = mid;
+  }
+  return Math.sqrt(lo * hi);
+}
+
+// ---------- true indices ----------
+function trueT(dist, index, p) {
+  if (dist === "Lognormal") return p * p / 2;
+  if (dist === "Pareto")
+    return index === "T1" ? 1 / (p - 1) - Math.log(p / (p - 1))
+                          : Math.log(p / (p - 1)) - 1 / p;
+  // Gamma
+  return index === "T1" ? digamma(p) + 1 / p - Math.log(p)
+                        : Math.log(p) - digamma(p);
+}
+
+function paramFor(dist, index, T) {
+  if (dist === "Lognormal") return Math.sqrt(2 * T);
+  if (dist === "Pareto") return bisect(a => trueT("Pareto", index, a), 1.0001, 1e4, T);
+  return bisect(k => trueT("Gamma", index, k), 1e-3, 1e5, T);
+}
+
+// ---------- random generation ----------
+function rnorm() {
+  let u = 0, v = 0;
+  while (u === 0) u = Math.random();
+  while (v === 0) v = Math.random();
+  return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+}
+
+function rgamma(k) {
+  if (k < 1) return rgamma(k + 1) * Math.pow(Math.random(), 1 / k);
+  const d = k - 1 / 3, c = 1 / Math.sqrt(9 * d);
+  for (;;) {
+    let x, v;
+    do { x = rnorm(); v = 1 + c * x; } while (v <= 0);
+    v = v * v * v;
+    const u = Math.random();
+    if (u < 1 - 0.0331 * x ** 4) return d * v;
+    if (Math.log(u) < 0.5 * x * x + d * (1 - v + Math.log(v))) return d * v;
+  }
+}
+
+function draw(dist, p) {
+  if (dist === "Lognormal") return Math.exp(p * rnorm());
+  if (dist === "Pareto") return Math.pow(1 - Math.random(), -1 / p);
+  return rgamma(p);
+}
+
+// ---------- estimators (plug-in and jackknife, O(n)) ----------
+function estimate(y, index, jack) {
+  const n = y.length;
+  let Sy = 0, Sly = 0, Sylogy = 0;
+  for (const v of y) { const l = Math.log(v); Sy += v; Sly += l; Sylogy += v * l; }
+  const m = Sy / n;
+  const est = index === "T1" ? Sylogy / Sy - Math.log(m) : Math.log(m) - Sly / n;
+  if (!jack) return [est, NaN];
+  let sLoo = 0;
+  for (const v of y) {
+    const l = Math.log(v), mi = (Sy - v) / (n - 1);
+    sLoo += index === "T1" ? (Sylogy - v * l) / (Sy - v) - Math.log(mi)
+                           : Math.log(mi) - (Sly - l) / (n - 1);
+  }
+  return [est, n * est - (n - 1) * (sLoo / n)];
+}
+
+// ---------- Monte Carlo ----------
+results = {
+  const {index, n, R, dists, correction} = params;
+  const out = [];
+  const y = new Float64Array(n);
+  for (const dist of dists) {
+    for (const T of Tgrid) {
+      const p = paramFor(dist, index, T);
+      let s0 = 0, s1 = 0;
+      for (let r = 0; r < R; r++) {
+        for (let i = 0; i < n; i++) y[i] = draw(dist, p);
+        const [e0, e1] = estimate(y, index, correction);
+        s0 += e0; s1 += e1;
+      }
+      out.push({series: dist, T, RB: 100 * (s0 / R - T) / T});
+      if (correction) out.push({series: `${dist} (jackknife)`, T, RB: 100 * (s1 / R - T) / T});
+    }
+  }
+  return out;
+}
+```
+
+The code of this simulation is shown in the source of this page (button *Code* at the top right). The full simulation study of the project is carried out in R and will be available in the section [Research data and R code](data-code.qmd).

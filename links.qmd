@@ -1,0 +1,28 @@
+---
+title: "Links of interest"
+---
+
+## Websites on inequality
+
+- [World Inequality Lab](https://inequalitylab.world/en/)
+- [Society for the Study of Economic Inequality (ECINEQ)](http://www.ecineq.org/)
+- [International Association for Research in Income and Wealth (IARIW)](https://iariw.org/)
+
+## Institutions and agendas
+
+- [Eurostat](https://ec.europa.eu/eurostat)
+- [Instituto Nacional de Estadística (Spain)](https://www.ine.es/)
+- [World Bank](https://www.worldbank.org/en/home)
+- [The 2030 Agenda for Sustainable Development](https://sdgs.un.org/2030agenda)
+
+## Datasets
+
+- [Penn World Table (PWT)](https://www.rug.nl/ggdc/productivity/pwt/)
+- [EU-SILC](https://ec.europa.eu/eurostat/web/microdata/european-union-statistics-on-income-and-living-conditions)
+- [HFCN — Eurosystem Household Finance and Consumption Network](https://www.ecb.europa.eu/pub/economic-research/research-networks/html/researcher_hfcn.en.html)
+- [AQUASTAT](https://www.fao.org/aquastat/en/)
+- [World Bank Enterprise Surveys](https://www.enterprisesurveys.org/en/enterprisesurveys)
+
+## Software
+
+- [R](https://www.r-project.org/) · [Quarto](https://quarto.org/) · [Posit (RStudio)](https://posit.co/) · [Rcpp](https://www.rcpp.org/)

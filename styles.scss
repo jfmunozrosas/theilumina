@@ -1,0 +1,56 @@
+/*-- scss:defaults --*/
+// Colores tomados del logo de THEILUMINA
+$theil-orange: #E07B20;
+$theil-blue:   #1F4E7A;
+$theil-frame:  #4F81BD;
+$theil-cream:  #FAF7F2;
+
+$primary: $theil-blue;
+$link-color: $theil-blue;
+$navbar-bg: #ffffff;
+$navbar-fg: $theil-blue;
+$navbar-hl: $theil-orange;
+$footer-bg: $theil-cream;
+$font-family-sans-serif: "Source Sans 3", "Segoe UI", Roboto, sans-serif;
+$headings-color: $theil-blue;
+
+/*-- scss:rules --*/
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap');
+
+.navbar { border-bottom: 3px solid $theil-orange; }
+.navbar-brand img { max-height: 46px; }
+
+h1, h2 { font-weight: 700; }
+h2 { border-bottom: 2px solid rgba($theil-orange, .35); padding-bottom: .25rem; }
+
+.hero {
+  background: $theil-cream;
+  border-left: 6px solid $theil-orange;
+  border-radius: 8px;
+  padding: 1.5rem 1.75rem;
+  margin: 1rem 0 2rem;
+  .tagline { font-size: 1.2rem; color: $theil-blue; margin: .75rem 0 0; }
+}
+
+.wp-card {
+  border: 1px solid rgba($theil-frame, .45);
+  border-top: 4px solid $theil-orange;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.25rem;
+  background: #fff;
+  h3 { margin-top: 0; color: $theil-blue; }
+  .meta { font-size: .9rem; color: #555; }
+}
+
+.pill {
+  display: inline-block;
+  background: rgba($theil-orange, .12);
+  color: darken($theil-orange, 15%);
+  border-radius: 999px;
+  padding: .1rem .6rem;
+  font-size: .85rem;
+  margin: 0 .25rem .25rem 0;
+}
+
+.pending { color: #888; font-style: italic; }

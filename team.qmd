@@ -1,0 +1,32 @@
+---
+title: "Team"
+---
+
+<!-- Revisar y completar la composición definitiva del equipo antes de publicar -->
+
+## Principal investigators
+
+- **Muñoz Rosas, J.F.** (University of Granada, Quantitative Methods)
+- <span class="pending">Second PI: to be completed</span>
+
+## Research team
+
+**University of Granada · Quantitative Methods and Statistics**
+Álvarez, E.; Cano, R.; Chica, J.; García, I.; García, R.M.; López, A.J.; Moya, P.J.; Muñoz, J.F.
+
+**University of Granada · Applied Economics (water, well-being)**
+<span class="pending">To be completed</span>
+
+**Tourism**
+Salinas, J.A.; <span class="pending">to be completed</span>
+
+**Business and management (servitization, digital transformation)**
+Vendrell, F.
+
+## Areas of expertise
+
+<span class="pill">Statistics and Operations Research</span>
+<span class="pill">Quantitative Methods</span>
+<span class="pill">Applied Economics</span>
+<span class="pill">Tourism</span>
+<span class="pill">Management and Business</span>

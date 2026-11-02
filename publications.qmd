@@ -1,0 +1,29 @@
+---
+title: "Publications"
+---
+
+## Target journals
+
+The main dissemination channel is publication in leading journals (JCR D1 or ABS 4/4*). Methodological results (WP1–WP3) target journals such as *Journal of Econometrics*, *Sociological Methods & Research*, *Social Indicators Research*, *Journal of Economic Inequality* and *Computational Statistics & Data Analysis*. The R package (WP4) targets the *Journal of Statistical Software*, and the applications (WP5) target journals in Water Resources, Tourism, Management and Business.
+
+## Working papers
+
+::: {.pending}
+To be completed as papers are submitted.
+:::
+
+## Published papers
+
+::: {.pending}
+To be completed.
+:::
+
+## Software
+
+- **theil**: Theil indices, bias corrections, variances and confidence intervals. R package with a C++ core. <span class="pending">Forthcoming on CRAN.</span>
+
+## Previous related work (GiniUs project)
+
+Muñoz, J.F., Moya-Fernández, P.J., & Álvarez-Verdejo, E. (2023). Exploring and correcting the bias in the estimation of the Gini measure of inequality. *Sociological Methods & Research*. <https://doi.org/10.1177/00491241231176847>
+
+Muñoz, J.F., Pavía, J.M., & Álvarez-Verdejo, E. (2024). giniVarCI: Gini indices, variances and confidence intervals for finite and infinite populations. R package. <https://CRAN.R-project.org/package=giniVarCI>

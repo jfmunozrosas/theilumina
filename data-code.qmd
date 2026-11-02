@@ -1,0 +1,78 @@
+---
+title: "Research data and R code"
+subtitle: "Reproducible simulation of samples with a given Theil index"
+---
+
+## Required libraries
+
+```r
+library(VGAM)      # rpareto(), rdagum()
+library(moments)   # skewness(), kurtosis()
+```
+
+## Parameters for a given value of the index
+
+The following functions return the parameter of each distribution that yields a given value of $T_0$ or $T_1$, using the closed forms on the page [Theil indices](theil-indices.qmd).
+
+```r
+# True Theil indices
+T.lognormal <- function(sigma)       sigma^2 / 2
+T.pareto    <- function(alpha, index) if (index == "T1")
+  1 / (alpha - 1) - log(alpha / (alpha - 1)) else log(alpha / (alpha - 1)) - 1 / alpha
+T.gamma     <- function(k, index) if (index == "T1")
+  digamma(k) + 1 / k - log(k) else log(k) - digamma(k)
+
+# Parameter giving a target value of the index
+param.theil <- function(T, dist = c("lognormal", "pareto", "gamma"),
+                        index = c("T0", "T1")) {
+  dist  <- match.arg(dist)
+  index <- match.arg(index)
+  switch(dist,
+    lognormal = sqrt(2 * T),
+    pareto    = uniroot(function(a) T.pareto(a, index) - T, c(1 + 1e-6, 1e4))$root,
+    gamma     = uniroot(function(k) T.gamma(k, index)  - T, c(1e-4, 1e5))$root)
+}
+```
+
+## Samples with a given Theil index
+
+```r
+set.seed(123)
+n <- 50
+T <- 0.3
+
+alpha <- param.theil(T, "pareto",    "T0")
+sigma <- param.theil(T, "lognormal", "T0")
+k     <- param.theil(T, "gamma",     "T0")
+
+Y.Par <- rpareto(n, scale = 1, shape = alpha)
+Y.Log <- rlnorm(n, meanlog = 5, sdlog = sigma)
+Y.Gam <- rgamma(n, shape = k, scale = 1)
+
+# Sample skewness: the key driver of the bias
+sapply(list(Pareto = Y.Par, Lognormal = Y.Log, Gamma = Y.Gam), skewness)
+```
+
+## Monte Carlo estimate of the relative bias
+
+```r
+RB.theil <- function(T, n, R = 1000, dist = "pareto", index = "T0") {
+  p   <- param.theil(T, dist, index)
+  rdist <- switch(dist,
+    lognormal = function() rlnorm(n, 0, p),
+    pareto    = function() rpareto(n, scale = 1, shape = p),
+    gamma     = function() rgamma(n, shape = p))
+  est <- replicate(R, { y <- rdist(); if (index == "T1") T1.hat(y) else T0.hat(y) })
+  100 * (mean(est) - T) / T
+}
+
+RB.theil(T = 0.5, n = 50, dist = "pareto", index = "T0")
+```
+
+The functions `T0.hat()` and `T1.hat()` are defined on the page [Theil indices](theil-indices.qmd).
+
+## Datasets of the project
+
+::: {.pending}
+The simulated datasets and the R code of each publication will be released here (and in an OSF repository) once the corresponding paper is accepted.
+:::
