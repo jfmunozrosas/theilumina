@@ -1,117 +1,5 @@
 [
   {
-    "objectID": "theil-indices.html",
-    "href": "theil-indices.html",
-    "title": "Theil indices",
-    "section": "",
-    "text": "Let Y be a positive random variable with mean \\mu = E[Y]. The Theil indices are members of the generalised entropy family GE(\\alpha):\n\nT_1 = GE(1) = E\\left[\\frac{Y}{\\mu}\\log\\frac{Y}{\\mu}\\right],\n\\qquad\nT_0 = GE(0) = E\\left[\\log\\frac{\\mu}{Y}\\right] = \\log\\mu - E[\\log Y].\n\nT_1 is the Theil index and T_0 the mean logarithmic deviation (MLD). Both are zero under perfect equality and increase with inequality. T_1 is more sensitive to the upper tail of the distribution, and T_0 to the lower tail.\n\n\n\n\n\n\n\n\n\n\nDistribution\nT_0\nT_1\n\n\n\n\nLognormal (\\mu_{\\log}, \\sigma)\n\\sigma^2/2\n\\sigma^2/2\n\n\nPareto (x_m, \\alpha), \\alpha&gt;1\n\\log\\frac{\\alpha}{\\alpha-1} - \\frac{1}{\\alpha}\n\\frac{1}{\\alpha-1} - \\log\\frac{\\alpha}{\\alpha-1}\n\n\nGamma (k, \\theta)\n\\log k - \\psi(k)\n\\psi(k) + \\frac{1}{k} - \\log k\n\n\n\nwhere \\psi(\\cdot) is the digamma function."
-  },
-  {
-    "objectID": "theil-indices.html#definition",
-    "href": "theil-indices.html#definition",
-    "title": "Theil indices",
-    "section": "",
-    "text": "Let Y be a positive random variable with mean \\mu = E[Y]. The Theil indices are members of the generalised entropy family GE(\\alpha):\n\nT_1 = GE(1) = E\\left[\\frac{Y}{\\mu}\\log\\frac{Y}{\\mu}\\right],\n\\qquad\nT_0 = GE(0) = E\\left[\\log\\frac{\\mu}{Y}\\right] = \\log\\mu - E[\\log Y].\n\nT_1 is the Theil index and T_0 the mean logarithmic deviation (MLD). Both are zero under perfect equality and increase with inequality. T_1 is more sensitive to the upper tail of the distribution, and T_0 to the lower tail.\n\n\n\n\n\n\n\n\n\n\nDistribution\nT_0\nT_1\n\n\n\n\nLognormal (\\mu_{\\log}, \\sigma)\n\\sigma^2/2\n\\sigma^2/2\n\n\nPareto (x_m, \\alpha), \\alpha&gt;1\n\\log\\frac{\\alpha}{\\alpha-1} - \\frac{1}{\\alpha}\n\\frac{1}{\\alpha-1} - \\log\\frac{\\alpha}{\\alpha-1}\n\n\nGamma (k, \\theta)\n\\log k - \\psi(k)\n\\psi(k) + \\frac{1}{k} - \\log k\n\n\n\nwhere \\psi(\\cdot) is the digamma function."
-  },
-  {
-    "objectID": "theil-indices.html#additive-decomposition",
-    "href": "theil-indices.html#additive-decomposition",
-    "title": "Theil indices",
-    "section": "Additive decomposition",
-    "text": "Additive decomposition\nIf the population is partitioned into G groups with population shares p_g, income shares s_g, means \\mu_g and indices T_{0g}, T_{1g}:\n\nT_1 = \\underbrace{\\sum_{g=1}^{G} s_g\\, T_{1g}}_{\\text{within}} + \\underbrace{\\sum_{g=1}^{G} s_g \\log\\frac{\\mu_g}{\\mu}}_{\\text{between}},\n\\qquad\nT_0 = \\underbrace{\\sum_{g=1}^{G} p_g\\, T_{0g}}_{\\text{within}} + \\underbrace{\\sum_{g=1}^{G} p_g \\log\\frac{\\mu}{\\mu_g}}_{\\text{between}}.\n\nThis property makes the Theil indices the standard tool to identify the sources of inequality: by region, gender, age, education, sector, type of employment or municipality size."
-  },
-  {
-    "objectID": "theil-indices.html#plug-in-estimators",
-    "href": "theil-indices.html#plug-in-estimators",
-    "title": "Theil indices",
-    "section": "Plug-in estimators",
-    "text": "Plug-in estimators\nGiven a sample y_1,\\dots,y_n with mean \\bar y:\n\n\\widehat{T}_1 = \\frac{1}{n}\\sum_{i=1}^{n}\\frac{y_i}{\\bar y}\\log\\frac{y_i}{\\bar y}\n= \\frac{\\sum_i y_i\\log y_i}{\\sum_i y_i} - \\log\\bar y,\n\\qquad\n\\widehat{T}_0 = \\log\\bar y - \\frac{1}{n}\\sum_{i=1}^{n}\\log y_i .\n\nT1.hat &lt;- function(y) {\n  m &lt;- mean(y)\n  mean((y / m) * log(y / m))\n}\n\nT0.hat &lt;- function(y) {\n  log(mean(y)) - mean(log(y))\n}\nThese estimators are consistent but biased in finite samples. The bias is negligible for symmetric, low-inequality data, but becomes severe under strong skewness and inequality. See the interactive bias explorer."
-  },
-  {
-    "objectID": "theil-indices.html#jackknife-bias-correction-and-variance",
-    "href": "theil-indices.html#jackknife-bias-correction-and-variance",
-    "title": "Theil indices",
-    "section": "Jackknife bias correction and variance",
-    "text": "Jackknife bias correction and variance\nLet \\widehat{T}_{(i)} be the estimator computed without observation i, and \\widehat{T}_{(\\cdot)} = n^{-1}\\sum_i \\widehat{T}_{(i)}. The jackknife bias-corrected estimator and variance estimator are\n\n\\widehat{T}^{\\,J} = n\\,\\widehat{T} - (n-1)\\,\\widehat{T}_{(\\cdot)},\n\\qquad\n\\widehat{V}_J = \\frac{n-1}{n}\\sum_{i=1}^{n}\\left(\\widehat{T}_{(i)} - \\widehat{T}_{(\\cdot)}\\right)^2 .\n\nThe standard implementation recomputes the index n times, with cost O(n^2). Because \\widehat{T}_0 and \\widehat{T}_1 depend on the data only through a few sums, every leave-one-out value can be obtained by subtracting observation i from those sums, with cost O(n):\n# Leave-one-out values in O(n)\nT.loo &lt;- function(y, index = c(\"T1\", \"T0\")) {\n  index &lt;- match.arg(index)\n  n  &lt;- length(y)\n  Sy &lt;- sum(y)\n  m.i &lt;- (Sy - y) / (n - 1)                      # leave-one-out means\n  if (index == \"T1\") {\n    Sylogy &lt;- sum(y * log(y))\n    (Sylogy - y * log(y)) / (Sy - y) - log(m.i)\n  } else {\n    Slogy &lt;- sum(log(y))\n    log(m.i) - (Slogy - log(y)) / (n - 1)\n  }\n}\n\njackknife.theil &lt;- function(y, index = c(\"T1\", \"T0\")) {\n  index &lt;- match.arg(index)\n  n   &lt;- length(y)\n  est &lt;- if (index == \"T1\") T1.hat(y) else T0.hat(y)\n  loo &lt;- T.loo(y, index)\n  m.loo &lt;- mean(loo)\n  list(estimate  = est,\n       corrected = n * est - (n - 1) * m.loo,\n       variance  = (n - 1) / n * sum((loo - m.loo)^2))   # two-pass\n}\nThese functions will be part of the R package theil, developed in WP4."
-  },
-  {
-    "objectID": "simulation.html",
-    "href": "simulation.html",
-    "title": "Interactive bias explorer",
-    "section": "",
-    "text": "This page runs a small Monte Carlo experiment in your browser. For each true value of the index, it draws R samples of size n from the selected distributions, computes the plug-in estimator and reports the empirical relative bias:\n\nRB(\\%) = 100 \\times \\frac{\\frac{1}{R}\\sum_{r=1}^{R}\\widehat{T}^{(r)} - T}{T}.\n\nThe parameters of each distribution are set so that the true index (T_0 or T_1) takes the value on the horizontal axis. Pareto is the most skewed distribution, Gamma the least.\n\n\nCode\nviewof params = Inputs.form({\n  index: Inputs.radio([\"T0\", \"T1\"], {label: \"Index\", value: \"T0\"}),\n  n:     Inputs.select([25, 50, 100, 200, 500, 1000], {label: \"Sample size (n)\", value: 50}),\n  R:     Inputs.select([200, 500, 1000, 2000], {label: \"Replications (R)\", value: 500}),\n  dists: Inputs.checkbox([\"Pareto\", \"Lognormal\", \"Gamma\"], {label: \"Distributions\", value: [\"Pareto\", \"Lognormal\", \"Gamma\"]}),\n  correction: Inputs.toggle({label: \"Add jackknife-corrected estimator\", value: false})\n})\n\n\n\n\n\n\n\n\n\nCode\nPlot.plot({\n  height: 380,\n  marginLeft: 55,\n  x: {label: `True ${params.index}`, grid: true},\n  y: {label: \"Relative bias (%)\", grid: true},\n  color: {legend: true, domain: series, range: palette},\n  marks: [\n    Plot.ruleY([0], {stroke: \"#888\", strokeDasharray: \"4,3\"}),\n    Plot.line(results, {x: \"T\", y: \"RB\", stroke: \"series\", strokeWidth: 2.5}),\n    Plot.dot(results, {x: \"T\", y: \"RB\", fill: \"series\", r: 3.5, tip: true})\n  ]\n})\n\n\n\n\n\n\n\n\n\nCode\nInputs.table(results.map(d =&gt; ({Series: d.series, \"True T\": d.T, \"RB (%)\": d.RB.toFixed(2)})), {rows: 12})\n\n\n\n\n\n\n\n\n\n\n\n\n\nHow to read the results\n\n\n\nWith symmetric or moderately skewed data (Gamma), the relative bias is small and shrinks quickly as n grows. With strong skewness (Pareto) and high inequality, the plug-in estimator underestimates inequality, and the bias remains large even for moderate sample sizes. The jackknife correction reduces, but does not always remove, this bias. These are the scenarios studied in WP1 and WP2.\n\n\n\n\nCode\nTgrid = [0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50]\n\nseries = params.correction\n  ? params.dists.flatMap(d =&gt; [d, `${d} (jackknife)`])\n  : params.dists\n\npalette = {\n  const base = {\"Pareto\": \"#E07B20\", \"Lognormal\": \"#1F4E7A\", \"Gamma\": \"#4FA383\"};\n  const out = [];\n  for (const d of params.dists) {\n    out.push(base[d]);\n    if (params.correction) out.push(d3.color(base[d]).brighter(1.2).formatHex());\n  }\n  return out;\n}\n\n// ---------- special functions ----------\nfunction digamma(x) {\n  let r = 0;\n  while (x &lt; 6) { r -= 1 / x; x += 1; }\n  const f = 1 / (x * x);\n  return r + Math.log(x) - 0.5 / x\n    - f * (1/12 - f * (1/120 - f * (1/252 - f * (1/240 - f / 132))));\n}\n\nfunction bisect(fn, lo, hi, target) {\n  // fn is monotone decreasing on [lo, hi]\n  for (let i = 0; i &lt; 200; i++) {\n    const mid = Math.sqrt(lo * hi);\n    if (fn(mid) &gt; target) lo = mid; else hi = mid;\n  }\n  return Math.sqrt(lo * hi);\n}\n\n// ---------- true indices ----------\nfunction trueT(dist, index, p) {\n  if (dist === \"Lognormal\") return p * p / 2;\n  if (dist === \"Pareto\")\n    return index === \"T1\" ? 1 / (p - 1) - Math.log(p / (p - 1))\n                          : Math.log(p / (p - 1)) - 1 / p;\n  // Gamma\n  return index === \"T1\" ? digamma(p) + 1 / p - Math.log(p)\n                        : Math.log(p) - digamma(p);\n}\n\nfunction paramFor(dist, index, T) {\n  if (dist === \"Lognormal\") return Math.sqrt(2 * T);\n  if (dist === \"Pareto\") return bisect(a =&gt; trueT(\"Pareto\", index, a), 1.0001, 1e4, T);\n  return bisect(k =&gt; trueT(\"Gamma\", index, k), 1e-3, 1e5, T);\n}\n\n// ---------- random generation ----------\nfunction rnorm() {\n  let u = 0, v = 0;\n  while (u === 0) u = Math.random();\n  while (v === 0) v = Math.random();\n  return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);\n}\n\nfunction rgamma(k) {\n  if (k &lt; 1) return rgamma(k + 1) * Math.pow(Math.random(), 1 / k);\n  const d = k - 1 / 3, c = 1 / Math.sqrt(9 * d);\n  for (;;) {\n    let x, v;\n    do { x = rnorm(); v = 1 + c * x; } while (v &lt;= 0);\n    v = v * v * v;\n    const u = Math.random();\n    if (u &lt; 1 - 0.0331 * x ** 4) return d * v;\n    if (Math.log(u) &lt; 0.5 * x * x + d * (1 - v + Math.log(v))) return d * v;\n  }\n}\n\nfunction draw(dist, p) {\n  if (dist === \"Lognormal\") return Math.exp(p * rnorm());\n  if (dist === \"Pareto\") return Math.pow(1 - Math.random(), -1 / p);\n  return rgamma(p);\n}\n\n// ---------- estimators (plug-in and jackknife, O(n)) ----------\nfunction estimate(y, index, jack) {\n  const n = y.length;\n  let Sy = 0, Sly = 0, Sylogy = 0;\n  for (const v of y) { const l = Math.log(v); Sy += v; Sly += l; Sylogy += v * l; }\n  const m = Sy / n;\n  const est = index === \"T1\" ? Sylogy / Sy - Math.log(m) : Math.log(m) - Sly / n;\n  if (!jack) return [est, NaN];\n  let sLoo = 0;\n  for (const v of y) {\n    const l = Math.log(v), mi = (Sy - v) / (n - 1);\n    sLoo += index === \"T1\" ? (Sylogy - v * l) / (Sy - v) - Math.log(mi)\n                           : Math.log(mi) - (Sly - l) / (n - 1);\n  }\n  return [est, n * est - (n - 1) * (sLoo / n)];\n}\n\n// ---------- Monte Carlo ----------\nresults = {\n  const {index, n, R, dists, correction} = params;\n  const out = [];\n  const y = new Float64Array(n);\n  for (const dist of dists) {\n    for (const T of Tgrid) {\n      const p = paramFor(dist, index, T);\n      let s0 = 0, s1 = 0;\n      for (let r = 0; r &lt; R; r++) {\n        for (let i = 0; i &lt; n; i++) y[i] = draw(dist, p);\n        const [e0, e1] = estimate(y, index, correction);\n        s0 += e0; s1 += e1;\n      }\n      out.push({series: dist, T, RB: 100 * (s0 / R - T) / T});\n      if (correction) out.push({series: `${dist} (jackknife)`, T, RB: 100 * (s1 / R - T) / T});\n    }\n  }\n  return out;\n}\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe code of this simulation is shown in the source of this page (button Code at the top right). The full simulation study of the project is carried out in R and will be available in the section Research data and R code.\n\n\n\n\n\n Back to top"
-  },
-  {
-    "objectID": "project.html",
-    "href": "project.html",
-    "title": "Project",
-    "section": "",
-    "text": "The project is organised into five work packages (WP), each aligned with a General Objective (GO). Each WP sets out Specific Objectives (SO) and Activities (A). A cross-cutting activity covers this website:"
-  },
-  {
-    "objectID": "project.html#wp1-bias-diagnosis-and-correction",
-    "href": "project.html#wp1-bias-diagnosis-and-correction",
-    "title": "Project",
-    "section": "WP1 · Bias diagnosis and correction",
-    "text": "WP1 · Bias diagnosis and correction\n\nGO1. Identify, predict and correct the bias of Theil index estimators\n\nResearchers: E. Álvarez, R. Cano, R.M. García, P.J. Moya, A.J. López, J.F. Muñoz\n\n\nSO1. Quantify the bias of the estimators and the data features that cause it, comparing the sensitivity of T_0 and T_1.\n\nA2. Design the Monte Carlo experiment.\nA3. Relative bias (RB) and bias ratio (BR) of T_0 and T_1 (H1, H2).\n\nSO2. Predict the bias from observable sample features, as a diagnostic tool.\n\nA4. GAM models for the bias.\nA5. Qualitative bias scale: negligible, mild, moderate, severe (H3).\n\nSO3. New bias-correction techniques and their impact on the MSE.\n\nA6. Jackknife and GAM-based corrected estimators.\nA7. Comparison with analytical and semiparametric corrections (H4, H5).\n\nSO4. Bias in the between- and within-group decomposition.\n\nA8. Bias of the decomposition components (H6)."
-  },
-  {
-    "objectID": "project.html#wp2-reliable-inference",
-    "href": "project.html#wp2-reliable-inference",
-    "title": "Project",
-    "section": "WP2 · Reliable inference",
-    "text": "WP2 · Reliable inference\n\nGO2. Reliable inference for Theil indices under strong skewness and inequality\n\nResearchers: E. Álvarez, J. Chica, R.M. García, P.J. Moya, J.F. Muñoz, F. Vendrell\n\n\nSO5. Bias of variance estimators and coverage of confidence intervals.\n\nA9. Evaluation of asymptotic, bootstrap, semiparametric and jackknife variances.\nA10. Scenarios where inference becomes unreliable (H7).\n\nSO6. New variance estimators and confidence intervals.\n\nA11. Jackknife variances and new confidence intervals.\nA12. Comparison and recommendations (H8)."
-  },
-  {
-    "objectID": "project.html#wp3-computationally-efficient-inference",
-    "href": "project.html#wp3-computationally-efficient-inference",
-    "title": "Project",
-    "section": "WP3 · Computationally efficient inference",
-    "text": "WP3 · Computationally efficient inference\n\nGO3. Reduce the computational cost of the jackknife\n\nResearchers: E. Álvarez, J. Chica, I. García, A.J. López, P.J. Moya, J.F. Muñoz\n\n\nSO7. Computational cost of the standard jackknife compared with alternative methods.\n\nA13. Execution times (H9).\n\nSO8. Efficient jackknife expressions with no loss of accuracy.\n\nA14. Analytical jackknife expressions.\nA15. Implementation and validation (H10)."
-  },
-  {
-    "objectID": "project.html#wp4-the-r-package-theil",
-    "href": "project.html#wp4-the-r-package-theil",
-    "title": "Project",
-    "section": "WP4 · The R package theil",
-    "text": "WP4 · The R package theil\n\nGO4. Open, efficient and reproducible software\n\nResearchers: E. Álvarez, J. Chica, A.J. López, P.J. Moya, J.F. Muñoz\n\n\nSO9. R package theil, with a C++ core (Rcpp).\n\nA16. Development of the package.\nA17. Documentation with vignettes and release on CRAN."
-  },
-  {
-    "objectID": "project.html#wp5-multidisciplinary-transfer",
-    "href": "project.html#wp5-multidisciplinary-transfer",
-    "title": "Project",
-    "section": "WP5 · Multidisciplinary transfer",
-    "text": "WP5 · Multidisciplinary transfer\n\nGO5. Transfer to the Social Sciences\n\nResearchers: all team members (coordinated by both PIs)\n\n\nSO10. Water: inequality in household water consumption and expenditure between and within municipalities.\n\nA18 (H13).\n\nSO11. Tourism: effect of tourism on income inequality within and between destinations.\n\nA19 (H14).\n\nSO12. Firms: servitization, digital transformation and AI adoption.\n\nA20 (H15).\n\nSO13. Global convergence in per capita consumption with bias-corrected estimators.\n\nA21 (H16)."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "THEILUMINA",
-    "section": "",
-    "text": "Bias, precision, computational efficiency and decomposition of Theil indices, with multidisciplinary applications in the Social Sciences."
-  },
-  {
-    "objectID": "index.html#about-theilumina",
-    "href": "index.html#about-theilumina",
-    "title": "THEILUMINA",
-    "section": "About THEILUMINA",
-    "text": "About THEILUMINA\nTHEILUMINA is a research project of the University of Granada (Spain) that develops new methods to estimate Theil inequality indices (T_0 and T_1) and to make reliable inferences about them. It builds on the previous project GiniUs on the Gini index.\nTheil indices are widely used because, unlike the Gini index, they can be additively decomposed into inequality between groups and inequality within groups. However, their estimators can be severely biased, and their confidence intervals unreliable, when data are highly skewed and unequal, which is precisely where measuring inequality matters most.\nThe project:\n\ndiagnoses, predicts and corrects the bias of the estimators of T_0 and T_1;\nprovides reliable variance estimators and confidence intervals, based on the jackknife;\nreduces the computational cost of the jackknife to make inference feasible with large samples;\ndevelops the open-source R package theil, with a C++ core;\ntransfers these methods to water economics, tourism, servitization and digital transformation of firms, and global convergence."
-  },
-  {
-    "objectID": "index.html#what-this-website-offers",
-    "href": "index.html#what-this-website-offers",
-    "title": "THEILUMINA",
-    "section": "What this website offers",
-    "text": "What this website offers\nThis website is a working tool for the research team and an open resource for other researchers:\n\nCommunication and collaboration. Data, R code, results and conclusions are shared among team members.\nReproducible research. Anyone can run the code and obtain the same tables and figures.\nInteractivity. The bias explorer lets users see how bias changes with skewness, inequality and sample size.\nDissemination and internationalisation. Results, data and software are openly available."
-  },
-  {
-    "objectID": "index.html#funding",
-    "href": "index.html#funding",
-    "title": "THEILUMINA",
-    "section": "Funding",
-    "text": "Funding\n\nProyectos de Generación de Conocimiento — convocatoria 2026. Agencia Estatal de Investigación. Reference: pending."
-  },
-  {
     "objectID": "data-code.html",
     "href": "data-code.html",
     "title": "Research data and R code",
@@ -154,6 +42,41 @@
     "text": "Datasets of the project\n\nThe simulated datasets and the R code of each publication will be released here (and in an OSF repository) once the corresponding paper is accepted."
   },
   {
+    "objectID": "publications.html",
+    "href": "publications.html",
+    "title": "Publications",
+    "section": "",
+    "text": "The main dissemination channel is publication in leading journals (JCR D1 or ABS 4/4*). Methodological results (WP1–WP3) target journals such as Journal of Econometrics, Sociological Methods & Research, Social Indicators Research, Journal of Economic Inequality and Computational Statistics & Data Analysis. The R package (WP4) targets the Journal of Statistical Software, and the applications (WP5) target journals in Water Resources, Tourism, Management and Business."
+  },
+  {
+    "objectID": "publications.html#target-journals",
+    "href": "publications.html#target-journals",
+    "title": "Publications",
+    "section": "",
+    "text": "The main dissemination channel is publication in leading journals (JCR D1 or ABS 4/4*). Methodological results (WP1–WP3) target journals such as Journal of Econometrics, Sociological Methods & Research, Social Indicators Research, Journal of Economic Inequality and Computational Statistics & Data Analysis. The R package (WP4) targets the Journal of Statistical Software, and the applications (WP5) target journals in Water Resources, Tourism, Management and Business."
+  },
+  {
+    "objectID": "publications.html#project-publications",
+    "href": "publications.html#project-publications",
+    "title": "Publications",
+    "section": "Project publications",
+    "text": "Project publications\n\nTo be completed as papers are submitted and published."
+  },
+  {
+    "objectID": "publications.html#software",
+    "href": "publications.html#software",
+    "title": "Publications",
+    "section": "Software",
+    "text": "Software\n\ntheil: Theil indices, bias corrections, variances and confidence intervals. R package with a C++ core. Forthcoming on CRAN.\nginiVarCI: Gini indices, variances and confidence intervals for finite and infinite populations. https://CRAN.R-project.org/package=giniVarCI\nsamplingVarEst: Sampling variance estimation. https://CRAN.R-project.org/package=samplingVarEst"
+  },
+  {
+    "objectID": "publications.html#previous-publications-of-the-team-20232026",
+    "href": "publications.html#previous-publications-of-the-team-20232026",
+    "title": "Publications",
+    "section": "Previous publications of the team (2023–2026)",
+    "text": "Previous publications of the team (2023–2026)\nThe table lists the 65 articles in JCR journals (SCIE/SSCI) published by team members since 2023 in the research areas of the project. Quality indicators: JCR quartile of the journal in the year of publication and, where applicable, ranking in the Chartered ABS Academic Journal Guide (AJG 2024).\n\n65 JCR articles 47 in Q1 57 in Q1–Q2 9 in ABS 4/4*\n\n\n2026\n\n\n\n\n\n\n\n\n\n\nArticle\nJournal\nTeam members\nJCR\nABS\n\n\n\n\nHeterodox Thinking on Water Economics, Values, and Governance\nAnnual Review of Environment and Resources\nTortajada\nQ1\n–\n\n\nThe “Happy and Poor” Paradox: Why Do Some Poor People Report Being Very Happy?\nApplied Research in Quality of Life\nGuardiola\nQ1\n–\n\n\nUnveiling the Hidden Link between Digital Servitization and Firm Performance: A Meta-analysis\nAsian Business & Management\nVendrell\nQ3\n2\n\n\nBeyond water reuse: the circular water economy as a governance framework\nCurrent Opinion in Environmental Sustainability\nTortajada\nQ1\n–\n\n\nDoes tourism reduce socio-economic inequality? Insights from the pandemic based on space and time models for t…\nEconomia Politica\nChica; Llorca; R.García\nQ2\n2\n\n\nHuman–environment Dynamics and Stages of Water Conflict in Shared-well Irrigation: Evidence from Rural Iran\nHuman Ecology\nTortajada\nQ1\n–\n\n\nAutomation, augmentation, or dual AI strategies for superior product line performance: the functional subsidia…\nInternational Journal of Production Economics\nVendrell\nQ1\n3\n\n\nFrom development aid to geopolitical leverage: the Aswan High Dam in global hydropolitics\nInternational Journal of Water Resources Development\nTortajada\nQ2\n–\n\n\nAchieving Scalability in Incumbent Firms: Testing and Extending the Four-Stage Development Model\nJournal of Business Research\nVendrell\nQ1\n3\n\n\nTowards a circular water economy in Southeast Asian cities\nJournal of Cleaner Production\nTortajada\nQ1\n2\n\n\nTransforming Industrial Competitiveness through Digital Service Innovation (DSI): Enabling Factors and Expecte…\nJournal of Enterprise Information Management\nVendrell\nQ1\n2\n\n\nThe Dual Effects of Digitalization on SMEs: Export Gains and Learning Losses\nJournal of International Business Studies\nGomes; Vendrell\nQ1\n4*\n\n\nRevisiting The Uppsala Model From A History-To-Theory Perspective: New Lessons On Network Positioning From A G…\nJournal of International Business Studies\nGomes; Vendrell\nQ1\n4*\n\n\nA Practical Guide to Proper Estimation and Inference of the Gini Index by Avoiding often Encountered Methodolo…\nSocial Indicators Research\nMuñoz\nQ1\n2\n\n\nDoes Economic Growth Drive Equitable Water and Sanitation Access? Assessing Inequality Reduction Across 64 Nat…\nSustainable Development\nS.López\nQ1\n1\n\n\nNarratives of Water Disconnection: Navigating Regulatory Tensions in the Netherlands\nWater Alternatives\nS.López\nQ2\n–\n\n\n\n\n\n2025\n\n\n\n\n\n\n\n\n\n\nArticle\nJournal\nTeam members\nJCR\nABS\n\n\n\n\nHRM algorithms: Moderating the relationship between chaotic markets and strategic renewal\nBritish Journal of Management\nVendrell\nQ1\n4\n\n\nWater in computable general equilibrium models: Review, synthesis and avenues for future research\nEnvironmental Modelling & Software\nTortajada\nQ2\n–\n\n\nSustainable water reuse for water security\nEnvironmental Research Letters\nTortajada\nQ1\n–\n\n\nConceptions of happiness and prosocial behavior: Evidence from a dictator game\nJournal of Happiness Studies\nGuardiola\nQ1\n–\n\n\nAI platforms as cooperation enablers favoring the development of strategic situating capabilities within solut…\nJournal of Product Innovation Management\nVendrell\nQ1\n4\n\n\nThe effect of disruptive change on the spatial variation of commercial rental prices: The case of the COVID-19…\nJournal of Retailing and Consumer Services\nCano; Chica\nQ1\n2\n\n\nScalability in Incumbent Firms: The Case of Nvidia\nLong Range Planning\nVendrell\nQ1\n3\n\n\nRethinking responses to the world’s water crises\nNature Sustainability\nTortajada\nQ1\n–\n\n\nDynamic spatio-temporal modelling of tourism impact on income inequality and polarization: inbound and domesti…\nPapers in Regional Science\nCasas; Chica; Llorca; R.García\nQ2\n2\n\n\nEstimation of the lot fraction defective in a finite lot of products with auxiliary quality characteristics\nQuality Engineering\nMuñoz; Vendrell; Álvarez\nQ3\n–\n\n\nBlazing the trail: Describing and assessing a new policy instrument whereby indirect tax incentives fuel colla…\nResearch Policy\nVendrell\nQ1\n4*\n\n\nWhen Do Firms Learn? Learning Before Versus After Exporting\nSmall Business Economics\nGomes; Vendrell\nQ2\n3\n\n\nInequalities in Talents’ Earnings: A Tale of Two European Countries\nSocial Indicators Research\nAddabbo\nQ1\n2\n\n\nExploring and correcting the bias in the estimation of the Gini measure of inequality\nSociological Methods & Research\nMoya; Muñoz; Álvarez\nQ1\n–\n\n\nBlockchain and other determinants of the financial attractiveness of tourism enterprises at the regional level…\nTransformations in Business & Economics\nCasas; Salinas\nQ3\n–\n\n\n\n\n\n2024\n\n\n\n\n\n\n\n\n\n\nArticle\nJournal\nTeam members\nJCR\nABS\n\n\n\n\nNot All Friends Are Alike: A Categorization of Friendly Acquisitions Integrating the Acquired Firm Profile wit…\nBritish Journal of Management\nGomes\nQ1\n4\n\n\nTesting Service Infusion in Manufacturing through Machine Learning Techniques: Looking Back and Forward\nInternational Journal of Operations & Production Management\nVendrell\nQ1\n4\n\n\nAI-enabled Smart Manufacturing boosts ecosystem value capture: The importance of servitization pathways within…\nInternational Journal of Production Economics\nVendrell\nQ1\n3\n\n\nThe Order of the Factors Matters: How Digital Transformation and Servitization Integrate More Efficiently\nInternational Journal of Production Economics\nVendrell\nQ1\n3\n\n\nThe role of knowledge in the decision of Granada University students to drink bottled water\nInternational Journal of Water Resources Development\nGuardiola; Ibáñez; Moya\nQ2\n–\n\n\nWater resource management in agriculture for achieving food and water security in Asia\nInternational Journal of Water Resources Development\nTortajada\nQ2\n–\n\n\nGroundwater: an unseen, overused and unappreciated resource\nInternational Journal of Water Resources Development\nTortajada\nQ2\n–\n\n\nSmoothing level selection for density estimators based on the moments\nJournal of Applied Statistics\nR.García\nQ3\n–\n\n\nSustainable servitization for cleaner and resource-wise production and consumption: Past, present, and future…\nJournal of Cleaner Production\nVendrell\nQ1\n2\n\n\nGood or excellent? Factors determining online hotel ratings. A spatial approach\nJournal of Hospitality Marketing & Management\nChica\nQ1\n2\n\n\nSetting contextual conditions to resolve Grand Challenges through Responsible Innovation: A comparative patent…\nJournal of Product Innovation Management\nVendrell\nQ1\n4\n\n\nImpact of heuristic–systematic cues on the purchase intention of the electronic commerce consumer through the…\nJournal of Retailing and Consumer Services\nMuñoz\nQ1\n2\n\n\nDigital Service Innovation: Ontology, context and theory\nJournal of Service Management\nVendrell\nQ1\n3\n\n\nReused water as a source of clean water and energy\nNature Water\nTortajada\nQ1\n–\n\n\nIntegration of Product-Service Innovation into Green Supply Chain Management: Emerging opportunities and parad…\nTechnovation\nVendrell\nQ1\n3\n\n\n\n\n\n2023\n\n\n\n\n\n\n\n\n\n\nArticle\nJournal\nTeam members\nJCR\nABS\n\n\n\n\nRescaled bootstrap confidence intervals for the population variance in the presence of outliers or spikes in t…\nCommunications in Statistics-Simulation and Computation\nMoya; Muñoz; Álvarez\nQ3\n–\n\n\nSolutions for the commercialization challenges of Horizon Europe and earth observation consortia: co-creation…\nElectronic Commerce Research\nGomes\nQ2\n1\n\n\nEntry-mode diversity and closing deals with international customers: The moderating role of advanced servitiza…\nInternational Business Review\nVendrell\nQ1\n3\n\n\nTourist accommodation, consumption and platforms\nInternational Journal of Consumer Studies\nSalinas\nQ1\n2\n\n\nProblematizing strategic alliance research: Challenges, issues and paradoxes in the new era\nInternational Journal of Management Reviews\nGomes\nQ1\n4\n\n\nIs digital transformation equally attractive to all manufacturers? Contextualizing the operational and custome…\nInternational Journal of Physical Distribution & Logistics Management\nVendrell\nQ1\n3\n\n\nTreble Innovation Firms: Antecedents, Outcomes, and Enhancing Factors\nInternational Journal of Production Economics\nGomes; Vendrell\nQ1\n3\n\n\nReimagining water management\nInternational Journal of Water Resources Development\nTortajada\nQ3\n–\n\n\nUnited Nations water conferences: reflections and expectations\nInternational Journal of Water Resources Development\nTortajada\nQ3\n–\n\n\nExploring the Influence of Hybrid Product-Service Offerings on Firm Internationalization Strategies: An Intern…\nInternational Marketing Review\nVendrell\nQ1\n3\n\n\nOpen and Social: Portraying the resilient, social and competitive, upcoming enterprise\nJournal of Enterprise Information Management\nVendrell\nQ1\n2\n\n\nConceptualizations of happiness and vegetarianism: empirical evidence from University Students in Spain\nJournal of Happiness Studies\nGuardiola\nQ1\n–\n\n\nChallenging the knowledge resources complementarity hypothesis: A counterexample\nKnowledge Management: Research & Practice\nVendrell\nQ1\n1\n\n\nHow does sustainable water consumption in the shower relate to different dimensions of perceived well-being? E…\nLocal Environment\nGuardiola; Ibáñez\nQ3\n–\n\n\nLearning ‘From’ vs. Learning ‘About’ Partners in Pre-Acquisition Strategic Alliances: The role of familiarity…\nLong Range Planning\nGomes; Vendrell\nQ1\n3\n\n\nPreparedness for drought is more than a climate-change fix.\nNature\nTortajada\nQ1\n–\n\n\nAssessment of Industrial Pre-determinants for Territories with Active Product-Service Innovation Ecosystems\nTechnovation\nVendrell\nQ1\n3\n\n\nProduct-service innovation systems—opening-up servitization-based innovation to manufacturing industry\nTechnovation\nVendrell\nQ1\n3\n\n\nDoes the Ownership of Water Utilities Influence Water-Saving Advice Provided to Service Users? An Analysis of…\nWater Resources Management\nGuardiola; Ibáñez; S.López\nQ1\n–"
+  },
+  {
     "objectID": "dissemination.html",
     "href": "dissemination.html",
     "title": "Dissemination",
@@ -187,6 +110,76 @@
     "title": "Dissemination",
     "section": "Inequality in the news",
     "text": "Inequality in the news\n\n2025 · Eurostat. Inequality in enlargement countries.\n2024 · World Bank. The geography of high inequality: monitoring the World Bank’s new indicator.\n2023 · World Bank. 2023 in nine charts: a growing inequality.\n2023 · World Economic Forum. Global inequality is a failure of imagination."
+  },
+  {
+    "objectID": "observatory.html",
+    "href": "observatory.html",
+    "title": "Inequality observatory",
+    "section": "",
+    "text": "This observatory gathers public inequality indicators for European and world countries. The data are downloaded live from the official sources every time the page is opened, so they always show the latest release. Each chart can be explored by hovering over the points, and the data can be downloaded as CSV.\nCode\nfunction jsonstat(js) {\n  // Flattens a JSON-stat 2.0 dataset (Eurostat API) into an array of records\n  const ids = js.id, size = js.size, dims = js.dimension;\n  const codes = ids.map(d =&gt; {\n    const idx = dims[d].category.index;\n    const arr = Array.isArray(idx) ? idx : Object.keys(idx).sort((a, b) =&gt; idx[a] - idx[b]);\n    return arr;\n  });\n  const labels = ids.map(d =&gt; dims[d].category.label || {});\n  const out = [];\n  const vals = js.value;\n  const keys = Array.isArray(vals) ? vals.map((v, i) =&gt; i).filter(i =&gt; vals[i] != null) : Object.keys(vals).map(Number);\n  for (const i of keys) {\n    let rem = i; const rec = {};\n    for (let d = ids.length - 1; d &gt;= 0; d--) {\n      const c = codes[d][rem % size[d]];\n      rec[ids[d]] = c;\n      if (ids[d] === \"geo\") rec.country = labels[d][c] || c;\n      rem = Math.floor(rem / size[d]);\n    }\n    rec.value = +vals[i];\n    out.push(rec);\n  }\n  return out;\n}\npref = [\"TOTAL\", \"T\", \"SHARE\", \"EUR\", \"PC\", \"A\"]\nfunction keepPreferred(recs, keepDims) {\n  // For dimensions other than geo/time (and keepDims) keep a single category\n  if (!recs.length) return recs;\n  const dimsAll = Object.keys(recs[0]).filter(k =&gt; ![\"geo\", \"time\", \"value\", \"country\", ...keepDims].includes(k));\n  let r = recs;\n  for (const d of dimsAll) {\n    const cats = [...new Set(r.map(x =&gt; x[d]))];\n    const chosen = pref.find(p =&gt; cats.includes(p)) ?? cats[0];\n    r = r.filter(x =&gt; x[d] === chosen);\n  }\n  return r;\n}\nasync function eurostat(code, query = \"\") {\n  const url = `https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/${code}?format=JSON&lang=EN${query}`;\n  const res = await fetch(url);\n  if (!res.ok) throw new Error(`Eurostat ${code}: HTTP ${res.status}`);\n  return jsonstat(await res.json());\n}\nEU = new Set([\"AT\",\"BE\",\"BG\",\"CY\",\"CZ\",\"DE\",\"DK\",\"EE\",\"EL\",\"ES\",\"FI\",\"FR\",\"HR\",\"HU\",\"IE\",\"IT\",\"LT\",\"LU\",\"LV\",\"MT\",\"NL\",\"PL\",\"PT\",\"RO\",\"SE\",\"SI\",\"SK\",\"EU27_2020\",\"NO\",\"CH\",\"IS\",\"RS\",\"TR\",\"MK\",\"ME\",\"AL\"])\nCode\n// ---------- Download Eurostat data ----------\neuroData = {\n  try {\n    const [gini, s80, dec] = await Promise.all([\n      eurostat(\"ilc_di12\"),\n      eurostat(\"ilc_di11\"),\n      eurostat(\"ilc_di01\", \"&indic_il=SHARE\" + [\"D1\",\"D2\",\"D3\",\"D4\",\"D5\",\"D6\",\"D7\",\"D8\",\"D9\",\"D10\"].map(q =&gt; `&quantile=${q}`).join(\"\"))\n    ]);\n    const rows = [];\n    for (const r of keepPreferred(gini, [])) rows.push({geo: r.geo, country: r.country, year: +r.time, indicator: \"Gini index\", value: r.value});\n    for (const r of keepPreferred(s80, [])) rows.push({geo: r.geo, country: r.country, year: +r.time, indicator: \"S80/S20 ratio\", value: r.value});\n    // Theil approximations from decile shares (grouped data, lower bound)\n    const d = keepPreferred(dec, [\"quantile\"]);\n    const groups = d3.group(d, r =&gt; r.geo, r =&gt; r.time);\n    for (const [geo, byYear] of groups) for (const [time, recs] of byYear) {\n      if (recs.length !== 10) continue;\n      const tot = d3.sum(recs, r =&gt; r.value);\n      const s = recs.map(r =&gt; r.value / tot).filter(v =&gt; v &gt; 0);\n      if (s.length !== 10) continue;\n      const T1 = d3.sum(s, v =&gt; v * Math.log(10 * v));\n      const T0 = d3.sum(s, v =&gt; 0.1 * Math.log(0.1 / v));\n      rows.push({geo, country: recs[0].country, year: +time, indicator: \"Theil T1 (decile approx.)\", value: T1});\n      rows.push({geo, country: recs[0].country, year: +time, indicator: \"Theil T0 (decile approx.)\", value: T0});\n    }\n    return {ok: true, rows: rows.filter(r =&gt; EU.has(r.geo) && Number.isFinite(r.value))};\n  } catch (e) {\n    return {ok: false, error: e.message, rows: []};\n  }\n}"
+  },
+  {
+    "objectID": "observatory.html#europe-eu-silc-indicators-eurostat",
+    "href": "observatory.html#europe-eu-silc-indicators-eurostat",
+    "title": "Inequality observatory",
+    "section": "Europe: EU-SILC indicators (Eurostat)",
+    "text": "Europe: EU-SILC indicators (Eurostat)\n\n\nCode\neuroCountries = [...new Set(euroData.rows.map(r =&gt; r.country))].sort()\nviewof euroSel = Inputs.form({\n  indicator: Inputs.radio([\"Gini index\", \"S80/S20 ratio\", \"Theil T0 (decile approx.)\", \"Theil T1 (decile approx.)\"], {label: \"Indicator\", value: \"Gini index\"}),\n  countries: Inputs.select(euroCountries, {label: \"Countries\", multiple: true, value: euroCountries.filter(c =&gt; /^(Spain|Italy|Portugal|Germany|France|European Union)/.test(c)).slice(0, 6), size: 8})\n})\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCode\neuroData.ok ? (euroSel.countries.length ? Plot.plot({\n  height: 420, marginLeft: 55, marginRight: 140,\n  x: {label: \"Year\", tickFormat: \"d\", grid: true},\n  y: {label: euroSel.indicator, grid: true, zero: false},\n  color: {legend: false},\n  marks: [\n    Plot.line(euroData.rows.filter(r =&gt; r.indicator === euroSel.indicator && euroSel.countries.includes(r.country)), {x: \"year\", y: \"value\", stroke: \"country\", strokeWidth: 2.2, sort: \"year\"}),\n    Plot.dot(euroData.rows.filter(r =&gt; r.indicator === euroSel.indicator && euroSel.countries.includes(r.country)), {x: \"year\", y: \"value\", fill: \"country\", r: 3, tip: true, title: d =&gt; `${d.country} · ${d.year}\\n${euroSel.indicator}: ${d.value.toFixed(3)}`}),\n    Plot.text(euroData.rows.filter(r =&gt; r.indicator === euroSel.indicator && euroSel.countries.includes(r.country)), Plot.selectLast({x: \"year\", y: \"value\", z: \"country\", text: \"country\", textAnchor: \"start\", dx: 6, fill: \"country\"}))\n  ]\n}) : html`&lt;p class=\"pending\"&gt;Select at least one country.&lt;/p&gt;`)\n: html`&lt;div class=\"callout callout-warning\"&gt;&lt;p&gt;&lt;b&gt;Eurostat data could not be loaded&lt;/b&gt; (${euroData.error}). Please try again later or consult &lt;a href=\"https://ec.europa.eu/eurostat/databrowser/view/ilc_di12/default/table\"&gt;Eurostat&lt;/a&gt; directly.&lt;/p&gt;&lt;/div&gt;`\n\n\n\n\n\n\n\n\n\nCode\neuroLatest = {\n  const r = euroData.rows.filter(d =&gt; d.indicator === euroSel.indicator);\n  const last = d3.rollup(r, v =&gt; v.sort((a, b) =&gt; b.year - a.year)[0], d =&gt; d.geo);\n  return [...last.values()].sort((a, b) =&gt; b.value - a.value);\n}\neuroData.ok ? Plot.plot({\n  height: Math.max(300, 16 * euroLatest.length), marginLeft: 170,\n  x: {label: `${euroSel.indicator} (latest available year)`, grid: true},\n  y: {label: null},\n  marks: [\n    Plot.barX(euroLatest, {y: \"country\", x: \"value\", sort: {y: \"-x\"}, fill: d =&gt; d.geo === \"EU27_2020\" ? \"#E07B20\" : (d.geo === \"ES\" ? \"#1F4E7A\" : \"#9DB5CF\"), tip: true, title: d =&gt; `${d.country} (${d.year}): ${d.value.toFixed(3)}`}),\n    Plot.ruleX([0])\n  ]\n}) : html``\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCode\neuroData.ok ? DOM.download(new Blob([d3.csvFormat(euroData.rows)], {type: \"text/csv\"}), \"theilumina_eurostat_inequality.csv\", \"Download Eurostat data (CSV)\") : html``\n\n\n\n\n\n\n\n\nSources: Eurostat, EU-SILC: ilc_di12 (Gini coefficient of equivalised disposable income), ilc_di11 (S80/S20 income quintile share ratio) and ilc_di01 (distribution of income by deciles). Theil approximations computed by THEILUMINA from the decile shares s_k: T_1 \\approx \\sum_k s_k \\ln(10\\,s_k) and T_0 \\approx \\sum_k 0.1 \\ln(0.1/s_k)."
+  },
+  {
+    "objectID": "observatory.html#world-gini-and-theil-t_0-world-bank-pip",
+    "href": "observatory.html#world-gini-and-theil-t_0-world-bank-pip",
+    "title": "Inequality observatory",
+    "section": "World: Gini and Theil T_0 (World Bank PIP)",
+    "text": "World: Gini and Theil T_0 (World Bank PIP)\n\n\nCode\nwbData = {\n  try {\n    const res = await fetch(\"https://api.worldbank.org/pip/v1/pip?country=all&year=all&fill_gaps=false&format=json\");\n    if (!res.ok) throw new Error(`World Bank PIP: HTTP ${res.status}`);\n    const js = await res.json();\n    const rows = [];\n    for (const r of js) {\n      if (r.reporting_level !== \"national\") continue;\n      const base = {code: r.country_code, country: r.country_name, year: +r.reporting_year, welfare: r.welfare_type};\n      if (r.gini != null) rows.push({...base, indicator: \"Gini index\", value: +r.gini});\n      if (r.mld != null) rows.push({...base, indicator: \"Theil T0 (mean log deviation)\", value: +r.mld});\n    }\n    return {ok: true, rows};\n  } catch (e) {\n    return {ok: false, error: e.message, rows: []};\n  }\n}\nwbCountries = [...new Set(wbData.rows.map(r =&gt; r.country))].sort()\nviewof wbSel = Inputs.form({\n  indicator: Inputs.radio([\"Gini index\", \"Theil T0 (mean log deviation)\"], {label: \"Indicator\", value: \"Theil T0 (mean log deviation)\"}),\n  countries: Inputs.select(wbCountries, {label: \"Countries\", multiple: true, value: wbCountries.filter(c =&gt; /^(Spain|Brazil|South Africa|United States|India|China)$/.test(c)), size: 8})\n})\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nwbData.ok ? (wbSel.countries.length ? Plot.plot({\n  height: 420, marginLeft: 55, marginRight: 140,\n  x: {label: \"Year\", tickFormat: \"d\", grid: true},\n  y: {label: wbSel.indicator, grid: true, zero: false},\n  marks: [\n    Plot.line(wbData.rows.filter(r =&gt; r.indicator === wbSel.indicator && wbSel.countries.includes(r.country)), {x: \"year\", y: \"value\", stroke: \"country\", z: d =&gt; d.country + d.welfare, strokeWidth: 2.2, sort: \"year\"}),\n    Plot.dot(wbData.rows.filter(r =&gt; r.indicator === wbSel.indicator && wbSel.countries.includes(r.country)), {x: \"year\", y: \"value\", fill: \"country\", r: 3, tip: true, title: d =&gt; `${d.country} · ${d.year} (${d.welfare})\\n${wbSel.indicator}: ${d.value.toFixed(3)}`}),\n    Plot.text(wbData.rows.filter(r =&gt; r.indicator === wbSel.indicator && wbSel.countries.includes(r.country)), Plot.selectLast({x: \"year\", y: \"value\", z: \"country\", text: \"country\", textAnchor: \"start\", dx: 6, fill: \"country\"}))\n  ]\n}) : html`&lt;p class=\"pending\"&gt;Select at least one country.&lt;/p&gt;`)\n: html`&lt;div class=\"callout callout-warning\"&gt;&lt;p&gt;&lt;b&gt;World Bank data could not be loaded&lt;/b&gt; (${wbData.error}). Please try again later or consult the &lt;a href=\"https://pip.worldbank.org\"&gt;Poverty and Inequality Platform&lt;/a&gt; directly.&lt;/p&gt;&lt;/div&gt;`\n\n\n\n\n\n\n\n\n\nCode\nwbData.ok ? DOM.download(new Blob([d3.csvFormat(wbData.rows)], {type: \"text/csv\"}), \"theilumina_worldbank_pip.csv\", \"Download World Bank data (CSV)\") : html``\n\n\n\n\n\n\n\n\nSource: World Bank, Poverty and Inequality Platform (PIP). National estimates; depending on the country, they refer to income or consumption (shown when hovering). The mean log deviation is the Theil index T_0."
+  },
+  {
+    "objectID": "observatory.html#other-public-sources-of-theil-indices",
+    "href": "observatory.html#other-public-sources-of-theil-indices",
+    "title": "Inequality observatory",
+    "section": "Other public sources of Theil indices",
+    "text": "Other public sources of Theil indices\n\nWorld Bank PIP: mean log deviation (T_0) for about 170 countries (used above).\nCEPALSTAT (ECLAC): Theil index of per capita income for Latin American countries.\nSEDLAC (CEDLAS and World Bank): Theil indices and other inequality measures for Latin America and the Caribbean.\nUniversity of Texas Inequality Project (UTIP-UNIDO): Theil indices of pay inequality across industrial sectors for most countries since 1963."
+  },
+  {
+    "objectID": "simulation.html",
+    "href": "simulation.html",
+    "title": "Interactive bias explorer",
+    "section": "",
+    "text": "This page runs a small Monte Carlo experiment in your browser. For each true value of the index, it draws R samples of size n from the selected distributions, computes the plug-in estimator and reports the empirical relative bias:\n\nRB(\\%) = 100 \\times \\frac{\\frac{1}{R}\\sum_{r=1}^{R}\\widehat{T}^{(r)} - T}{T}.\n\nThe parameters of each distribution are set so that the true index (T_0 or T_1) takes the value on the horizontal axis. Pareto is the most skewed distribution, Gamma the least.\n\n\nCode\nviewof params = Inputs.form({\n  index: Inputs.radio([\"T0\", \"T1\"], {label: \"Index\", value: \"T0\"}),\n  n:     Inputs.select([25, 50, 100, 200, 500, 1000], {label: \"Sample size (n)\", value: 50}),\n  R:     Inputs.select([200, 500, 1000, 2000], {label: \"Replications (R)\", value: 500}),\n  dists: Inputs.checkbox([\"Pareto\", \"Lognormal\", \"Gamma\"], {label: \"Distributions\", value: [\"Pareto\", \"Lognormal\", \"Gamma\"]}),\n  correction: Inputs.toggle({label: \"Add jackknife-corrected estimator\", value: false})\n})\n\n\n\n\n\n\n\n\n\nCode\nPlot.plot({\n  height: 380,\n  marginLeft: 55,\n  x: {label: `True ${params.index}`, grid: true},\n  y: {label: \"Relative bias (%)\", grid: true},\n  color: {legend: true, domain: series, range: palette},\n  marks: [\n    Plot.ruleY([0], {stroke: \"#888\", strokeDasharray: \"4,3\"}),\n    Plot.line(results, {x: \"T\", y: \"RB\", stroke: \"series\", strokeWidth: 2.5}),\n    Plot.dot(results, {x: \"T\", y: \"RB\", fill: \"series\", r: 3.5, tip: true})\n  ]\n})\n\n\n\n\n\n\n\n\n\nCode\nInputs.table(results.map(d =&gt; ({Series: d.series, \"True T\": d.T, \"RB (%)\": d.RB.toFixed(2)})), {rows: 12})\n\n\n\n\n\n\n\n\n\n\n\n\n\nHow to read the results\n\n\n\nWith symmetric or moderately skewed data (Gamma), the relative bias is small and shrinks quickly as n grows. With strong skewness (Pareto) and high inequality, the plug-in estimator underestimates inequality, and the bias remains large even for moderate sample sizes. The jackknife correction reduces, but does not always remove, this bias. These are the scenarios studied in WP1 and WP2.\n\n\n\n\nCode\nTgrid = [0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50]\n\nseries = params.correction\n  ? params.dists.flatMap(d =&gt; [d, `${d} (jackknife)`])\n  : params.dists\n\npalette = {\n  const base = {\"Pareto\": \"#E07B20\", \"Lognormal\": \"#1F4E7A\", \"Gamma\": \"#4FA383\"};\n  const out = [];\n  for (const d of params.dists) {\n    out.push(base[d]);\n    if (params.correction) out.push(d3.color(base[d]).brighter(1.2).formatHex());\n  }\n  return out;\n}\n\n// ---------- special functions ----------\nfunction digamma(x) {\n  let r = 0;\n  while (x &lt; 6) { r -= 1 / x; x += 1; }\n  const f = 1 / (x * x);\n  return r + Math.log(x) - 0.5 / x\n    - f * (1/12 - f * (1/120 - f * (1/252 - f * (1/240 - f / 132))));\n}\n\nfunction bisect(fn, lo, hi, target) {\n  // fn is monotone decreasing on [lo, hi]\n  for (let i = 0; i &lt; 200; i++) {\n    const mid = Math.sqrt(lo * hi);\n    if (fn(mid) &gt; target) lo = mid; else hi = mid;\n  }\n  return Math.sqrt(lo * hi);\n}\n\n// ---------- true indices ----------\nfunction trueT(dist, index, p) {\n  if (dist === \"Lognormal\") return p * p / 2;\n  if (dist === \"Pareto\")\n    return index === \"T1\" ? 1 / (p - 1) - Math.log(p / (p - 1))\n                          : Math.log(p / (p - 1)) - 1 / p;\n  // Gamma\n  return index === \"T1\" ? digamma(p) + 1 / p - Math.log(p)\n                        : Math.log(p) - digamma(p);\n}\n\nfunction paramFor(dist, index, T) {\n  if (dist === \"Lognormal\") return Math.sqrt(2 * T);\n  if (dist === \"Pareto\") return bisect(a =&gt; trueT(\"Pareto\", index, a), 1.0001, 1e4, T);\n  return bisect(k =&gt; trueT(\"Gamma\", index, k), 1e-3, 1e5, T);\n}\n\n// ---------- random generation ----------\nfunction rnorm() {\n  let u = 0, v = 0;\n  while (u === 0) u = Math.random();\n  while (v === 0) v = Math.random();\n  return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);\n}\n\nfunction rgamma(k) {\n  if (k &lt; 1) return rgamma(k + 1) * Math.pow(Math.random(), 1 / k);\n  const d = k - 1 / 3, c = 1 / Math.sqrt(9 * d);\n  for (;;) {\n    let x, v;\n    do { x = rnorm(); v = 1 + c * x; } while (v &lt;= 0);\n    v = v * v * v;\n    const u = Math.random();\n    if (u &lt; 1 - 0.0331 * x ** 4) return d * v;\n    if (Math.log(u) &lt; 0.5 * x * x + d * (1 - v + Math.log(v))) return d * v;\n  }\n}\n\nfunction draw(dist, p) {\n  if (dist === \"Lognormal\") return Math.exp(p * rnorm());\n  if (dist === \"Pareto\") return Math.pow(1 - Math.random(), -1 / p);\n  return rgamma(p);\n}\n\n// ---------- estimators (plug-in and jackknife, O(n)) ----------\nfunction estimate(y, index, jack) {\n  const n = y.length;\n  let Sy = 0, Sly = 0, Sylogy = 0;\n  for (const v of y) { const l = Math.log(v); Sy += v; Sly += l; Sylogy += v * l; }\n  const m = Sy / n;\n  const est = index === \"T1\" ? Sylogy / Sy - Math.log(m) : Math.log(m) - Sly / n;\n  if (!jack) return [est, NaN];\n  let sLoo = 0;\n  for (const v of y) {\n    const l = Math.log(v), mi = (Sy - v) / (n - 1);\n    sLoo += index === \"T1\" ? (Sylogy - v * l) / (Sy - v) - Math.log(mi)\n                           : Math.log(mi) - (Sly - l) / (n - 1);\n  }\n  return [est, n * est - (n - 1) * (sLoo / n)];\n}\n\n// ---------- Monte Carlo ----------\nresults = {\n  const {index, n, R, dists, correction} = params;\n  const out = [];\n  const y = new Float64Array(n);\n  for (const dist of dists) {\n    for (const T of Tgrid) {\n      const p = paramFor(dist, index, T);\n      let s0 = 0, s1 = 0;\n      for (let r = 0; r &lt; R; r++) {\n        for (let i = 0; i &lt; n; i++) y[i] = draw(dist, p);\n        const [e0, e1] = estimate(y, index, correction);\n        s0 += e0; s1 += e1;\n      }\n      out.push({series: dist, T, RB: 100 * (s0 / R - T) / T});\n      if (correction) out.push({series: `${dist} (jackknife)`, T, RB: 100 * (s1 / R - T) / T});\n    }\n  }\n  return out;\n}\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe code of this simulation is shown in the source of this page (button Code at the top right). The full simulation study of the project is carried out in R and will be available in the section Research data and R code.\n\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "theil-indices.html",
+    "href": "theil-indices.html",
+    "title": "Theil indices",
+    "section": "",
+    "text": "Let Y be a positive random variable with mean \\mu = E[Y]. The Theil indices are members of the generalised entropy family GE(\\alpha):\n\nT_1 = GE(1) = E\\left[\\frac{Y}{\\mu}\\log\\frac{Y}{\\mu}\\right],\n\\qquad\nT_0 = GE(0) = E\\left[\\log\\frac{\\mu}{Y}\\right] = \\log\\mu - E[\\log Y].\n\nT_1 is the Theil index and T_0 the mean logarithmic deviation (MLD). Both are zero under perfect equality and increase with inequality. T_1 is more sensitive to the upper tail of the distribution, and T_0 to the lower tail.\n\n\n\n\n\n\n\n\n\n\nDistribution\nT_0\nT_1\n\n\n\n\nLognormal (\\mu_{\\log}, \\sigma)\n\\sigma^2/2\n\\sigma^2/2\n\n\nPareto (x_m, \\alpha), \\alpha&gt;1\n\\log\\frac{\\alpha}{\\alpha-1} - \\frac{1}{\\alpha}\n\\frac{1}{\\alpha-1} - \\log\\frac{\\alpha}{\\alpha-1}\n\n\nGamma (k, \\theta)\n\\log k - \\psi(k)\n\\psi(k) + \\frac{1}{k} - \\log k\n\n\n\nwhere \\psi(\\cdot) is the digamma function."
+  },
+  {
+    "objectID": "theil-indices.html#definition",
+    "href": "theil-indices.html#definition",
+    "title": "Theil indices",
+    "section": "",
+    "text": "Let Y be a positive random variable with mean \\mu = E[Y]. The Theil indices are members of the generalised entropy family GE(\\alpha):\n\nT_1 = GE(1) = E\\left[\\frac{Y}{\\mu}\\log\\frac{Y}{\\mu}\\right],\n\\qquad\nT_0 = GE(0) = E\\left[\\log\\frac{\\mu}{Y}\\right] = \\log\\mu - E[\\log Y].\n\nT_1 is the Theil index and T_0 the mean logarithmic deviation (MLD). Both are zero under perfect equality and increase with inequality. T_1 is more sensitive to the upper tail of the distribution, and T_0 to the lower tail.\n\n\n\n\n\n\n\n\n\n\nDistribution\nT_0\nT_1\n\n\n\n\nLognormal (\\mu_{\\log}, \\sigma)\n\\sigma^2/2\n\\sigma^2/2\n\n\nPareto (x_m, \\alpha), \\alpha&gt;1\n\\log\\frac{\\alpha}{\\alpha-1} - \\frac{1}{\\alpha}\n\\frac{1}{\\alpha-1} - \\log\\frac{\\alpha}{\\alpha-1}\n\n\nGamma (k, \\theta)\n\\log k - \\psi(k)\n\\psi(k) + \\frac{1}{k} - \\log k\n\n\n\nwhere \\psi(\\cdot) is the digamma function."
+  },
+  {
+    "objectID": "theil-indices.html#additive-decomposition",
+    "href": "theil-indices.html#additive-decomposition",
+    "title": "Theil indices",
+    "section": "Additive decomposition",
+    "text": "Additive decomposition\nIf the population is partitioned into G groups with population shares p_g, income shares s_g, means \\mu_g and indices T_{0g}, T_{1g}:\n\nT_1 = \\underbrace{\\sum_{g=1}^{G} s_g\\, T_{1g}}_{\\text{within}} + \\underbrace{\\sum_{g=1}^{G} s_g \\log\\frac{\\mu_g}{\\mu}}_{\\text{between}},\n\\qquad\nT_0 = \\underbrace{\\sum_{g=1}^{G} p_g\\, T_{0g}}_{\\text{within}} + \\underbrace{\\sum_{g=1}^{G} p_g \\log\\frac{\\mu}{\\mu_g}}_{\\text{between}}.\n\nThis property makes the Theil indices the standard tool to identify the sources of inequality: by region, gender, age, education, sector, type of employment or municipality size."
+  },
+  {
+    "objectID": "theil-indices.html#plug-in-estimators",
+    "href": "theil-indices.html#plug-in-estimators",
+    "title": "Theil indices",
+    "section": "Plug-in estimators",
+    "text": "Plug-in estimators\nGiven a sample y_1,\\dots,y_n with mean \\bar y:\n\n\\widehat{T}_1 = \\frac{1}{n}\\sum_{i=1}^{n}\\frac{y_i}{\\bar y}\\log\\frac{y_i}{\\bar y}\n= \\frac{\\sum_i y_i\\log y_i}{\\sum_i y_i} - \\log\\bar y,\n\\qquad\n\\widehat{T}_0 = \\log\\bar y - \\frac{1}{n}\\sum_{i=1}^{n}\\log y_i .\n\nT1.hat &lt;- function(y) {\n  m &lt;- mean(y)\n  mean((y / m) * log(y / m))\n}\n\nT0.hat &lt;- function(y) {\n  log(mean(y)) - mean(log(y))\n}\nThese estimators are consistent but biased in finite samples. The bias is negligible for symmetric, low-inequality data, but becomes severe under strong skewness and inequality. See the interactive bias explorer."
+  },
+  {
+    "objectID": "theil-indices.html#jackknife-bias-correction-and-variance",
+    "href": "theil-indices.html#jackknife-bias-correction-and-variance",
+    "title": "Theil indices",
+    "section": "Jackknife bias correction and variance",
+    "text": "Jackknife bias correction and variance\nLet \\widehat{T}_{(i)} be the estimator computed without observation i, and \\widehat{T}_{(\\cdot)} = n^{-1}\\sum_i \\widehat{T}_{(i)}. The jackknife bias-corrected estimator and variance estimator are\n\n\\widehat{T}^{\\,J} = n\\,\\widehat{T} - (n-1)\\,\\widehat{T}_{(\\cdot)},\n\\qquad\n\\widehat{V}_J = \\frac{n-1}{n}\\sum_{i=1}^{n}\\left(\\widehat{T}_{(i)} - \\widehat{T}_{(\\cdot)}\\right)^2 .\n\nThe standard implementation recomputes the index n times, with cost O(n^2). Because \\widehat{T}_0 and \\widehat{T}_1 depend on the data only through a few sums, every leave-one-out value can be obtained by subtracting observation i from those sums, with cost O(n):\n# Leave-one-out values in O(n)\nT.loo &lt;- function(y, index = c(\"T1\", \"T0\")) {\n  index &lt;- match.arg(index)\n  n  &lt;- length(y)\n  Sy &lt;- sum(y)\n  m.i &lt;- (Sy - y) / (n - 1)                      # leave-one-out means\n  if (index == \"T1\") {\n    Sylogy &lt;- sum(y * log(y))\n    (Sylogy - y * log(y)) / (Sy - y) - log(m.i)\n  } else {\n    Slogy &lt;- sum(log(y))\n    log(m.i) - (Slogy - log(y)) / (n - 1)\n  }\n}\n\njackknife.theil &lt;- function(y, index = c(\"T1\", \"T0\")) {\n  index &lt;- match.arg(index)\n  n   &lt;- length(y)\n  est &lt;- if (index == \"T1\") T1.hat(y) else T0.hat(y)\n  loo &lt;- T.loo(y, index)\n  m.loo &lt;- mean(loo)\n  list(estimate  = est,\n       corrected = n * est - (n - 1) * m.loo,\n       variance  = (n - 1) / n * sum((loo - m.loo)^2))   # two-pass\n}\nThese functions will be part of the R package theil, developed in WP4."
   },
   {
     "objectID": "links.html",
@@ -224,73 +217,101 @@
     "text": "Software\n\nR · Quarto · Posit (RStudio) · Rcpp"
   },
   {
-    "objectID": "publications.html",
-    "href": "publications.html",
-    "title": "Publications",
+    "objectID": "project.html",
+    "href": "project.html",
+    "title": "Project",
     "section": "",
-    "text": "The main dissemination channel is publication in leading journals (JCR D1 or ABS 4/4). Methodological results (WP1–WP3) target journals such as Journal of Econometrics, Sociological Methods & Research, Social Indicators Research, Journal of Economic Inequality* and Computational Statistics & Data Analysis. The R package (WP4) targets the Journal of Statistical Software, and the applications (WP5) target journals in Water Resources, Tourism, Management and Business."
+    "text": "The project is organised into five work packages (WP), each aligned with a General Objective (GO). Each WP sets out Specific Objectives (SO) and Activities (A). A cross-cutting activity covers this website:"
   },
   {
-    "objectID": "publications.html#target-journals",
-    "href": "publications.html#target-journals",
-    "title": "Publications",
-    "section": "",
-    "text": "The main dissemination channel is publication in leading journals (JCR D1 or ABS 4/4). Methodological results (WP1–WP3) target journals such as Journal of Econometrics, Sociological Methods & Research, Social Indicators Research, Journal of Economic Inequality* and Computational Statistics & Data Analysis. The R package (WP4) targets the Journal of Statistical Software, and the applications (WP5) target journals in Water Resources, Tourism, Management and Business."
+    "objectID": "project.html#wp1-bias-diagnosis-and-correction",
+    "href": "project.html#wp1-bias-diagnosis-and-correction",
+    "title": "Project",
+    "section": "WP1 · Bias diagnosis and correction",
+    "text": "WP1 · Bias diagnosis and correction\n\nGO1. Identify, predict and correct the bias of Theil index estimators\n\nResearchers: E. Álvarez, R. Cano, R.M. García, P.J. Moya, A.J. López, J.F. Muñoz\n\n\nSO1. Quantify the bias of the estimators and the data features that cause it, comparing the sensitivity of T_0 and T_1.\n\nA2. Design the Monte Carlo experiment.\nA3. Relative bias (RB) and bias ratio (BR) of T_0 and T_1 (H1, H2).\n\nSO2. Predict the bias from observable sample features, as a diagnostic tool.\n\nA4. GAM models for the bias.\nA5. Qualitative bias scale: negligible, mild, moderate, severe (H3).\n\nSO3. New bias-correction techniques and their impact on the MSE.\n\nA6. Jackknife and GAM-based corrected estimators.\nA7. Comparison with analytical and semiparametric corrections (H4, H5).\n\nSO4. Bias in the between- and within-group decomposition.\n\nA8. Bias of the decomposition components (H6)."
   },
   {
-    "objectID": "publications.html#working-papers",
-    "href": "publications.html#working-papers",
-    "title": "Publications",
-    "section": "Working papers",
-    "text": "Working papers\n\nTo be completed as papers are submitted."
+    "objectID": "project.html#wp2-reliable-inference",
+    "href": "project.html#wp2-reliable-inference",
+    "title": "Project",
+    "section": "WP2 · Reliable inference",
+    "text": "WP2 · Reliable inference\n\nGO2. Reliable inference for Theil indices under strong skewness and inequality\n\nResearchers: E. Álvarez, J. Chica, R.M. García, P.J. Moya, J.F. Muñoz, F. Vendrell\n\n\nSO5. Bias of variance estimators and coverage of confidence intervals.\n\nA9. Evaluation of asymptotic, bootstrap, semiparametric and jackknife variances.\nA10. Scenarios where inference becomes unreliable (H7).\n\nSO6. New variance estimators and confidence intervals.\n\nA11. Jackknife variances and new confidence intervals.\nA12. Comparison and recommendations (H8)."
   },
   {
-    "objectID": "publications.html#published-papers",
-    "href": "publications.html#published-papers",
-    "title": "Publications",
-    "section": "Published papers",
-    "text": "Published papers\n\nTo be completed."
+    "objectID": "project.html#wp3-computationally-efficient-inference",
+    "href": "project.html#wp3-computationally-efficient-inference",
+    "title": "Project",
+    "section": "WP3 · Computationally efficient inference",
+    "text": "WP3 · Computationally efficient inference\n\nGO3. Reduce the computational cost of the jackknife\n\nResearchers: E. Álvarez, J. Chica, I. García, A.J. López, P.J. Moya, J.F. Muñoz\n\n\nSO7. Computational cost of the standard jackknife compared with alternative methods.\n\nA13. Execution times (H9).\n\nSO8. Efficient jackknife expressions with no loss of accuracy.\n\nA14. Analytical jackknife expressions.\nA15. Implementation and validation (H10)."
   },
   {
-    "objectID": "publications.html#software",
-    "href": "publications.html#software",
-    "title": "Publications",
-    "section": "Software",
-    "text": "Software\n\ntheil: Theil indices, bias corrections, variances and confidence intervals. R package with a C++ core. Forthcoming on CRAN."
+    "objectID": "project.html#wp4-the-r-package-theil",
+    "href": "project.html#wp4-the-r-package-theil",
+    "title": "Project",
+    "section": "WP4 · The R package theil",
+    "text": "WP4 · The R package theil\n\nGO4. Open, efficient and reproducible software\n\nResearchers: E. Álvarez, J. Chica, A.J. López, P.J. Moya, J.A. Salinas, J.F. Muñoz\n\n\nSO9. R package theil, with a C++ core (Rcpp).\n\nA16. Development of the package.\nA17. Documentation with vignettes and release on CRAN."
   },
   {
-    "objectID": "publications.html#previous-related-work-ginius-project",
-    "href": "publications.html#previous-related-work-ginius-project",
-    "title": "Publications",
-    "section": "Previous related work (GiniUs project)",
-    "text": "Previous related work (GiniUs project)\nMuñoz, J.F., Moya-Fernández, P.J., & Álvarez-Verdejo, E. (2023). Exploring and correcting the bias in the estimation of the Gini measure of inequality. Sociological Methods & Research. https://doi.org/10.1177/00491241231176847\nMuñoz, J.F., Pavía, J.M., & Álvarez-Verdejo, E. (2024). giniVarCI: Gini indices, variances and confidence intervals for finite and infinite populations. R package. https://CRAN.R-project.org/package=giniVarCI"
+    "objectID": "project.html#wp5-multidisciplinary-transfer",
+    "href": "project.html#wp5-multidisciplinary-transfer",
+    "title": "Project",
+    "section": "WP5 · Multidisciplinary transfer",
+    "text": "WP5 · Multidisciplinary transfer\n\nGO5. Transfer to the Social Sciences\n\nResearchers: all team members (coordinated by both PIs)\n\n\nSO10. Water: inequality in household water consumption and expenditure between and within municipalities.\n\nA18 (H13).\n\nSO11. Tourism: effect of tourism on income inequality within and between destinations.\n\nA19 (H14).\n\nSO12. Firms: servitization, digital transformation and AI adoption.\n\nA20 (H15).\n\nSO13. Global convergence in per capita consumption with bias-corrected estimators.\n\nA21 (H16)."
   },
   {
     "objectID": "team.html",
     "href": "team.html",
     "title": "Team",
     "section": "",
-    "text": "Muñoz Rosas, J.F. (University of Granada, Quantitative Methods)\nSecond PI: to be completed"
+    "text": "Juan Francisco Muñoz Rosas (PI). University of Granada · Quantitative Methods for Economics and Business.\n\nEncarnación Álvarez Verdejo (Co-PI). University of Granada · Quantitative Methods for Economics and Business."
   },
   {
     "objectID": "team.html#principal-investigators",
     "href": "team.html#principal-investigators",
     "title": "Team",
     "section": "",
-    "text": "Muñoz Rosas, J.F. (University of Granada, Quantitative Methods)\nSecond PI: to be completed"
+    "text": "Juan Francisco Muñoz Rosas (PI). University of Granada · Quantitative Methods for Economics and Business.\n\nEncarnación Álvarez Verdejo (Co-PI). University of Granada · Quantitative Methods for Economics and Business."
   },
   {
-    "objectID": "team.html#research-team",
-    "href": "team.html#research-team",
+    "objectID": "team.html#team-members-by-field",
+    "href": "team.html#team-members-by-field",
     "title": "Team",
-    "section": "Research team",
-    "text": "Research team\nUniversity of Granada · Quantitative Methods and Statistics Álvarez, E.; Cano, R.; Chica, J.; García, I.; García, R.M.; López, A.J.; Moya, P.J.; Muñoz, J.F.\nUniversity of Granada · Applied Economics (water, well-being) To be completed\nTourism Salinas, J.A.; to be completed\nBusiness and management (servitization, digital transformation) Vendrell, F."
+    "section": "Team members by field",
+    "text": "Team members by field\nQuantitative Methods for Economics and Business (University of Granada)\nÁlvarez, E. (Co-PI); Cano, R.; Chica, J.; García, I.; García, R.M.; Moya, P.J.; Muñoz, J.F. (PI)\nStatistics and Operations Research (University of Granada)\nLópez, A.J.; and the PhD students Cano, P. and Yáñez\nApplied Economics (water, well-being, poverty)\nGuardiola, J.; Ibáñez, N.; López, S.; Rodríguez (University of Granada) · Addabbo, T. (University of Modena and Reggio Emilia, Italy) · Tortajada, C. (University of Glasgow, United Kingdom)\nInternational and Spanish Economics (tourism)\nCasas, A.C.; Llorca, C.M.; Salinas, J.A. (University of Granada)\nBusiness Management (servitization, digital transformation and AI)\nVendrell, F. and Gomes, E. (foreign institutions)\nQuantitative Methods Statistics and Operations Research Applied Economics International Economics Business Management United Kingdom · Italy · Portugal"
   },
   {
-    "objectID": "team.html#areas-of-expertise",
-    "href": "team.html#areas-of-expertise",
+    "objectID": "team.html#co-authorship-network",
+    "href": "team.html#co-authorship-network",
     "title": "Team",
-    "section": "Areas of expertise",
-    "text": "Areas of expertise\nStatistics and Operations Research Quantitative Methods Applied Economics Tourism Management and Business"
+    "section": "Co-authorship network",
+    "text": "Co-authorship network\nThe team has a consolidated record of joint research: methodological and applied researchers already publish together, which ensures that the methods developed in the project are transferred to the Social Sciences.\n\n\n\nCo-authorship network of the THEILUMINA team. Each node shows the number of articles in JCR journals (SCIE/SSCI) of each researcher; each link shows the number of JCR articles co-authored. Filled nodes: members of the previous GiniUs project; white nodes: new members; squares: PhD students; dashed ring: researchers at foreign institutions."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "THEILUMINA",
+    "section": "",
+    "text": "Bias, precision, computational efficiency and decomposition of Theil indices, with multidisciplinary applications in the Social Sciences."
+  },
+  {
+    "objectID": "index.html#about-theilumina",
+    "href": "index.html#about-theilumina",
+    "title": "THEILUMINA",
+    "section": "About THEILUMINA",
+    "text": "About THEILUMINA\nTHEILUMINA is a research project led by the University of Granada (Spain) that develops new methods to estimate Theil inequality indices (T_0 and T_1) and to make reliable inferences about them. It builds on the previous project GiniUs (PID2022-136235NB-I00) on the Gini index, which produced the R package giniVarCI.\nTheil indices are widely used because, unlike the Gini index, they can be additively decomposed into inequality between groups and inequality within groups. However, their estimators can be severely biased, and their confidence intervals unreliable, when data are highly skewed and unequal, which is precisely where measuring inequality matters most.\nThe project:\n\ndiagnoses, predicts and corrects the bias of the estimators of T_0 and T_1;\nprovides reliable variance estimators and confidence intervals, based on the jackknife;\nreduces the computational cost of the jackknife to make inference feasible with large samples;\ndevelops the open-source R package theil, with a C++ core;\ntransfers these methods to water economics, tourism, servitization and digital transformation of firms, and global convergence."
+  },
+  {
+    "objectID": "index.html#what-this-website-offers",
+    "href": "index.html#what-this-website-offers",
+    "title": "THEILUMINA",
+    "section": "What this website offers",
+    "text": "What this website offers\nThis website is a working tool for the research team and an open resource for other researchers:\n\nCommunication and collaboration. Data, R code, results and conclusions are shared among team members.\nReproducible research. Anyone can run the code and obtain the same tables and figures.\nInteractivity. The bias explorer lets users see how bias changes with skewness, inequality and sample size.\nInequality observatory. The observatory shows official inequality indicators (Gini, S80/S20 and Theil indices), updated live from Eurostat and the World Bank.\nDissemination and internationalisation. Results, data and software are openly available."
+  },
+  {
+    "objectID": "index.html#project-status",
+    "href": "index.html#project-status",
+    "title": "THEILUMINA",
+    "section": "Project status",
+    "text": "Project status\n\nThe project proposal is currently under evaluation."
   }
 ]

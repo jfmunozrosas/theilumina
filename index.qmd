@@ -12,7 +12,7 @@ toc: false
 
 ## About THEILUMINA
 
-**THEILUMINA** is a research project of the University of Granada (Spain) that develops new methods to estimate Theil inequality indices ($T_0$ and $T_1$) and to make reliable inferences about them. It builds on the previous project [GiniUs](https://cran.r-project.org/package=giniVarCI) on the Gini index.
+**THEILUMINA** is a research project led by the University of Granada (Spain) that develops new methods to estimate Theil inequality indices ($T_0$ and $T_1$) and to make reliable inferences about them. It builds on the previous project GiniUs (PID2022-136235NB-I00) on the Gini index, which produced the R package [giniVarCI](https://cran.r-project.org/package=giniVarCI).
 
 Theil indices are widely used because, unlike the Gini index, they can be additively decomposed into inequality **between** groups and inequality **within** groups. However, their estimators can be severely biased, and their confidence intervals unreliable, when data are highly skewed and unequal, which is precisely where measuring inequality matters most.
 
@@ -31,14 +31,11 @@ This website is a working tool for the research team and an open resource for ot
 1. **Communication and collaboration.** Data, R code, results and conclusions are shared among team members.
 2. **Reproducible research.** Anyone can run the code and obtain the same tables and figures.
 3. **Interactivity.** The [bias explorer](simulation.qmd) lets users see how bias changes with skewness, inequality and sample size.
-4. **Dissemination and internationalisation.** Results, data and software are openly available.
+4. **Inequality observatory.** The [observatory](observatory.qmd) shows official inequality indicators (Gini, S80/S20 and Theil indices), updated live from Eurostat and the World Bank.
+5. **Dissemination and internationalisation.** Results, data and software are openly available.
 
-## Funding
+## Project status
 
-::: {.pending}
-Proyectos de Generación de Conocimiento — convocatoria 2026. Agencia Estatal de Investigación. Reference: *pending*.
+::: {.status}
+The project proposal is currently **under evaluation**.
 :::
-
-<!-- Añadir aquí los logos del Ministerio, AEI y FEDER cuando se conceda el proyecto:
-![](images/LogoMinisterio.jpg){width=30%} ![](images/LogoAEI.png){width=30%} ![](images/LogoFEDER.jpg){width=30%}
--->

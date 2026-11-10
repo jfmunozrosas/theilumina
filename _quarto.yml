@@ -28,6 +28,8 @@ website:
             text: "Interactive bias explorer"
           - href: data-code.qmd
             text: "Research data and R code"
+      - href: observatory.qmd
+        text: Observatory
       - href: publications.qmd
         text: Publications
       - href: dissemination.qmd

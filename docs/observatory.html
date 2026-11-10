@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Inequality observatory – THEILUMINA</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./images/logo_theilumina.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-00955f6b0038cceb76c5c3659775ae37.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<script type="module" src="site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./images/logo_theilumina.png" alt="THEILUMINA logo" class="navbar-logo">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./project.html"> 
+<span class="menu-text">Project</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./team.html"> 
+<span class="menu-text">Team</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-theil-indices" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Theil indices</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-theil-indices">    
+        <li>
+    <a class="dropdown-item" href="./theil-indices.html">
+ <span class="dropdown-text">Definition and estimation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./simulation.html">
+ <span class="dropdown-text">Interactive bias explorer</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./data-code.html">
+ <span class="dropdown-text">Research data and R code</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" href="./observatory.html" aria-current="page"> 
+<span class="menu-text">Observatory</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./publications.html"> 
+<span class="menu-text">Publications</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./dissemination.html"> 
+<span class="menu-text">Dissemination</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./links.html"> 
+<span class="menu-text">Links</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/jfmunozrosas/theilumina"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#europe-eu-silc-indicators-eurostat" id="toc-europe-eu-silc-indicators-eurostat" class="nav-link active" data-scroll-target="#europe-eu-silc-indicators-eurostat">Europe: EU-SILC indicators (Eurostat)</a></li>
+  <li><a href="#world-gini-and-theil-t_0-world-bank-pip" id="toc-world-gini-and-theil-t_0-world-bank-pip" class="nav-link" data-scroll-target="#world-gini-and-theil-t_0-world-bank-pip">World: Gini and Theil <span class="math inline">T_0</span> (World Bank PIP)</a></li>
+  <li><a href="#other-public-sources-of-theil-indices" id="toc-other-public-sources-of-theil-indices" class="nav-link" data-scroll-target="#other-public-sources-of-theil-indices">Other public sources of Theil indices</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Inequality observatory</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+<p class="subtitle lead">Official inequality indicators, updated live from Eurostat and the World Bank</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>This observatory gathers public inequality indicators for European and world countries. The data are <strong>downloaded live from the official sources</strong> every time the page is opened, so they always show the latest release. Each chart can be explored by hovering over the points, and the data can be downloaded as CSV.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Why Theil indices are rarely published, and what this observatory offers
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Official statistics usually publish the <strong>Gini index</strong> and the <strong>S80/S20 ratio</strong>, but seldom Theil indices, even though Theil indices can be decomposed into inequality <em>between</em> and <em>within</em> groups. This observatory shows:</p>
+<ul>
+<li><strong>Theil <span class="math inline">T_0</span> (mean log deviation)</strong>, published by the World Bank’s <em>Poverty and Inequality Platform</em> (PIP) for about 170 countries.</li>
+<li>An <strong>approximation of <span class="math inline">T_0</span> and <span class="math inline">T_1</span> for EU countries</strong>, computed from the income shares of the ten deciles published by Eurostat (EU-SILC). Because it only uses inequality <em>between</em> deciles, it is a <strong>lower bound</strong> of the true index; inequality within each decile is ignored.</li>
+</ul>
+<p>All these figures are point estimates based on samples. As shown by this project, Theil estimators can be biased and their margin of error can be large when incomes are highly skewed. The <strong>theil</strong> R package will provide bias-corrected estimates and confidence intervals from microdata.</p>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="sourceCode cell-code hidden" id="cb1" data-startfrom="22" data-source-offset="-33"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 21;"><span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">jsonstat</span>(js) {</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Flattens a JSON-stat 2.0 dataset (Eurostat API) into an array of records</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> ids <span class="op">=</span> js<span class="op">.</span><span class="at">id</span><span class="op">,</span> size <span class="op">=</span> js<span class="op">.</span><span class="at">size</span><span class="op">,</span> dims <span class="op">=</span> js<span class="op">.</span><span class="at">dimension</span><span class="op">;</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> codes <span class="op">=</span> ids<span class="op">.</span><span class="fu">map</span>(d <span class="kw">=&gt;</span> {</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> idx <span class="op">=</span> dims[d]<span class="op">.</span><span class="at">category</span><span class="op">.</span><span class="at">index</span><span class="op">;</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> arr <span class="op">=</span> <span class="bu">Array</span><span class="op">.</span><span class="fu">isArray</span>(idx) <span class="op">?</span> idx <span class="op">:</span> <span class="bu">Object</span><span class="op">.</span><span class="fu">keys</span>(idx)<span class="op">.</span><span class="fu">sort</span>((a<span class="op">,</span> b) <span class="kw">=&gt;</span> idx[a] <span class="op">-</span> idx[b])<span class="op">;</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> arr<span class="op">;</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> labels <span class="op">=</span> ids<span class="op">.</span><span class="fu">map</span>(d <span class="kw">=&gt;</span> dims[d]<span class="op">.</span><span class="at">category</span><span class="op">.</span><span class="at">label</span> <span class="op">||</span> {})<span class="op">;</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> out <span class="op">=</span> []<span class="op">;</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> vals <span class="op">=</span> js<span class="op">.</span><span class="at">value</span><span class="op">;</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> keys <span class="op">=</span> <span class="bu">Array</span><span class="op">.</span><span class="fu">isArray</span>(vals) <span class="op">?</span> vals<span class="op">.</span><span class="fu">map</span>((v<span class="op">,</span> i) <span class="kw">=&gt;</span> i)<span class="op">.</span><span class="fu">filter</span>(i <span class="kw">=&gt;</span> vals[i] <span class="op">!=</span> <span class="kw">null</span>) <span class="op">:</span> <span class="bu">Object</span><span class="op">.</span><span class="fu">keys</span>(vals)<span class="op">.</span><span class="fu">map</span>(<span class="bu">Number</span>)<span class="op">;</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (<span class="kw">const</span> i <span class="kw">of</span> keys) {</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> rem <span class="op">=</span> i<span class="op">;</span> <span class="kw">const</span> rec <span class="op">=</span> {}<span class="op">;</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (<span class="kw">let</span> d <span class="op">=</span> ids<span class="op">.</span><span class="at">length</span> <span class="op">-</span> <span class="dv">1</span><span class="op">;</span> d <span class="op">&gt;=</span> <span class="dv">0</span><span class="op">;</span> d<span class="op">--</span>) {</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> c <span class="op">=</span> codes[d][rem <span class="op">%</span> size[d]]<span class="op">;</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>      rec[ids[d]] <span class="op">=</span> c<span class="op">;</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (ids[d] <span class="op">===</span> <span class="st">"geo"</span>) rec<span class="op">.</span><span class="at">country</span> <span class="op">=</span> labels[d][c] <span class="op">||</span> c<span class="op">;</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>      rem <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">floor</span>(rem <span class="op">/</span> size[d])<span class="op">;</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    rec<span class="op">.</span><span class="at">value</span> <span class="op">=</span> <span class="op">+</span>vals[i]<span class="op">;</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    out<span class="op">.</span><span class="fu">push</span>(rec)<span class="op">;</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> out<span class="op">;</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>pref <span class="op">=</span> [<span class="st">"TOTAL"</span><span class="op">,</span> <span class="st">"T"</span><span class="op">,</span> <span class="st">"SHARE"</span><span class="op">,</span> <span class="st">"EUR"</span><span class="op">,</span> <span class="st">"PC"</span><span class="op">,</span> <span class="st">"A"</span>]</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">keepPreferred</span>(recs<span class="op">,</span> keepDims) {</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>  <span class="co">// For dimensions other than geo/time (and keepDims) keep a single category</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="op">!</span>recs<span class="op">.</span><span class="at">length</span>) <span class="cf">return</span> recs<span class="op">;</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> dimsAll <span class="op">=</span> <span class="bu">Object</span><span class="op">.</span><span class="fu">keys</span>(recs[<span class="dv">0</span>])<span class="op">.</span><span class="fu">filter</span>(k <span class="kw">=&gt;</span> <span class="op">!</span>[<span class="st">"geo"</span><span class="op">,</span> <span class="st">"time"</span><span class="op">,</span> <span class="st">"value"</span><span class="op">,</span> <span class="st">"country"</span><span class="op">,</span> <span class="op">...</span>keepDims]<span class="op">.</span><span class="fu">includes</span>(k))<span class="op">;</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> r <span class="op">=</span> recs<span class="op">;</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (<span class="kw">const</span> d <span class="kw">of</span> dimsAll) {</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> cats <span class="op">=</span> [<span class="op">...</span><span class="kw">new</span> <span class="bu">Set</span>(r<span class="op">.</span><span class="fu">map</span>(x <span class="kw">=&gt;</span> x[d]))]<span class="op">;</span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> chosen <span class="op">=</span> pref<span class="op">.</span><span class="fu">find</span>(p <span class="kw">=&gt;</span> cats<span class="op">.</span><span class="fu">includes</span>(p)) <span class="op">??</span> cats[<span class="dv">0</span>]<span class="op">;</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> r<span class="op">.</span><span class="fu">filter</span>(x <span class="kw">=&gt;</span> x[d] <span class="op">===</span> chosen)<span class="op">;</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> r<span class="op">;</span></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="kw">async</span> <span class="kw">function</span> <span class="fu">eurostat</span>(code<span class="op">,</span> query <span class="op">=</span> <span class="st">""</span>) {</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> url <span class="op">=</span> <span class="vs">`https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/</span><span class="sc">${</span>code<span class="sc">}</span><span class="vs">?format=JSON&amp;lang=EN</span><span class="sc">${</span>query<span class="sc">}</span><span class="vs">`</span><span class="op">;</span></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> res <span class="op">=</span> <span class="cf">await</span> <span class="fu">fetch</span>(url)<span class="op">;</span></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="op">!</span>res<span class="op">.</span><span class="at">ok</span>) <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">Error</span>(<span class="vs">`Eurostat </span><span class="sc">${</span>code<span class="sc">}</span><span class="vs">: HTTP </span><span class="sc">${</span>res<span class="op">.</span><span class="at">status</span><span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="fu">jsonstat</span>(<span class="cf">await</span> res<span class="op">.</span><span class="fu">json</span>())<span class="op">;</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>EU <span class="op">=</span> <span class="kw">new</span> <span class="bu">Set</span>([<span class="st">"AT"</span><span class="op">,</span><span class="st">"BE"</span><span class="op">,</span><span class="st">"BG"</span><span class="op">,</span><span class="st">"CY"</span><span class="op">,</span><span class="st">"CZ"</span><span class="op">,</span><span class="st">"DE"</span><span class="op">,</span><span class="st">"DK"</span><span class="op">,</span><span class="st">"EE"</span><span class="op">,</span><span class="st">"EL"</span><span class="op">,</span><span class="st">"ES"</span><span class="op">,</span><span class="st">"FI"</span><span class="op">,</span><span class="st">"FR"</span><span class="op">,</span><span class="st">"HR"</span><span class="op">,</span><span class="st">"HU"</span><span class="op">,</span><span class="st">"IE"</span><span class="op">,</span><span class="st">"IT"</span><span class="op">,</span><span class="st">"LT"</span><span class="op">,</span><span class="st">"LU"</span><span class="op">,</span><span class="st">"LV"</span><span class="op">,</span><span class="st">"MT"</span><span class="op">,</span><span class="st">"NL"</span><span class="op">,</span><span class="st">"PL"</span><span class="op">,</span><span class="st">"PT"</span><span class="op">,</span><span class="st">"RO"</span><span class="op">,</span><span class="st">"SE"</span><span class="op">,</span><span class="st">"SI"</span><span class="op">,</span><span class="st">"SK"</span><span class="op">,</span><span class="st">"EU27_2020"</span><span class="op">,</span><span class="st">"NO"</span><span class="op">,</span><span class="st">"CH"</span><span class="op">,</span><span class="st">"IS"</span><span class="op">,</span><span class="st">"RS"</span><span class="op">,</span><span class="st">"TR"</span><span class="op">,</span><span class="st">"MK"</span><span class="op">,</span><span class="st">"ME"</span><span class="op">,</span><span class="st">"AL"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-4" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-5" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="sourceCode cell-code hidden" id="cb2" data-startfrom="70" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 69;"><span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a><span class="co">// ---------- Download Eurostat data ----------</span></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>euroData <span class="op">=</span> {</span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>  <span class="cf">try</span> {</span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> [gini<span class="op">,</span> s80<span class="op">,</span> dec] <span class="op">=</span> <span class="cf">await</span> <span class="bu">Promise</span><span class="op">.</span><span class="fu">all</span>([</span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>      <span class="fu">eurostat</span>(<span class="st">"ilc_di12"</span>)<span class="op">,</span></span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>      <span class="fu">eurostat</span>(<span class="st">"ilc_di11"</span>)<span class="op">,</span></span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>      <span class="fu">eurostat</span>(<span class="st">"ilc_di01"</span><span class="op">,</span> <span class="st">"&amp;indic_il=SHARE"</span> <span class="op">+</span> [<span class="st">"D1"</span><span class="op">,</span><span class="st">"D2"</span><span class="op">,</span><span class="st">"D3"</span><span class="op">,</span><span class="st">"D4"</span><span class="op">,</span><span class="st">"D5"</span><span class="op">,</span><span class="st">"D6"</span><span class="op">,</span><span class="st">"D7"</span><span class="op">,</span><span class="st">"D8"</span><span class="op">,</span><span class="st">"D9"</span><span class="op">,</span><span class="st">"D10"</span>]<span class="op">.</span><span class="fu">map</span>(q <span class="kw">=&gt;</span> <span class="vs">`&amp;quantile=</span><span class="sc">${</span>q<span class="sc">}</span><span class="vs">`</span>)<span class="op">.</span><span class="fu">join</span>(<span class="st">""</span>))</span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>    ])<span class="op">;</span></span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> rows <span class="op">=</span> []<span class="op">;</span></span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (<span class="kw">const</span> r <span class="kw">of</span> <span class="fu">keepPreferred</span>(gini<span class="op">,</span> [])) rows<span class="op">.</span><span class="fu">push</span>({<span class="dt">geo</span><span class="op">:</span> r<span class="op">.</span><span class="at">geo</span><span class="op">,</span> <span class="dt">country</span><span class="op">:</span> r<span class="op">.</span><span class="at">country</span><span class="op">,</span> <span class="dt">year</span><span class="op">:</span> <span class="op">+</span>r<span class="op">.</span><span class="at">time</span><span class="op">,</span> <span class="dt">indicator</span><span class="op">:</span> <span class="st">"Gini index"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> r<span class="op">.</span><span class="at">value</span>})<span class="op">;</span></span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (<span class="kw">const</span> r <span class="kw">of</span> <span class="fu">keepPreferred</span>(s80<span class="op">,</span> [])) rows<span class="op">.</span><span class="fu">push</span>({<span class="dt">geo</span><span class="op">:</span> r<span class="op">.</span><span class="at">geo</span><span class="op">,</span> <span class="dt">country</span><span class="op">:</span> r<span class="op">.</span><span class="at">country</span><span class="op">,</span> <span class="dt">year</span><span class="op">:</span> <span class="op">+</span>r<span class="op">.</span><span class="at">time</span><span class="op">,</span> <span class="dt">indicator</span><span class="op">:</span> <span class="st">"S80/S20 ratio"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> r<span class="op">.</span><span class="at">value</span>})<span class="op">;</span></span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Theil approximations from decile shares (grouped data, lower bound)</span></span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> d <span class="op">=</span> <span class="fu">keepPreferred</span>(dec<span class="op">,</span> [<span class="st">"quantile"</span>])<span class="op">;</span></span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> groups <span class="op">=</span> d3<span class="op">.</span><span class="fu">group</span>(d<span class="op">,</span> r <span class="kw">=&gt;</span> r<span class="op">.</span><span class="at">geo</span><span class="op">,</span> r <span class="kw">=&gt;</span> r<span class="op">.</span><span class="at">time</span>)<span class="op">;</span></span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (<span class="kw">const</span> [geo<span class="op">,</span> byYear] <span class="kw">of</span> groups) <span class="cf">for</span> (<span class="kw">const</span> [time<span class="op">,</span> recs] <span class="kw">of</span> byYear) {</span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (recs<span class="op">.</span><span class="at">length</span> <span class="op">!==</span> <span class="dv">10</span>) <span class="cf">continue</span><span class="op">;</span></span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> tot <span class="op">=</span> d3<span class="op">.</span><span class="fu">sum</span>(recs<span class="op">,</span> r <span class="kw">=&gt;</span> r<span class="op">.</span><span class="at">value</span>)<span class="op">;</span></span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> s <span class="op">=</span> recs<span class="op">.</span><span class="fu">map</span>(r <span class="kw">=&gt;</span> r<span class="op">.</span><span class="at">value</span> <span class="op">/</span> tot)<span class="op">.</span><span class="fu">filter</span>(v <span class="kw">=&gt;</span> v <span class="op">&gt;</span> <span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (s<span class="op">.</span><span class="at">length</span> <span class="op">!==</span> <span class="dv">10</span>) <span class="cf">continue</span><span class="op">;</span></span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> T1 <span class="op">=</span> d3<span class="op">.</span><span class="fu">sum</span>(s<span class="op">,</span> v <span class="kw">=&gt;</span> v <span class="op">*</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">log</span>(<span class="dv">10</span> <span class="op">*</span> v))<span class="op">;</span></span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> T0 <span class="op">=</span> d3<span class="op">.</span><span class="fu">sum</span>(s<span class="op">,</span> v <span class="kw">=&gt;</span> <span class="fl">0.1</span> <span class="op">*</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">log</span>(<span class="fl">0.1</span> <span class="op">/</span> v))<span class="op">;</span></span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a>      rows<span class="op">.</span><span class="fu">push</span>({geo<span class="op">,</span> <span class="dt">country</span><span class="op">:</span> recs[<span class="dv">0</span>]<span class="op">.</span><span class="at">country</span><span class="op">,</span> <span class="dt">year</span><span class="op">:</span> <span class="op">+</span>time<span class="op">,</span> <span class="dt">indicator</span><span class="op">:</span> <span class="st">"Theil T1 (decile approx.)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> T1})<span class="op">;</span></span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a>      rows<span class="op">.</span><span class="fu">push</span>({geo<span class="op">,</span> <span class="dt">country</span><span class="op">:</span> recs[<span class="dv">0</span>]<span class="op">.</span><span class="at">country</span><span class="op">,</span> <span class="dt">year</span><span class="op">:</span> <span class="op">+</span>time<span class="op">,</span> <span class="dt">indicator</span><span class="op">:</span> <span class="st">"Theil T0 (decile approx.)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> T0})<span class="op">;</span></span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {<span class="dt">ok</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span> <span class="dt">rows</span><span class="op">:</span> rows<span class="op">.</span><span class="fu">filter</span>(r <span class="kw">=&gt;</span> EU<span class="op">.</span><span class="fu">has</span>(r<span class="op">.</span><span class="at">geo</span>) <span class="op">&amp;&amp;</span> <span class="bu">Number</span><span class="op">.</span><span class="fu">isFinite</span>(r<span class="op">.</span><span class="at">value</span>))}<span class="op">;</span></span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">catch</span> (e) {</span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {<span class="dt">ok</span><span class="op">:</span> <span class="kw">false</span><span class="op">,</span> <span class="dt">error</span><span class="op">:</span> e<span class="op">.</span><span class="at">message</span><span class="op">,</span> <span class="dt">rows</span><span class="op">:</span> []}<span class="op">;</span></span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<section id="europe-eu-silc-indicators-eurostat" class="level2">
+<h2 class="anchored" data-anchor-id="europe-eu-silc-indicators-eurostat">Europe: EU-SILC indicators (Eurostat)</h2>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="sourceCode cell-code hidden" id="cb3" data-startfrom="106" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 105;"><span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a>euroCountries <span class="op">=</span> [<span class="op">...</span><span class="kw">new</span> <span class="bu">Set</span>(euroData<span class="op">.</span><span class="at">rows</span><span class="op">.</span><span class="fu">map</span>(r <span class="kw">=&gt;</span> r<span class="op">.</span><span class="at">country</span>))]<span class="op">.</span><span class="fu">sort</span>()</span>
+<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a>viewof euroSel <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">form</span>({</span>
+<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a>  <span class="dt">indicator</span><span class="op">:</span> Inputs<span class="op">.</span><span class="fu">radio</span>([<span class="st">"Gini index"</span><span class="op">,</span> <span class="st">"S80/S20 ratio"</span><span class="op">,</span> <span class="st">"Theil T0 (decile approx.)"</span><span class="op">,</span> <span class="st">"Theil T1 (decile approx.)"</span>]<span class="op">,</span> {<span class="dt">label</span><span class="op">:</span> <span class="st">"Indicator"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="st">"Gini index"</span>})<span class="op">,</span></span>
+<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a>  <span class="dt">countries</span><span class="op">:</span> Inputs<span class="op">.</span><span class="fu">select</span>(euroCountries<span class="op">,</span> {<span class="dt">label</span><span class="op">:</span> <span class="st">"Countries"</span><span class="op">,</span> <span class="dt">multiple</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> euroCountries<span class="op">.</span><span class="fu">filter</span>(c <span class="kw">=&gt;</span> <span class="ss">/</span><span class="sc">^(</span><span class="ss">Spain</span><span class="sc">|</span><span class="ss">Italy</span><span class="sc">|</span><span class="ss">Portugal</span><span class="sc">|</span><span class="ss">Germany</span><span class="sc">|</span><span class="ss">France</span><span class="sc">|</span><span class="ss">European Union</span><span class="sc">)</span><span class="ss">/</span><span class="op">.</span><span class="fu">test</span>(c))<span class="op">.</span><span class="fu">slice</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">6</span>)<span class="op">,</span> <span class="dt">size</span><span class="op">:</span> <span class="dv">8</span>})</span>
+<span id="cb3-110"><a href="#cb3-110" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-3-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-3-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="sourceCode cell-code hidden" id="cb4" data-startfrom="114" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 113;"><span id="cb4-114"><a href="#cb4-114" aria-hidden="true" tabindex="-1"></a>euroData<span class="op">.</span><span class="at">ok</span> <span class="op">?</span> (euroSel<span class="op">.</span><span class="at">countries</span><span class="op">.</span><span class="at">length</span> <span class="op">?</span> Plot<span class="op">.</span><span class="fu">plot</span>({</span>
+<span id="cb4-115"><a href="#cb4-115" aria-hidden="true" tabindex="-1"></a>  <span class="dt">height</span><span class="op">:</span> <span class="dv">420</span><span class="op">,</span> <span class="dt">marginLeft</span><span class="op">:</span> <span class="dv">55</span><span class="op">,</span> <span class="dt">marginRight</span><span class="op">:</span> <span class="dv">140</span><span class="op">,</span></span>
+<span id="cb4-116"><a href="#cb4-116" aria-hidden="true" tabindex="-1"></a>  <span class="dt">x</span><span class="op">:</span> {<span class="dt">label</span><span class="op">:</span> <span class="st">"Year"</span><span class="op">,</span> <span class="dt">tickFormat</span><span class="op">:</span> <span class="st">"d"</span><span class="op">,</span> <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span>}<span class="op">,</span></span>
+<span id="cb4-117"><a href="#cb4-117" aria-hidden="true" tabindex="-1"></a>  <span class="dt">y</span><span class="op">:</span> {<span class="dt">label</span><span class="op">:</span> euroSel<span class="op">.</span><span class="at">indicator</span><span class="op">,</span> <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span> <span class="dt">zero</span><span class="op">:</span> <span class="kw">false</span>}<span class="op">,</span></span>
+<span id="cb4-118"><a href="#cb4-118" aria-hidden="true" tabindex="-1"></a>  <span class="dt">color</span><span class="op">:</span> {<span class="dt">legend</span><span class="op">:</span> <span class="kw">false</span>}<span class="op">,</span></span>
+<span id="cb4-119"><a href="#cb4-119" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
+<span id="cb4-120"><a href="#cb4-120" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">line</span>(euroData<span class="op">.</span><span class="at">rows</span><span class="op">.</span><span class="fu">filter</span>(r <span class="kw">=&gt;</span> r<span class="op">.</span><span class="at">indicator</span> <span class="op">===</span> euroSel<span class="op">.</span><span class="at">indicator</span> <span class="op">&amp;&amp;</span> euroSel<span class="op">.</span><span class="at">countries</span><span class="op">.</span><span class="fu">includes</span>(r<span class="op">.</span><span class="at">country</span>))<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> <span class="st">"year"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"value"</span><span class="op">,</span> <span class="dt">stroke</span><span class="op">:</span> <span class="st">"country"</span><span class="op">,</span> <span class="dt">strokeWidth</span><span class="op">:</span> <span class="fl">2.2</span><span class="op">,</span> <span class="dt">sort</span><span class="op">:</span> <span class="st">"year"</span>})<span class="op">,</span></span>
+<span id="cb4-121"><a href="#cb4-121" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">dot</span>(euroData<span class="op">.</span><span class="at">rows</span><span class="op">.</span><span class="fu">filter</span>(r <span class="kw">=&gt;</span> r<span class="op">.</span><span class="at">indicator</span> <span class="op">===</span> euroSel<span class="op">.</span><span class="at">indicator</span> <span class="op">&amp;&amp;</span> euroSel<span class="op">.</span><span class="at">countries</span><span class="op">.</span><span class="fu">includes</span>(r<span class="op">.</span><span class="at">country</span>))<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> <span class="st">"year"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"value"</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">"country"</span><span class="op">,</span> <span class="dt">r</span><span class="op">:</span> <span class="dv">3</span><span class="op">,</span> <span class="dt">tip</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span> <span class="dt">title</span><span class="op">:</span> d <span class="kw">=&gt;</span> <span class="vs">`</span><span class="sc">${</span>d<span class="op">.</span><span class="at">country</span><span class="sc">}</span><span class="vs"> · </span><span class="sc">${</span>d<span class="op">.</span><span class="at">year</span><span class="sc">}\n${</span>euroSel<span class="op">.</span><span class="at">indicator</span><span class="sc">}</span><span class="vs">: </span><span class="sc">${</span>d<span class="op">.</span><span class="at">value</span><span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">3</span>)<span class="sc">}</span><span class="vs">`</span>})<span class="op">,</span></span>
+<span id="cb4-122"><a href="#cb4-122" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">text</span>(euroData<span class="op">.</span><span class="at">rows</span><span class="op">.</span><span class="fu">filter</span>(r <span class="kw">=&gt;</span> r<span class="op">.</span><span class="at">indicator</span> <span class="op">===</span> euroSel<span class="op">.</span><span class="at">indicator</span> <span class="op">&amp;&amp;</span> euroSel<span class="op">.</span><span class="at">countries</span><span class="op">.</span><span class="fu">includes</span>(r<span class="op">.</span><span class="at">country</span>))<span class="op">,</span> Plot<span class="op">.</span><span class="fu">selectLast</span>({<span class="dt">x</span><span class="op">:</span> <span class="st">"year"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"value"</span><span class="op">,</span> <span class="dt">z</span><span class="op">:</span> <span class="st">"country"</span><span class="op">,</span> <span class="dt">text</span><span class="op">:</span> <span class="st">"country"</span><span class="op">,</span> <span class="dt">textAnchor</span><span class="op">:</span> <span class="st">"start"</span><span class="op">,</span> <span class="dt">dx</span><span class="op">:</span> <span class="dv">6</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">"country"</span>}))</span>
+<span id="cb4-123"><a href="#cb4-123" aria-hidden="true" tabindex="-1"></a>  ]</span>
+<span id="cb4-124"><a href="#cb4-124" aria-hidden="true" tabindex="-1"></a>}) <span class="op">:</span> <span class="fu">html</span><span class="vs">`&lt;p class="pending"&gt;Select at least one country.&lt;/p&gt;`</span>)</span>
+<span id="cb4-125"><a href="#cb4-125" aria-hidden="true" tabindex="-1"></a><span class="op">:</span> <span class="fu">html</span><span class="vs">`&lt;div class="callout callout-warning"&gt;&lt;p&gt;&lt;b&gt;Eurostat data could not be loaded&lt;/b&gt; (</span><span class="sc">${</span>euroData<span class="op">.</span><span class="at">error</span><span class="sc">}</span><span class="vs">). Please try again later or consult &lt;a href="https://ec.europa.eu/eurostat/databrowser/view/ilc_di12/default/table"&gt;Eurostat&lt;/a&gt; directly.&lt;/p&gt;&lt;/div&gt;`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-4" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="sourceCode cell-code hidden" id="cb5" data-startfrom="131" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 130;"><span id="cb5-131"><a href="#cb5-131" aria-hidden="true" tabindex="-1"></a>euroLatest <span class="op">=</span> {</span>
+<span id="cb5-132"><a href="#cb5-132" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> r <span class="op">=</span> euroData<span class="op">.</span><span class="at">rows</span><span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">indicator</span> <span class="op">===</span> euroSel<span class="op">.</span><span class="at">indicator</span>)<span class="op">;</span></span>
+<span id="cb5-133"><a href="#cb5-133" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> last <span class="op">=</span> d3<span class="op">.</span><span class="fu">rollup</span>(r<span class="op">,</span> v <span class="kw">=&gt;</span> v<span class="op">.</span><span class="fu">sort</span>((a<span class="op">,</span> b) <span class="kw">=&gt;</span> b<span class="op">.</span><span class="at">year</span> <span class="op">-</span> a<span class="op">.</span><span class="at">year</span>)[<span class="dv">0</span>]<span class="op">,</span> d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">geo</span>)<span class="op">;</span></span>
+<span id="cb5-134"><a href="#cb5-134" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> [<span class="op">...</span>last<span class="op">.</span><span class="fu">values</span>()]<span class="op">.</span><span class="fu">sort</span>((a<span class="op">,</span> b) <span class="kw">=&gt;</span> b<span class="op">.</span><span class="at">value</span> <span class="op">-</span> a<span class="op">.</span><span class="at">value</span>)<span class="op">;</span></span>
+<span id="cb5-135"><a href="#cb5-135" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-136"><a href="#cb5-136" aria-hidden="true" tabindex="-1"></a>euroData<span class="op">.</span><span class="at">ok</span> <span class="op">?</span> Plot<span class="op">.</span><span class="fu">plot</span>({</span>
+<span id="cb5-137"><a href="#cb5-137" aria-hidden="true" tabindex="-1"></a>  <span class="dt">height</span><span class="op">:</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">max</span>(<span class="dv">300</span><span class="op">,</span> <span class="dv">16</span> <span class="op">*</span> euroLatest<span class="op">.</span><span class="at">length</span>)<span class="op">,</span> <span class="dt">marginLeft</span><span class="op">:</span> <span class="dv">170</span><span class="op">,</span></span>
+<span id="cb5-138"><a href="#cb5-138" aria-hidden="true" tabindex="-1"></a>  <span class="dt">x</span><span class="op">:</span> {<span class="dt">label</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span>euroSel<span class="op">.</span><span class="at">indicator</span><span class="sc">}</span><span class="vs"> (latest available year)`</span><span class="op">,</span> <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span>}<span class="op">,</span></span>
+<span id="cb5-139"><a href="#cb5-139" aria-hidden="true" tabindex="-1"></a>  <span class="dt">y</span><span class="op">:</span> {<span class="dt">label</span><span class="op">:</span> <span class="kw">null</span>}<span class="op">,</span></span>
+<span id="cb5-140"><a href="#cb5-140" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
+<span id="cb5-141"><a href="#cb5-141" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">barX</span>(euroLatest<span class="op">,</span> {<span class="dt">y</span><span class="op">:</span> <span class="st">"country"</span><span class="op">,</span> <span class="dt">x</span><span class="op">:</span> <span class="st">"value"</span><span class="op">,</span> <span class="dt">sort</span><span class="op">:</span> {<span class="dt">y</span><span class="op">:</span> <span class="st">"-x"</span>}<span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">geo</span> <span class="op">===</span> <span class="st">"EU27_2020"</span> <span class="op">?</span> <span class="st">"#E07B20"</span> <span class="op">:</span> (d<span class="op">.</span><span class="at">geo</span> <span class="op">===</span> <span class="st">"ES"</span> <span class="op">?</span> <span class="st">"#1F4E7A"</span> <span class="op">:</span> <span class="st">"#9DB5CF"</span>)<span class="op">,</span> <span class="dt">tip</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span> <span class="dt">title</span><span class="op">:</span> d <span class="kw">=&gt;</span> <span class="vs">`</span><span class="sc">${</span>d<span class="op">.</span><span class="at">country</span><span class="sc">}</span><span class="vs"> (</span><span class="sc">${</span>d<span class="op">.</span><span class="at">year</span><span class="sc">}</span><span class="vs">): </span><span class="sc">${</span>d<span class="op">.</span><span class="at">value</span><span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">3</span>)<span class="sc">}</span><span class="vs">`</span>})<span class="op">,</span></span>
+<span id="cb5-142"><a href="#cb5-142" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">ruleX</span>([<span class="dv">0</span>])</span>
+<span id="cb5-143"><a href="#cb5-143" aria-hidden="true" tabindex="-1"></a>  ]</span>
+<span id="cb5-144"><a href="#cb5-144" aria-hidden="true" tabindex="-1"></a>}) <span class="op">:</span> <span class="fu">html</span><span class="vs">``</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-5-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-5-2" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="sourceCode cell-code hidden" id="cb6" data-startfrom="148" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 147;"><span id="cb6-148"><a href="#cb6-148" aria-hidden="true" tabindex="-1"></a>euroData<span class="op">.</span><span class="at">ok</span> <span class="op">?</span> DOM<span class="op">.</span><span class="fu">download</span>(<span class="kw">new</span> <span class="bu">Blob</span>([d3<span class="op">.</span><span class="fu">csvFormat</span>(euroData<span class="op">.</span><span class="at">rows</span>)]<span class="op">,</span> {<span class="dt">type</span><span class="op">:</span> <span class="st">"text/csv"</span>})<span class="op">,</span> <span class="st">"theilumina_eurostat_inequality.csv"</span><span class="op">,</span> <span class="st">"Download Eurostat data (CSV)"</span>) <span class="op">:</span> <span class="fu">html</span><span class="vs">``</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-6" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+<p class="source">
+Sources: Eurostat, EU-SILC: <a href="https://ec.europa.eu/eurostat/databrowser/view/ilc_di12/default/table">ilc_di12</a> (Gini coefficient of equivalised disposable income), <a href="https://ec.europa.eu/eurostat/databrowser/view/ilc_di11/default/table">ilc_di11</a> (S80/S20 income quintile share ratio) and <a href="https://ec.europa.eu/eurostat/databrowser/view/ilc_di01/default/table">ilc_di01</a> (distribution of income by deciles). Theil approximations computed by THEILUMINA from the decile shares <span class="math inline">s_k</span>: <span class="math inline">T_1 \approx \sum_k s_k \ln(10\,s_k)</span> and <span class="math inline">T_0 \approx \sum_k 0.1 \ln(0.1/s_k)</span>.
+</p>
+</section>
+<section id="world-gini-and-theil-t_0-world-bank-pip" class="level2">
+<h2 class="anchored" data-anchor-id="world-gini-and-theil-t_0-world-bank-pip">World: Gini and Theil <span class="math inline">T_0</span> (World Bank PIP)</h2>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="sourceCode cell-code hidden" id="cb7" data-startfrom="158" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 157;"><span id="cb7-158"><a href="#cb7-158" aria-hidden="true" tabindex="-1"></a>wbData <span class="op">=</span> {</span>
+<span id="cb7-159"><a href="#cb7-159" aria-hidden="true" tabindex="-1"></a>  <span class="cf">try</span> {</span>
+<span id="cb7-160"><a href="#cb7-160" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> res <span class="op">=</span> <span class="cf">await</span> <span class="fu">fetch</span>(<span class="st">"https://api.worldbank.org/pip/v1/pip?country=all&amp;year=all&amp;fill_gaps=false&amp;format=json"</span>)<span class="op">;</span></span>
+<span id="cb7-161"><a href="#cb7-161" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="op">!</span>res<span class="op">.</span><span class="at">ok</span>) <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">Error</span>(<span class="vs">`World Bank PIP: HTTP </span><span class="sc">${</span>res<span class="op">.</span><span class="at">status</span><span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span>
+<span id="cb7-162"><a href="#cb7-162" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> js <span class="op">=</span> <span class="cf">await</span> res<span class="op">.</span><span class="fu">json</span>()<span class="op">;</span></span>
+<span id="cb7-163"><a href="#cb7-163" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> rows <span class="op">=</span> []<span class="op">;</span></span>
+<span id="cb7-164"><a href="#cb7-164" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (<span class="kw">const</span> r <span class="kw">of</span> js) {</span>
+<span id="cb7-165"><a href="#cb7-165" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (r<span class="op">.</span><span class="at">reporting_level</span> <span class="op">!==</span> <span class="st">"national"</span>) <span class="cf">continue</span><span class="op">;</span></span>
+<span id="cb7-166"><a href="#cb7-166" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> base <span class="op">=</span> {<span class="dt">code</span><span class="op">:</span> r<span class="op">.</span><span class="at">country_code</span><span class="op">,</span> <span class="dt">country</span><span class="op">:</span> r<span class="op">.</span><span class="at">country_name</span><span class="op">,</span> <span class="dt">year</span><span class="op">:</span> <span class="op">+</span>r<span class="op">.</span><span class="at">reporting_year</span><span class="op">,</span> <span class="dt">welfare</span><span class="op">:</span> r<span class="op">.</span><span class="at">welfare_type</span>}<span class="op">;</span></span>
+<span id="cb7-167"><a href="#cb7-167" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (r<span class="op">.</span><span class="at">gini</span> <span class="op">!=</span> <span class="kw">null</span>) rows<span class="op">.</span><span class="fu">push</span>({<span class="op">...</span>base<span class="op">,</span> <span class="dt">indicator</span><span class="op">:</span> <span class="st">"Gini index"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="op">+</span>r<span class="op">.</span><span class="at">gini</span>})<span class="op">;</span></span>
+<span id="cb7-168"><a href="#cb7-168" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (r<span class="op">.</span><span class="at">mld</span> <span class="op">!=</span> <span class="kw">null</span>) rows<span class="op">.</span><span class="fu">push</span>({<span class="op">...</span>base<span class="op">,</span> <span class="dt">indicator</span><span class="op">:</span> <span class="st">"Theil T0 (mean log deviation)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="op">+</span>r<span class="op">.</span><span class="at">mld</span>})<span class="op">;</span></span>
+<span id="cb7-169"><a href="#cb7-169" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb7-170"><a href="#cb7-170" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {<span class="dt">ok</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span> rows}<span class="op">;</span></span>
+<span id="cb7-171"><a href="#cb7-171" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">catch</span> (e) {</span>
+<span id="cb7-172"><a href="#cb7-172" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {<span class="dt">ok</span><span class="op">:</span> <span class="kw">false</span><span class="op">,</span> <span class="dt">error</span><span class="op">:</span> e<span class="op">.</span><span class="at">message</span><span class="op">,</span> <span class="dt">rows</span><span class="op">:</span> []}<span class="op">;</span></span>
+<span id="cb7-173"><a href="#cb7-173" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-174"><a href="#cb7-174" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-175"><a href="#cb7-175" aria-hidden="true" tabindex="-1"></a>wbCountries <span class="op">=</span> [<span class="op">...</span><span class="kw">new</span> <span class="bu">Set</span>(wbData<span class="op">.</span><span class="at">rows</span><span class="op">.</span><span class="fu">map</span>(r <span class="kw">=&gt;</span> r<span class="op">.</span><span class="at">country</span>))]<span class="op">.</span><span class="fu">sort</span>()</span>
+<span id="cb7-176"><a href="#cb7-176" aria-hidden="true" tabindex="-1"></a>viewof wbSel <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">form</span>({</span>
+<span id="cb7-177"><a href="#cb7-177" aria-hidden="true" tabindex="-1"></a>  <span class="dt">indicator</span><span class="op">:</span> Inputs<span class="op">.</span><span class="fu">radio</span>([<span class="st">"Gini index"</span><span class="op">,</span> <span class="st">"Theil T0 (mean log deviation)"</span>]<span class="op">,</span> {<span class="dt">label</span><span class="op">:</span> <span class="st">"Indicator"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="st">"Theil T0 (mean log deviation)"</span>})<span class="op">,</span></span>
+<span id="cb7-178"><a href="#cb7-178" aria-hidden="true" tabindex="-1"></a>  <span class="dt">countries</span><span class="op">:</span> Inputs<span class="op">.</span><span class="fu">select</span>(wbCountries<span class="op">,</span> {<span class="dt">label</span><span class="op">:</span> <span class="st">"Countries"</span><span class="op">,</span> <span class="dt">multiple</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> wbCountries<span class="op">.</span><span class="fu">filter</span>(c <span class="kw">=&gt;</span> <span class="ss">/</span><span class="sc">^(</span><span class="ss">Spain</span><span class="sc">|</span><span class="ss">Brazil</span><span class="sc">|</span><span class="ss">South Africa</span><span class="sc">|</span><span class="ss">United States</span><span class="sc">|</span><span class="ss">India</span><span class="sc">|</span><span class="ss">China</span><span class="sc">)$</span><span class="ss">/</span><span class="op">.</span><span class="fu">test</span>(c))<span class="op">,</span> <span class="dt">size</span><span class="op">:</span> <span class="dv">8</span>})</span>
+<span id="cb7-179"><a href="#cb7-179" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-7-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-7-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-7-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="sourceCode cell-code hidden" id="cb8" data-startfrom="183" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 182;"><span id="cb8-183"><a href="#cb8-183" aria-hidden="true" tabindex="-1"></a>wbData<span class="op">.</span><span class="at">ok</span> <span class="op">?</span> (wbSel<span class="op">.</span><span class="at">countries</span><span class="op">.</span><span class="at">length</span> <span class="op">?</span> Plot<span class="op">.</span><span class="fu">plot</span>({</span>
+<span id="cb8-184"><a href="#cb8-184" aria-hidden="true" tabindex="-1"></a>  <span class="dt">height</span><span class="op">:</span> <span class="dv">420</span><span class="op">,</span> <span class="dt">marginLeft</span><span class="op">:</span> <span class="dv">55</span><span class="op">,</span> <span class="dt">marginRight</span><span class="op">:</span> <span class="dv">140</span><span class="op">,</span></span>
+<span id="cb8-185"><a href="#cb8-185" aria-hidden="true" tabindex="-1"></a>  <span class="dt">x</span><span class="op">:</span> {<span class="dt">label</span><span class="op">:</span> <span class="st">"Year"</span><span class="op">,</span> <span class="dt">tickFormat</span><span class="op">:</span> <span class="st">"d"</span><span class="op">,</span> <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span>}<span class="op">,</span></span>
+<span id="cb8-186"><a href="#cb8-186" aria-hidden="true" tabindex="-1"></a>  <span class="dt">y</span><span class="op">:</span> {<span class="dt">label</span><span class="op">:</span> wbSel<span class="op">.</span><span class="at">indicator</span><span class="op">,</span> <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span> <span class="dt">zero</span><span class="op">:</span> <span class="kw">false</span>}<span class="op">,</span></span>
+<span id="cb8-187"><a href="#cb8-187" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
+<span id="cb8-188"><a href="#cb8-188" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">line</span>(wbData<span class="op">.</span><span class="at">rows</span><span class="op">.</span><span class="fu">filter</span>(r <span class="kw">=&gt;</span> r<span class="op">.</span><span class="at">indicator</span> <span class="op">===</span> wbSel<span class="op">.</span><span class="at">indicator</span> <span class="op">&amp;&amp;</span> wbSel<span class="op">.</span><span class="at">countries</span><span class="op">.</span><span class="fu">includes</span>(r<span class="op">.</span><span class="at">country</span>))<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> <span class="st">"year"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"value"</span><span class="op">,</span> <span class="dt">stroke</span><span class="op">:</span> <span class="st">"country"</span><span class="op">,</span> <span class="dt">z</span><span class="op">:</span> d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">country</span> <span class="op">+</span> d<span class="op">.</span><span class="at">welfare</span><span class="op">,</span> <span class="dt">strokeWidth</span><span class="op">:</span> <span class="fl">2.2</span><span class="op">,</span> <span class="dt">sort</span><span class="op">:</span> <span class="st">"year"</span>})<span class="op">,</span></span>
+<span id="cb8-189"><a href="#cb8-189" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">dot</span>(wbData<span class="op">.</span><span class="at">rows</span><span class="op">.</span><span class="fu">filter</span>(r <span class="kw">=&gt;</span> r<span class="op">.</span><span class="at">indicator</span> <span class="op">===</span> wbSel<span class="op">.</span><span class="at">indicator</span> <span class="op">&amp;&amp;</span> wbSel<span class="op">.</span><span class="at">countries</span><span class="op">.</span><span class="fu">includes</span>(r<span class="op">.</span><span class="at">country</span>))<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> <span class="st">"year"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"value"</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">"country"</span><span class="op">,</span> <span class="dt">r</span><span class="op">:</span> <span class="dv">3</span><span class="op">,</span> <span class="dt">tip</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span> <span class="dt">title</span><span class="op">:</span> d <span class="kw">=&gt;</span> <span class="vs">`</span><span class="sc">${</span>d<span class="op">.</span><span class="at">country</span><span class="sc">}</span><span class="vs"> · </span><span class="sc">${</span>d<span class="op">.</span><span class="at">year</span><span class="sc">}</span><span class="vs"> (</span><span class="sc">${</span>d<span class="op">.</span><span class="at">welfare</span><span class="sc">}</span><span class="vs">)</span><span class="sc">\n${</span>wbSel<span class="op">.</span><span class="at">indicator</span><span class="sc">}</span><span class="vs">: </span><span class="sc">${</span>d<span class="op">.</span><span class="at">value</span><span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">3</span>)<span class="sc">}</span><span class="vs">`</span>})<span class="op">,</span></span>
+<span id="cb8-190"><a href="#cb8-190" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">text</span>(wbData<span class="op">.</span><span class="at">rows</span><span class="op">.</span><span class="fu">filter</span>(r <span class="kw">=&gt;</span> r<span class="op">.</span><span class="at">indicator</span> <span class="op">===</span> wbSel<span class="op">.</span><span class="at">indicator</span> <span class="op">&amp;&amp;</span> wbSel<span class="op">.</span><span class="at">countries</span><span class="op">.</span><span class="fu">includes</span>(r<span class="op">.</span><span class="at">country</span>))<span class="op">,</span> Plot<span class="op">.</span><span class="fu">selectLast</span>({<span class="dt">x</span><span class="op">:</span> <span class="st">"year"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"value"</span><span class="op">,</span> <span class="dt">z</span><span class="op">:</span> <span class="st">"country"</span><span class="op">,</span> <span class="dt">text</span><span class="op">:</span> <span class="st">"country"</span><span class="op">,</span> <span class="dt">textAnchor</span><span class="op">:</span> <span class="st">"start"</span><span class="op">,</span> <span class="dt">dx</span><span class="op">:</span> <span class="dv">6</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">"country"</span>}))</span>
+<span id="cb8-191"><a href="#cb8-191" aria-hidden="true" tabindex="-1"></a>  ]</span>
+<span id="cb8-192"><a href="#cb8-192" aria-hidden="true" tabindex="-1"></a>}) <span class="op">:</span> <span class="fu">html</span><span class="vs">`&lt;p class="pending"&gt;Select at least one country.&lt;/p&gt;`</span>)</span>
+<span id="cb8-193"><a href="#cb8-193" aria-hidden="true" tabindex="-1"></a><span class="op">:</span> <span class="fu">html</span><span class="vs">`&lt;div class="callout callout-warning"&gt;&lt;p&gt;&lt;b&gt;World Bank data could not be loaded&lt;/b&gt; (</span><span class="sc">${</span>wbData<span class="op">.</span><span class="at">error</span><span class="sc">}</span><span class="vs">). Please try again later or consult the &lt;a href="https://pip.worldbank.org"&gt;Poverty and Inequality Platform&lt;/a&gt; directly.&lt;/p&gt;&lt;/div&gt;`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-8" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="sourceCode cell-code hidden" id="cb9" data-startfrom="198" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 197;"><span id="cb9-198"><a href="#cb9-198" aria-hidden="true" tabindex="-1"></a>wbData<span class="op">.</span><span class="at">ok</span> <span class="op">?</span> DOM<span class="op">.</span><span class="fu">download</span>(<span class="kw">new</span> <span class="bu">Blob</span>([d3<span class="op">.</span><span class="fu">csvFormat</span>(wbData<span class="op">.</span><span class="at">rows</span>)]<span class="op">,</span> {<span class="dt">type</span><span class="op">:</span> <span class="st">"text/csv"</span>})<span class="op">,</span> <span class="st">"theilumina_worldbank_pip.csv"</span><span class="op">,</span> <span class="st">"Download World Bank data (CSV)"</span>) <span class="op">:</span> <span class="fu">html</span><span class="vs">``</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-9" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+<p class="source">
+Source: World Bank, <a href="https://pip.worldbank.org">Poverty and Inequality Platform (PIP)</a>. National estimates; depending on the country, they refer to income or consumption (shown when hovering). The mean log deviation is the Theil index <span class="math inline">T_0</span>.
+</p>
+</section>
+<section id="other-public-sources-of-theil-indices" class="level2">
+<h2 class="anchored" data-anchor-id="other-public-sources-of-theil-indices">Other public sources of Theil indices</h2>
+<ul>
+<li><strong>World Bank PIP</strong>: mean log deviation (<span class="math inline">T_0</span>) for about 170 countries (used above).</li>
+<li><strong>CEPALSTAT (ECLAC)</strong>: Theil index of per capita income for Latin American countries.</li>
+<li><strong>SEDLAC (CEDLAS and World Bank)</strong>: Theil indices and other inequality measures for Latin America and the Caribbean.</li>
+<li><strong>University of Texas Inequality Project (UTIP-UNIDO)</strong>: Theil indices of pay inequality across industrial sectors for most countries since 1963.</li>
+</ul>
+
+
+<!-- -->
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6Ii8vIC0tLS0tLS0tLS0gSGVscGVycyAtLS0tLS0tLS0tXG5mdW5jdGlvbiBqc29uc3RhdChqcykge1xuICAvLyBGbGF0dGVucyBhIEpTT04tc3RhdCAyLjAgZGF0YXNldCAoRXVyb3N0YXQgQVBJKSBpbnRvIGFuIGFycmF5IG9mIHJlY29yZHNcbiAgY29uc3QgaWRzID0ganMuaWQsIHNpemUgPSBqcy5zaXplLCBkaW1zID0ganMuZGltZW5zaW9uO1xuICBjb25zdCBjb2RlcyA9IGlkcy5tYXAoZCA9PiB7XG4gICAgY29uc3QgaWR4ID0gZGltc1tkXS5jYXRlZ29yeS5pbmRleDtcbiAgICBjb25zdCBhcnIgPSBBcnJheS5pc0FycmF5KGlkeCkgPyBpZHggOiBPYmplY3Qua2V5cyhpZHgpLnNvcnQoKGEsIGIpID0+IGlkeFthXSAtIGlkeFtiXSk7XG4gICAgcmV0dXJuIGFycjtcbiAgfSk7XG4gIGNvbnN0IGxhYmVscyA9IGlkcy5tYXAoZCA9PiBkaW1zW2RdLmNhdGVnb3J5LmxhYmVsIHx8IHt9KTtcbiAgY29uc3Qgb3V0ID0gW107XG4gIGNvbnN0IHZhbHMgPSBqcy52YWx1ZTtcbiAgY29uc3Qga2V5cyA9IEFycmF5LmlzQXJyYXkodmFscykgPyB2YWxzLm1hcCgodiwgaSkgPT4gaSkuZmlsdGVyKGkgPT4gdmFsc1tpXSAhPSBudWxsKSA6IE9iamVjdC5rZXlzKHZhbHMpLm1hcChOdW1iZXIpO1xuICBmb3IgKGNvbnN0IGkgb2Yga2V5cykge1xuICAgIGxldCByZW0gPSBpOyBjb25zdCByZWMgPSB7fTtcbiAgICBmb3IgKGxldCBkID0gaWRzLmxlbmd0aCAtIDE7IGQgPj0gMDsgZC0tKSB7XG4gICAgICBjb25zdCBjID0gY29kZXNbZF1bcmVtICUgc2l6ZVtkXV07XG4gICAgICByZWNbaWRzW2RdXSA9IGM7XG4gICAgICBpZiAoaWRzW2RdID09PSBcImdlb1wiKSByZWMuY291bnRyeSA9IGxhYmVsc1tkXVtjXSB8fCBjO1xuICAgICAgcmVtID0gTWF0aC5mbG9vcihyZW0gLyBzaXplW2RdKTtcbiAgICB9XG4gICAgcmVjLnZhbHVlID0gK3ZhbHNbaV07XG4gICAgb3V0LnB1c2gocmVjKTtcbiAgfVxuICByZXR1cm4gb3V0O1xufVxucHJlZiA9IFtcIlRPVEFMXCIsIFwiVFwiLCBcIlNIQVJFXCIsIFwiRVVSXCIsIFwiUENcIiwgXCJBXCJdXG5mdW5jdGlvbiBrZWVwUHJlZmVycmVkKHJlY3MsIGtlZXBEaW1zKSB7XG4gIC8vIEZvciBkaW1lbnNpb25zIG90aGVyIHRoYW4gZ2VvL3RpbWUgKGFuZCBrZWVwRGltcykga2VlcCBhIHNpbmdsZSBjYXRlZ29yeVxuICBpZiAoIXJlY3MubGVuZ3RoKSByZXR1cm4gcmVjcztcbiAgY29uc3QgZGltc0FsbCA9IE9iamVjdC5rZXlzKHJlY3NbMF0pLmZpbHRlcihrID0+ICFbXCJnZW9cIiwgXCJ0aW1lXCIsIFwidmFsdWVcIiwgXCJjb3VudHJ5XCIsIC4uLmtlZXBEaW1zXS5pbmNsdWRlcyhrKSk7XG4gIGxldCByID0gcmVjcztcbiAgZm9yIChjb25zdCBkIG9mIGRpbXNBbGwpIHtcbiAgICBjb25zdCBjYXRzID0gWy4uLm5ldyBTZXQoci5tYXAoeCA9PiB4W2RdKSldO1xuICAgIGNvbnN0IGNob3NlbiA9IHByZWYuZmluZChwID0+IGNhdHMuaW5jbHVkZXMocCkpID8/IGNhdHNbMF07XG4gICAgciA9IHIuZmlsdGVyKHggPT4geFtkXSA9PT0gY2hvc2VuKTtcbiAgfVxuICByZXR1cm4gcjtcbn1cbmFzeW5jIGZ1bmN0aW9uIGV1cm9zdGF0KGNvZGUsIHF1ZXJ5ID0gXCJcIikge1xuICBjb25zdCB1cmwgPSBgaHR0cHM6Ly9lYy5ldXJvcGEuZXUvZXVyb3N0YXQvYXBpL2Rpc3NlbWluYXRpb24vc3RhdGlzdGljcy8xLjAvZGF0YS8ke2NvZGV9P2Zvcm1hdD1KU09OJmxhbmc9RU4ke3F1ZXJ5fWA7XG4gIGNvbnN0IHJlcyA9IGF3YWl0IGZldGNoKHVybCk7XG4gIGlmICghcmVzLm9rKSB0aHJvdyBuZXcgRXJyb3IoYEV1cm9zdGF0ICR7Y29kZX06IEhUVFAgJHtyZXMuc3RhdHVzfWApO1xuICByZXR1cm4ganNvbnN0YXQoYXdhaXQgcmVzLmpzb24oKSk7XG59XG5FVSA9IG5ldyBTZXQoW1wiQVRcIixcIkJFXCIsXCJCR1wiLFwiQ1lcIixcIkNaXCIsXCJERVwiLFwiREtcIixcIkVFXCIsXCJFTFwiLFwiRVNcIixcIkZJXCIsXCJGUlwiLFwiSFJcIixcIkhVXCIsXCJJRVwiLFwiSVRcIixcIkxUXCIsXCJMVVwiLFwiTFZcIixcIk1UXCIsXCJOTFwiLFwiUExcIixcIlBUXCIsXCJST1wiLFwiU0VcIixcIlNJXCIsXCJTS1wiLFwiRVUyN18yMDIwXCIsXCJOT1wiLFwiQ0hcIixcIklTXCIsXCJSU1wiLFwiVFJcIixcIk1LXCIsXCJNRVwiLFwiQUxcIl0pXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTIiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiIvLyAtLS0tLS0tLS0tIERvd25sb2FkIEV1cm9zdGF0IGRhdGEgLS0tLS0tLS0tLVxuZXVyb0RhdGEgPSB7XG4gIHRyeSB7XG4gICAgY29uc3QgW2dpbmksIHM4MCwgZGVjXSA9IGF3YWl0IFByb21pc2UuYWxsKFtcbiAgICAgIGV1cm9zdGF0KFwiaWxjX2RpMTJcIiksXG4gICAgICBldXJvc3RhdChcImlsY19kaTExXCIpLFxuICAgICAgZXVyb3N0YXQoXCJpbGNfZGkwMVwiLCBcIiZpbmRpY19pbD1TSEFSRVwiICsgW1wiRDFcIixcIkQyXCIsXCJEM1wiLFwiRDRcIixcIkQ1XCIsXCJENlwiLFwiRDdcIixcIkQ4XCIsXCJEOVwiLFwiRDEwXCJdLm1hcChxID0+IGAmcXVhbnRpbGU9JHtxfWApLmpvaW4oXCJcIikpXG4gICAgXSk7XG4gICAgY29uc3Qgcm93cyA9IFtdO1xuICAgIGZvciAoY29uc3QgciBvZiBrZWVwUHJlZmVycmVkKGdpbmksIFtdKSkgcm93cy5wdXNoKHtnZW86IHIuZ2VvLCBjb3VudHJ5OiByLmNvdW50cnksIHllYXI6ICtyLnRpbWUsIGluZGljYXRvcjogXCJHaW5pIGluZGV4XCIsIHZhbHVlOiByLnZhbHVlfSk7XG4gICAgZm9yIChjb25zdCByIG9mIGtlZXBQcmVmZXJyZWQoczgwLCBbXSkpIHJvd3MucHVzaCh7Z2VvOiByLmdlbywgY291bnRyeTogci5jb3VudHJ5LCB5ZWFyOiArci50aW1lLCBpbmRpY2F0b3I6IFwiUzgwL1MyMCByYXRpb1wiLCB2YWx1ZTogci52YWx1ZX0pO1xuICAgIC8vIFRoZWlsIGFwcHJveGltYXRpb25zIGZyb20gZGVjaWxlIHNoYXJlcyAoZ3JvdXBlZCBkYXRhLCBsb3dlciBib3VuZClcbiAgICBjb25zdCBkID0ga2VlcFByZWZlcnJlZChkZWMsIFtcInF1YW50aWxlXCJdKTtcbiAgICBjb25zdCBncm91cHMgPSBkMy5ncm91cChkLCByID0+IHIuZ2VvLCByID0+IHIudGltZSk7XG4gICAgZm9yIChjb25zdCBbZ2VvLCBieVllYXJdIG9mIGdyb3VwcykgZm9yIChjb25zdCBbdGltZSwgcmVjc10gb2YgYnlZZWFyKSB7XG4gICAgICBpZiAocmVjcy5sZW5ndGggIT09IDEwKSBjb250aW51ZTtcbiAgICAgIGNvbnN0IHRvdCA9IGQzLnN1bShyZWNzLCByID0+IHIudmFsdWUpO1xuICAgICAgY29uc3QgcyA9IHJlY3MubWFwKHIgPT4gci52YWx1ZSAvIHRvdCkuZmlsdGVyKHYgPT4gdiA+IDApO1xuICAgICAgaWYgKHMubGVuZ3RoICE9PSAxMCkgY29udGludWU7XG4gICAgICBjb25zdCBUMSA9IGQzLnN1bShzLCB2ID0+IHYgKiBNYXRoLmxvZygxMCAqIHYpKTtcbiAgICAgIGNvbnN0IFQwID0gZDMuc3VtKHMsIHYgPT4gMC4xICogTWF0aC5sb2coMC4xIC8gdikpO1xuICAgICAgcm93cy5wdXNoKHtnZW8sIGNvdW50cnk6IHJlY3NbMF0uY291bnRyeSwgeWVhcjogK3RpbWUsIGluZGljYXRvcjogXCJUaGVpbCBUMSAoZGVjaWxlIGFwcHJveC4pXCIsIHZhbHVlOiBUMX0pO1xuICAgICAgcm93cy5wdXNoKHtnZW8sIGNvdW50cnk6IHJlY3NbMF0uY291bnRyeSwgeWVhcjogK3RpbWUsIGluZGljYXRvcjogXCJUaGVpbCBUMCAoZGVjaWxlIGFwcHJveC4pXCIsIHZhbHVlOiBUMH0pO1xuICAgIH1cbiAgICByZXR1cm4ge29rOiB0cnVlLCByb3dzOiByb3dzLmZpbHRlcihyID0+IEVVLmhhcyhyLmdlbykgJiYgTnVtYmVyLmlzRmluaXRlKHIudmFsdWUpKX07XG4gIH0gY2F0Y2ggKGUpIHtcbiAgICByZXR1cm4ge29rOiBmYWxzZSwgZXJyb3I6IGUubWVzc2FnZSwgcm93czogW119O1xuICB9XG59XG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTMiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJldXJvQ291bnRyaWVzID0gWy4uLm5ldyBTZXQoZXVyb0RhdGEucm93cy5tYXAociA9PiByLmNvdW50cnkpKV0uc29ydCgpXG52aWV3b2YgZXVyb1NlbCA9IElucHV0cy5mb3JtKHtcbiAgaW5kaWNhdG9yOiBJbnB1dHMucmFkaW8oW1wiR2luaSBpbmRleFwiLCBcIlM4MC9TMjAgcmF0aW9cIiwgXCJUaGVpbCBUMCAoZGVjaWxlIGFwcHJveC4pXCIsIFwiVGhlaWwgVDEgKGRlY2lsZSBhcHByb3guKVwiXSwge2xhYmVsOiBcIkluZGljYXRvclwiLCB2YWx1ZTogXCJHaW5pIGluZGV4XCJ9KSxcbiAgY291bnRyaWVzOiBJbnB1dHMuc2VsZWN0KGV1cm9Db3VudHJpZXMsIHtsYWJlbDogXCJDb3VudHJpZXNcIiwgbXVsdGlwbGU6IHRydWUsIHZhbHVlOiBldXJvQ291bnRyaWVzLmZpbHRlcihjID0+IC9eKFNwYWlufEl0YWx5fFBvcnR1Z2FsfEdlcm1hbnl8RnJhbmNlfEV1cm9wZWFuIFVuaW9uKS8udGVzdChjKSkuc2xpY2UoMCwgNiksIHNpemU6IDh9KVxufSlcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtNCIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6ImV1cm9EYXRhLm9rID8gKGV1cm9TZWwuY291bnRyaWVzLmxlbmd0aCA/IFBsb3QucGxvdCh7XG4gIGhlaWdodDogNDIwLCBtYXJnaW5MZWZ0OiA1NSwgbWFyZ2luUmlnaHQ6IDE0MCxcbiAgeDoge2xhYmVsOiBcIlllYXJcIiwgdGlja0Zvcm1hdDogXCJkXCIsIGdyaWQ6IHRydWV9LFxuICB5OiB7bGFiZWw6IGV1cm9TZWwuaW5kaWNhdG9yLCBncmlkOiB0cnVlLCB6ZXJvOiBmYWxzZX0sXG4gIGNvbG9yOiB7bGVnZW5kOiBmYWxzZX0sXG4gIG1hcmtzOiBbXG4gICAgUGxvdC5saW5lKGV1cm9EYXRhLnJvd3MuZmlsdGVyKHIgPT4gci5pbmRpY2F0b3IgPT09IGV1cm9TZWwuaW5kaWNhdG9yICYmIGV1cm9TZWwuY291bnRyaWVzLmluY2x1ZGVzKHIuY291bnRyeSkpLCB7eDogXCJ5ZWFyXCIsIHk6IFwidmFsdWVcIiwgc3Ryb2tlOiBcImNvdW50cnlcIiwgc3Ryb2tlV2lkdGg6IDIuMiwgc29ydDogXCJ5ZWFyXCJ9KSxcbiAgICBQbG90LmRvdChldXJvRGF0YS5yb3dzLmZpbHRlcihyID0+IHIuaW5kaWNhdG9yID09PSBldXJvU2VsLmluZGljYXRvciAmJiBldXJvU2VsLmNvdW50cmllcy5pbmNsdWRlcyhyLmNvdW50cnkpKSwge3g6IFwieWVhclwiLCB5OiBcInZhbHVlXCIsIGZpbGw6IFwiY291bnRyeVwiLCByOiAzLCB0aXA6IHRydWUsIHRpdGxlOiBkID0+IGAke2QuY291bnRyeX0gwrcgJHtkLnllYXJ9XFxuJHtldXJvU2VsLmluZGljYXRvcn06ICR7ZC52YWx1ZS50b0ZpeGVkKDMpfWB9KSxcbiAgICBQbG90LnRleHQoZXVyb0RhdGEucm93cy5maWx0ZXIociA9PiByLmluZGljYXRvciA9PT0gZXVyb1NlbC5pbmRpY2F0b3IgJiYgZXVyb1NlbC5jb3VudHJpZXMuaW5jbHVkZXMoci5jb3VudHJ5KSksIFBsb3Quc2VsZWN0TGFzdCh7eDogXCJ5ZWFyXCIsIHk6IFwidmFsdWVcIiwgejogXCJjb3VudHJ5XCIsIHRleHQ6IFwiY291bnRyeVwiLCB0ZXh0QW5jaG9yOiBcInN0YXJ0XCIsIGR4OiA2LCBmaWxsOiBcImNvdW50cnlcIn0pKVxuICBdXG59KSA6IGh0bWxgPHAgY2xhc3M9XCJwZW5kaW5nXCI+U2VsZWN0IGF0IGxlYXN0IG9uZSBjb3VudHJ5LjwvcD5gKVxuOiBodG1sYDxkaXYgY2xhc3M9XCJjYWxsb3V0IGNhbGxvdXQtd2FybmluZ1wiPjxwPjxiPkV1cm9zdGF0IGRhdGEgY291bGQgbm90IGJlIGxvYWRlZDwvYj4gKCR7ZXVyb0RhdGEuZXJyb3J9KS4gUGxlYXNlIHRyeSBhZ2FpbiBsYXRlciBvciBjb25zdWx0IDxhIGhyZWY9XCJodHRwczovL2VjLmV1cm9wYS5ldS9ldXJvc3RhdC9kYXRhYnJvd3Nlci92aWV3L2lsY19kaTEyL2RlZmF1bHQvdGFibGVcIj5FdXJvc3RhdDwvYT4gZGlyZWN0bHkuPC9wPjwvZGl2PmBcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtNSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6ImV1cm9MYXRlc3QgPSB7XG4gIGNvbnN0IHIgPSBldXJvRGF0YS5yb3dzLmZpbHRlcihkID0+IGQuaW5kaWNhdG9yID09PSBldXJvU2VsLmluZGljYXRvcik7XG4gIGNvbnN0IGxhc3QgPSBkMy5yb2xsdXAociwgdiA9PiB2LnNvcnQoKGEsIGIpID0+IGIueWVhciAtIGEueWVhcilbMF0sIGQgPT4gZC5nZW8pO1xuICByZXR1cm4gWy4uLmxhc3QudmFsdWVzKCldLnNvcnQoKGEsIGIpID0+IGIudmFsdWUgLSBhLnZhbHVlKTtcbn1cbmV1cm9EYXRhLm9rID8gUGxvdC5wbG90KHtcbiAgaGVpZ2h0OiBNYXRoLm1heCgzMDAsIDE2ICogZXVyb0xhdGVzdC5sZW5ndGgpLCBtYXJnaW5MZWZ0OiAxNzAsXG4gIHg6IHtsYWJlbDogYCR7ZXVyb1NlbC5pbmRpY2F0b3J9IChsYXRlc3QgYXZhaWxhYmxlIHllYXIpYCwgZ3JpZDogdHJ1ZX0sXG4gIHk6IHtsYWJlbDogbnVsbH0sXG4gIG1hcmtzOiBbXG4gICAgUGxvdC5iYXJYKGV1cm9MYXRlc3QsIHt5OiBcImNvdW50cnlcIiwgeDogXCJ2YWx1ZVwiLCBzb3J0OiB7eTogXCIteFwifSwgZmlsbDogZCA9PiBkLmdlbyA9PT0gXCJFVTI3XzIwMjBcIiA/IFwiI0UwN0IyMFwiIDogKGQuZ2VvID09PSBcIkVTXCIgPyBcIiMxRjRFN0FcIiA6IFwiIzlEQjVDRlwiKSwgdGlwOiB0cnVlLCB0aXRsZTogZCA9PiBgJHtkLmNvdW50cnl9ICgke2QueWVhcn0pOiAke2QudmFsdWUudG9GaXhlZCgzKX1gfSksXG4gICAgUGxvdC5ydWxlWChbMF0pXG4gIF1cbn0pIDogaHRtbGBgXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTYiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJldXJvRGF0YS5vayA/IERPTS5kb3dubG9hZChuZXcgQmxvYihbZDMuY3N2Rm9ybWF0KGV1cm9EYXRhLnJvd3MpXSwge3R5cGU6IFwidGV4dC9jc3ZcIn0pLCBcInRoZWlsdW1pbmFfZXVyb3N0YXRfaW5lcXVhbGl0eS5jc3ZcIiwgXCJEb3dubG9hZCBFdXJvc3RhdCBkYXRhIChDU1YpXCIpIDogaHRtbGBgXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTciLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJ3YkRhdGEgPSB7XG4gIHRyeSB7XG4gICAgY29uc3QgcmVzID0gYXdhaXQgZmV0Y2goXCJodHRwczovL2FwaS53b3JsZGJhbmsub3JnL3BpcC92MS9waXA/Y291bnRyeT1hbGwmeWVhcj1hbGwmZmlsbF9nYXBzPWZhbHNlJmZvcm1hdD1qc29uXCIpO1xuICAgIGlmICghcmVzLm9rKSB0aHJvdyBuZXcgRXJyb3IoYFdvcmxkIEJhbmsgUElQOiBIVFRQICR7cmVzLnN0YXR1c31gKTtcbiAgICBjb25zdCBqcyA9IGF3YWl0IHJlcy5qc29uKCk7XG4gICAgY29uc3Qgcm93cyA9IFtdO1xuICAgIGZvciAoY29uc3QgciBvZiBqcykge1xuICAgICAgaWYgKHIucmVwb3J0aW5nX2xldmVsICE9PSBcIm5hdGlvbmFsXCIpIGNvbnRpbnVlO1xuICAgICAgY29uc3QgYmFzZSA9IHtjb2RlOiByLmNvdW50cnlfY29kZSwgY291bnRyeTogci5jb3VudHJ5X25hbWUsIHllYXI6ICtyLnJlcG9ydGluZ195ZWFyLCB3ZWxmYXJlOiByLndlbGZhcmVfdHlwZX07XG4gICAgICBpZiAoci5naW5pICE9IG51bGwpIHJvd3MucHVzaCh7Li4uYmFzZSwgaW5kaWNhdG9yOiBcIkdpbmkgaW5kZXhcIiwgdmFsdWU6ICtyLmdpbml9KTtcbiAgICAgIGlmIChyLm1sZCAhPSBudWxsKSByb3dzLnB1c2goey4uLmJhc2UsIGluZGljYXRvcjogXCJUaGVpbCBUMCAobWVhbiBsb2cgZGV2aWF0aW9uKVwiLCB2YWx1ZTogK3IubWxkfSk7XG4gICAgfVxuICAgIHJldHVybiB7b2s6IHRydWUsIHJvd3N9O1xuICB9IGNhdGNoIChlKSB7XG4gICAgcmV0dXJuIHtvazogZmFsc2UsIGVycm9yOiBlLm1lc3NhZ2UsIHJvd3M6IFtdfTtcbiAgfVxufVxud2JDb3VudHJpZXMgPSBbLi4ubmV3IFNldCh3YkRhdGEucm93cy5tYXAociA9PiByLmNvdW50cnkpKV0uc29ydCgpXG52aWV3b2Ygd2JTZWwgPSBJbnB1dHMuZm9ybSh7XG4gIGluZGljYXRvcjogSW5wdXRzLnJhZGlvKFtcIkdpbmkgaW5kZXhcIiwgXCJUaGVpbCBUMCAobWVhbiBsb2cgZGV2aWF0aW9uKVwiXSwge2xhYmVsOiBcIkluZGljYXRvclwiLCB2YWx1ZTogXCJUaGVpbCBUMCAobWVhbiBsb2cgZGV2aWF0aW9uKVwifSksXG4gIGNvdW50cmllczogSW5wdXRzLnNlbGVjdCh3YkNvdW50cmllcywge2xhYmVsOiBcIkNvdW50cmllc1wiLCBtdWx0aXBsZTogdHJ1ZSwgdmFsdWU6IHdiQ291bnRyaWVzLmZpbHRlcihjID0+IC9eKFNwYWlufEJyYXppbHxTb3V0aCBBZnJpY2F8VW5pdGVkIFN0YXRlc3xJbmRpYXxDaGluYSkkLy50ZXN0KGMpKSwgc2l6ZTogOH0pXG59KVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC04IiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoid2JEYXRhLm9rID8gKHdiU2VsLmNvdW50cmllcy5sZW5ndGggPyBQbG90LnBsb3Qoe1xuICBoZWlnaHQ6IDQyMCwgbWFyZ2luTGVmdDogNTUsIG1hcmdpblJpZ2h0OiAxNDAsXG4gIHg6IHtsYWJlbDogXCJZZWFyXCIsIHRpY2tGb3JtYXQ6IFwiZFwiLCBncmlkOiB0cnVlfSxcbiAgeToge2xhYmVsOiB3YlNlbC5pbmRpY2F0b3IsIGdyaWQ6IHRydWUsIHplcm86IGZhbHNlfSxcbiAgbWFya3M6IFtcbiAgICBQbG90LmxpbmUod2JEYXRhLnJvd3MuZmlsdGVyKHIgPT4gci5pbmRpY2F0b3IgPT09IHdiU2VsLmluZGljYXRvciAmJiB3YlNlbC5jb3VudHJpZXMuaW5jbHVkZXMoci5jb3VudHJ5KSksIHt4OiBcInllYXJcIiwgeTogXCJ2YWx1ZVwiLCBzdHJva2U6IFwiY291bnRyeVwiLCB6OiBkID0+IGQuY291bnRyeSArIGQud2VsZmFyZSwgc3Ryb2tlV2lkdGg6IDIuMiwgc29ydDogXCJ5ZWFyXCJ9KSxcbiAgICBQbG90LmRvdCh3YkRhdGEucm93cy5maWx0ZXIociA9PiByLmluZGljYXRvciA9PT0gd2JTZWwuaW5kaWNhdG9yICYmIHdiU2VsLmNvdW50cmllcy5pbmNsdWRlcyhyLmNvdW50cnkpKSwge3g6IFwieWVhclwiLCB5OiBcInZhbHVlXCIsIGZpbGw6IFwiY291bnRyeVwiLCByOiAzLCB0aXA6IHRydWUsIHRpdGxlOiBkID0+IGAke2QuY291bnRyeX0gwrcgJHtkLnllYXJ9ICgke2Qud2VsZmFyZX0pXFxuJHt3YlNlbC5pbmRpY2F0b3J9OiAke2QudmFsdWUudG9GaXhlZCgzKX1gfSksXG4gICAgUGxvdC50ZXh0KHdiRGF0YS5yb3dzLmZpbHRlcihyID0+IHIuaW5kaWNhdG9yID09PSB3YlNlbC5pbmRpY2F0b3IgJiYgd2JTZWwuY291bnRyaWVzLmluY2x1ZGVzKHIuY291bnRyeSkpLCBQbG90LnNlbGVjdExhc3Qoe3g6IFwieWVhclwiLCB5OiBcInZhbHVlXCIsIHo6IFwiY291bnRyeVwiLCB0ZXh0OiBcImNvdW50cnlcIiwgdGV4dEFuY2hvcjogXCJzdGFydFwiLCBkeDogNiwgZmlsbDogXCJjb3VudHJ5XCJ9KSlcbiAgXVxufSkgOiBodG1sYDxwIGNsYXNzPVwicGVuZGluZ1wiPlNlbGVjdCBhdCBsZWFzdCBvbmUgY291bnRyeS48L3A+YClcbjogaHRtbGA8ZGl2IGNsYXNzPVwiY2FsbG91dCBjYWxsb3V0LXdhcm5pbmdcIj48cD48Yj5Xb3JsZCBCYW5rIGRhdGEgY291bGQgbm90IGJlIGxvYWRlZDwvYj4gKCR7d2JEYXRhLmVycm9yfSkuIFBsZWFzZSB0cnkgYWdhaW4gbGF0ZXIgb3IgY29uc3VsdCB0aGUgPGEgaHJlZj1cImh0dHBzOi8vcGlwLndvcmxkYmFuay5vcmdcIj5Qb3ZlcnR5IGFuZCBJbmVxdWFsaXR5IFBsYXRmb3JtPC9hPiBkaXJlY3RseS48L3A+PC9kaXY+YFxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC05IiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoid2JEYXRhLm9rID8gRE9NLmRvd25sb2FkKG5ldyBCbG9iKFtkMy5jc3ZGb3JtYXQod2JEYXRhLnJvd3MpXSwge3R5cGU6IFwidGV4dC9jc3ZcIn0pLCBcInRoZWlsdW1pbmFfd29ybGRiYW5rX3BpcC5jc3ZcIiwgXCJEb3dubG9hZCBXb3JsZCBCYW5rIGRhdGEgKENTVilcIikgOiBodG1sYGBcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnZXVyb1NlbCcpIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCd3YlNlbCcpIn1dfQ==
+</script>
+<script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+window._ojs.paths.runtimeToDoc = "../..";
+window._ojs.paths.runtimeToRoot = "../..";
+window._ojs.paths.docToRoot = "";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/jfmunozrosas\.github\.io\/theilumina");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb10" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Inequality observatory"</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Official inequality indicators, updated live from Eurostat and the World Bank"</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>This observatory gathers public inequality indicators for European and world countries. The data are **downloaded live from the official sources** every time the page is opened, so they always show the latest release. Each chart can be explored by hovering over the points, and the data can be downloaded as CSV.</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## Why Theil indices are rarely published, and what this observatory offers</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>Official statistics usually publish the **Gini index** and the **S80/S20 ratio**, but seldom Theil indices, even though Theil indices can be decomposed into inequality *between* and *within* groups. This observatory shows:</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Theil $T_0$ (mean log deviation)**, published by the World Bank's *Poverty and Inequality Platform* (PIP) for about 170 countries.</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>An **approximation of $T_0$ and $T_1$ for EU countries**, computed from the income shares of the ten deciles published by Eurostat (EU-SILC). Because it only uses inequality *between* deciles, it is a **lower bound** of the true index; inequality within each decile is ignored.</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>All these figures are point estimates based on samples. As shown by this project, Theil estimators can be biased and their margin of error can be large when incomes are highly skewed. The **theil** R package will provide bias-corrected estimates and confidence intervals from microdata.</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="in">//| echo: false</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="in">// ---------- Helpers ----------</span></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="in">function jsonstat(js) {</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="in">  // Flattens a JSON-stat 2.0 dataset (Eurostat API) into an array of records</span></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a><span class="in">  const ids = js.id, size = js.size, dims = js.dimension;</span></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a><span class="in">  const codes = ids.map(d =&gt; {</span></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a><span class="in">    const idx = dims[d].category.index;</span></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a><span class="in">    const arr = Array.isArray(idx) ? idx : Object.keys(idx).sort((a, b) =&gt; idx[a] - idx[b]);</span></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a><span class="in">    return arr;</span></span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a><span class="in">  });</span></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a><span class="in">  const labels = ids.map(d =&gt; dims[d].category.label || {});</span></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a><span class="in">  const out = [];</span></span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a><span class="in">  const vals = js.value;</span></span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a><span class="in">  const keys = Array.isArray(vals) ? vals.map((v, i) =&gt; i).filter(i =&gt; vals[i] != null) : Object.keys(vals).map(Number);</span></span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a><span class="in">  for (const i of keys) {</span></span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a><span class="in">    let rem = i; const rec = {};</span></span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a><span class="in">    for (let d = ids.length - 1; d &gt;= 0; d--) {</span></span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a><span class="in">      const c = codes[d][rem % size[d]];</span></span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a><span class="in">      rec[ids[d]] = c;</span></span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a><span class="in">      if (ids[d] === "geo") rec.country = labels[d][c] || c;</span></span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a><span class="in">      rem = Math.floor(rem / size[d]);</span></span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a><span class="in">    rec.value = +vals[i];</span></span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a><span class="in">    out.push(rec);</span></span>
+<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
+<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a><span class="in">  return out;</span></span>
+<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a><span class="in">pref = ["TOTAL", "T", "SHARE", "EUR", "PC", "A"]</span></span>
+<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a><span class="in">function keepPreferred(recs, keepDims) {</span></span>
+<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a><span class="in">  // For dimensions other than geo/time (and keepDims) keep a single category</span></span>
+<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a><span class="in">  if (!recs.length) return recs;</span></span>
+<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a><span class="in">  const dimsAll = Object.keys(recs[0]).filter(k =&gt; !["geo", "time", "value", "country", ...keepDims].includes(k));</span></span>
+<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a><span class="in">  let r = recs;</span></span>
+<span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a><span class="in">  for (const d of dimsAll) {</span></span>
+<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a><span class="in">    const cats = [...new Set(r.map(x =&gt; x[d]))];</span></span>
+<span id="cb10-57"><a href="#cb10-57" aria-hidden="true" tabindex="-1"></a><span class="in">    const chosen = pref.find(p =&gt; cats.includes(p)) ?? cats[0];</span></span>
+<span id="cb10-58"><a href="#cb10-58" aria-hidden="true" tabindex="-1"></a><span class="in">    r = r.filter(x =&gt; x[d] === chosen);</span></span>
+<span id="cb10-59"><a href="#cb10-59" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
+<span id="cb10-60"><a href="#cb10-60" aria-hidden="true" tabindex="-1"></a><span class="in">  return r;</span></span>
+<span id="cb10-61"><a href="#cb10-61" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb10-62"><a href="#cb10-62" aria-hidden="true" tabindex="-1"></a><span class="in">async function eurostat(code, query = "") {</span></span>
+<span id="cb10-63"><a href="#cb10-63" aria-hidden="true" tabindex="-1"></a><span class="in">  const url = `https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/${code}?format=JSON&amp;lang=EN${query}`;</span></span>
+<span id="cb10-64"><a href="#cb10-64" aria-hidden="true" tabindex="-1"></a><span class="in">  const res = await fetch(url);</span></span>
+<span id="cb10-65"><a href="#cb10-65" aria-hidden="true" tabindex="-1"></a><span class="in">  if (!res.ok) throw new Error(`Eurostat ${code}: HTTP ${res.status}`);</span></span>
+<span id="cb10-66"><a href="#cb10-66" aria-hidden="true" tabindex="-1"></a><span class="in">  return jsonstat(await res.json());</span></span>
+<span id="cb10-67"><a href="#cb10-67" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb10-68"><a href="#cb10-68" aria-hidden="true" tabindex="-1"></a><span class="in">EU = new Set(["AT","BE","BG","CY","CZ","DE","DK","EE","EL","ES","FI","FR","HR","HU","IE","IT","LT","LU","LV","MT","NL","PL","PT","RO","SE","SI","SK","EU27_2020","NO","CH","IS","RS","TR","MK","ME","AL"])</span></span>
+<span id="cb10-69"><a href="#cb10-69" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-70"><a href="#cb10-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-73"><a href="#cb10-73" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb10-74"><a href="#cb10-74" aria-hidden="true" tabindex="-1"></a><span class="in">//| echo: false</span></span>
+<span id="cb10-75"><a href="#cb10-75" aria-hidden="true" tabindex="-1"></a><span class="in">// ---------- Download Eurostat data ----------</span></span>
+<span id="cb10-76"><a href="#cb10-76" aria-hidden="true" tabindex="-1"></a><span class="in">euroData = {</span></span>
+<span id="cb10-77"><a href="#cb10-77" aria-hidden="true" tabindex="-1"></a><span class="in">  try {</span></span>
+<span id="cb10-78"><a href="#cb10-78" aria-hidden="true" tabindex="-1"></a><span class="in">    const [gini, s80, dec] = await Promise.all([</span></span>
+<span id="cb10-79"><a href="#cb10-79" aria-hidden="true" tabindex="-1"></a><span class="in">      eurostat("ilc_di12"),</span></span>
+<span id="cb10-80"><a href="#cb10-80" aria-hidden="true" tabindex="-1"></a><span class="in">      eurostat("ilc_di11"),</span></span>
+<span id="cb10-81"><a href="#cb10-81" aria-hidden="true" tabindex="-1"></a><span class="in">      eurostat("ilc_di01", "&amp;indic_il=SHARE" + ["D1","D2","D3","D4","D5","D6","D7","D8","D9","D10"].map(q =&gt; `&amp;quantile=${q}`).join(""))</span></span>
+<span id="cb10-82"><a href="#cb10-82" aria-hidden="true" tabindex="-1"></a><span class="in">    ]);</span></span>
+<span id="cb10-83"><a href="#cb10-83" aria-hidden="true" tabindex="-1"></a><span class="in">    const rows = [];</span></span>
+<span id="cb10-84"><a href="#cb10-84" aria-hidden="true" tabindex="-1"></a><span class="in">    for (const r of keepPreferred(gini, [])) rows.push({geo: r.geo, country: r.country, year: +r.time, indicator: "Gini index", value: r.value});</span></span>
+<span id="cb10-85"><a href="#cb10-85" aria-hidden="true" tabindex="-1"></a><span class="in">    for (const r of keepPreferred(s80, [])) rows.push({geo: r.geo, country: r.country, year: +r.time, indicator: "S80/S20 ratio", value: r.value});</span></span>
+<span id="cb10-86"><a href="#cb10-86" aria-hidden="true" tabindex="-1"></a><span class="in">    // Theil approximations from decile shares (grouped data, lower bound)</span></span>
+<span id="cb10-87"><a href="#cb10-87" aria-hidden="true" tabindex="-1"></a><span class="in">    const d = keepPreferred(dec, ["quantile"]);</span></span>
+<span id="cb10-88"><a href="#cb10-88" aria-hidden="true" tabindex="-1"></a><span class="in">    const groups = d3.group(d, r =&gt; r.geo, r =&gt; r.time);</span></span>
+<span id="cb10-89"><a href="#cb10-89" aria-hidden="true" tabindex="-1"></a><span class="in">    for (const [geo, byYear] of groups) for (const [time, recs] of byYear) {</span></span>
+<span id="cb10-90"><a href="#cb10-90" aria-hidden="true" tabindex="-1"></a><span class="in">      if (recs.length !== 10) continue;</span></span>
+<span id="cb10-91"><a href="#cb10-91" aria-hidden="true" tabindex="-1"></a><span class="in">      const tot = d3.sum(recs, r =&gt; r.value);</span></span>
+<span id="cb10-92"><a href="#cb10-92" aria-hidden="true" tabindex="-1"></a><span class="in">      const s = recs.map(r =&gt; r.value / tot).filter(v =&gt; v &gt; 0);</span></span>
+<span id="cb10-93"><a href="#cb10-93" aria-hidden="true" tabindex="-1"></a><span class="in">      if (s.length !== 10) continue;</span></span>
+<span id="cb10-94"><a href="#cb10-94" aria-hidden="true" tabindex="-1"></a><span class="in">      const T1 = d3.sum(s, v =&gt; v * Math.log(10 * v));</span></span>
+<span id="cb10-95"><a href="#cb10-95" aria-hidden="true" tabindex="-1"></a><span class="in">      const T0 = d3.sum(s, v =&gt; 0.1 * Math.log(0.1 / v));</span></span>
+<span id="cb10-96"><a href="#cb10-96" aria-hidden="true" tabindex="-1"></a><span class="in">      rows.push({geo, country: recs[0].country, year: +time, indicator: "Theil T1 (decile approx.)", value: T1});</span></span>
+<span id="cb10-97"><a href="#cb10-97" aria-hidden="true" tabindex="-1"></a><span class="in">      rows.push({geo, country: recs[0].country, year: +time, indicator: "Theil T0 (decile approx.)", value: T0});</span></span>
+<span id="cb10-98"><a href="#cb10-98" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
+<span id="cb10-99"><a href="#cb10-99" aria-hidden="true" tabindex="-1"></a><span class="in">    return {ok: true, rows: rows.filter(r =&gt; EU.has(r.geo) &amp;&amp; Number.isFinite(r.value))};</span></span>
+<span id="cb10-100"><a href="#cb10-100" aria-hidden="true" tabindex="-1"></a><span class="in">  } catch (e) {</span></span>
+<span id="cb10-101"><a href="#cb10-101" aria-hidden="true" tabindex="-1"></a><span class="in">    return {ok: false, error: e.message, rows: []};</span></span>
+<span id="cb10-102"><a href="#cb10-102" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
+<span id="cb10-103"><a href="#cb10-103" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb10-104"><a href="#cb10-104" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-105"><a href="#cb10-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-106"><a href="#cb10-106" aria-hidden="true" tabindex="-1"></a><span class="fu">## Europe: EU-SILC indicators (Eurostat)</span></span>
+<span id="cb10-107"><a href="#cb10-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-110"><a href="#cb10-110" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb10-111"><a href="#cb10-111" aria-hidden="true" tabindex="-1"></a><span class="in">//| echo: false</span></span>
+<span id="cb10-112"><a href="#cb10-112" aria-hidden="true" tabindex="-1"></a><span class="in">euroCountries = [...new Set(euroData.rows.map(r =&gt; r.country))].sort()</span></span>
+<span id="cb10-113"><a href="#cb10-113" aria-hidden="true" tabindex="-1"></a><span class="in">viewof euroSel = Inputs.form({</span></span>
+<span id="cb10-114"><a href="#cb10-114" aria-hidden="true" tabindex="-1"></a><span class="in">  indicator: Inputs.radio(["Gini index", "S80/S20 ratio", "Theil T0 (decile approx.)", "Theil T1 (decile approx.)"], {label: "Indicator", value: "Gini index"}),</span></span>
+<span id="cb10-115"><a href="#cb10-115" aria-hidden="true" tabindex="-1"></a><span class="in">  countries: Inputs.select(euroCountries, {label: "Countries", multiple: true, value: euroCountries.filter(c =&gt; /^(Spain|Italy|Portugal|Germany|France|European Union)/.test(c)).slice(0, 6), size: 8})</span></span>
+<span id="cb10-116"><a href="#cb10-116" aria-hidden="true" tabindex="-1"></a><span class="in">})</span></span>
+<span id="cb10-117"><a href="#cb10-117" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-118"><a href="#cb10-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-121"><a href="#cb10-121" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb10-122"><a href="#cb10-122" aria-hidden="true" tabindex="-1"></a><span class="in">//| echo: false</span></span>
+<span id="cb10-123"><a href="#cb10-123" aria-hidden="true" tabindex="-1"></a><span class="in">euroData.ok ? (euroSel.countries.length ? Plot.plot({</span></span>
+<span id="cb10-124"><a href="#cb10-124" aria-hidden="true" tabindex="-1"></a><span class="in">  height: 420, marginLeft: 55, marginRight: 140,</span></span>
+<span id="cb10-125"><a href="#cb10-125" aria-hidden="true" tabindex="-1"></a><span class="in">  x: {label: "Year", tickFormat: "d", grid: true},</span></span>
+<span id="cb10-126"><a href="#cb10-126" aria-hidden="true" tabindex="-1"></a><span class="in">  y: {label: euroSel.indicator, grid: true, zero: false},</span></span>
+<span id="cb10-127"><a href="#cb10-127" aria-hidden="true" tabindex="-1"></a><span class="in">  color: {legend: false},</span></span>
+<span id="cb10-128"><a href="#cb10-128" aria-hidden="true" tabindex="-1"></a><span class="in">  marks: [</span></span>
+<span id="cb10-129"><a href="#cb10-129" aria-hidden="true" tabindex="-1"></a><span class="in">    Plot.line(euroData.rows.filter(r =&gt; r.indicator === euroSel.indicator &amp;&amp; euroSel.countries.includes(r.country)), {x: "year", y: "value", stroke: "country", strokeWidth: 2.2, sort: "year"}),</span></span>
+<span id="cb10-130"><a href="#cb10-130" aria-hidden="true" tabindex="-1"></a><span class="in">    Plot.dot(euroData.rows.filter(r =&gt; r.indicator === euroSel.indicator &amp;&amp; euroSel.countries.includes(r.country)), {x: "year", y: "value", fill: "country", r: 3, tip: true, title: d =&gt; `${d.country} · ${d.year}\n${euroSel.indicator}: ${d.value.toFixed(3)}`}),</span></span>
+<span id="cb10-131"><a href="#cb10-131" aria-hidden="true" tabindex="-1"></a><span class="in">    Plot.text(euroData.rows.filter(r =&gt; r.indicator === euroSel.indicator &amp;&amp; euroSel.countries.includes(r.country)), Plot.selectLast({x: "year", y: "value", z: "country", text: "country", textAnchor: "start", dx: 6, fill: "country"}))</span></span>
+<span id="cb10-132"><a href="#cb10-132" aria-hidden="true" tabindex="-1"></a><span class="in">  ]</span></span>
+<span id="cb10-133"><a href="#cb10-133" aria-hidden="true" tabindex="-1"></a><span class="in">}) : html`&lt;p class="pending"&gt;Select at least one country.&lt;/p&gt;`)</span></span>
+<span id="cb10-134"><a href="#cb10-134" aria-hidden="true" tabindex="-1"></a><span class="in">: html`&lt;div class="callout callout-warning"&gt;&lt;p&gt;&lt;b&gt;Eurostat data could not be loaded&lt;/b&gt; (${euroData.error}). Please try again later or consult &lt;a href="https://ec.europa.eu/eurostat/databrowser/view/ilc_di12/default/table"&gt;Eurostat&lt;/a&gt; directly.&lt;/p&gt;&lt;/div&gt;`</span></span>
+<span id="cb10-135"><a href="#cb10-135" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-136"><a href="#cb10-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-139"><a href="#cb10-139" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb10-140"><a href="#cb10-140" aria-hidden="true" tabindex="-1"></a><span class="in">//| echo: false</span></span>
+<span id="cb10-141"><a href="#cb10-141" aria-hidden="true" tabindex="-1"></a><span class="in">euroLatest = {</span></span>
+<span id="cb10-142"><a href="#cb10-142" aria-hidden="true" tabindex="-1"></a><span class="in">  const r = euroData.rows.filter(d =&gt; d.indicator === euroSel.indicator);</span></span>
+<span id="cb10-143"><a href="#cb10-143" aria-hidden="true" tabindex="-1"></a><span class="in">  const last = d3.rollup(r, v =&gt; v.sort((a, b) =&gt; b.year - a.year)[0], d =&gt; d.geo);</span></span>
+<span id="cb10-144"><a href="#cb10-144" aria-hidden="true" tabindex="-1"></a><span class="in">  return [...last.values()].sort((a, b) =&gt; b.value - a.value);</span></span>
+<span id="cb10-145"><a href="#cb10-145" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb10-146"><a href="#cb10-146" aria-hidden="true" tabindex="-1"></a><span class="in">euroData.ok ? Plot.plot({</span></span>
+<span id="cb10-147"><a href="#cb10-147" aria-hidden="true" tabindex="-1"></a><span class="in">  height: Math.max(300, 16 * euroLatest.length), marginLeft: 170,</span></span>
+<span id="cb10-148"><a href="#cb10-148" aria-hidden="true" tabindex="-1"></a><span class="in">  x: {label: `${euroSel.indicator} (latest available year)`, grid: true},</span></span>
+<span id="cb10-149"><a href="#cb10-149" aria-hidden="true" tabindex="-1"></a><span class="in">  y: {label: null},</span></span>
+<span id="cb10-150"><a href="#cb10-150" aria-hidden="true" tabindex="-1"></a><span class="in">  marks: [</span></span>
+<span id="cb10-151"><a href="#cb10-151" aria-hidden="true" tabindex="-1"></a><span class="in">    Plot.barX(euroLatest, {y: "country", x: "value", sort: {y: "-x"}, fill: d =&gt; d.geo === "EU27_2020" ? "#E07B20" : (d.geo === "ES" ? "#1F4E7A" : "#9DB5CF"), tip: true, title: d =&gt; `${d.country} (${d.year}): ${d.value.toFixed(3)}`}),</span></span>
+<span id="cb10-152"><a href="#cb10-152" aria-hidden="true" tabindex="-1"></a><span class="in">    Plot.ruleX([0])</span></span>
+<span id="cb10-153"><a href="#cb10-153" aria-hidden="true" tabindex="-1"></a><span class="in">  ]</span></span>
+<span id="cb10-154"><a href="#cb10-154" aria-hidden="true" tabindex="-1"></a><span class="in">}) : html``</span></span>
+<span id="cb10-155"><a href="#cb10-155" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-156"><a href="#cb10-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-159"><a href="#cb10-159" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb10-160"><a href="#cb10-160" aria-hidden="true" tabindex="-1"></a><span class="in">//| echo: false</span></span>
+<span id="cb10-161"><a href="#cb10-161" aria-hidden="true" tabindex="-1"></a><span class="in">euroData.ok ? DOM.download(new Blob([d3.csvFormat(euroData.rows)], {type: "text/csv"}), "theilumina_eurostat_inequality.csv", "Download Eurostat data (CSV)") : html``</span></span>
+<span id="cb10-162"><a href="#cb10-162" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-163"><a href="#cb10-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-164"><a href="#cb10-164" aria-hidden="true" tabindex="-1"></a>&lt;p class="source"&gt;Sources: Eurostat, EU-SILC: <span class="co">[</span><span class="ot">ilc_di12</span><span class="co">](https://ec.europa.eu/eurostat/databrowser/view/ilc_di12/default/table)</span> (Gini coefficient of equivalised disposable income), <span class="co">[</span><span class="ot">ilc_di11</span><span class="co">](https://ec.europa.eu/eurostat/databrowser/view/ilc_di11/default/table)</span> (S80/S20 income quintile share ratio) and <span class="co">[</span><span class="ot">ilc_di01</span><span class="co">](https://ec.europa.eu/eurostat/databrowser/view/ilc_di01/default/table)</span> (distribution of income by deciles). Theil approximations computed by THEILUMINA from the decile shares $s_k$: $T_1 \approx \sum_k s_k \ln(10\,s_k)$ and $T_0 \approx \sum_k 0.1 \ln(0.1/s_k)$.&lt;/p&gt;</span>
+<span id="cb10-165"><a href="#cb10-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-166"><a href="#cb10-166" aria-hidden="true" tabindex="-1"></a><span class="fu">## World: Gini and Theil $T_0$ (World Bank PIP)</span></span>
+<span id="cb10-167"><a href="#cb10-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-170"><a href="#cb10-170" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb10-171"><a href="#cb10-171" aria-hidden="true" tabindex="-1"></a><span class="in">//| echo: false</span></span>
+<span id="cb10-172"><a href="#cb10-172" aria-hidden="true" tabindex="-1"></a><span class="in">wbData = {</span></span>
+<span id="cb10-173"><a href="#cb10-173" aria-hidden="true" tabindex="-1"></a><span class="in">  try {</span></span>
+<span id="cb10-174"><a href="#cb10-174" aria-hidden="true" tabindex="-1"></a><span class="in">    const res = await fetch("https://api.worldbank.org/pip/v1/pip?country=all&amp;year=all&amp;fill_gaps=false&amp;format=json");</span></span>
+<span id="cb10-175"><a href="#cb10-175" aria-hidden="true" tabindex="-1"></a><span class="in">    if (!res.ok) throw new Error(`World Bank PIP: HTTP ${res.status}`);</span></span>
+<span id="cb10-176"><a href="#cb10-176" aria-hidden="true" tabindex="-1"></a><span class="in">    const js = await res.json();</span></span>
+<span id="cb10-177"><a href="#cb10-177" aria-hidden="true" tabindex="-1"></a><span class="in">    const rows = [];</span></span>
+<span id="cb10-178"><a href="#cb10-178" aria-hidden="true" tabindex="-1"></a><span class="in">    for (const r of js) {</span></span>
+<span id="cb10-179"><a href="#cb10-179" aria-hidden="true" tabindex="-1"></a><span class="in">      if (r.reporting_level !== "national") continue;</span></span>
+<span id="cb10-180"><a href="#cb10-180" aria-hidden="true" tabindex="-1"></a><span class="in">      const base = {code: r.country_code, country: r.country_name, year: +r.reporting_year, welfare: r.welfare_type};</span></span>
+<span id="cb10-181"><a href="#cb10-181" aria-hidden="true" tabindex="-1"></a><span class="in">      if (r.gini != null) rows.push({...base, indicator: "Gini index", value: +r.gini});</span></span>
+<span id="cb10-182"><a href="#cb10-182" aria-hidden="true" tabindex="-1"></a><span class="in">      if (r.mld != null) rows.push({...base, indicator: "Theil T0 (mean log deviation)", value: +r.mld});</span></span>
+<span id="cb10-183"><a href="#cb10-183" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
+<span id="cb10-184"><a href="#cb10-184" aria-hidden="true" tabindex="-1"></a><span class="in">    return {ok: true, rows};</span></span>
+<span id="cb10-185"><a href="#cb10-185" aria-hidden="true" tabindex="-1"></a><span class="in">  } catch (e) {</span></span>
+<span id="cb10-186"><a href="#cb10-186" aria-hidden="true" tabindex="-1"></a><span class="in">    return {ok: false, error: e.message, rows: []};</span></span>
+<span id="cb10-187"><a href="#cb10-187" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
+<span id="cb10-188"><a href="#cb10-188" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb10-189"><a href="#cb10-189" aria-hidden="true" tabindex="-1"></a><span class="in">wbCountries = [...new Set(wbData.rows.map(r =&gt; r.country))].sort()</span></span>
+<span id="cb10-190"><a href="#cb10-190" aria-hidden="true" tabindex="-1"></a><span class="in">viewof wbSel = Inputs.form({</span></span>
+<span id="cb10-191"><a href="#cb10-191" aria-hidden="true" tabindex="-1"></a><span class="in">  indicator: Inputs.radio(["Gini index", "Theil T0 (mean log deviation)"], {label: "Indicator", value: "Theil T0 (mean log deviation)"}),</span></span>
+<span id="cb10-192"><a href="#cb10-192" aria-hidden="true" tabindex="-1"></a><span class="in">  countries: Inputs.select(wbCountries, {label: "Countries", multiple: true, value: wbCountries.filter(c =&gt; /^(Spain|Brazil|South Africa|United States|India|China)$/.test(c)), size: 8})</span></span>
+<span id="cb10-193"><a href="#cb10-193" aria-hidden="true" tabindex="-1"></a><span class="in">})</span></span>
+<span id="cb10-194"><a href="#cb10-194" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-195"><a href="#cb10-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-198"><a href="#cb10-198" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb10-199"><a href="#cb10-199" aria-hidden="true" tabindex="-1"></a><span class="in">//| echo: false</span></span>
+<span id="cb10-200"><a href="#cb10-200" aria-hidden="true" tabindex="-1"></a><span class="in">wbData.ok ? (wbSel.countries.length ? Plot.plot({</span></span>
+<span id="cb10-201"><a href="#cb10-201" aria-hidden="true" tabindex="-1"></a><span class="in">  height: 420, marginLeft: 55, marginRight: 140,</span></span>
+<span id="cb10-202"><a href="#cb10-202" aria-hidden="true" tabindex="-1"></a><span class="in">  x: {label: "Year", tickFormat: "d", grid: true},</span></span>
+<span id="cb10-203"><a href="#cb10-203" aria-hidden="true" tabindex="-1"></a><span class="in">  y: {label: wbSel.indicator, grid: true, zero: false},</span></span>
+<span id="cb10-204"><a href="#cb10-204" aria-hidden="true" tabindex="-1"></a><span class="in">  marks: [</span></span>
+<span id="cb10-205"><a href="#cb10-205" aria-hidden="true" tabindex="-1"></a><span class="in">    Plot.line(wbData.rows.filter(r =&gt; r.indicator === wbSel.indicator &amp;&amp; wbSel.countries.includes(r.country)), {x: "year", y: "value", stroke: "country", z: d =&gt; d.country + d.welfare, strokeWidth: 2.2, sort: "year"}),</span></span>
+<span id="cb10-206"><a href="#cb10-206" aria-hidden="true" tabindex="-1"></a><span class="in">    Plot.dot(wbData.rows.filter(r =&gt; r.indicator === wbSel.indicator &amp;&amp; wbSel.countries.includes(r.country)), {x: "year", y: "value", fill: "country", r: 3, tip: true, title: d =&gt; `${d.country} · ${d.year} (${d.welfare})\n${wbSel.indicator}: ${d.value.toFixed(3)}`}),</span></span>
+<span id="cb10-207"><a href="#cb10-207" aria-hidden="true" tabindex="-1"></a><span class="in">    Plot.text(wbData.rows.filter(r =&gt; r.indicator === wbSel.indicator &amp;&amp; wbSel.countries.includes(r.country)), Plot.selectLast({x: "year", y: "value", z: "country", text: "country", textAnchor: "start", dx: 6, fill: "country"}))</span></span>
+<span id="cb10-208"><a href="#cb10-208" aria-hidden="true" tabindex="-1"></a><span class="in">  ]</span></span>
+<span id="cb10-209"><a href="#cb10-209" aria-hidden="true" tabindex="-1"></a><span class="in">}) : html`&lt;p class="pending"&gt;Select at least one country.&lt;/p&gt;`)</span></span>
+<span id="cb10-210"><a href="#cb10-210" aria-hidden="true" tabindex="-1"></a><span class="in">: html`&lt;div class="callout callout-warning"&gt;&lt;p&gt;&lt;b&gt;World Bank data could not be loaded&lt;/b&gt; (${wbData.error}). Please try again later or consult the &lt;a href="https://pip.worldbank.org"&gt;Poverty and Inequality Platform&lt;/a&gt; directly.&lt;/p&gt;&lt;/div&gt;`</span></span>
+<span id="cb10-211"><a href="#cb10-211" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-212"><a href="#cb10-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-215"><a href="#cb10-215" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb10-216"><a href="#cb10-216" aria-hidden="true" tabindex="-1"></a><span class="in">//| echo: false</span></span>
+<span id="cb10-217"><a href="#cb10-217" aria-hidden="true" tabindex="-1"></a><span class="in">wbData.ok ? DOM.download(new Blob([d3.csvFormat(wbData.rows)], {type: "text/csv"}), "theilumina_worldbank_pip.csv", "Download World Bank data (CSV)") : html``</span></span>
+<span id="cb10-218"><a href="#cb10-218" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-219"><a href="#cb10-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-220"><a href="#cb10-220" aria-hidden="true" tabindex="-1"></a>&lt;p class="source"&gt;Source: World Bank, <span class="co">[</span><span class="ot">Poverty and Inequality Platform (PIP)</span><span class="co">](https://pip.worldbank.org)</span>. National estimates; depending on the country, they refer to income or consumption (shown when hovering). The mean log deviation is the Theil index $T_0$.&lt;/p&gt;</span>
+<span id="cb10-221"><a href="#cb10-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-222"><a href="#cb10-222" aria-hidden="true" tabindex="-1"></a><span class="fu">## Other public sources of Theil indices</span></span>
+<span id="cb10-223"><a href="#cb10-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-224"><a href="#cb10-224" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**World Bank PIP**: mean log deviation ($T_0$) for about 170 countries (used above).</span>
+<span id="cb10-225"><a href="#cb10-225" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**CEPALSTAT (ECLAC)**: Theil index of per capita income for Latin American countries.</span>
+<span id="cb10-226"><a href="#cb10-226" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**SEDLAC (CEDLAS and World Bank)**: Theil indices and other inequality measures for Latin America and the Caribbean.</span>
+<span id="cb10-227"><a href="#cb10-227" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**University of Texas Inequality Project (UTIP-UNIDO)**: Theil indices of pay inequality across industrial sectors for most countries since 1963.</span>
+</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>THEILUMINA · Universidad de Granada</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Built with <a href="https://quarto.org">Quarto</a> · Reproducible research</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

@@ -54,3 +54,23 @@ h2 { border-bottom: 2px solid rgba($theil-orange, .35); padding-bottom: .25rem; 
 }
 
 .pending { color: #888; font-style: italic; }
+
+.status {
+  background: rgba($theil-orange, .10);
+  border-left: 5px solid $theil-orange;
+  border-radius: 6px;
+  padding: .75rem 1rem;
+  font-size: 1.05rem;
+}
+.stats { margin: .5rem 0 1rem; }
+.stat {
+  display: inline-block;
+  background: $theil-cream;
+  border: 1px solid rgba($theil-frame, .4);
+  border-radius: 8px;
+  padding: .35rem .8rem;
+  margin: 0 .4rem .4rem 0;
+  b { color: $theil-orange; font-size: 1.2rem; }
+}
+.source { font-size: .85rem; color: #666; }
+table { font-size: .88rem; }

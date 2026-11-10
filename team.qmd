@@ -1,32 +1,39 @@
 ---
 title: "Team"
+subtitle: "A multidisciplinary and international team with a consolidated co-authorship network"
 ---
-
-<!-- Revisar y completar la composición definitiva del equipo antes de publicar -->
 
 ## Principal investigators
 
-- **Muñoz Rosas, J.F.** (University of Granada, Quantitative Methods)
-- <span class="pending">Second PI: to be completed</span>
+- **Juan Francisco Muñoz Rosas** (PI). University of Granada · Quantitative Methods for Economics and Business.\
+- **Encarnación Álvarez Verdejo** (Co-PI). University of Granada · Quantitative Methods for Economics and Business.
 
-## Research team
+## Team members by field
 
-**University of Granada · Quantitative Methods and Statistics**
-Álvarez, E.; Cano, R.; Chica, J.; García, I.; García, R.M.; López, A.J.; Moya, P.J.; Muñoz, J.F.
+**Quantitative Methods for Economics and Business** (University of Granada)\
+Álvarez, E. (Co-PI); Cano, R.; Chica, J.; García, I.; García, R.M.; Moya, P.J.; Muñoz, J.F. (PI)
 
-**University of Granada · Applied Economics (water, well-being)**
-<span class="pending">To be completed</span>
+**Statistics and Operations Research** (University of Granada)\
+López, A.J.; and the PhD students Cano, P. and Yáñez
 
-**Tourism**
-Salinas, J.A.; <span class="pending">to be completed</span>
+**Applied Economics** (water, well-being, poverty)\
+Guardiola, J.; Ibáñez, N.; López, S.; Rodríguez (University of Granada) · Addabbo, T. (University of Modena and Reggio Emilia, Italy) · Tortajada, C. (University of Glasgow, United Kingdom)
 
-**Business and management (servitization, digital transformation)**
-Vendrell, F.
+**International and Spanish Economics** (tourism)\
+Casas, A.C.; Llorca, C.M.; Salinas, J.A. (University of Granada)
 
-## Areas of expertise
+**Business Management** (servitization, digital transformation and AI)\
+Vendrell, F. and Gomes, E. (foreign institutions)
 
-<span class="pill">Statistics and Operations Research</span>
 <span class="pill">Quantitative Methods</span>
+<span class="pill">Statistics and Operations Research</span>
 <span class="pill">Applied Economics</span>
-<span class="pill">Tourism</span>
-<span class="pill">Management and Business</span>
+<span class="pill">International Economics</span>
+<span class="pill">Business Management</span>
+<span class="pill">United Kingdom · Italy · Portugal</span>
+
+## Co-authorship network
+
+The team has a consolidated record of joint research: methodological and applied researchers already publish together, which ensures that the methods developed in the project are transferred to the Social Sciences.
+
+![Co-authorship network of the THEILUMINA team. Each node shows the number of articles in JCR journals (SCIE/SSCI) of each researcher; each link shows the number of JCR articles co-authored. Filled nodes: members of the previous GiniUs project; white nodes: new members; squares: PhD students; dashed ring: researchers at foreign institutions.](images/coauthorship_network.png){fig-alt="Co-authorship network of the THEILUMINA team" .lightbox}

@@ -61,7 +61,7 @@ The project is organised into five work packages (WP), each aligned with a Gener
 ::: {.wp-card}
 ### GO4. Open, efficient and reproducible software
 
-<p class="meta">Researchers: E. Álvarez, J. Chica, A.J. López, P.J. Moya, J.F. Muñoz</p>
+<p class="meta">Researchers: E. Álvarez, J. Chica, A.J. López, P.J. Moya, J.A. Salinas, J.F. Muñoz</p>
 
 - **SO9.** R package **theil**, with a C++ core (Rcpp).
     - A16. Development of the package.

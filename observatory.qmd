@@ -1,0 +1,209 @@
+---
+title: "Inequality observatory"
+subtitle: "Official inequality indicators, updated live from Eurostat and the World Bank"
+---
+
+This observatory gathers public inequality indicators for European and world countries. The data are **downloaded live from the official sources** every time the page is opened, so they always show the latest release. Each chart can be explored by hovering over the points, and the data can be downloaded as CSV.
+
+::: {.callout-note collapse="true"}
+## Why Theil indices are rarely published, and what this observatory offers
+
+Official statistics usually publish the **Gini index** and the **S80/S20 ratio**, but seldom Theil indices, even though Theil indices can be decomposed into inequality *between* and *within* groups. This observatory shows:
+
+- **Theil $T_0$ (mean log deviation)**, published by the World Bank's *Poverty and Inequality Platform* (PIP) for about 170 countries.
+- An **approximation of $T_0$ and $T_1$ for EU countries**, computed from the income shares of the ten deciles published by Eurostat (EU-SILC). Because it only uses inequality *between* deciles, it is a **lower bound** of the true index; inequality within each decile is ignored.
+
+All these figures are point estimates based on samples. As shown by this project, Theil estimators can be biased and their margin of error can be large when incomes are highly skewed. The **theil** R package will provide bias-corrected estimates and confidence intervals from microdata.
+:::
+
+```{ojs}
+//| echo: false
+// ---------- Helpers ----------
+function jsonstat(js) {
+  // Flattens a JSON-stat 2.0 dataset (Eurostat API) into an array of records
+  const ids = js.id, size = js.size, dims = js.dimension;
+  const codes = ids.map(d => {
+    const idx = dims[d].category.index;
+    const arr = Array.isArray(idx) ? idx : Object.keys(idx).sort((a, b) => idx[a] - idx[b]);
+    return arr;
+  });
+  const labels = ids.map(d => dims[d].category.label || {});
+  const out = [];
+  const vals = js.value;
+  const keys = Array.isArray(vals) ? vals.map((v, i) => i).filter(i => vals[i] != null) : Object.keys(vals).map(Number);
+  for (const i of keys) {
+    let rem = i; const rec = {};
+    for (let d = ids.length - 1; d >= 0; d--) {
+      const c = codes[d][rem % size[d]];
+      rec[ids[d]] = c;
+      if (ids[d] === "geo") rec.country = labels[d][c] || c;
+      rem = Math.floor(rem / size[d]);
+    }
+    rec.value = +vals[i];
+    out.push(rec);
+  }
+  return out;
+}
+pref = ["TOTAL", "T", "SHARE", "EUR", "PC", "A"]
+function keepPreferred(recs, keepDims) {
+  // For dimensions other than geo/time (and keepDims) keep a single category
+  if (!recs.length) return recs;
+  const dimsAll = Object.keys(recs[0]).filter(k => !["geo", "time", "value", "country", ...keepDims].includes(k));
+  let r = recs;
+  for (const d of dimsAll) {
+    const cats = [...new Set(r.map(x => x[d]))];
+    const chosen = pref.find(p => cats.includes(p)) ?? cats[0];
+    r = r.filter(x => x[d] === chosen);
+  }
+  return r;
+}
+async function eurostat(code, query = "") {
+  const url = `https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/${code}?format=JSON&lang=EN${query}`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`Eurostat ${code}: HTTP ${res.status}`);
+  return jsonstat(await res.json());
+}
+EU = new Set(["AT","BE","BG","CY","CZ","DE","DK","EE","EL","ES","FI","FR","HR","HU","IE","IT","LT","LU","LV","MT","NL","PL","PT","RO","SE","SI","SK","EU27_2020","NO","CH","IS","RS","TR","MK","ME","AL"])
+```
+
+```{ojs}
+//| echo: false
+// ---------- Download Eurostat data ----------
+euroData = {
+  try {
+    const [gini, s80, dec] = await Promise.all([
+      eurostat("ilc_di12"),
+      eurostat("ilc_di11"),
+      eurostat("ilc_di01", "&indic_il=SHARE" + ["D1","D2","D3","D4","D5","D6","D7","D8","D9","D10"].map(q => `&quantile=${q}`).join(""))
+    ]);
+    const rows = [];
+    for (const r of keepPreferred(gini, [])) rows.push({geo: r.geo, country: r.country, year: +r.time, indicator: "Gini index", value: r.value});
+    for (const r of keepPreferred(s80, [])) rows.push({geo: r.geo, country: r.country, year: +r.time, indicator: "S80/S20 ratio", value: r.value});
+    // Theil approximations from decile shares (grouped data, lower bound)
+    const d = keepPreferred(dec, ["quantile"]);
+    const groups = d3.group(d, r => r.geo, r => r.time);
+    for (const [geo, byYear] of groups) for (const [time, recs] of byYear) {
+      if (recs.length !== 10) continue;
+      const tot = d3.sum(recs, r => r.value);
+      const s = recs.map(r => r.value / tot).filter(v => v > 0);
+      if (s.length !== 10) continue;
+      const T1 = d3.sum(s, v => v * Math.log(10 * v));
+      const T0 = d3.sum(s, v => 0.1 * Math.log(0.1 / v));
+      rows.push({geo, country: recs[0].country, year: +time, indicator: "Theil T1 (decile approx.)", value: T1});
+      rows.push({geo, country: recs[0].country, year: +time, indicator: "Theil T0 (decile approx.)", value: T0});
+    }
+    return {ok: true, rows: rows.filter(r => EU.has(r.geo) && Number.isFinite(r.value))};
+  } catch (e) {
+    return {ok: false, error: e.message, rows: []};
+  }
+}
+```
+
+## Europe: EU-SILC indicators (Eurostat)
+
+```{ojs}
+//| echo: false
+euroCountries = [...new Set(euroData.rows.map(r => r.country))].sort()
+viewof euroSel = Inputs.form({
+  indicator: Inputs.radio(["Gini index", "S80/S20 ratio", "Theil T0 (decile approx.)", "Theil T1 (decile approx.)"], {label: "Indicator", value: "Gini index"}),
+  countries: Inputs.select(euroCountries, {label: "Countries", multiple: true, value: euroCountries.filter(c => /^(Spain|Italy|Portugal|Germany|France|European Union)/.test(c)).slice(0, 6), size: 8})
+})
+```
+
+```{ojs}
+//| echo: false
+euroData.ok ? (euroSel.countries.length ? Plot.plot({
+  height: 420, marginLeft: 55, marginRight: 140,
+  x: {label: "Year", tickFormat: "d", grid: true},
+  y: {label: euroSel.indicator, grid: true, zero: false},
+  color: {legend: false},
+  marks: [
+    Plot.line(euroData.rows.filter(r => r.indicator === euroSel.indicator && euroSel.countries.includes(r.country)), {x: "year", y: "value", stroke: "country", strokeWidth: 2.2, sort: "year"}),
+    Plot.dot(euroData.rows.filter(r => r.indicator === euroSel.indicator && euroSel.countries.includes(r.country)), {x: "year", y: "value", fill: "country", r: 3, tip: true, title: d => `${d.country} · ${d.year}\n${euroSel.indicator}: ${d.value.toFixed(3)}`}),
+    Plot.text(euroData.rows.filter(r => r.indicator === euroSel.indicator && euroSel.countries.includes(r.country)), Plot.selectLast({x: "year", y: "value", z: "country", text: "country", textAnchor: "start", dx: 6, fill: "country"}))
+  ]
+}) : html`<p class="pending">Select at least one country.</p>`)
+: html`<div class="callout callout-warning"><p><b>Eurostat data could not be loaded</b> (${euroData.error}). Please try again later or consult <a href="https://ec.europa.eu/eurostat/databrowser/view/ilc_di12/default/table">Eurostat</a> directly.</p></div>`
+```
+
+```{ojs}
+//| echo: false
+euroLatest = {
+  const r = euroData.rows.filter(d => d.indicator === euroSel.indicator);
+  const last = d3.rollup(r, v => v.sort((a, b) => b.year - a.year)[0], d => d.geo);
+  return [...last.values()].sort((a, b) => b.value - a.value);
+}
+euroData.ok ? Plot.plot({
+  height: Math.max(300, 16 * euroLatest.length), marginLeft: 170,
+  x: {label: `${euroSel.indicator} (latest available year)`, grid: true},
+  y: {label: null},
+  marks: [
+    Plot.barX(euroLatest, {y: "country", x: "value", sort: {y: "-x"}, fill: d => d.geo === "EU27_2020" ? "#E07B20" : (d.geo === "ES" ? "#1F4E7A" : "#9DB5CF"), tip: true, title: d => `${d.country} (${d.year}): ${d.value.toFixed(3)}`}),
+    Plot.ruleX([0])
+  ]
+}) : html``
+```
+
+```{ojs}
+//| echo: false
+euroData.ok ? DOM.download(new Blob([d3.csvFormat(euroData.rows)], {type: "text/csv"}), "theilumina_eurostat_inequality.csv", "Download Eurostat data (CSV)") : html``
+```
+
+<p class="source">Sources: Eurostat, EU-SILC: [ilc_di12](https://ec.europa.eu/eurostat/databrowser/view/ilc_di12/default/table) (Gini coefficient of equivalised disposable income), [ilc_di11](https://ec.europa.eu/eurostat/databrowser/view/ilc_di11/default/table) (S80/S20 income quintile share ratio) and [ilc_di01](https://ec.europa.eu/eurostat/databrowser/view/ilc_di01/default/table) (distribution of income by deciles). Theil approximations computed by THEILUMINA from the decile shares $s_k$: $T_1 \approx \sum_k s_k \ln(10\,s_k)$ and $T_0 \approx \sum_k 0.1 \ln(0.1/s_k)$.</p>
+
+## World: Gini and Theil $T_0$ (World Bank PIP)
+
+```{ojs}
+//| echo: false
+wbData = {
+  try {
+    const res = await fetch("https://api.worldbank.org/pip/v1/pip?country=all&year=all&fill_gaps=false&format=json");
+    if (!res.ok) throw new Error(`World Bank PIP: HTTP ${res.status}`);
+    const js = await res.json();
+    const rows = [];
+    for (const r of js) {
+      if (r.reporting_level !== "national") continue;
+      const base = {code: r.country_code, country: r.country_name, year: +r.reporting_year, welfare: r.welfare_type};
+      if (r.gini != null) rows.push({...base, indicator: "Gini index", value: +r.gini});
+      if (r.mld != null) rows.push({...base, indicator: "Theil T0 (mean log deviation)", value: +r.mld});
+    }
+    return {ok: true, rows};
+  } catch (e) {
+    return {ok: false, error: e.message, rows: []};
+  }
+}
+wbCountries = [...new Set(wbData.rows.map(r => r.country))].sort()
+viewof wbSel = Inputs.form({
+  indicator: Inputs.radio(["Gini index", "Theil T0 (mean log deviation)"], {label: "Indicator", value: "Theil T0 (mean log deviation)"}),
+  countries: Inputs.select(wbCountries, {label: "Countries", multiple: true, value: wbCountries.filter(c => /^(Spain|Brazil|South Africa|United States|India|China)$/.test(c)), size: 8})
+})
+```
+
+```{ojs}
+//| echo: false
+wbData.ok ? (wbSel.countries.length ? Plot.plot({
+  height: 420, marginLeft: 55, marginRight: 140,
+  x: {label: "Year", tickFormat: "d", grid: true},
+  y: {label: wbSel.indicator, grid: true, zero: false},
+  marks: [
+    Plot.line(wbData.rows.filter(r => r.indicator === wbSel.indicator && wbSel.countries.includes(r.country)), {x: "year", y: "value", stroke: "country", z: d => d.country + d.welfare, strokeWidth: 2.2, sort: "year"}),
+    Plot.dot(wbData.rows.filter(r => r.indicator === wbSel.indicator && wbSel.countries.includes(r.country)), {x: "year", y: "value", fill: "country", r: 3, tip: true, title: d => `${d.country} · ${d.year} (${d.welfare})\n${wbSel.indicator}: ${d.value.toFixed(3)}`}),
+    Plot.text(wbData.rows.filter(r => r.indicator === wbSel.indicator && wbSel.countries.includes(r.country)), Plot.selectLast({x: "year", y: "value", z: "country", text: "country", textAnchor: "start", dx: 6, fill: "country"}))
+  ]
+}) : html`<p class="pending">Select at least one country.</p>`)
+: html`<div class="callout callout-warning"><p><b>World Bank data could not be loaded</b> (${wbData.error}). Please try again later or consult the <a href="https://pip.worldbank.org">Poverty and Inequality Platform</a> directly.</p></div>`
+```
+
+```{ojs}
+//| echo: false
+wbData.ok ? DOM.download(new Blob([d3.csvFormat(wbData.rows)], {type: "text/csv"}), "theilumina_worldbank_pip.csv", "Download World Bank data (CSV)") : html``
+```
+
+<p class="source">Source: World Bank, [Poverty and Inequality Platform (PIP)](https://pip.worldbank.org). National estimates; depending on the country, they refer to income or consumption (shown when hovering). The mean log deviation is the Theil index $T_0$.</p>
+
+## Other public sources of Theil indices
+
+- **World Bank PIP**: mean log deviation ($T_0$) for about 170 countries (used above).
+- **CEPALSTAT (ECLAC)**: Theil index of per capita income for Latin American countries.
+- **SEDLAC (CEDLAS and World Bank)**: Theil indices and other inequality measures for Latin America and the Caribbean.
+- **University of Texas Inequality Project (UTIP-UNIDO)**: Theil indices of pay inequality across industrial sectors for most countries since 1963.
