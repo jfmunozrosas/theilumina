@@ -1,13 +1,19 @@
 project:
   type: website
   output-dir: docs
+  resources:
+    - "data/*.csv"
+    - "images/brand/*"
 
 website:
   title: "THEILUMINA"
-  description: "Illuminating inequality with Theil indices: bias, precision, computational efficiency and decomposition, with multidisciplinary applications."
+  description: "Research project proposal (under evaluation). Illuminating inequality with Theil indices: bias, precision, computational efficiency and decomposition, with multidisciplinary applications."
   site-url: "https://jfmunozrosas.github.io/theilumina"   # <- cambiar por la URL definitiva
   favicon: images/logo_theilumina.png
   page-navigation: true
+  open-graph: true
+  twitter-card: true
+  image: images/logo_theilumina.png
   back-to-top-navigation: true
   navbar:
     logo: images/logo_theilumina.png
@@ -16,8 +22,14 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - href: project.qmd
-        text: Project
+      - text: Project
+        menu:
+          - href: research.qmd
+            text: "Research problems and questions"
+          - href: project.qmd
+            text: "Objectives, work packages and activities"
+          - href: news.qmd
+            text: "Status and news"
       - href: team.qmd
         text: Team
       - text: Theil indices
@@ -32,17 +44,28 @@ website:
         text: Observatory
       - href: publications.qmd
         text: Publications
-      - href: dissemination.qmd
-        text: Dissemination
-      - href: links.qmd
-        text: Links
+      - text: Dissemination
+        menu:
+          - href: dissemination.qmd
+            text: "Seminars, conferences and stays"
+          - href: identity.qmd
+            text: "Logo and project identity"
+          - href: links.qmd
+            text: "Links of interest"
+      - href: contact.qmd
+        text: Contact
     right:
+      - href: news.qmd
+        text: "● Under evaluation"
+        aria-label: "Project status: under evaluation"
       - icon: github
         href: https://github.com/jfmunozrosas/theilumina   # <- cambiar
         aria-label: GitHub
   page-footer:
-    left: "THEILUMINA · Universidad de Granada"
+    left: "THEILUMINA · Research project proposal · Universidad de Granada · Last update: 16 November 2026"
     right: "Built with [Quarto](https://quarto.org) · Reproducible research"
+
+date-modified: "2026-11-16"
 
 format:
   html:

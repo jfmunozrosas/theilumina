@@ -8,6 +8,21 @@ title: "Links of interest"
 - [Society for the Study of Economic Inequality (ECINEQ)](http://www.ecineq.org/)
 - [International Association for Research in Income and Wealth (IARIW)](https://iariw.org/)
 
+## Inequality observatories
+
+- [Observatorio de Desigualdad de Andalucía](https://observatoriodesigualdadandalucia.org/)
+- [Monitor de Desigualdad · CaixaBank Research](https://www.caixabankresearch.com/es/economia-y-mercados/sector-publico/monitor-desigualdad)
+- [Red Andaluza de Lucha contra la Pobreza y la Exclusión Social (EAPN Andalucía)](http://www.eapn-andalucia.org/)
+- [El Estado de la Pobreza · EAPN España](https://www.eapn.es/estadodepobreza/)
+- [Fundación FOESSA](https://www.foessa.es/)
+- [INE · Household Income Distribution Atlas](https://www.ine.es/en/experimental/atlas/experimental_atlas_en.htm)
+- [World Inequality Database (WID)](https://wid.world/)
+- [UNU-WIDER · World Income Inequality Database (WIID)](https://www.wider.unu.edu/wiid)
+- [OECD Income Distribution Database](https://www.oecd.org/en/data/datasets/income-and-wealth-distribution-database.html)
+- [LIS Cross-National Data Center](https://www.lisdatacenter.org/)
+
+See also the [THEILUMINA inequality observatory](observatory.qmd).
+
 ## Institutions and agendas
 
 - [Eurostat](https://ec.europa.eu/eurostat)

@@ -3,27 +3,71 @@ title: "Team"
 subtitle: "A multidisciplinary and international team with a consolidated co-authorship network"
 ---
 
+Click on a name to open the researcher's profile (Google Scholar or the Research Portal of the University of Granada). Following the call, members belong either to the **research team** or to the **work team**.
+
 ## Principal investigators
 
-- **Juan Francisco Muñoz Rosas** (PI). University of Granada · Quantitative Methods for Economics and Business.\
-- **Encarnación Álvarez Verdejo** (Co-PI). University of Granada · Quantitative Methods for Economics and Business.
+- **[Juan Francisco Muñoz Rosas](https://scholar.google.es/citations?user=gedX7Z8AAAAJ&hl=es&oi=ao)** (PI). University of Granada, Spain · Quantitative Methods for Economics and Business.
+- **[Encarnación Álvarez Verdejo](https://scholar.google.es/citations?user=dBLU8iAAAAAJ&hl=es&oi=ao)** (Co-PI). University of Granada, Spain · Quantitative Methods for Economics and Business.
 
 ## Team members by field
 
-**Quantitative Methods for Economics and Business** (University of Granada)\
-Álvarez, E. (Co-PI); Cano, R.; Chica, J.; García, I.; García, R.M.; Moya, P.J.; Muñoz, J.F. (PI)
+::: {.field-card}
+### Quantitative Methods for Economics and Business
 
-**Statistics and Operations Research** (University of Granada)\
-López, A.J.; and the PhD students Cano, P. and Yáñez
+<p class="lines">Theoretical contributions · Econometrics · Estimation · Inference · Computational efficiency</p>
 
-**Applied Economics** (water, well-being, poverty)\
-Guardiola, J.; Ibáñez, N.; López, S.; Rodríguez (University of Granada) · Addabbo, T. (University of Modena and Reggio Emilia, Italy) · Tortajada, C. (University of Glasgow, United Kingdom)
+- [Encarnación Álvarez Verdejo](https://scholar.google.es/citations?user=dBLU8iAAAAAJ&hl=es&oi=ao) (Co-PI) — University of Granada, Spain
+- [Rafael Arturo Cano Guervós](https://scholar.google.es/citations?user=xh-t7cQAAAAJ&hl=es&oi=ao) — University of Granada, Spain <span class="pill pill-role">Research team</span>
+- [Jorge Miguel Chica Olmo](https://scholar.google.es/citations?user=Q2Lq9ZQAAAAJ&hl=es&oi=ao) — University of Granada, Spain <span class="pill pill-role">Research team</span>
+- [Irene García Garrido](https://produccioncientifica.ugr.es/investigadores/354680/detalle) — University of Granada, Spain <span class="pill pill-role">Research team</span>
+- [Rosa María García Fernández](https://produccioncientifica.ugr.es/investigadores/357334/detalle) — University of Granada, Spain <span class="pill pill-role">Research team</span>
+- [Pablo José Moya Fernández](https://scholar.google.es/citations?user=LWC3hNMAAAAJ&hl=es&oi=sra) — University of Granada, Spain <span class="pill pill-role">Research team</span>
+- [Juan Francisco Muñoz Rosas](https://scholar.google.es/citations?user=gedX7Z8AAAAJ&hl=es&oi=ao) (PI) — University of Granada, Spain
+:::
 
-**International and Spanish Economics** (tourism)\
-Casas, A.C.; Llorca, C.M.; Salinas, J.A. (University of Granada)
+::: {.field-card}
+### Statistics and Operations Research
 
-**Business Management** (servitization, digital transformation and AI)\
-Vendrell, F. and Gomes, E. (foreign institutions)
+<p class="lines">Theoretical contributions · Advanced modelling</p>
+
+- [Antonio Jesús López Montoya](https://scholar.google.es/citations?user=ZCaQrV0AAAAJ&hl=es&oi=ao) — University of Granada, Spain <span class="pill pill-role">Research team</span>
+- Pedro Antonio Cano Chica — PhD student, University of Granada, Spain <span class="pill pill-phd">Early-career researcher in training</span> <span class="pill pill-role">Work team</span>
+- Victoria Eugenia Yáñez Justicia — PhD student, University of Granada, Spain <span class="pill pill-phd">Early-career researcher in training</span> <span class="pill pill-role">Work team</span>
+- Elena Maroto Rica — PhD student, University of Granada, Spain <span class="pill pill-phd">Early-career researcher in training</span> <span class="pill pill-role">Work team</span>
+:::
+
+::: {.field-card}
+### Applied Economics
+
+<p class="lines">Water · Well-being · Poverty</p>
+
+- [Jorge Guardiola Wanden-Berghe](https://scholar.google.es/citations?user=GwRVIK8AAAAJ&hl=es&oi=ao) — University of Granada, Spain <span class="pill pill-role">Research team</span>
+- [Mª Nazaret Ibáñez Rueda](https://scholar.google.es/citations?user=8w_MCg0AAAAJ&hl=es&oi=ao) — University of León, Spain <span class="pill pill-role">Work team</span>
+- [Samara López Ruiz](https://scholar.google.es/citations?user=Z9bNNRIAAAAJ&hl=es&oi=ao) — University of Valladolid, Spain <span class="pill pill-role">Work team</span>
+- [José Antonio Rodríguez Martín](https://produccioncientifica.ugr.es/investigadores/355394/detalle) — University of Granada, Spain <span class="pill pill-role">Research team</span>
+- [Tindara Addabbo](https://scholar.google.es/citations?user=yQKeFNQAAAAJ&hl=es&oi=ao) — University of Modena and Reggio Emilia, Italy <span class="pill pill-role">Work team</span>
+- [Hilda Cecilia Tortajada Quiroz](https://scholar.google.es/citations?user=AByDTj8AAAAJ&hl=es&oi=ao) — University of Glasgow, United Kingdom <span class="pill pill-role">Work team</span>
+:::
+
+::: {.field-card}
+### International and Spanish Economics
+
+<p class="lines">Tourism</p>
+
+- [Amalia Cristina Casas Jurado](https://scholar.google.es/citations?user=L_q6ekkAAAAJ&hl=es&oi=ao) — University of Granada, Spain <span class="pill pill-role">Research team</span>
+- [Carmen María Llorca Rodríguez](https://scholar.google.es/citations?user=1vkldToAAAAJ&hl=es&oi=ao) — University of Granada, Spain <span class="pill pill-role">Research team</span>
+- [José Antonio Salinas Fernández](https://scholar.google.es/citations?user=-8HB3tMAAAAJ&hl=es&oi=ao) — University of Granada, Spain <span class="pill pill-role">Research team</span>
+:::
+
+::: {.field-card}
+### Business Management
+
+<p class="lines">Servitization · Digital transformation · Artificial intelligence</p>
+
+- [Ferran Vendrell-Herrero](https://scholar.google.es/citations?user=9cL9quUAAAAJ&hl=es&oi=ao) — University of Edinburgh, United Kingdom <span class="pill pill-role">Work team</span>
+- [Emanuel Rogério Sabino Gomes](https://scholar.google.es/citations?user=k5kf314AAAAJ&hl=es&oi=ao) — NOVA University Lisbon, Portugal <span class="pill pill-role">Work team</span>
+:::
 
 <span class="pill">Quantitative Methods</span>
 <span class="pill">Statistics and Operations Research</span>
@@ -36,4 +80,10 @@ Vendrell, F. and Gomes, E. (foreign institutions)
 
 The team has a consolidated record of joint research: methodological and applied researchers already publish together, which ensures that the methods developed in the project are transferred to the Social Sciences.
 
-![Co-authorship network of the THEILUMINA team. Each node shows the number of articles in JCR journals (SCIE/SSCI) of each researcher; each link shows the number of JCR articles co-authored. Filled nodes: members of the previous GiniUs project; white nodes: new members; squares: PhD students; dashed ring: researchers at foreign institutions.](images/coauthorship_network.png){fig-alt="Co-authorship network of the THEILUMINA team" .lightbox}
+![Co-authorship network of the THEILUMINA team. Each node shows the number of articles in JCR journals (SCIE/SSCI) of each researcher; each link shows the number of JCR articles co-authored. Filled nodes: members of the previous GiniUs project; white nodes: new members; squares: PhD students; dashed ring: researchers at foreign institutions. Sources: Google Scholar and Research Portal of the University of Granada; indexing according to the Web of Science Master Journal List (November 2026).](images/coauthorship_network.png){fig-alt="Co-authorship network of the THEILUMINA team" .lightbox}
+
+<p class="source">Download the network: [PNG](images/coauthorship_network.png) · [PDF](images/coauthorship_network.pdf) · [SVG](images/coauthorship_network.svg)</p>
+
+## Join us
+
+External researchers interested in collaborating, in particular in the transfer areas (water, tourism, firms, regional inequality and global convergence), are welcome to [get in touch](contact.qmd).

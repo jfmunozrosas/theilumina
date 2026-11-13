@@ -1,0 +1,72 @@
+---
+title: "Contact and collaboration"
+subtitle: "For researchers, institutions and organisations interested in collaborating with THEILUMINA"
+toc: false
+---
+
+We welcome contact from external researchers and organisations, in particular in the **transfer areas** of the project:
+
+::: {.transfer-grid}
+<div class="transfer-item"><b>Water</b><br>Inequality in household water consumption and expenditure</div>
+<div class="transfer-item"><b>Tourism</b><br>Effect of tourism on income inequality</div>
+<div class="transfer-item"><b>Firms</b><br>Servitization, digital transformation and AI adoption</div>
+<div class="transfer-item"><b>Regional inequality and global convergence</b><br>Bias-corrected inequality across regions and countries</div>
+<div class="transfer-item"><b>Methods and software</b><br>Bias correction, jackknife inference and the R package <i>theil</i></div>
+:::
+
+## Send us a message
+
+The form opens your email application with the message ready to send. No data are stored on this website.
+
+```{=html}
+<!-- To change the contact address, edit CONTACT_EMAIL below (one line). -->
+<form id="contact-form" class="contact-form" onsubmit="return theiluminaContact(event)">
+  <div class="row g-3">
+    <div class="col-md-6"><label class="form-label" for="cf-name">Name</label>
+      <input class="form-control" id="cf-name" required></div>
+    <div class="col-md-6"><label class="form-label" for="cf-inst">Institution</label>
+      <input class="form-control" id="cf-inst"></div>
+    <div class="col-md-6"><label class="form-label" for="cf-area">Area of interest</label>
+      <select class="form-select" id="cf-area">
+        <option>Methods (bias, inference, computational efficiency)</option>
+        <option>R package theil</option>
+        <option>Water</option>
+        <option>Tourism</option>
+        <option>Firms: servitization, digital transformation and AI</option>
+        <option>Regional inequality and global convergence</option>
+        <option>Data sharing</option>
+        <option>Seminars, visits and research stays</option>
+        <option>Other</option>
+      </select></div>
+    <div class="col-md-6"><label class="form-label" for="cf-type">Type of collaboration</label>
+      <select class="form-select" id="cf-type">
+        <option>Joint research or co-authorship</option>
+        <option>Applying the methods to my data</option>
+        <option>Seminar or conference invitation</option>
+        <option>Research stay</option>
+        <option>Information about the project</option>
+      </select></div>
+    <div class="col-12"><label class="form-label" for="cf-msg">Message</label>
+      <textarea class="form-control" id="cf-msg" rows="5" required></textarea></div>
+    <div class="col-12"><button class="btn btn-primary" type="submit">Prepare email</button></div>
+  </div>
+</form>
+<script>
+const CONTACT_EMAIL = "jfmunoz@ugr.es";
+function theiluminaContact(e) {
+  e.preventDefault();
+  const v = id => document.getElementById(id).value.trim();
+  const subject = `[THEILUMINA] Collaboration: ${v("cf-area")}`;
+  const body = `Name: ${v("cf-name")}\nInstitution: ${v("cf-inst")}\nArea of interest: ${v("cf-area")}\nType of collaboration: ${v("cf-type")}\n\n${v("cf-msg")}`;
+  window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  return false;
+}
+</script>
+```
+
+## Other ways to get in touch
+
+- **Email:** [jfmunoz@ugr.es](mailto:jfmunoz@ugr.es)
+- **Principal investigators:** [Juan Francisco Muñoz Rosas](https://scholar.google.es/citations?user=gedX7Z8AAAAJ&hl=es&oi=ao) and [Encarnación Álvarez Verdejo](https://scholar.google.es/citations?user=dBLU8iAAAAAJ&hl=es&oi=ao), Department of Quantitative Methods for Economics and Business, Faculty of Economics and Business, University of Granada (Spain).
+- **Code and data:** suggestions and issues can be posted in the [GitHub repository](https://github.com/jfmunozrosas/theilumina/issues).
+- **Project identity:** logos for your presentations and publications are available on the [identity page](identity.qmd).

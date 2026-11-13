@@ -1,9 +1,9 @@
 ---
 title: "Inequality observatory"
-subtitle: "Official inequality indicators, updated live from Eurostat and the World Bank"
+subtitle: "Official inequality indicators from Eurostat, the World Bank and the Spanish Statistical Office (INE), and links to other inequality observatories"
 ---
 
-This observatory gathers public inequality indicators for European and world countries. The data are **downloaded live from the official sources** every time the page is opened, so they always show the latest release. Each chart can be explored by hovering over the points, and the data can be downloaded as CSV.
+This observatory gathers public inequality indicators for European and world countries and for the Spanish regions. Eurostat and World Bank data are **downloaded live from the official sources** every time the page is opened, so they always show the latest release; INE data are downloaded every time the website is updated. Each chart can be explored by hovering over the points, and the data can be downloaded as CSV.
 
 ::: {.callout-note collapse="true"}
 ## Why Theil indices are rarely published, and what this observatory offers
@@ -60,8 +60,29 @@ function keepPreferred(recs, keepDims) {
 async function eurostat(code, query = "") {
   const url = `https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/${code}?format=JSON&lang=EN${query}`;
   const res = await fetch(url);
-  if (!res.ok) throw new Error(`Eurostat ${code}: HTTP ${res.status}`);
+  if (!res.ok) {
+    // Eurostat returns the reason of the error in the body (JSON-stat "error" field)
+    let msg = `HTTP ${res.status}`;
+    try {
+      const js = await res.json();
+      const err = Array.isArray(js.error) ? js.error[0] : js.error;
+      if (err && err.label) msg += ` – ${err.label}`;
+    } catch (e) {}
+    throw new Error(`Eurostat ${code}: ${msg}`);
+  }
   return jsonstat(await res.json());
+}
+deciles = ["D1","D2","D3","D4","D5","D6","D7","D8","D9","D10"]
+async function decileShares() {
+  // Income shares by decile (ilc_di01). Shares do not depend on the currency, so only EUR is requested;
+  // this keeps the request small. If the joint request is rejected, deciles are requested one by one.
+  const base = "&indic_il=SHARE&currency=EUR&sinceTimePeriod=2005";
+  try {
+    return await eurostat("ilc_di01", base + deciles.map(q => `&quantile=${q}`).join(""));
+  } catch (e1) {
+    const parts = await Promise.all(deciles.map(q => eurostat("ilc_di01", `${base}&quantile=${q}`)));
+    return parts.flat();
+  }
 }
 EU = new Set(["AT","BE","BG","CY","CZ","DE","DK","EE","EL","ES","FI","FR","HR","HU","IE","IT","LT","LU","LV","MT","NL","PL","PT","RO","SE","SI","SK","EU27_2020","NO","CH","IS","RS","TR","MK","ME","AL"])
 ```
@@ -70,17 +91,18 @@ EU = new Set(["AT","BE","BG","CY","CZ","DE","DK","EE","EL","ES","FI","FR","HR","
 //| echo: false
 // ---------- Download Eurostat data ----------
 euroData = {
-  try {
-    const [gini, s80, dec] = await Promise.all([
-      eurostat("ilc_di12"),
-      eurostat("ilc_di11"),
-      eurostat("ilc_di01", "&indic_il=SHARE" + ["D1","D2","D3","D4","D5","D6","D7","D8","D9","D10"].map(q => `&quantile=${q}`).join(""))
-    ]);
-    const rows = [];
-    for (const r of keepPreferred(gini, [])) rows.push({geo: r.geo, country: r.country, year: +r.time, indicator: "Gini index", value: r.value});
-    for (const r of keepPreferred(s80, [])) rows.push({geo: r.geo, country: r.country, year: +r.time, indicator: "S80/S20 ratio", value: r.value});
+  // Each dataset is loaded independently: if one of them fails, the others are still shown
+  const [gini, s80, dec] = await Promise.allSettled([eurostat("ilc_di12"), eurostat("ilc_di11"), decileShares()]);
+  const rows = [], errors = [];
+  if (gini.status === "fulfilled") {
+    for (const r of keepPreferred(gini.value, [])) rows.push({geo: r.geo, country: r.country, year: +r.time, indicator: "Gini index", value: r.value});
+  } else errors.push(gini.reason.message);
+  if (s80.status === "fulfilled") {
+    for (const r of keepPreferred(s80.value, [])) rows.push({geo: r.geo, country: r.country, year: +r.time, indicator: "S80/S20 ratio", value: r.value});
+  } else errors.push(s80.reason.message);
+  if (dec.status === "fulfilled") {
     // Theil approximations from decile shares (grouped data, lower bound)
-    const d = keepPreferred(dec, ["quantile"]);
+    const d = keepPreferred(dec.value, ["quantile"]);
     const groups = d3.group(d, r => r.geo, r => r.time);
     for (const [geo, byYear] of groups) for (const [time, recs] of byYear) {
       if (recs.length !== 10) continue;
@@ -92,10 +114,10 @@ euroData = {
       rows.push({geo, country: recs[0].country, year: +time, indicator: "Theil T1 (decile approx.)", value: T1});
       rows.push({geo, country: recs[0].country, year: +time, indicator: "Theil T0 (decile approx.)", value: T0});
     }
-    return {ok: true, rows: rows.filter(r => EU.has(r.geo) && Number.isFinite(r.value))};
-  } catch (e) {
-    return {ok: false, error: e.message, rows: []};
-  }
+  } else errors.push(dec.reason.message);
+  const out = rows.filter(r => EU.has(r.geo) && Number.isFinite(r.value));
+  return {ok: out.length > 0, rows: out, errors, error: errors.join("; "),
+          indicators: [...new Set(out.map(r => r.indicator))]};
 }
 ```
 
@@ -105,9 +127,14 @@ euroData = {
 //| echo: false
 euroCountries = [...new Set(euroData.rows.map(r => r.country))].sort()
 viewof euroSel = Inputs.form({
-  indicator: Inputs.radio(["Gini index", "S80/S20 ratio", "Theil T0 (decile approx.)", "Theil T1 (decile approx.)"], {label: "Indicator", value: "Gini index"}),
+  indicator: Inputs.radio(euroData.indicators.length ? euroData.indicators : ["Gini index"], {label: "Indicator", value: euroData.indicators.includes("Gini index") ? "Gini index" : euroData.indicators[0]}),
   countries: Inputs.select(euroCountries, {label: "Countries", multiple: true, value: euroCountries.filter(c => /^(Spain|Italy|Portugal|Germany|France|European Union)/.test(c)).slice(0, 6), size: 8})
 })
+```
+
+```{ojs}
+//| echo: false
+euroData.ok && euroData.errors.length ? html`<div class="callout callout-note"><p>Some Eurostat series could not be loaded and are not shown (${euroData.error}).</p></div>` : html``
 ```
 
 ```{ojs}
@@ -200,6 +227,158 @@ wbData.ok ? DOM.download(new Blob([d3.csvFormat(wbData.rows)], {type: "text/csv"
 ```
 
 <p class="source">Source: World Bank, [Poverty and Inequality Platform (PIP)](https://pip.worldbank.org). National estimates; depending on the country, they refer to income or consumption (shown when hovering). The mean log deviation is the Theil index $T_0$.</p>
+
+## Spain: inequality by region (INE)
+
+The Spanish Statistical Office (INE) publishes the **Gini index** and the **S80/S20 ratio** of equivalised disposable income for Spain and its 19 regions (autonomous communities and cities), from the Living Conditions Survey (ECV). The data are downloaded from the INE API every time the website is rendered.
+
+```{r}
+#| label: ine-download
+#| include: false
+# INE table 67246: Desigualdad en la distribución de ingresos (S80/S20 y coeficiente de Gini) por CCAA (ECV)
+ine_file <- "data/ine_67246.csv"
+dir.create("data", showWarnings = FALSE)
+ine <- tryCatch({
+  tmp <- tempfile(fileext = ".csv")
+  download.file("https://www.ine.es/wstempus/csv_sc/es/DATOS_TABLA/67246", tmp, quiet = TRUE, mode = "wb")
+  x <- read.csv2(tmp, fileEncoding = "UTF-8-BOM", check.names = FALSE, colClasses = "character")
+  names(x) <- c("region", "indicador", "year", "value")
+  x$value  <- as.numeric(gsub(",", ".", gsub(".", "", x$value, fixed = TRUE), fixed = TRUE))
+  x$year   <- as.integer(x$year)
+  x$region <- sub("^[0-9]+ ", "", x$region)
+  x$region[x$region == "Total Nacional"] <- "Spain (total)"
+  lab <- c("Gini" = "Gini index",
+           "Desigualdad (S80/S20)" = "S80/S20 ratio",
+           "Gini (con alquiler imputado)" = "Gini index (with imputed rent)",
+           "Distribución de la renta S80/S20 (alquiler imputado)" = "S80/S20 ratio (with imputed rent)")
+  x$indicator <- unname(lab[x$indicador])
+  x <- x[!is.na(x$value) & !is.na(x$indicator), c("region", "indicator", "year", "value")]
+  write.csv(x, ine_file, row.names = FALSE, fileEncoding = "UTF-8")
+  x
+}, error = function(e) {
+  # If INE cannot be reached, use the last downloaded copy (if any)
+  if (file.exists(ine_file)) read.csv(ine_file, fileEncoding = "UTF-8") else
+    data.frame(region = character(), indicator = character(), year = integer(), value = numeric())
+})
+ojs_define(ineRaw = ine)
+```
+
+```{ojs}
+//| echo: false
+ineRows = transpose(ineRaw)
+ineOk = ineRows.length > 0
+ineRegions = [...new Set(ineRows.map(r => r.region))].sort((a, b) => a === "Spain (total)" ? -1 : b === "Spain (total)" ? 1 : a.localeCompare(b, "es"))
+viewof ineSel = ineOk ? Inputs.form({
+  indicator: Inputs.radio(["Gini index", "S80/S20 ratio", "Gini index (with imputed rent)", "S80/S20 ratio (with imputed rent)"], {label: "Indicator", value: "Gini index"}),
+  regions: Inputs.select(ineRegions, {label: "Regions", multiple: true, value: ["Spain (total)", "Andalucía", "Madrid, Comunidad de", "Cataluña", "País Vasco"].filter(r => ineRegions.includes(r)), size: 8})
+}) : html`<div class="callout callout-warning"><p><b>INE data could not be loaded.</b> Please consult the <a href="https://www.ine.es/jaxiT3/Tabla.htm?t=67246">INE table</a> directly.</p></div>`
+```
+
+```{ojs}
+//| echo: false
+ineOk ? (ineSel.regions.length ? Plot.plot({
+  height: 420, marginLeft: 55, marginRight: 150,
+  x: {label: "Year (survey)", tickFormat: "d", grid: true},
+  y: {label: ineSel.indicator, grid: true, zero: false},
+  marks: [
+    Plot.line(ineRows.filter(r => r.indicator === ineSel.indicator && ineSel.regions.includes(r.region)), {x: "year", y: "value", stroke: "region", strokeWidth: 2.2, sort: "year"}),
+    Plot.dot(ineRows.filter(r => r.indicator === ineSel.indicator && ineSel.regions.includes(r.region)), {x: "year", y: "value", fill: "region", r: 3, tip: true, title: d => `${d.region} · ${d.year}\n${ineSel.indicator}: ${d.value}`}),
+    Plot.text(ineRows.filter(r => r.indicator === ineSel.indicator && ineSel.regions.includes(r.region)), Plot.selectLast({x: "year", y: "value", z: "region", text: "region", textAnchor: "start", dx: 6, fill: "region"}))
+  ]
+}) : html`<p class="pending">Select at least one region.</p>`) : html``
+```
+
+```{ojs}
+//| echo: false
+ineLatest = {
+  if (!ineOk) return [];
+  const r = ineRows.filter(d => d.indicator === ineSel.indicator);
+  const y = d3.max(r, d => d.year);
+  return r.filter(d => d.year === y).sort((a, b) => b.value - a.value);
+}
+ineOk ? Plot.plot({
+  height: Math.max(300, 20 * ineLatest.length), marginLeft: 190,
+  x: {label: `${ineSel.indicator} (${ineLatest.length ? ineLatest[0].year : ""})`, grid: true},
+  y: {label: null},
+  marks: [
+    Plot.barX(ineLatest, {y: "region", x: "value", sort: {y: "-x"}, fill: d => d.region === "Spain (total)" ? "#E07B20" : (d.region === "Andalucía" ? "#1F4E7A" : "#9DB5CF"), tip: true, title: d => `${d.region} (${d.year}): ${d.value}`}),
+    Plot.ruleX([0])
+  ]
+}) : html``
+```
+
+```{ojs}
+//| echo: false
+ineOk ? DOM.download(new Blob([d3.csvFormat(ineRows)], {type: "text/csv"}), "theilumina_ine_inequality.csv", "Download INE data (CSV)") : html``
+```
+
+<p class="source">Source: Instituto Nacional de Estadística (INE), Living Conditions Survey (ECV): [Inequality in the distribution of income (S80/S20 and Gini coefficient) by region](https://www.ine.es/jaxiT3/Tabla.htm?t=67246). The Gini index is expressed on a 0–100 scale. The year is the survey year; income refers to the previous year. For inequality at the municipal and census-tract level, see the INE [Household Income Distribution Atlas](https://www.ine.es/en/experimental/atlas/experimental_atlas_en.htm).</p>
+
+## Other inequality observatories
+
+::: {.obs-grid}
+
+::: {.obs-card}
+**[Observatorio de Desigualdad de Andalucía](https://observatoriodesigualdadandalucia.org/)**\
+Platform of more than twenty organisations and Andalusian universities (including the University of Granada) that publishes periodic reports on inequality in Andalusia.
+:::
+
+::: {.obs-card}
+**[Monitor de Desigualdad · CaixaBank Research](https://www.caixabankresearch.com/es/economia-y-mercados/sector-publico/monitor-desigualdad)**\
+Real-time monitor of wage-income inequality in Spain, built from anonymised payroll data (with Pompeu Fabra University and IPEG).
+:::
+
+::: {.obs-card}
+**[EAPN Andalucía](http://www.eapn-andalucia.org/)**\
+Red Andaluza de Lucha contra la Pobreza y la Exclusión Social: reports and indicators on poverty and social exclusion in Andalusia.
+:::
+
+::: {.obs-card}
+**[El Estado de la Pobreza · EAPN España](https://www.eapn.es/estadodepobreza/)**\
+Annual report on poverty and social exclusion (AROPE) in Spain and its regions.
+:::
+
+::: {.obs-card}
+**[Fundación FOESSA](https://www.foessa.es/)**\
+Reports on social exclusion and development in Spain, promoted by Cáritas.
+:::
+
+::: {.obs-card}
+**[INE · Household Income Distribution Atlas](https://www.ine.es/en/experimental/atlas/experimental_atlas_en.htm)**\
+Gini index and P80/P20 ratio for every Spanish municipality, district and census tract.
+:::
+
+::: {.obs-card}
+**[World Inequality Database (WID)](https://wid.world/)**\
+Income and wealth inequality series, including top income shares, for most countries.
+:::
+
+::: {.obs-card}
+**[UNU-WIDER · World Income Inequality Database (WIID)](https://www.wider.unu.edu/wiid)**\
+The most comprehensive collection of income inequality statistics, including Theil and MLD indices.
+:::
+
+::: {.obs-card}
+**[OECD Income Distribution Database](https://www.oecd.org/en/data/datasets/income-and-wealth-distribution-database.html)**\
+Inequality and poverty indicators for OECD countries, based on harmonised definitions.
+:::
+
+::: {.obs-card}
+**[LIS Cross-National Data Center](https://www.lisdatacenter.org/)**\
+Harmonised income and wealth microdata for more than 50 countries.
+:::
+
+::: {.obs-card}
+**[World Bank · Poverty and Inequality Platform](https://pip.worldbank.org/)**\
+Poverty and inequality indicators, including the mean log deviation ($T_0$), for about 170 countries.
+:::
+
+::: {.obs-card}
+**[Eurostat · Living conditions](https://ec.europa.eu/eurostat/web/income-and-living-conditions)**\
+EU-SILC indicators on income distribution, poverty and social exclusion in Europe.
+:::
+
+:::
 
 ## Other public sources of Theil indices
 

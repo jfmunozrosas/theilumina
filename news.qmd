@@ -1,0 +1,26 @@
+---
+title: "Status and news"
+subtitle: "Project status and short news on the activity of the team"
+---
+
+## Project status
+
+{{< include _status.md >}}
+
+## News
+
+<!-- Add new entries at the top, using the same format: date, tag and one or two sentences. -->
+
+::: {.news-list}
+
+::: {.news-item}
+<span class="news-date">November 2026</span> <span class="news-tag tag-web">Website</span>
+
+**The THEILUMINA website is created** for the research project proposal.
+:::
+
+:::
+
+::: {.callout-tip appearance="simple"}
+Would you like to collaborate or receive news about the project? [Contact us](contact.qmd).
+:::

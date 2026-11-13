@@ -1,0 +1,77 @@
+---
+title: "Research problems and questions"
+subtitle: "Why reliable estimation and inference for Theil indices is still an open problem"
+---
+
+Theil indices ($T_0$ and $T_1$) are the standard tool to decompose inequality into a *between-group* and a *within-group* component. Yet the way they are usually estimated and used in practice raises several problems that the project addresses. The figures on this page are **preliminary results** of the team, and illustrate the problems with the most skewed distribution considered (Pareto).
+
+::: {.callout-note appearance="simple"}
+## How to read the figures
+The relative bias (RB) of an estimator is the percentage difference between its average value over many simulated samples and the true value of the index. Dashed horizontal lines delimit the region of **negligible bias**. Each panel corresponds to a level of inequality ($T_0$ or $T_1$ from 0.05 to 0.5), and the horizontal axis shows the sample size.
+:::
+
+## Problem 1 · The estimators underestimate inequality
+
+The standard (plug-in) estimators of the Theil indices are **biased downwards** in finite samples: they systematically underestimate inequality. The bias grows with the **skewness** of the data and the **level of inequality**, which are precisely the conditions found in income, wealth, water consumption or tourism data. With highly skewed data and high inequality, samples larger than 5,000 observations are needed for the bias to become negligible.
+
+![Relative bias of the standard, jackknife bias-corrected and semiparametric estimators of $T_0$ (left) and $T_1$ (right) for samples drawn from a Pareto distribution (high skewness). The standard estimator (solid blue) shows a negative bias that reaches about −20% with small samples and high inequality; the bias-corrected estimator (dashed green) stays close to zero; the semiparametric estimator can overestimate severely (values shown as text). Source: THEILUMINA team, preliminary results.](images/paper/fig_bias_pareto.png){fig-alt="Relative bias of Theil index estimators under a Pareto distribution" .lightbox width=85%}
+
+::: {.rq}
+**Research questions (WP1)**
+
+- **RQ1.** How large is the bias of the estimators of $T_0$ and $T_1$, and which data features (sample size, skewness, inequality, tails) drive it?
+- **RQ2.** Can the bias be *predicted* from observable sample features, so that users know in advance whether their estimate is reliable (negligible, mild, moderate or severe bias)?
+- **RQ3.** Which correction (jackknife, model-based, analytical or semiparametric) best reduces the bias without inflating the mean squared error?
+- **RQ4.** How does the bias propagate to the **between- and within-group components** of the decomposition?
+:::
+
+## Problem 2 · Inference is unreliable: variances are underestimated
+
+Even when the point estimate is acceptable, its **margin of error** may not be. Under skewed distributions, the usual **asymptotic** and **bootstrap** variance estimators severely underestimate the true variance (by 30–70% in the figure below), even with thousands of observations. As a result, confidence intervals are too narrow and differences in inequality across regions, groups or years may be declared significant when they are not. The **jackknife** variance estimator remains close to the region of negligible bias.
+
+![Relative bias of the asymptotic (solid blue), jackknife (dashed green) and bootstrap (dash-dotted red) variance estimators of the Theil indices for samples drawn from a Pareto distribution. Dashed black lines at ±5% delimit the region of negligible bias, and orange lines at ±20% the region of severe bias. Source: THEILUMINA team, preliminary results.](images/paper/fig_varbias_pareto.png){fig-alt="Relative bias of variance estimators of Theil indices under a Pareto distribution" .lightbox width=85%}
+
+::: {.rq}
+**Research questions (WP2)**
+
+- **RQ5.** Under which combinations of sample size, skewness and inequality do the asymptotic, bootstrap, semiparametric and jackknife variance estimators become unreliable?
+- **RQ6.** Can new jackknife-based variance estimators and confidence intervals achieve coverage close to the nominal level under strong skewness and inequality, both for the indices and for their decomposition?
+:::
+
+## Problem 3 · The jackknife is computationally prohibitive
+
+The jackknife recomputes the estimator $n$ times, leaving out one observation each time, so its cost grows **quadratically** with the sample size ($\mathcal{O}(n^2)$). With $n = 100{,}000$ observations, the standard jackknife needs more than 16 minutes to compute the variance of a single Theil index, and a Monte Carlo study with $n = 5{,}000$ takes more than two days. Our closed-form expressions give **exactly the same result** with linear cost ($\mathcal{O}(n)$): 15 milliseconds and less than 40 seconds, respectively. For the bias-corrected estimators, the standard jackknife would take decades, which makes reduced expressions essential.
+
+![Computation times, in R, of the standard jackknife, the proposed closed-form jackknife and the asymptotic variance estimators of $T_0$ and $T_1$. Top: large samples ($n$ up to 100,000). Bottom: complete Monte Carlo experiment (48,000 samples per sample size). Note the change of units: minutes and days for the standard jackknife, seconds for the proposed expressions. Source: THEILUMINA team, preliminary results.](images/paper/fig_times.png){fig-alt="Computation times of jackknife variance estimators" .lightbox width=80%}
+
+::: {.rq}
+**Research questions (WP3)**
+
+- **RQ7.** How large is the computational cost of the standard jackknife compared with alternative variance estimators for big data (surveys and administrative records with millions of observations)?
+- **RQ8.** Can exact, closed-form jackknife expressions be derived for the bias-corrected estimators, the decomposition components and complex survey designs, with no loss of accuracy?
+:::
+
+## Problem 4 · There is no open software for reliable Theil inference
+
+Existing software computes point estimates of Theil indices but does not offer bias diagnostics, bias corrections or reliable variance estimators and confidence intervals, and it does not scale to large samples.
+
+::: {.rq}
+**Research question (WP4)**
+
+- **RQ9.** Can the methods developed in WP1–WP3 be implemented in an open, documented and efficient R package (**theil**, with a C++ core) that makes reliable inference for Theil indices accessible to applied researchers?
+:::
+
+## Problem 5 · Do corrected estimates change empirical conclusions?
+
+The bias is not a technicality. When the methods are applied to real data, the difference between standard and bias-corrected estimates varies with sample size, skewness and inequality, and can change rankings and conclusions. For example, in our application to real GDP per capita for 183 countries (1990–2023), the bias-corrected estimates are between 2% and 6% higher for $T_0$, and up to 12% higher for $T_1$, than the standard ones, with the largest differences in the most skewed regions (the Americas and Asia & Pacific).
+
+::: {.rq}
+**Research questions (WP5)**
+
+- **RQ10.** How unequal are household water consumption and expenditure between and within municipalities, and how much does the bias correction change this picture?
+- **RQ11.** Does tourism reduce or increase income inequality within and between destinations?
+- **RQ12.** How unequal are servitization, digital transformation and AI adoption across firms, sectors and countries?
+- **RQ13.** Is there global convergence in per capita consumption and income once bias-corrected estimators and reliable confidence intervals are used?
+:::
+
+See [Objectives, work packages and activities](project.qmd) for how these questions are organised into work packages.

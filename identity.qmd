@@ -1,0 +1,80 @@
+---
+title: "Logo and project identity"
+subtitle: "Free to use by co-authors and collaborators in their own communications"
+---
+
+Co-authors, collaborators and institutions can use the THEILUMINA logo in presentations, posters, papers, websites and social media about work related to the project.
+
+[Download the complete identity kit (ZIP)](images/brand/theilumina_brand_kit.zip){.btn .btn-primary}
+
+## Logos
+
+::: {.brand-grid}
+
+::: {.brand-card}
+![](images/brand/theilumina_logo_en.png){fig-alt="THEILUMINA logo, English version"}
+
+**Main logo (English)**\
+[PNG](images/brand/theilumina_logo_en.png){download=""} · [SVG](images/brand/theilumina_logo_en.svg){download=""}
+:::
+
+::: {.brand-card}
+![](images/brand/theilumina_logo_es.png){fig-alt="THEILUMINA logo, Spanish version"}
+
+**Main logo (Spanish)**\
+[PNG](images/brand/theilumina_logo_es.png){download=""} · [SVG](images/brand/theilumina_logo_es.svg){download=""}
+:::
+
+::: {.brand-card}
+![](images/brand/theilumina_logo_en_transparent.png){fig-alt="THEILUMINA logo without background"}
+
+**Transparent background**\
+[PNG](images/brand/theilumina_logo_en_transparent.png){download=""} · [SVG](images/brand/theilumina_logo_en_transparent.svg){download=""}
+:::
+
+::: {.brand-card .brand-dark}
+![](images/brand/theilumina_logo_en_negative.png){fig-alt="THEILUMINA logo for dark backgrounds"}
+
+**Dark backgrounds**\
+[PNG](images/brand/theilumina_logo_en_negative.png){download=""} · [SVG](images/brand/theilumina_logo_en_negative.svg){download=""}
+:::
+
+::: {.brand-card}
+![](images/brand/theilumina_icon.png){fig-alt="THEILUMINA icon" width=40%}
+
+**Icon (small sizes, social media)**\
+[PNG](images/brand/theilumina_icon.png){download=""} · [SVG](images/brand/theilumina_icon.svg){download=""}
+:::
+
+::: {.brand-card}
+![](images/logo_theilumina.png){fig-alt="Original THEILUMINA logo"}
+
+**Original logo**\
+[PNG](images/logo_theilumina.png){download=""}
+:::
+
+:::
+
+## Colours and typeface
+
+<div class="swatches">
+<div class="swatch" style="background:#E07B20"><span>Orange<br>#E07B20</span></div>
+<div class="swatch" style="background:#1F4E7A"><span>Blue<br>#1F4E7A</span></div>
+<div class="swatch" style="background:#4F81BD"><span>Frame<br>#4F81BD</span></div>
+<div class="swatch swatch-light" style="background:#FAF7F2"><span>Cream<br>#FAF7F2</span></div>
+</div>
+
+Typeface: [Source Sans 3](https://fonts.google.com/specimen/Source+Sans+3) (open licence).
+
+## Guidelines
+
+- Keep the proportions of the logo and leave some free space around it.
+- Do not change the colours; on dark backgrounds use the version for dark backgrounds.
+- Use the icon only when the full logo would be too small to read.
+- When possible, link the logo to the project website: <https://jfmunozrosas.github.io/theilumina/>.
+
+## Suggested acknowledgement
+
+If your work is related to the project, you can use this text (adapt it once the project is funded and has a reference number):
+
+> This work is related to the research project proposal THEILUMINA (*Illuminating inequality with Theil indices: bias, precision, computational efficiency and decomposition, with multidisciplinary applications*), University of Granada, Spain.

@@ -1,7 +1,11 @@
 ---
 title: "Project"
-subtitle: "General objectives, work packages and activities"
+subtitle: "Research project proposal · General objectives, work packages and activities"
 ---
+
+{{< include _status.md >}}
+
+The research problems and questions that motivate these objectives are described in [Research problems and questions](research.qmd).
 
 The project is organised into five work packages (WP), each aligned with a General Objective (GO). Each WP sets out Specific Objectives (SO) and Activities (A). A cross-cutting activity covers this website:
 

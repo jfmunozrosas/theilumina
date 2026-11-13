@@ -4,7 +4,7 @@ title: "Publications"
 
 ## Target journals
 
-The main dissemination channel is publication in leading journals (JCR D1 or ABS 4/4\*). Methodological results (WP1–WP3) target journals such as *Journal of Econometrics*, *Sociological Methods & Research*, *Social Indicators Research*, *Journal of Economic Inequality* and *Computational Statistics & Data Analysis*. The R package (WP4) targets the *Journal of Statistical Software*, and the applications (WP5) target journals in Water Resources, Tourism, Management and Business.
+The main dissemination channel is publication in leading journals (JCR Q1/Q2 or ABS 3/4/4\*). Methodological results (WP1–WP3) target journals such as *Journal of Econometrics*, *Sociological Methods & Research*, *Social Indicators Research*, *Journal of Economic Inequality* and *Computational Statistics & Data Analysis*. The R package (WP4) targets the *Journal of Statistical Software*, and the applications (WP5) target journals in Water Resources, Tourism, Management and Business.
 
 ## Project publications
 

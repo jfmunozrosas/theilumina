@@ -25,5 +25,23 @@
   },
   "data-code.qmd": {
     "data-code.html": "8f4056d2"
+  },
+  "404.qmd": {
+    "404.html": "4f2ceaa9"
+  },
+  "contact.qmd": {
+    "contact.html": "6d8f7236"
+  },
+  "identity.qmd": {
+    "identity.html": "3e4e6562"
+  },
+  "news.qmd": {
+    "news.html": "ebffc970"
+  },
+  "observatory.qmd": {
+    "observatory.html": "399ab8bb"
+  },
+  "research.qmd": {
+    "research.html": "9c2cd9b8"
   }
 }

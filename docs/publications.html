@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.42">
+<meta name="generator" content="quarto-1.7.32">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -21,8 +21,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -33,7 +34,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -65,15 +66,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./images/logo_theilumina.png" rel="icon" type="image/png">
-<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-00955f6b0038cceb76c5c3659775ae37.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-94f770f99f782f4736c44efb5cafe651.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -104,9 +106,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <style>html{ scroll-behavior: smooth; }</style>
 
 
+<meta property="og:title" content="Publications – THEILUMINA">
+<meta property="og:description" content="Research project proposal (under evaluation). Illuminating inequality with Theil indices: bias, precision, computational efficiency and decomposition, with multidisciplinary applications.">
+<meta property="og:image" content="https://jfmunozrosas.github.io/theilumina/images/logo_theilumina.png">
+<meta property="og:site_name" content="THEILUMINA">
+<meta property="og:image:height" content="130">
+<meta property="og:image:width" content="394">
+<meta name="twitter:title" content="Publications – THEILUMINA">
+<meta name="twitter:description" content="Research project proposal (under evaluation). Illuminating inequality with Theil indices: bias, precision, computational efficiency and decomposition, with multidisciplinary applications.">
+<meta name="twitter:image" content="https://jfmunozrosas.github.io/theilumina/images/logo_theilumina.png">
+<meta name="twitter:image-height" content="130">
+<meta name="twitter:image-width" content="394">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -127,10 +141,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./project.html"> 
-<span class="menu-text">Project</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-project" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Project</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-project">    
+        <li>
+    <a class="dropdown-item" href="./research.html">
+ <span class="dropdown-text">Research problems and questions</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./project.html">
+ <span class="dropdown-text">Objectives, work packages and activities</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./news.html">
+ <span class="dropdown-text">Status and news</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item">
     <a class="nav-link" href="./team.html"> 
 <span class="menu-text">Team</span></a>
@@ -162,16 +191,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="nav-link active" href="./publications.html" aria-current="page"> 
 <span class="menu-text">Publications</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./dissemination.html"> 
-<span class="menu-text">Dissemination</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-dissemination" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Dissemination</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-dissemination">    
+        <li>
+    <a class="dropdown-item" href="./dissemination.html">
+ <span class="dropdown-text">Seminars, conferences and stays</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./identity.html">
+ <span class="dropdown-text">Logo and project identity</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./links.html">
+ <span class="dropdown-text">Links of interest</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item">
-    <a class="nav-link" href="./links.html"> 
-<span class="menu-text">Links</span></a>
+    <a class="nav-link" href="./contact.html"> 
+<span class="menu-text">Contact</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./news.html"> 
+<span class="menu-text">● Under evaluation</span></a>
+  </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/jfmunozrosas/theilumina"> <i class="bi bi-github" role="img" aria-label="GitHub">
 </i> 
@@ -214,6 +262,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
     
   
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">November 16, 2026</p>
+    </div>
+  </div>
     
   </div>
   
@@ -224,7 +278,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="target-journals" class="level2">
 <h2 class="anchored" data-anchor-id="target-journals">Target journals</h2>
-<p>The main dissemination channel is publication in leading journals (JCR D1 or ABS 4/4*). Methodological results (WP1–WP3) target journals such as <em>Journal of Econometrics</em>, <em>Sociological Methods &amp; Research</em>, <em>Social Indicators Research</em>, <em>Journal of Economic Inequality</em> and <em>Computational Statistics &amp; Data Analysis</em>. The R package (WP4) targets the <em>Journal of Statistical Software</em>, and the applications (WP5) target journals in Water Resources, Tourism, Management and Business.</p>
+<p>The main dissemination channel is publication in leading journals (JCR Q1/Q2 or ABS 3/4/4*). Methodological results (WP1–WP3) target journals such as <em>Journal of Econometrics</em>, <em>Sociological Methods &amp; Research</em>, <em>Social Indicators Research</em>, <em>Journal of Economic Inequality</em> and <em>Computational Statistics &amp; Data Analysis</em>. The R package (WP4) targets the <em>Journal of Statistical Software</em>, and the applications (WP5) target journals in Water Resources, Tourism, Management and Business.</p>
 </section>
 <section id="project-publications" class="level2">
 <h2 class="anchored" data-anchor-id="project-publications">Project publications</h2>
@@ -242,7 +296,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="previous-publications-of-the-team-20232026" class="level2">
 <h2 class="anchored" data-anchor-id="previous-publications-of-the-team-20232026">Previous publications of the team (2023–2026)</h2>
-<p>The table lists the <strong>65 articles in JCR journals (SCIE/SSCI)</strong> published by team members since 2023 in the research areas of the project. Quality indicators: JCR quartile of the journal <strong>in the year of publication</strong> and, where applicable, ranking in the Chartered ABS <em>Academic Journal Guide</em> (AJG 2024).</p>
+<p>The table lists the <strong>65 articles in JCR journals (SCIE/SSCI)</strong> published by team members since 2023 in the research areas of the project. Within each year, articles are ordered by their relation to the project: articles on inequality and poverty (◆) first, then methodological articles on estimation and inference, articles in the transfer areas (water, tourism, firms) and, finally, other articles. Quality indicators: JCR quartile of the journal <strong>in the year of publication</strong> and, where applicable, ranking in the Chartered ABS <em>Academic Journal Guide</em> (AJG 2024).</p>
 <div class="stats">
 <p><span class="stat"><b>65</b> JCR articles</span> <span class="stat"><b>47</b> in Q1</span> <span class="stat"><b>57</b> in Q1–Q2</span> <span class="stat"><b>9</b> in ABS 4/4*</span></p>
 </div>
@@ -267,6 +321,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
+<td>◆ A Practical Guide to Proper Estimation and Inference of the Gini Index by Avoiding often Encountered Methodolo…</td>
+<td><em>Social Indicators Research</em></td>
+<td>Muñoz</td>
+<td style="text-align: center;">Q1</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr class="even">
+<td>◆ Does tourism reduce socio-economic inequality? Insights from the pandemic based on space and time models for t…</td>
+<td><em>Economia Politica</em></td>
+<td>Chica; Llorca; R.García</td>
+<td style="text-align: center;">Q2</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr class="odd">
+<td>◆ The “Happy and Poor” Paradox: Why Do Some Poor People Report Being Very Happy?</td>
+<td><em>Applied Research in Quality of Life</em></td>
+<td>Guardiola</td>
+<td style="text-align: center;">Q1</td>
+<td style="text-align: center;">–</td>
+</tr>
+<tr class="even">
+<td>◆ Does Economic Growth Drive Equitable Water and Sanitation Access? Assessing Inequality Reduction Across 64 Nat…</td>
+<td><em>Sustainable Development</em></td>
+<td>S.López</td>
+<td style="text-align: center;">Q1</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="odd">
 <td>Heterodox Thinking on Water Economics, Values, and Governance</td>
 <td><em>Annual Review of Environment and Resources</em></td>
 <td>Tortajada</td>
@@ -274,32 +356,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: center;">–</td>
 </tr>
 <tr class="even">
-<td>The “Happy and Poor” Paradox: Why Do Some Poor People Report Being Very Happy?</td>
-<td><em>Applied Research in Quality of Life</em></td>
-<td>Guardiola</td>
-<td style="text-align: center;">Q1</td>
-<td style="text-align: center;">–</td>
-</tr>
-<tr class="odd">
 <td>Unveiling the Hidden Link between Digital Servitization and Firm Performance: A Meta-analysis</td>
 <td><em>Asian Business &amp; Management</em></td>
 <td>Vendrell</td>
 <td style="text-align: center;">Q3</td>
 <td style="text-align: center;">2</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Beyond water reuse: the circular water economy as a governance framework</td>
 <td><em>Current Opinion in Environmental Sustainability</em></td>
 <td>Tortajada</td>
 <td style="text-align: center;">Q1</td>
 <td style="text-align: center;">–</td>
-</tr>
-<tr class="odd">
-<td>Does tourism reduce socio-economic inequality? Insights from the pandemic based on space and time models for t…</td>
-<td><em>Economia Politica</em></td>
-<td>Chica; Llorca; R.García</td>
-<td style="text-align: center;">Q2</td>
-<td style="text-align: center;">2</td>
 </tr>
 <tr class="even">
 <td>Human–environment Dynamics and Stages of Water Conflict in Shared-well Irrigation: Evidence from Rural Iran</td>
@@ -323,53 +391,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: center;">–</td>
 </tr>
 <tr class="odd">
-<td>Achieving Scalability in Incumbent Firms: Testing and Extending the Four-Stage Development Model</td>
-<td><em>Journal of Business Research</em></td>
-<td>Vendrell</td>
-<td style="text-align: center;">Q1</td>
-<td style="text-align: center;">3</td>
-</tr>
-<tr class="even">
 <td>Towards a circular water economy in Southeast Asian cities</td>
 <td><em>Journal of Cleaner Production</em></td>
 <td>Tortajada</td>
 <td style="text-align: center;">Q1</td>
 <td style="text-align: center;">2</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Transforming Industrial Competitiveness through Digital Service Innovation (DSI): Enabling Factors and Expecte…</td>
 <td><em>Journal of Enterprise Information Management</em></td>
 <td>Vendrell</td>
 <td style="text-align: center;">Q1</td>
 <td style="text-align: center;">2</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>The Dual Effects of Digitalization on SMEs: Export Gains and Learning Losses</td>
 <td><em>Journal of International Business Studies</em></td>
 <td>Gomes; Vendrell</td>
 <td style="text-align: center;">Q1</td>
 <td style="text-align: center;">4*</td>
-</tr>
-<tr class="odd">
-<td>Revisiting The Uppsala Model From A History-To-Theory Perspective: New Lessons On Network Positioning From A G…</td>
-<td><em>Journal of International Business Studies</em></td>
-<td>Gomes; Vendrell</td>
-<td style="text-align: center;">Q1</td>
-<td style="text-align: center;">4*</td>
-</tr>
-<tr class="even">
-<td>A Practical Guide to Proper Estimation and Inference of the Gini Index by Avoiding often Encountered Methodolo…</td>
-<td><em>Social Indicators Research</em></td>
-<td>Muñoz</td>
-<td style="text-align: center;">Q1</td>
-<td style="text-align: center;">2</td>
-</tr>
-<tr class="odd">
-<td>Does Economic Growth Drive Equitable Water and Sanitation Access? Assessing Inequality Reduction Across 64 Nat…</td>
-<td><em>Sustainable Development</em></td>
-<td>S.López</td>
-<td style="text-align: center;">Q1</td>
-<td style="text-align: center;">1</td>
 </tr>
 <tr class="even">
 <td>Narratives of Water Disconnection: Navigating Regulatory Tensions in the Netherlands</td>
@@ -377,6 +417,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>S.López</td>
 <td style="text-align: center;">Q2</td>
 <td style="text-align: center;">–</td>
+</tr>
+<tr class="odd">
+<td>Achieving Scalability in Incumbent Firms: Testing and Extending the Four-Stage Development Model</td>
+<td><em>Journal of Business Research</em></td>
+<td>Vendrell</td>
+<td style="text-align: center;">Q1</td>
+<td style="text-align: center;">3</td>
+</tr>
+<tr class="even">
+<td>Revisiting The Uppsala Model From A History-To-Theory Perspective: New Lessons On Network Positioning From A G…</td>
+<td><em>Journal of International Business Studies</em></td>
+<td>Gomes; Vendrell</td>
+<td style="text-align: center;">Q1</td>
+<td style="text-align: center;">4*</td>
 </tr>
 </tbody>
 </table>
@@ -402,66 +456,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td>HRM algorithms: Moderating the relationship between chaotic markets and strategic renewal</td>
-<td><em>British Journal of Management</em></td>
-<td>Vendrell</td>
-<td style="text-align: center;">Q1</td>
-<td style="text-align: center;">4</td>
-</tr>
-<tr class="even">
-<td>Water in computable general equilibrium models: Review, synthesis and avenues for future research</td>
-<td><em>Environmental Modelling &amp; Software</em></td>
-<td>Tortajada</td>
-<td style="text-align: center;">Q2</td>
-<td style="text-align: center;">–</td>
-</tr>
-<tr class="odd">
-<td>Sustainable water reuse for water security</td>
-<td><em>Environmental Research Letters</em></td>
-<td>Tortajada</td>
+<td>◆ Exploring and correcting the bias in the estimation of the Gini measure of inequality</td>
+<td><em>Sociological Methods &amp; Research</em></td>
+<td>Moya; Muñoz; Álvarez</td>
 <td style="text-align: center;">Q1</td>
 <td style="text-align: center;">–</td>
 </tr>
 <tr class="even">
-<td>Conceptions of happiness and prosocial behavior: Evidence from a dictator game</td>
-<td><em>Journal of Happiness Studies</em></td>
-<td>Guardiola</td>
-<td style="text-align: center;">Q1</td>
-<td style="text-align: center;">–</td>
-</tr>
-<tr class="odd">
-<td>AI platforms as cooperation enablers favoring the development of strategic situating capabilities within solut…</td>
-<td><em>Journal of Product Innovation Management</em></td>
-<td>Vendrell</td>
-<td style="text-align: center;">Q1</td>
-<td style="text-align: center;">4</td>
-</tr>
-<tr class="even">
-<td>The effect of disruptive change on the spatial variation of commercial rental prices: The case of the COVID-19…</td>
-<td><em>Journal of Retailing and Consumer Services</em></td>
-<td>Cano; Chica</td>
-<td style="text-align: center;">Q1</td>
-<td style="text-align: center;">2</td>
-</tr>
-<tr class="odd">
-<td>Scalability in Incumbent Firms: The Case of Nvidia</td>
-<td><em>Long Range Planning</em></td>
-<td>Vendrell</td>
-<td style="text-align: center;">Q1</td>
-<td style="text-align: center;">3</td>
-</tr>
-<tr class="even">
-<td>Rethinking responses to the world’s water crises</td>
-<td><em>Nature Sustainability</em></td>
-<td>Tortajada</td>
-<td style="text-align: center;">Q1</td>
-<td style="text-align: center;">–</td>
-</tr>
-<tr class="odd">
-<td>Dynamic spatio-temporal modelling of tourism impact on income inequality and polarization: inbound and domesti…</td>
+<td>◆ Dynamic spatio-temporal modelling of tourism impact on income inequality and polarization: inbound and domesti…</td>
 <td><em>Papers in Regional Science</em></td>
 <td>Casas; Chica; Llorca; R.García</td>
 <td style="text-align: center;">Q2</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr class="odd">
+<td>◆ Inequalities in Talents’ Earnings: A Tale of Two European Countries</td>
+<td><em>Social Indicators Research</em></td>
+<td>Addabbo</td>
+<td style="text-align: center;">Q1</td>
 <td style="text-align: center;">2</td>
 </tr>
 <tr class="even">
@@ -472,39 +484,81 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: center;">–</td>
 </tr>
 <tr class="odd">
+<td>Water in computable general equilibrium models: Review, synthesis and avenues for future research</td>
+<td><em>Environmental Modelling &amp; Software</em></td>
+<td>Tortajada</td>
+<td style="text-align: center;">Q2</td>
+<td style="text-align: center;">–</td>
+</tr>
+<tr class="even">
+<td>Sustainable water reuse for water security</td>
+<td><em>Environmental Research Letters</em></td>
+<td>Tortajada</td>
+<td style="text-align: center;">Q1</td>
+<td style="text-align: center;">–</td>
+</tr>
+<tr class="odd">
+<td>Conceptions of happiness and prosocial behavior: Evidence from a dictator game</td>
+<td><em>Journal of Happiness Studies</em></td>
+<td>Guardiola</td>
+<td style="text-align: center;">Q1</td>
+<td style="text-align: center;">–</td>
+</tr>
+<tr class="even">
+<td>AI platforms as cooperation enablers favoring the development of strategic situating capabilities within solut…</td>
+<td><em>Journal of Product Innovation Management</em></td>
+<td>Vendrell</td>
+<td style="text-align: center;">Q1</td>
+<td style="text-align: center;">4</td>
+</tr>
+<tr class="odd">
+<td>Rethinking responses to the world’s water crises</td>
+<td><em>Nature Sustainability</em></td>
+<td>Tortajada</td>
+<td style="text-align: center;">Q1</td>
+<td style="text-align: center;">–</td>
+</tr>
+<tr class="even">
+<td>Blockchain and other determinants of the financial attractiveness of tourism enterprises at the regional level…</td>
+<td><em>Transformations in Business &amp; Economics</em></td>
+<td>Casas; Salinas</td>
+<td style="text-align: center;">Q3</td>
+<td style="text-align: center;">–</td>
+</tr>
+<tr class="odd">
+<td>The effect of disruptive change on the spatial variation of commercial rental prices: The case of the COVID-19…</td>
+<td><em>Journal of Retailing and Consumer Services</em></td>
+<td>Cano; Chica</td>
+<td style="text-align: center;">Q1</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr class="even">
+<td>HRM algorithms: Moderating the relationship between chaotic markets and strategic renewal</td>
+<td><em>British Journal of Management</em></td>
+<td>Vendrell</td>
+<td style="text-align: center;">Q1</td>
+<td style="text-align: center;">4</td>
+</tr>
+<tr class="odd">
+<td>Scalability in Incumbent Firms: The Case of Nvidia</td>
+<td><em>Long Range Planning</em></td>
+<td>Vendrell</td>
+<td style="text-align: center;">Q1</td>
+<td style="text-align: center;">3</td>
+</tr>
+<tr class="even">
 <td>Blazing the trail: Describing and assessing a new policy instrument whereby indirect tax incentives fuel colla…</td>
 <td><em>Research Policy</em></td>
 <td>Vendrell</td>
 <td style="text-align: center;">Q1</td>
 <td style="text-align: center;">4*</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>When Do Firms Learn? Learning Before Versus After Exporting</td>
 <td><em>Small Business Economics</em></td>
 <td>Gomes; Vendrell</td>
 <td style="text-align: center;">Q2</td>
 <td style="text-align: center;">3</td>
-</tr>
-<tr class="odd">
-<td>Inequalities in Talents’ Earnings: A Tale of Two European Countries</td>
-<td><em>Social Indicators Research</em></td>
-<td>Addabbo</td>
-<td style="text-align: center;">Q1</td>
-<td style="text-align: center;">2</td>
-</tr>
-<tr class="even">
-<td>Exploring and correcting the bias in the estimation of the Gini measure of inequality</td>
-<td><em>Sociological Methods &amp; Research</em></td>
-<td>Moya; Muñoz; Álvarez</td>
-<td style="text-align: center;">Q1</td>
-<td style="text-align: center;">–</td>
-</tr>
-<tr class="odd">
-<td>Blockchain and other determinants of the financial attractiveness of tourism enterprises at the regional level…</td>
-<td><em>Transformations in Business &amp; Economics</em></td>
-<td>Casas; Salinas</td>
-<td style="text-align: center;">Q3</td>
-<td style="text-align: center;">–</td>
 </tr>
 </tbody>
 </table>
@@ -530,11 +584,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td>Not All Friends Are Alike: A Categorization of Friendly Acquisitions Integrating the Acquired Firm Profile wit…</td>
-<td><em>British Journal of Management</em></td>
-<td>Gomes</td>
+<td>Smoothing level selection for density estimators based on the moments</td>
+<td><em>Journal of Applied Statistics</em></td>
+<td>R.García</td>
+<td style="text-align: center;">Q3</td>
+<td style="text-align: center;">–</td>
+</tr>
+<tr class="even">
+<td>The role of knowledge in the decision of Granada University students to drink bottled water</td>
+<td><em>International Journal of Water Resources Development</em></td>
+<td>Guardiola; Ibáñez; Moya</td>
+<td style="text-align: center;">Q2</td>
+<td style="text-align: center;">–</td>
+</tr>
+<tr class="odd">
+<td>Good or excellent? Factors determining online hotel ratings. A spatial approach</td>
+<td><em>Journal of Hospitality Marketing &amp; Management</em></td>
+<td>Chica</td>
 <td style="text-align: center;">Q1</td>
-<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
 </tr>
 <tr class="even">
 <td>Testing Service Infusion in Manufacturing through Machine Learning Techniques: Looking Back and Forward</td>
@@ -558,31 +626,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: center;">3</td>
 </tr>
 <tr class="odd">
-<td>The role of knowledge in the decision of Granada University students to drink bottled water</td>
-<td><em>International Journal of Water Resources Development</em></td>
-<td>Guardiola; Ibáñez; Moya</td>
-<td style="text-align: center;">Q2</td>
-<td style="text-align: center;">–</td>
-</tr>
-<tr class="even">
 <td>Water resource management in agriculture for achieving food and water security in Asia</td>
 <td><em>International Journal of Water Resources Development</em></td>
 <td>Tortajada</td>
 <td style="text-align: center;">Q2</td>
 <td style="text-align: center;">–</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Groundwater: an unseen, overused and unappreciated resource</td>
 <td><em>International Journal of Water Resources Development</em></td>
 <td>Tortajada</td>
 <td style="text-align: center;">Q2</td>
-<td style="text-align: center;">–</td>
-</tr>
-<tr class="even">
-<td>Smoothing level selection for density estimators based on the moments</td>
-<td><em>Journal of Applied Statistics</em></td>
-<td>R.García</td>
-<td style="text-align: center;">Q3</td>
 <td style="text-align: center;">–</td>
 </tr>
 <tr class="odd">
@@ -593,11 +647,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: center;">2</td>
 </tr>
 <tr class="even">
-<td>Good or excellent? Factors determining online hotel ratings. A spatial approach</td>
-<td><em>Journal of Hospitality Marketing &amp; Management</em></td>
-<td>Chica</td>
+<td>Digital Service Innovation: Ontology, context and theory</td>
+<td><em>Journal of Service Management</em></td>
+<td>Vendrell</td>
+<td style="text-align: center;">Q1</td>
+<td style="text-align: center;">3</td>
+</tr>
+<tr class="odd">
+<td>Reused water as a source of clean water and energy</td>
+<td><em>Nature Water</em></td>
+<td>Tortajada</td>
+<td style="text-align: center;">Q1</td>
+<td style="text-align: center;">–</td>
+</tr>
+<tr class="even">
+<td>Integration of Product-Service Innovation into Green Supply Chain Management: Emerging opportunities and parad…</td>
+<td><em>Technovation</em></td>
+<td>Vendrell</td>
+<td style="text-align: center;">Q1</td>
+<td style="text-align: center;">3</td>
+</tr>
+<tr class="odd">
+<td>Impact of heuristic–systematic cues on the purchase intention of the electronic commerce consumer through the…</td>
+<td><em>Journal of Retailing and Consumer Services</em></td>
+<td>Muñoz</td>
 <td style="text-align: center;">Q1</td>
 <td style="text-align: center;">2</td>
+</tr>
+<tr class="even">
+<td>Not All Friends Are Alike: A Categorization of Friendly Acquisitions Integrating the Acquired Firm Profile wit…</td>
+<td><em>British Journal of Management</em></td>
+<td>Gomes</td>
+<td style="text-align: center;">Q1</td>
+<td style="text-align: center;">4</td>
 </tr>
 <tr class="odd">
 <td>Setting contextual conditions to resolve Grand Challenges through Responsible Innovation: A comparative patent…</td>
@@ -605,34 +687,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>Vendrell</td>
 <td style="text-align: center;">Q1</td>
 <td style="text-align: center;">4</td>
-</tr>
-<tr class="even">
-<td>Impact of heuristic–systematic cues on the purchase intention of the electronic commerce consumer through the…</td>
-<td><em>Journal of Retailing and Consumer Services</em></td>
-<td>Muñoz</td>
-<td style="text-align: center;">Q1</td>
-<td style="text-align: center;">2</td>
-</tr>
-<tr class="odd">
-<td>Digital Service Innovation: Ontology, context and theory</td>
-<td><em>Journal of Service Management</em></td>
-<td>Vendrell</td>
-<td style="text-align: center;">Q1</td>
-<td style="text-align: center;">3</td>
-</tr>
-<tr class="even">
-<td>Reused water as a source of clean water and energy</td>
-<td><em>Nature Water</em></td>
-<td>Tortajada</td>
-<td style="text-align: center;">Q1</td>
-<td style="text-align: center;">–</td>
-</tr>
-<tr class="odd">
-<td>Integration of Product-Service Innovation into Green Supply Chain Management: Emerging opportunities and parad…</td>
-<td><em>Technovation</em></td>
-<td>Vendrell</td>
-<td style="text-align: center;">Q1</td>
-<td style="text-align: center;">3</td>
 </tr>
 </tbody>
 </table>
@@ -665,32 +719,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: center;">–</td>
 </tr>
 <tr class="even">
-<td>Solutions for the commercialization challenges of Horizon Europe and earth observation consortia: co-creation…</td>
-<td><em>Electronic Commerce Research</em></td>
-<td>Gomes</td>
-<td style="text-align: center;">Q2</td>
-<td style="text-align: center;">1</td>
-</tr>
-<tr class="odd">
 <td>Entry-mode diversity and closing deals with international customers: The moderating role of advanced servitiza…</td>
 <td><em>International Business Review</em></td>
 <td>Vendrell</td>
 <td style="text-align: center;">Q1</td>
 <td style="text-align: center;">3</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Tourist accommodation, consumption and platforms</td>
 <td><em>International Journal of Consumer Studies</em></td>
 <td>Salinas</td>
 <td style="text-align: center;">Q1</td>
 <td style="text-align: center;">2</td>
-</tr>
-<tr class="odd">
-<td>Problematizing strategic alliance research: Challenges, issues and paradoxes in the new era</td>
-<td><em>International Journal of Management Reviews</em></td>
-<td>Gomes</td>
-<td style="text-align: center;">Q1</td>
-<td style="text-align: center;">4</td>
 </tr>
 <tr class="even">
 <td>Is digital transformation equally attractive to all manufacturers? Contextualizing the operational and custome…</td>
@@ -700,39 +740,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: center;">3</td>
 </tr>
 <tr class="odd">
-<td>Treble Innovation Firms: Antecedents, Outcomes, and Enhancing Factors</td>
-<td><em>International Journal of Production Economics</em></td>
-<td>Gomes; Vendrell</td>
-<td style="text-align: center;">Q1</td>
-<td style="text-align: center;">3</td>
-</tr>
-<tr class="even">
 <td>Reimagining water management</td>
 <td><em>International Journal of Water Resources Development</em></td>
 <td>Tortajada</td>
 <td style="text-align: center;">Q3</td>
 <td style="text-align: center;">–</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>United Nations water conferences: reflections and expectations</td>
 <td><em>International Journal of Water Resources Development</em></td>
 <td>Tortajada</td>
 <td style="text-align: center;">Q3</td>
 <td style="text-align: center;">–</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Exploring the Influence of Hybrid Product-Service Offerings on Firm Internationalization Strategies: An Intern…</td>
 <td><em>International Marketing Review</em></td>
 <td>Vendrell</td>
 <td style="text-align: center;">Q1</td>
 <td style="text-align: center;">3</td>
-</tr>
-<tr class="odd">
-<td>Open and Social: Portraying the resilient, social and competitive, upcoming enterprise</td>
-<td><em>Journal of Enterprise Information Management</em></td>
-<td>Vendrell</td>
-<td style="text-align: center;">Q1</td>
-<td style="text-align: center;">2</td>
 </tr>
 <tr class="even">
 <td>Conceptualizations of happiness and vegetarianism: empirical evidence from University Students in Spain</td>
@@ -742,25 +768,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: center;">–</td>
 </tr>
 <tr class="odd">
-<td>Challenging the knowledge resources complementarity hypothesis: A counterexample</td>
-<td><em>Knowledge Management: Research &amp; Practice</em></td>
-<td>Vendrell</td>
-<td style="text-align: center;">Q1</td>
-<td style="text-align: center;">1</td>
-</tr>
-<tr class="even">
 <td>How does sustainable water consumption in the shower relate to different dimensions of perceived well-being? E…</td>
 <td><em>Local Environment</em></td>
 <td>Guardiola; Ibáñez</td>
 <td style="text-align: center;">Q3</td>
 <td style="text-align: center;">–</td>
-</tr>
-<tr class="odd">
-<td>Learning ‘From’ vs.&nbsp;Learning ‘About’ Partners in Pre-Acquisition Strategic Alliances: The role of familiarity…</td>
-<td><em>Long Range Planning</em></td>
-<td>Gomes; Vendrell</td>
-<td style="text-align: center;">Q1</td>
-<td style="text-align: center;">3</td>
 </tr>
 <tr class="even">
 <td>Preparedness for drought is more than a climate-change fix.</td>
@@ -790,6 +802,48 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: center;">Q1</td>
 <td style="text-align: center;">–</td>
 </tr>
+<tr class="even">
+<td>Solutions for the commercialization challenges of Horizon Europe and earth observation consortia: co-creation…</td>
+<td><em>Electronic Commerce Research</em></td>
+<td>Gomes</td>
+<td style="text-align: center;">Q2</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="odd">
+<td>Problematizing strategic alliance research: Challenges, issues and paradoxes in the new era</td>
+<td><em>International Journal of Management Reviews</em></td>
+<td>Gomes</td>
+<td style="text-align: center;">Q1</td>
+<td style="text-align: center;">4</td>
+</tr>
+<tr class="even">
+<td>Treble Innovation Firms: Antecedents, Outcomes, and Enhancing Factors</td>
+<td><em>International Journal of Production Economics</em></td>
+<td>Gomes; Vendrell</td>
+<td style="text-align: center;">Q1</td>
+<td style="text-align: center;">3</td>
+</tr>
+<tr class="odd">
+<td>Open and Social: Portraying the resilient, social and competitive, upcoming enterprise</td>
+<td><em>Journal of Enterprise Information Management</em></td>
+<td>Vendrell</td>
+<td style="text-align: center;">Q1</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr class="even">
+<td>Challenging the knowledge resources complementarity hypothesis: A counterexample</td>
+<td><em>Knowledge Management: Research &amp; Practice</em></td>
+<td>Vendrell</td>
+<td style="text-align: center;">Q1</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="odd">
+<td>Learning ‘From’ vs.&nbsp;Learning ‘About’ Partners in Pre-Acquisition Strategic Alliances: The role of familiarity…</td>
+<td><em>Long Range Planning</em></td>
+<td>Gomes; Vendrell</td>
+<td style="text-align: center;">Q1</td>
+<td style="text-align: center;">3</td>
+</tr>
 </tbody>
 </table>
 
@@ -801,287 +855,293 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-  const viewSource = window.document.getElementById('quarto-view-source') ||
-                     window.document.getElementById('quarto-code-tools-source');
-  if (viewSource) {
-    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
-    viewSource.addEventListener("click", function(e) {
-      if (sourceUrl) {
-        // rstudio viewer pane
-        if (/\bcapabilities=\b/.test(window.location)) {
-          window.open(sourceUrl);
-        } else {
-          window.location.href = sourceUrl;
-        }
-      } else {
-        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
-        modal.show();
-      }
-      return false;
-    });
-  }
-  function toggleCodeHandler(show) {
-    return function(e) {
-      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-      for (let i=0; i<detailsSrc.length; i++) {
-        const details = detailsSrc[i].parentElement;
-        if (show) {
-          details.open = true;
-        } else {
-          details.removeAttribute("open");
-        }
-      }
-      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
-      const fromCls = show ? "hidden" : "unhidden";
-      const toCls = show ? "unhidden" : "hidden";
-      for (let i=0; i<cellCodeDivs.length; i++) {
-        const codeDiv = cellCodeDivs[i];
-        if (codeDiv.classList.contains(fromCls)) {
-          codeDiv.classList.remove(fromCls);
-          codeDiv.classList.add(toCls);
-        } 
-      }
-      return false;
-    }
-  }
-  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
-  if (hideAllCode) {
-    hideAllCode.addEventListener("click", toggleCodeHandler(false));
-  }
-  const showAllCode = window.document.getElementById("quarto-show-all-code");
-  if (showAllCode) {
-    showAllCode.addEventListener("click", toggleCodeHandler(true));
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/jfmunozrosas\.github\.io\/theilumina");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
         }
       }
+      return false;
     }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
         }
-        return container.innerHTML
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/jfmunozrosas\.github\.io\/theilumina");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -1089,192 +1149,168 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Publications"</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">## Target journals</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>The main dissemination channel is publication in leading journals (JCR D1 or ABS 4/4<span class="sc">\*</span>). Methodological results (WP1–WP3) target journals such as *Journal of Econometrics*, *Sociological Methods &amp; Research*, *Social Indicators Research*, *Journal of Economic Inequality* and *Computational Statistics &amp; Data Analysis*. The R package (WP4) targets the *Journal of Statistical Software*, and the applications (WP5) target journals in Water Resources, Tourism, Management and Business.</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>The main dissemination channel is publication in leading journals (JCR Q1/Q2 or ABS 3/4/4<span class="sc">\*</span>). Methodological results (WP1–WP3) target journals such as *Journal of Econometrics*, *Sociological Methods &amp; Research*, *Social Indicators Research*, *Journal of Economic Inequality* and *Computational Statistics &amp; Data Analysis*. The R package (WP4) targets the *Journal of Statistical Software*, and the applications (WP5) target journals in Water Resources, Tourism, Management and Business.</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## Project publications</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
@@ -1284,7 +1320,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">## Software</span></span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**theil**: Theil indices, bias corrections, variances and confidence intervals. R package with a C++ core. &lt;span class="pending"&gt;Forthcoming on CRAN.&lt;/span&gt;</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**theil**: Theil indices, bias corrections, variances and confidence intervals. R package with a C++ core. <span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"pending"</span><span class="dt">&gt;</span>Forthcoming on CRAN.<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**giniVarCI**: Gini indices, variances and confidence intervals for finite and infinite populations. <span class="ot">&lt;https://CRAN.R-project.org/package=giniVarCI&gt;</span></span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**samplingVarEst**: Sampling variance estimation. <span class="ot">&lt;https://CRAN.R-project.org/package=samplingVarEst&gt;</span></span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
@@ -1296,7 +1332,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>THEILUMINA · Universidad de Granada</p>
+<p>THEILUMINA · Research project proposal · Universidad de Granada · Last update: 16 November 2026</p>
 </div>   
     <div class="nav-footer-center">
       &nbsp;

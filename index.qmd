@@ -1,6 +1,6 @@
 ---
 title: "THEILUMINA"
-subtitle: "Illuminating inequality with Theil indices"
+subtitle: "Illuminating inequality with Theil indices · Research project proposal"
 toc: false
 ---
 
@@ -8,13 +8,19 @@ toc: false
 ![](images/logo_theilumina.png){width=60% fig-alt="THEILUMINA logo"}
 
 <p class="tagline">Bias, precision, computational efficiency and decomposition of Theil indices, with multidisciplinary applications in the Social Sciences.</p>
+
+<p class="hero-badge"><span class="badge-status">Research project proposal · Under evaluation</span></p>
 :::
+
+## Project status
+
+{{< include _status.md >}}
 
 ## About THEILUMINA
 
-**THEILUMINA** is a research project led by the University of Granada (Spain) that develops new methods to estimate Theil inequality indices ($T_0$ and $T_1$) and to make reliable inferences about them. It builds on the previous project GiniUs (PID2022-136235NB-I00) on the Gini index, which produced the R package [giniVarCI](https://cran.r-project.org/package=giniVarCI).
+**THEILUMINA** is a **research project proposal** led by the University of Granada (Spain) that develops new methods to estimate Theil inequality indices ($T_0$ and $T_1$) and to make reliable inferences about them. It builds on the previous project GiniUs (PID2022-136235NB-I00) on the Gini index, which produced the R package [giniVarCI](https://cran.r-project.org/package=giniVarCI).
 
-Theil indices are widely used because, unlike the Gini index, they can be additively decomposed into inequality **between** groups and inequality **within** groups. However, their estimators can be severely biased, and their confidence intervals unreliable, when data are highly skewed and unequal, which is precisely where measuring inequality matters most.
+Theil indices are widely used because, unlike the Gini index, they can be additively decomposed into inequality **between** groups and inequality **within** groups. However, their estimators can be severely biased, and their confidence intervals unreliable, when data are highly skewed and unequal, which is precisely where measuring inequality matters most. The [research problems and questions](research.qmd) page illustrates these problems with preliminary results.
 
 The project:
 
@@ -24,6 +30,14 @@ The project:
 - develops the open-source R package **theil**, with a C++ core;
 - transfers these methods to water economics, tourism, servitization and digital transformation of firms, and global convergence.
 
+## Latest news
+
+::: {.news-mini}
+- **November 2026** · The THEILUMINA website is created for the research project proposal.
+:::
+
+[All news →](news.qmd){.btn .btn-outline-primary .btn-sm}
+
 ## What this website offers
 
 This website is a working tool for the research team and an open resource for other researchers:
@@ -31,11 +45,6 @@ This website is a working tool for the research team and an open resource for ot
 1. **Communication and collaboration.** Data, R code, results and conclusions are shared among team members.
 2. **Reproducible research.** Anyone can run the code and obtain the same tables and figures.
 3. **Interactivity.** The [bias explorer](simulation.qmd) lets users see how bias changes with skewness, inequality and sample size.
-4. **Inequality observatory.** The [observatory](observatory.qmd) shows official inequality indicators (Gini, S80/S20 and Theil indices), updated live from Eurostat and the World Bank.
-5. **Dissemination and internationalisation.** Results, data and software are openly available.
-
-## Project status
-
-::: {.status}
-The project proposal is currently **under evaluation**.
-:::
+4. **Inequality observatory.** The [observatory](observatory.qmd) shows official inequality indicators (Gini, S80/S20 and Theil indices) from Eurostat, the World Bank and the Spanish Statistical Office (INE), with links to other inequality observatories.
+5. **Dissemination and internationalisation.** Results, data and software are openly available, and the [project identity](identity.qmd) can be freely used by co-authors and collaborators.
+6. **Collaboration.** External researchers interested in the project can [contact us](contact.qmd).
