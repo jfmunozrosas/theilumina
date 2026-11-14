@@ -7,11 +7,11 @@ toc: false
 We welcome contact from external researchers and organisations, in particular in the **transfer areas** of the project:
 
 ::: {.transfer-grid}
-<div class="transfer-item"><b>Water</b><br>Inequality in household water consumption and expenditure</div>
-<div class="transfer-item"><b>Tourism</b><br>Effect of tourism on income inequality</div>
-<div class="transfer-item"><b>Firms</b><br>Servitization, digital transformation and AI adoption</div>
-<div class="transfer-item"><b>Regional inequality and global convergence</b><br>Bias-corrected inequality across regions and countries</div>
-<div class="transfer-item"><b>Methods and software</b><br>Bias correction, jackknife inference and the R package <i>theil</i></div>
+<div class="transfer-item"><b>Water</b><br>Water economics, governance and policy; access to water and sanitation; water consumption, reuse and the circular water economy</div>
+<div class="transfer-item"><b>Tourism</b><br>Tourism economics, competitiveness and sustainability; seasonality; tourism and regional development; spatial and spatio-temporal analysis</div>
+<div class="transfer-item"><b>Firms</b><br>Servitization, digital transformation and AI adoption; innovation; international business, alliances and acquisitions</div>
+<div class="transfer-item"><b>Poverty and inequality measurement</b><br>Inequality and poverty indicators; well-being and quality of life; decomposition of inequality by groups, regions and countries</div>
+<div class="transfer-item"><b>Methods and software</b><br>Bias correction, jackknife inference, computational efficiency and the R package <i>theil</i></div>
 :::
 
 ## Send us a message
@@ -33,7 +33,7 @@ The form opens your email application with the message ready to send. No data ar
         <option>Water</option>
         <option>Tourism</option>
         <option>Firms: servitization, digital transformation and AI</option>
-        <option>Regional inequality and global convergence</option>
+        <option>Poverty and inequality measurement</option>
         <option>Data sharing</option>
         <option>Seminars, visits and research stays</option>
         <option>Other</option>
@@ -61,6 +61,37 @@ function theiluminaContact(e) {
   window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   return false;
 }
+</script>
+```
+
+## Where to find us
+
+```{=html}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+<div class="row g-3 align-items-start">
+  <div class="col-md-7"><div id="contact-map" class="map-box map-box-small" role="region" aria-label="Map of the Faculty of Economics and Business, University of Granada"></div></div>
+  <div class="col-md-5">
+    <p><b>Facultad de Ciencias Económicas y Empresariales</b><br>Universidad de Granada<br>Campus Universitario de Cartuja, s/n<br>18071 Granada, Spain</p>
+    <p>Department of Quantitative Methods for Economics and Business</p>
+    <p><a href="mailto:jfmunoz@ugr.es">jfmunoz@ugr.es</a></p>
+    <p><a href="https://www.openstreetmap.org/?mlat=37.1938&amp;mlon=-3.5985#map=17/37.1938/-3.5985" target="_blank" rel="noopener">Open in OpenStreetMap ↗</a></p>
+  </div>
+</div>
+<script>
+(function () {
+  function draw() {
+    if (typeof L === "undefined") { setTimeout(draw, 200); return; }
+    const p = [37.1938, -3.5985];
+    const map = L.map("contact-map", {scrollWheelZoom: false}).setView(p, 16);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+    L.circleMarker(p, {radius: 11, color: "#fff", weight: 2, fillColor: "#E07B20", fillOpacity: 0.95}).addTo(map)
+      .bindPopup("<b>Facultad de Ciencias Económicas y Empresariales</b><br>Universidad de Granada<br>Campus de Cartuja, 18071 Granada").openPopup();
+  }
+  draw();
+})();
 </script>
 ```
 

@@ -159,3 +159,10 @@ table { font-size: .88rem; }
 .transfer-item { background: $theil-cream; border-left: 4px solid $theil-orange; border-radius: 6px; padding: .6rem .8rem; font-size: .92rem; }
 .contact-form { background: $theil-cream; border-radius: 8px; padding: 1.2rem; margin-bottom: 1.5rem; }
 .pill-role { background: rgba($theil-frame, .12); color: darken($theil-frame, 15%); }
+.hyp { background: rgba($theil-orange, .07); border-left: 4px solid $theil-orange; border-radius: 6px;
+       padding: .55rem .8rem; font-size: .93rem; margin: .4rem 0 .8rem; }
+.map-box { height: 430px; border-radius: 8px; border: 1px solid rgba($theil-frame, .35); margin: .8rem 0 1.5rem; z-index: 0; }
+.map-box-small { height: 320px; }
+.sym { display: inline-block; min-width: 1.1em; text-align: center; margin-right: .1rem; font-size: .95em; }
+.sym-ineq { color: $theil-orange; font-weight: 700; }
+.sym-tour { color: $theil-blue; }
