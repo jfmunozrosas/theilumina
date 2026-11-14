@@ -79,3 +79,4 @@ format:
     smooth-scroll: true
     html-math-method: katex
     lang: en
+    include-after-body: _goatcounter.html

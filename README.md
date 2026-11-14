@@ -56,3 +56,5 @@ Para contenidos que necesiten servidor (Shiny), aloja la app en shinyapps.io y e
 **Correo de contacto:** constante `CONTACT_EMAIL` en `contact.qmd`.
 
 **Datos del INE:** la página del observatorio contiene un bloque de R que descarga la tabla 67246 del INE al renderizar (solo usa R base) y guarda una copia en `data/ine_67246.csv`, que se usa si el INE no responde. Necesita R con los paquetes `rmarkdown` y `knitr`.
+
+**Contador de visitas:** usa GoatCounter (gratuito, sin cookies). Crea una cuenta en https://www.goatcounter.com con el código `theilumina` y activa en Settings la opción "Allow adding visitor counts on your website". El número aparece en el pie de todas las páginas. Si el código no está disponible, cámbialo en `_goatcounter.html`.

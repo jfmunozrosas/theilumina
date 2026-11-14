@@ -75,7 +75,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-92f05fe4699585ba3767874f9ff9928c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-fc4708d37b6638c664457f50cc202a6b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -375,6 +375,33 @@ function theiluminaContact(e) {
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<!--
+  Visit counter (GoatCounter, free and cookie-free).
+  1. Create an account at https://www.goatcounter.com with the code below (theilumina).
+  2. In Settings, enable "Allow adding visitor counts on your website".
+  If the code "theilumina" is not available, change GC_CODE here (two places: this line and data-goatcounter).
+-->
+<script data-goatcounter="https://theilumina.goatcounter.com/count" async="" src="//gc.zgo.at/count.js"></script>
+<script>
+(function () {
+  const GC_CODE = "theilumina";
+  function show(n) {
+    const box = document.querySelector(".nav-footer-left") || document.querySelector("footer");
+    if (!box || document.getElementById("visit-counter")) return;
+    const s = document.createElement("span");
+    s.id = "visit-counter";
+    s.className = "visit-counter";
+    s.innerHTML = ` · <span class="vc-num">${n}</span> visits`;
+    box.appendChild(s);
+  }
+  // Skip local previews (quarto preview)
+  if (location.hostname === "localhost" || location.hostname === "127.0.0.1") return;
+  fetch(`https://${GC_CODE}.goatcounter.com/counter/TOTAL.json`)
+    .then(r => r.ok ? r.json() : null)
+    .then(d => { if (d && d.count) show(String(d.count).replace(/\s/g, ".")); })
+    .catch(() => {});
+})();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
