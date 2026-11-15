@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Guía práctica: índices de Theil en R – THEILUMINA</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../images/logo_theilumina.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-fa1e17b68db0e6c2c765344693dbaad9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Sin resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="Guía práctica: índices de Theil en R – THEILUMINA">
+<meta property="og:description" content="Estimación, descomposición, sesgo y precisión · Guías prácticas de THEILUMINA">
+<meta property="og:image" content="https://jfmunozrosas.github.io/theilumina/images/brand/theilumina_logo_es.png">
+<meta property="og:site_name" content="THEILUMINA">
+<meta property="og:image:alt" content="Logo de THEILUMINA">
+<meta property="og:image:height" content="680">
+<meta property="og:image:width" content="2240">
+<meta name="twitter:title" content="Guía práctica: índices de Theil en R – THEILUMINA">
+<meta name="twitter:description" content="Estimación, descomposición, sesgo y precisión · Guías prácticas de THEILUMINA">
+<meta name="twitter:image" content="https://jfmunozrosas.github.io/theilumina/images/brand/theilumina_logo_es.png">
+<meta name="twitter:image:alt" content="Logo de THEILUMINA">
+<meta name="twitter:image-height" content="680">
+<meta name="twitter:image-width" content="2240">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../images/logo_theilumina.png" alt="THEILUMINA logo" class="navbar-logo">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Buscar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Navegación de palanca" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-project" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Project</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-project">    
+        <li>
+    <a class="dropdown-item" href="../research.html">
+ <span class="dropdown-text">Research problems and questions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../project.html">
+ <span class="dropdown-text">Objectives, work packages and activities</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../news.html">
+ <span class="dropdown-text">Status and news</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../team.html"> 
+<span class="menu-text">Team</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-theil-indices" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Theil indices</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-theil-indices">    
+        <li>
+    <a class="dropdown-item" href="../theil-indices.html">
+ <span class="dropdown-text">Definition and estimation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../simulation.html">
+ <span class="dropdown-text">Interactive bias explorer</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../data-code.html">
+ <span class="dropdown-text">Research data and R code</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../observatory.html"> 
+<span class="menu-text">Observatory</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../publications.html"> 
+<span class="menu-text">Publications</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-dissemination" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Dissemination</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-dissemination">    
+        <li>
+    <a class="dropdown-item" href="../guides.html">
+ <span class="dropdown-text">Practical guides</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../dissemination.html">
+ <span class="dropdown-text">Seminars, conferences and stays</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../identity.html">
+ <span class="dropdown-text">Logo and project identity</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../links.html">
+ <span class="dropdown-text">Links of interest</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../contact.html"> 
+<span class="menu-text">Contact</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../news.html"> 
+<span class="menu-text">● Under evaluation</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/jfmunozrosas/theilumina"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">En esta página</h2>
+   
+  <ul class="collapse">
+  <li><a href="#introducción" id="toc-introducción" class="nav-link active" data-scroll-target="#introducción">Introducción</a></li>
+  <li><a href="#fórmulas" id="toc-fórmulas" class="nav-link" data-scroll-target="#fórmulas">Fórmulas</a></li>
+  <li><a href="#estimación-en-r" id="toc-estimación-en-r" class="nav-link" data-scroll-target="#estimación-en-r">Estimación en R</a></li>
+  <li><a href="#descomposición-entre-y-dentro-de-grupos" id="toc-descomposición-entre-y-dentro-de-grupos" class="nav-link" data-scroll-target="#descomposición-entre-y-dentro-de-grupos">Descomposición entre y dentro de grupos</a></li>
+  <li><a href="#ejemplo-completo-renta-por-regiones" id="toc-ejemplo-completo-renta-por-regiones" class="nav-link" data-scroll-target="#ejemplo-completo-renta-por-regiones">Ejemplo completo: renta por regiones</a></li>
+  <li><a href="#ejemplo-descomposición-por-sexo" id="toc-ejemplo-descomposición-por-sexo" class="nav-link" data-scroll-target="#ejemplo-descomposición-por-sexo">Ejemplo: descomposición por sexo</a></li>
+  <li><a href="#sesgo-y-precisión" id="toc-sesgo-y-precisión" class="nav-link" data-scroll-target="#sesgo-y-precisión">Sesgo y precisión</a></li>
+  <li><a href="#errores-frecuentes-y-buenas-prácticas" id="toc-errores-frecuentes-y-buenas-prácticas" class="nav-link" data-scroll-target="#errores-frecuentes-y-buenas-prácticas">Errores frecuentes y buenas prácticas</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Guía práctica: índices de Theil en R</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Código</button></div></div>
+<p class="subtitle lead">Estimación, descomposición, sesgo y precisión · Guías prácticas de THEILUMINA</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Fecha de publicación</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">15 de noviembre de 2026</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">Fecha de modificación</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">16 de noviembre de 2026</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="guide-logo">
+<p><img src="../images/brand/theilumina_logo_es.png" class="img-fluid" alt="Logo de THEILUMINA"></p>
+</div>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><a href="../guides/theil-indices-r.html">English version</a> · <a href="../guides.html">Todas las guías prácticas</a></p>
+</div>
+</div>
+</div>
+<section id="introducción" class="level2">
+<h2 class="anchored" data-anchor-id="introducción">Introducción</h2>
+<p>Esta guía muestra cómo estimar los índices de Theil en R, cómo descomponerlos entre grupos y dentro de ellos, y cómo medir su sesgo y su precisión. Todo el código usa R base o paquetes disponibles hoy en CRAN.</p>
+<p>Los dos índices de Theil pertenecen a la familia de entropía generalizada GE(<span class="math inline">\alpha</span>):</p>
+<ul>
+<li><strong><span class="math inline">T_1</span> (índice de Theil T, GE(1))</strong>: es más sensible a lo que ocurre en la parte alta de la distribución.</li>
+<li><strong><span class="math inline">T_0</span> (desviación logarítmica media o MLD, GE(0))</strong>: es más sensible a la parte baja.</li>
+</ul>
+<p>Ambos valen 0 con igualdad perfecta, cumplen el principio de transferencias de Pigou-Dalton, no dependen de la escala de la renta y, sobre todo, son <strong>aditivamente descomponibles</strong>. La desigualdad total es exactamente la suma de una parte <em>entre</em> grupos (regiones, sexo, sectores) y otra <em>dentro</em> de ellos. Esta propiedad, que el índice de Gini no tiene, es la razón principal para usarlos.</p>
+<p>El paquete de R <strong>theil</strong> de THEILUMINA reunirá en una sola herramienta la estimación, la corrección del sesgo y la inferencia. Mientras tanto, esta guía usa las funciones que ya existen.</p>
+</section>
+<section id="fórmulas" class="level2">
+<h2 class="anchored" data-anchor-id="fórmulas">Fórmulas</h2>
+<p>Sea una muestra de rentas positivas <span class="math inline">y_1, \dots, y_n</span> con pesos muestrales <span class="math inline">w_i</span> y media ponderada <span class="math inline">\mu</span>. Sin pesos, basta con tomar <span class="math inline">w_i = 1</span>.</p>
+<p><span class="math display">
+T_1 = \frac{\sum_i w_i \frac{y_i}{\mu}\ln\frac{y_i}{\mu}}{\sum_i w_i}, \qquad
+T_0 = \frac{\sum_i w_i \ln\frac{\mu}{y_i}}{\sum_i w_i}, \qquad
+\mu = \frac{\sum_i w_i y_i}{\sum_i w_i}
+</span></p>
+<p>Con <span class="math inline">G</span> grupos, donde <span class="math inline">p_g</span> es la proporción de población del grupo <span class="math inline">g</span>, <span class="math inline">\mu_g</span> su media y <span class="math inline">s_g = p_g \mu_g / \mu</span> su proporción de renta, las descomposiciones son:</p>
+<p><span class="math display">
+T_1 = \underbrace{\sum_g s_g\, T_{1,g}}_{\text{dentro}} + \underbrace{\sum_g s_g \ln\frac{\mu_g}{\mu}}_{\text{entre}}, \qquad
+T_0 = \underbrace{\sum_g p_g\, T_{0,g}}_{\text{dentro}} + \underbrace{\sum_g p_g \ln\frac{\mu}{\mu_g}}_{\text{entre}}
+</span></p>
+<p>En <span class="math inline">T_1</span> la desigualdad dentro de cada grupo se pondera por su peso en la renta; en <span class="math inline">T_0</span>, por su peso en la población. Por eso <span class="math inline">T_0</span> es el índice preferido cuando se quiere que cada persona cuente lo mismo, y la única descomposición en la que la parte «entre» no depende de la desigualdad dentro de los grupos.</p>
+<p>Ambos índices requieren rentas estrictamente positivas: los logaritmos no admiten ceros ni valores negativos.</p>
+</section>
+<section id="estimación-en-r" class="level2">
+<h2 class="anchored" data-anchor-id="estimación-en-r">Estimación en R</h2>
+<section id="con-r-base" class="level3">
+<h3 class="anchored" data-anchor-id="con-r-base">Con R base</h3>
+<p>Dos funciones de pocas líneas bastan, con pesos opcionales:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>theil_T1 <span class="ot">&lt;-</span> <span class="cf">function</span>(y, <span class="at">w =</span> <span class="fu">rep</span>(<span class="dv">1</span>, <span class="fu">length</span>(y))) {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stopifnot</span>(<span class="fu">all</span>(y <span class="sc">&gt;</span> <span class="dv">0</span>))</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  mu <span class="ot">&lt;-</span> <span class="fu">weighted.mean</span>(y, w)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  r  <span class="ot">&lt;-</span> y <span class="sc">/</span> mu</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>(w <span class="sc">*</span> r <span class="sc">*</span> <span class="fu">log</span>(r)) <span class="sc">/</span> <span class="fu">sum</span>(w)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>theil_T0 <span class="ot">&lt;-</span> <span class="cf">function</span>(y, <span class="at">w =</span> <span class="fu">rep</span>(<span class="dv">1</span>, <span class="fu">length</span>(y))) {</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stopifnot</span>(<span class="fu">all</span>(y <span class="sc">&gt;</span> <span class="dv">0</span>))</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  mu <span class="ot">&lt;-</span> <span class="fu">weighted.mean</span>(y, w)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>(w <span class="sc">*</span> <span class="fu">log</span>(mu <span class="sc">/</span> y)) <span class="sc">/</span> <span class="fu">sum</span>(w)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">60</span>, <span class="dv">80</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">theil_T1</span>(y)   <span class="co"># 0.1809</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">theil_T0</span>(y)   <span class="co"># 0.2114</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="con-paquetes-de-cran" class="level3">
+<h3 class="anchored" data-anchor-id="con-paquetes-de-cran">Con paquetes de CRAN</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Paquete</th>
+<th><span class="math inline">T_1</span></th>
+<th><span class="math inline">T_0</span></th>
+<th>Pesos</th>
+<th>Descomposición</th>
+<th>Errores estándar</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>ineq</code></td>
+<td><code>Theil(y, parameter = 0)</code></td>
+<td><code>Theil(y, parameter = 1)</code></td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td><code>dineq</code></td>
+<td><code>theil.wtd(y, weights)</code></td>
+<td><code>mld.wtd(y, weights)</code></td>
+<td>Sí</td>
+<td><code>theil_decomp()</code>, <code>mld_decomp()</code></td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td><code>IC2</code></td>
+<td><code>calcGEI(y, w, alpha = 1)</code></td>
+<td><code>calcGEI(y, w, alpha = 0)</code></td>
+<td>Sí</td>
+<td><code>decompGEI()</code></td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td><code>convey</code></td>
+<td><code>svygei(~y, des, epsilon = 1)</code></td>
+<td><code>svygei(~y, des, epsilon = 0)</code></td>
+<td>Diseño muestral</td>
+<td><code>svygeidec()</code></td>
+<td>Sí, por linealización</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Cuidado con <code>ineq</code>:</strong> en <code>Theil()</code>, <code>parameter = 0</code> devuelve <span class="math inline">T_1</span> y cualquier otro valor devuelve <span class="math inline">T_0</span>, al revés de lo que sugiere la notación GE(<span class="math inline">\alpha</span>). Además, para <span class="math inline">T_1</span> elimina en silencio las rentas nulas. Compruébalo siempre con el ejemplo anterior.</p>
+</div>
+</div>
+</div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ineq)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Theil</span>(y, <span class="at">parameter =</span> <span class="dv">0</span>)   <span class="co"># 0.1809 -&gt; T1</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">Theil</span>(y, <span class="at">parameter =</span> <span class="dv">1</span>)   <span class="co"># 0.2114 -&gt; T0</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dineq)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">3</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">theil.wtd</span>(y, <span class="at">weights =</span> w) <span class="co"># 0.2125</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">mld.wtd</span>(y, <span class="at">weights =</span> w)   <span class="co"># 0.2710</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Con datos de encuesta (ECV/EU-SILC), <code>convey</code> es la opción más completa, porque tiene en cuenta el diseño muestral al calcular los errores estándar:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survey); <span class="fu">library</span>(convey)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>des <span class="ot">&lt;-</span> <span class="fu">svydesign</span>(<span class="at">ids =</span> <span class="sc">~</span>psu, <span class="at">strata =</span> <span class="sc">~</span>estrato, <span class="at">weights =</span> <span class="sc">~</span>peso, <span class="at">data =</span> ecv)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>des <span class="ot">&lt;-</span> <span class="fu">convey_prep</span>(des)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">svygei</span>(<span class="sc">~</span>renta_eq, des, <span class="at">epsilon =</span> <span class="dv">0</span>)   <span class="co"># T0 con su error estándar</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">svygei</span>(<span class="sc">~</span>renta_eq, des, <span class="at">epsilon =</span> <span class="dv">1</span>)   <span class="co"># T1 con su error estándar</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Los nombres de los argumentos pueden cambiar entre versiones. Antes de usar una función, consulta su ayuda (<code>?decompGEI</code>, <code>?svygeidec</code>).</p>
+</section>
+</section>
+<section id="descomposición-entre-y-dentro-de-grupos" class="level2">
+<h2 class="anchored" data-anchor-id="descomposición-entre-y-dentro-de-grupos">Descomposición entre y dentro de grupos</h2>
+<p>En el ejemplo, dos regiones explican el 72 % de la desigualdad total según <span class="math inline">T_1</span> y el 68 % según <span class="math inline">T_0</span>. Esta función aplica las fórmulas anteriores a cualquier variable de grupo:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>theil_decomp <span class="ot">&lt;-</span> <span class="cf">function</span>(y, g, <span class="at">w =</span> <span class="fu">rep</span>(<span class="dv">1</span>, <span class="fu">length</span>(y)), <span class="at">tipo =</span> <span class="fu">c</span>(<span class="st">"T1"</span>, <span class="st">"T0"</span>)) {</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  tipo <span class="ot">&lt;-</span> <span class="fu">match.arg</span>(tipo)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  mu  <span class="ot">&lt;-</span> <span class="fu">weighted.mean</span>(y, w)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  grp <span class="ot">&lt;-</span> <span class="fu">split</span>(<span class="fu">seq_along</span>(y), g)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">sapply</span>(grp, <span class="cf">function</span>(i) {</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    p   <span class="ot">&lt;-</span> <span class="fu">sum</span>(w[i]) <span class="sc">/</span> <span class="fu">sum</span>(w)              <span class="co"># proporción de población</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    mug <span class="ot">&lt;-</span> <span class="fu">weighted.mean</span>(y[i], w[i])       <span class="co"># media del grupo</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    s   <span class="ot">&lt;-</span> p <span class="sc">*</span> mug <span class="sc">/</span> mu                    <span class="co"># proporción de renta</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    Tg  <span class="ot">&lt;-</span> <span class="cf">if</span> (tipo <span class="sc">==</span> <span class="st">"T1"</span>) <span class="fu">theil_T1</span>(y[i], w[i]) <span class="cf">else</span> <span class="fu">theil_T0</span>(y[i], w[i])</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (tipo <span class="sc">==</span> <span class="st">"T1"</span>) <span class="fu">c</span>(<span class="at">p =</span> p, <span class="at">s =</span> s, <span class="at">T_g =</span> Tg, <span class="at">dentro =</span> s <span class="sc">*</span> Tg, <span class="at">entre =</span> s <span class="sc">*</span> <span class="fu">log</span>(mug <span class="sc">/</span> mu))</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>              <span class="fu">c</span>(<span class="at">p =</span> p, <span class="at">s =</span> s, <span class="at">T_g =</span> Tg, <span class="at">dentro =</span> p <span class="sc">*</span> Tg, <span class="at">entre =</span> p <span class="sc">*</span> <span class="fu">log</span>(mu <span class="sc">/</span> mug))</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  }))</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  W <span class="ot">&lt;-</span> <span class="fu">sum</span>(res[, <span class="st">"dentro"</span>]); B <span class="ot">&lt;-</span> <span class="fu">sum</span>(res[, <span class="st">"entre"</span>])</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">grupos =</span> res,</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">resumen =</span> <span class="fu">c</span>(<span class="at">total =</span> W <span class="sc">+</span> B, <span class="at">dentro =</span> W, <span class="at">entre =</span> B, <span class="at">pct_entre =</span> <span class="dv">100</span> <span class="sc">*</span> B <span class="sc">/</span> (W <span class="sc">+</span> B)))</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"A"</span>, <span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"B"</span>, <span class="st">"B"</span>)</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="fu">theil_decomp</span>(y, g, <span class="at">tipo =</span> <span class="st">"T1"</span>)<span class="sc">$</span>resumen</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="fu">theil_decomp</span>(y, g, <span class="at">tipo =</span> <span class="st">"T0"</span>)<span class="sc">$</span>resumen</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Índice</th>
+<th>Total</th>
+<th>Dentro</th>
+<th>Entre</th>
+<th>% entre</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">T_1</span></td>
+<td>0,1809</td>
+<td>0,0501</td>
+<td>0,1308</td>
+<td>72,3 %</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">T_0</span></td>
+<td>0,2114</td>
+<td>0,0676</td>
+<td>0,1438</td>
+<td>68,0 %</td>
+</tr>
+</tbody>
+</table>
+<p>En ambos casos dentro + entre reproduce exactamente el total, lo que sirve como comprobación. Con paquetes, el mismo resultado se obtiene con <code>dineq::theil_decomp(y, g, w)</code> y <code>dineq::mld_decomp(y, g, w)</code>, con <code>IC2::decompGEI(y, g, w, alpha = 1)</code>, o con <code>convey::svygeidec(~y, ~g, des, epsilon = 1)</code> si hay diseño muestral.</p>
+</section>
+<section id="ejemplo-completo-renta-por-regiones" class="level2">
+<h2 class="anchored" data-anchor-id="ejemplo-completo-renta-por-regiones">Ejemplo completo: renta por regiones</h2>
+<p>Este ejemplo simula rentas log-normales en cuatro regiones con medias y dispersiones distintas, calcula los dos índices, los descompone y representa la contribución de cada región. Los valores exactos dependen de la semilla; lo que importa es la interpretación.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>regiones <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">region =</span> <span class="fu">c</span>(<span class="st">"Norte"</span>, <span class="st">"Sur"</span>, <span class="st">"Este"</span>, <span class="st">"Oeste"</span>),</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">n      =</span> <span class="fu">c</span>(<span class="dv">400</span>, <span class="dv">300</span>, <span class="dv">200</span>, <span class="dv">100</span>),</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">media  =</span> <span class="fu">c</span>(<span class="fl">9.9</span>, <span class="fl">9.5</span>, <span class="fl">10.1</span>, <span class="fl">9.7</span>),   <span class="co"># media de log(renta)</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd     =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.7</span>, <span class="fl">0.6</span>, <span class="fl">0.4</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(<span class="fu">seq_len</span>(<span class="fu">nrow</span>(regiones)), <span class="cf">function</span>(k) {</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">with</span>(regiones[k, ], <span class="fu">data.frame</span>(<span class="at">region =</span> region,</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">renta  =</span> <span class="fu">rlnorm</span>(n, <span class="at">meanlog =</span> media, <span class="at">sdlog =</span> sd)))</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>}))</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Índices globales</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="fu">theil_T1</span>(datos<span class="sc">$</span>renta)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="fu">theil_T0</span>(datos<span class="sc">$</span>renta)</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Descomposición por región</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>dT0 <span class="ot">&lt;-</span> <span class="fu">theil_decomp</span>(datos<span class="sc">$</span>renta, datos<span class="sc">$</span>region, <span class="at">tipo =</span> <span class="st">"T0"</span>)</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(dT0<span class="sc">$</span>grupos, <span class="dv">4</span>)</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(dT0<span class="sc">$</span>resumen, <span class="dv">4</span>)</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Contribución de cada región a la desigualdad "dentro"</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>contrib <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">region =</span> <span class="fu">rownames</span>(dT0<span class="sc">$</span>grupos),</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>                      <span class="at">dentro =</span> dT0<span class="sc">$</span>grupos[, <span class="st">"dentro"</span>])</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(contrib, <span class="fu">aes</span>(<span class="fu">reorder</span>(region, dentro), dentro)) <span class="sc">+</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"#E07B20"</span>) <span class="sc">+</span> <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Contribución a T0 (dentro de regiones)"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Cómo leer el resultado:</p>
+<ul>
+<li><code>pct_entre</code> indica qué parte de la desigualdad se debe a que las regiones tienen rentas medias distintas. Una política de convergencia regional solo puede actuar sobre esa parte.</li>
+<li>La columna <code>dentro</code> muestra qué regiones aportan más desigualdad interna. Depende tanto de su desigualdad propia (<code>T_g</code>) como de su tamaño (<code>p</code>).</li>
+<li>Si <span class="math inline">T_1</span> y <span class="math inline">T_0</span> dan mensajes distintos, la desigualdad se concentra en colas diferentes: <span class="math inline">T_1</span> reacciona a la parte alta y <span class="math inline">T_0</span> a la parte baja.</li>
+</ul>
+</section>
+<section id="ejemplo-descomposición-por-sexo" class="level2">
+<h2 class="anchored" data-anchor-id="ejemplo-descomposición-por-sexo">Ejemplo: descomposición por sexo</h2>
+<p>En este ejemplo, la brecha entre mujeres y hombres explica alrededor del 23 % de la desigualdad total; el 77 % restante se debe a la desigualdad dentro de cada sexo. Los datos son diez rentas (en miles de euros), cinco de mujeres y cinco de hombres:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>renta <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">15</span>, <span class="dv">18</span>, <span class="dv">22</span>, <span class="dv">30</span>,   <span class="co"># mujeres</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>           <span class="dv">16</span>, <span class="dv">20</span>, <span class="dv">25</span>, <span class="dv">35</span>, <span class="dv">50</span>)   <span class="co"># hombres</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>sexo  <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Mujer"</span>, <span class="st">"Hombre"</span>), <span class="at">each =</span> <span class="dv">5</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>d1 <span class="ot">&lt;-</span> <span class="fu">theil_decomp</span>(renta, sexo, <span class="at">tipo =</span> <span class="st">"T1"</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>d0 <span class="ot">&lt;-</span> <span class="fu">theil_decomp</span>(renta, sexo, <span class="at">tipo =</span> <span class="st">"T0"</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(d0<span class="sc">$</span>grupos, <span class="dv">4</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">rbind</span>(<span class="at">T1 =</span> d1<span class="sc">$</span>resumen, <span class="at">T0 =</span> d0<span class="sc">$</span>resumen), <span class="dv">4</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Grupo</th>
+<th>Renta media</th>
+<th>% población</th>
+<th>% renta</th>
+<th><span class="math inline">T_1</span> del grupo</th>
+<th><span class="math inline">T_0</span> del grupo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Mujeres</td>
+<td>19,4</td>
+<td>50 %</td>
+<td>39,9 %</td>
+<td>0,0502</td>
+<td>0,0502</td>
+</tr>
+<tr class="even">
+<td>Hombres</td>
+<td>29,2</td>
+<td>50 %</td>
+<td>60,1 %</td>
+<td>0,0833</td>
+<td>0,0833</td>
+</tr>
+</tbody>
+</table>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Índice</th>
+<th>Total</th>
+<th>Dentro</th>
+<th>Entre (brecha de género)</th>
+<th>% entre</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">T_1</span></td>
+<td>0,0906</td>
+<td>0,0701</td>
+<td>0,0205</td>
+<td>22,6 %</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">T_0</span></td>
+<td>0,0875</td>
+<td>0,0667</td>
+<td>0,0208</td>
+<td>23,7 %</td>
+</tr>
+</tbody>
+</table>
+<p>Cómo leerlo:</p>
+<ul>
+<li>La parte <strong>entre</strong> mide cuánta desigualdad desaparecería si mujeres y hombres tuvieran la misma renta media. Es la medida de la brecha de género que ofrecen los índices de Theil.</li>
+<li>La parte <strong>dentro</strong> indica que, aun cerrando la brecha, quedaría la mayor parte de la desigualdad, sobre todo entre los hombres (índice del grupo 0,083 frente a 0,050).</li>
+<li>Con datos de encuesta, la misma descomposición con su error estándar se obtiene con <code>convey::svygeidec(~renta, ~sexo, des, epsilon = 0)</code>. Es lo que permite decir si la brecha ha cambiado de verdad entre dos años.</li>
+</ul>
+<p>La variable de grupo puede ser cualquier otra: discapacidad, nacionalidad, nivel educativo, o cruces como sexo × región (<code>interaction(sexo, region)</code>). Cuantos más grupos, más pequeños son y mayor es el sesgo, como se explica en la sección siguiente.</p>
+</section>
+<section id="sesgo-y-precisión" class="level2">
+<h2 class="anchored" data-anchor-id="sesgo-y-precisión">Sesgo y precisión</h2>
+<p>Los estimadores muestrales de <span class="math inline">T_0</span> y <span class="math inline">T_1</span> tienen sesgo, que suele ser a la baja y es mayor en muestras pequeñas y con distribuciones de cola pesada. Por eso no deberían publicarse sin una medida de su precisión. El jackknife da a la vez una estimación del sesgo y del error estándar:</p>
+<p><span class="math display">
+\widehat{\text{sesgo}} = (n-1)\,(\bar T_{(\cdot)} - \hat T), \qquad
+\tilde T = \hat T - \widehat{\text{sesgo}}, \qquad
+\widehat{\text{Var}} = \frac{n-1}{n}\sum_i \big(\hat T_{(i)} - \bar T_{(\cdot)}\big)^2
+</span></p>
+<p>Calcular los <span class="math inline">n</span> índices «dejando uno fuera» repitiendo la fórmula cuesta <span class="math inline">\mathcal{O}(n^2)</span>. Como <span class="math inline">T_0</span> y <span class="math inline">T_1</span> solo dependen de unas pocas sumas, todos se obtienen a la vez en <span class="math inline">\mathcal{O}(n)</span>, lo que hace el jackknife viable con millones de observaciones:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>jackknife_theil <span class="ot">&lt;-</span> <span class="cf">function</span>(y, <span class="at">tipo =</span> <span class="fu">c</span>(<span class="st">"T1"</span>, <span class="st">"T0"</span>)) {</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  tipo <span class="ot">&lt;-</span> <span class="fu">match.arg</span>(tipo); n <span class="ot">&lt;-</span> <span class="fu">length</span>(y)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  S1 <span class="ot">&lt;-</span> <span class="fu">sum</span>(y); S2 <span class="ot">&lt;-</span> <span class="fu">sum</span>(y <span class="sc">*</span> <span class="fu">log</span>(y)); L <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">log</span>(y))</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (tipo <span class="sc">==</span> <span class="st">"T1"</span>) {</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    T    <span class="ot">&lt;-</span> S2 <span class="sc">/</span> S1 <span class="sc">-</span> <span class="fu">log</span>(S1 <span class="sc">/</span> n)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    Tloo <span class="ot">&lt;-</span> (S2 <span class="sc">-</span> y <span class="sc">*</span> <span class="fu">log</span>(y)) <span class="sc">/</span> (S1 <span class="sc">-</span> y) <span class="sc">-</span> <span class="fu">log</span>((S1 <span class="sc">-</span> y) <span class="sc">/</span> (n <span class="sc">-</span> <span class="dv">1</span>))</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    T    <span class="ot">&lt;-</span> <span class="fu">log</span>(S1 <span class="sc">/</span> n) <span class="sc">-</span> L <span class="sc">/</span> n</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    Tloo <span class="ot">&lt;-</span> <span class="fu">log</span>((S1 <span class="sc">-</span> y) <span class="sc">/</span> (n <span class="sc">-</span> <span class="dv">1</span>)) <span class="sc">-</span> (L <span class="sc">-</span> <span class="fu">log</span>(y)) <span class="sc">/</span> (n <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  sesgo <span class="ot">&lt;-</span> (n <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> (<span class="fu">mean</span>(Tloo) <span class="sc">-</span> T)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  ee    <span class="ot">&lt;-</span> <span class="fu">sqrt</span>((n <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">/</span> n <span class="sc">*</span> <span class="fu">sum</span>((Tloo <span class="sc">-</span> <span class="fu">mean</span>(Tloo))<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="at">T =</span> T, <span class="at">sesgo =</span> sesgo, <span class="at">T_corregido =</span> T <span class="sc">-</span> sesgo, <span class="at">ee =</span> ee)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">jackknife_theil</span>(y, <span class="st">"T1"</span>), <span class="dv">4</span>)  <span class="co"># T 0.1809  sesgo -0.0296  T_corregido 0.2106  ee 0.0858</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">jackknife_theil</span>(y, <span class="st">"T0"</span>), <span class="dv">4</span>)  <span class="co"># T 0.2114  sesgo -0.0372  T_corregido 0.2486  ee 0.1071</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Con solo seis observaciones, el error estándar es casi la mitad del índice: el ejemplo muestra por qué un valor puntual sin margen de error puede engañar.</p>
+<p>Para intervalos de confianza, el bootstrap es la alternativa habitual. Con distribuciones asimétricas conviene usar el intervalo bootstrap-t o el BCa, mejor que el de percentiles:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(boot)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">boot</span>(datos<span class="sc">$</span>renta, <span class="cf">function</span>(d, i) <span class="fu">theil_T0</span>(d[i]), <span class="at">R =</span> <span class="dv">2000</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">boot.ci</span>(b, <span class="at">type =</span> <span class="fu">c</span>(<span class="st">"perc"</span>, <span class="st">"bca"</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Con datos de encuesta, <code>convey::svygei()</code> ya devuelve el error estándar por linealización, teniendo en cuenta estratos y conglomerados. THEILUMINA estudia cómo predecir y corregir el sesgo (OG1), cómo construir intervalos fiables (OG2) y cómo reducir el coste del jackknife (OG3), y lo integrará todo en el paquete <strong>theil</strong> (OG4).</p>
+</section>
+<section id="errores-frecuentes-y-buenas-prácticas" class="level2">
+<h2 class="anchored" data-anchor-id="errores-frecuentes-y-buenas-prácticas">Errores frecuentes y buenas prácticas</h2>
+<ol type="1">
+<li><strong>Confundir <span class="math inline">T_0</span> y <span class="math inline">T_1</span>.</strong> Indica siempre cuál usas y comprueba la convención del paquete (en <code>ineq</code>, <code>parameter = 0</code> es <span class="math inline">T_1</span>).</li>
+<li><strong>Rentas nulas o negativas.</strong> Los logaritmos fallan o los paquetes las eliminan en silencio. Decide explícitamente qué hacer con ellas (excluirlas, acotarlas o usar otro índice de la familia GE) e informa de cuántas hay.</li>
+<li><strong>Olvidar los pesos.</strong> Con datos de encuesta, los índices sin ponderar no estiman la desigualdad de la población.</li>
+<li><strong>Comparar sin margen de error.</strong> Una diferencia entre regiones o años solo es relevante si supera la incertidumbre del estimador. Acompaña cada índice de su error estándar o de su intervalo de confianza.</li>
+<li><strong>Desagregar demasiado.</strong> El sesgo crece al reducirse el tamaño de cada grupo. En descomposiciones con muchos grupos pequeños, corrige el sesgo o agrupa categorías.</li>
+<li><strong>No verificar la descomposición.</strong> Dentro + entre debe coincidir con el total; si no coincide, hay un error en los pesos o en los grupos.</li>
+</ol>
+<hr>
+<p class="source">
+Cómo citar: THEILUMINA (2026). <em>Guía práctica: índices de Theil en R</em>. Guías prácticas de THEILUMINA, Universidad de Granada. <a href="https://jfmunozrosas.github.io/theilumina/guides/indices-theil-r-es.html" class="uri">https://jfmunozrosas.github.io/theilumina/guides/indices-theil-r-es.html</a>
+</p>
+
+
+<!-- -->
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Volver arriba</a></main> <!-- /main -->
+<!--
+  Visit counter (GoatCounter, free and cookie-free).
+  1. Create an account at https://www.goatcounter.com with the code below (theilumina).
+  2. In Settings, enable "Allow adding visitor counts on your website".
+  If the code "theilumina" is not available, change GC_CODE here (two places: this line and data-goatcounter).
+-->
+<script data-goatcounter="https://theilumina.goatcounter.com/count" async="" src="//gc.zgo.at/count.js"></script>
+<script>
+(function () {
+  const GC_CODE = "theilumina";
+  function show(n) {
+    const box = document.querySelector(".nav-footer-left") || document.querySelector("footer");
+    if (!box || document.getElementById("visit-counter")) return;
+    const s = document.createElement("span");
+    s.id = "visit-counter";
+    s.className = "visit-counter";
+    s.innerHTML = ` · <span class="vc-num">${n}</span> visits`;
+    box.appendChild(s);
+  }
+  // Skip local previews (quarto preview)
+  if (location.hostname === "localhost" || location.hostname === "127.0.0.1") return;
+  fetch(`https://${GC_CODE}.goatcounter.com/counter/TOTAL.json`)
+    .then(r => r.ok ? r.json() : null)
+    .then(d => { if (d && d.count) show(String(d.count).replace(/\s/g, ".")); })
+    .catch(() => {});
+})();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/jfmunozrosas\.github\.io\/theilumina");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Ejecutar el código</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb9" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Guía práctica: índices de Theil en R"</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Estimación, descomposición, sesgo y precisión · Guías prácticas de THEILUMINA"</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2026-11-15"</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="an">lang:</span><span class="co"> es</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>::: {.guide-logo}</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="al">![](../images/brand/theilumina_logo_es.png)</span>{fig-alt="Logo de THEILUMINA"}</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>::: {.callout-note appearance="simple"}</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">English version</span><span class="co">](theil-indices-r.qmd)</span> · <span class="co">[</span><span class="ot">Todas las guías prácticas</span><span class="co">](../guides.qmd)</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="fu">## Introducción</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>Esta guía muestra cómo estimar los índices de Theil en R, cómo descomponerlos entre grupos y dentro de ellos, y cómo medir su sesgo y su precisión. Todo el código usa R base o paquetes disponibles hoy en CRAN.</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>Los dos índices de Theil pertenecen a la familia de entropía generalizada GE($\alpha$):</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**$T_1$ (índice de Theil T, GE(1))**: es más sensible a lo que ocurre en la parte alta de la distribución.</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**$T_0$ (desviación logarítmica media o MLD, GE(0))**: es más sensible a la parte baja.</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>Ambos valen 0 con igualdad perfecta, cumplen el principio de transferencias de Pigou-Dalton, no dependen de la escala de la renta y, sobre todo, son **aditivamente descomponibles**. La desigualdad total es exactamente la suma de una parte *entre* grupos (regiones, sexo, sectores) y otra *dentro* de ellos. Esta propiedad, que el índice de Gini no tiene, es la razón principal para usarlos.</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>El paquete de R **theil** de THEILUMINA reunirá en una sola herramienta la estimación, la corrección del sesgo y la inferencia. Mientras tanto, esta guía usa las funciones que ya existen.</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="fu">## Fórmulas</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>Sea una muestra de rentas positivas $y_1, \dots, y_n$ con pesos muestrales $w_i$ y media ponderada $\mu$. Sin pesos, basta con tomar $w_i = 1$.</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>T_1 = \frac{\sum_i w_i \frac{y_i}{\mu}\ln\frac{y_i}{\mu}}{\sum_i w_i}, \qquad</span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>T_0 = \frac{\sum_i w_i \ln\frac{\mu}{y_i}}{\sum_i w_i}, \qquad</span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>\mu = \frac{\sum_i w_i y_i}{\sum_i w_i}</span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>Con $G$ grupos, donde $p_g$ es la proporción de población del grupo $g$, $\mu_g$ su media y $s_g = p_g \mu_g / \mu$ su proporción de renta, las descomposiciones son:</span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>T_1 = \underbrace{\sum_g s_g\, T_{1,g}}_{\text{dentro}} + \underbrace{\sum_g s_g \ln\frac{\mu_g}{\mu}}_{\text{entre}}, \qquad</span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>T_0 = \underbrace{\sum_g p_g\, T_{0,g}}_{\text{dentro}} + \underbrace{\sum_g p_g \ln\frac{\mu}{\mu_g}}_{\text{entre}}</span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>En $T_1$ la desigualdad dentro de cada grupo se pondera por su peso en la renta; en $T_0$, por su peso en la población. Por eso $T_0$ es el índice preferido cuando se quiere que cada persona cuente lo mismo, y la única descomposición en la que la parte «entre» no depende de la desigualdad dentro de los grupos.</span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>Ambos índices requieren rentas estrictamente positivas: los logaritmos no admiten ceros ni valores negativos.</span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a><span class="fu">## Estimación en R</span></span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a><span class="fu">### Con R base</span></span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a>Dos funciones de pocas líneas bastan, con pesos opcionales:</span>
+<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a>theil_T1 <span class="ot">&lt;-</span> <span class="cf">function</span>(y, <span class="at">w =</span> <span class="fu">rep</span>(<span class="dv">1</span>, <span class="fu">length</span>(y))) {</span>
+<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stopifnot</span>(<span class="fu">all</span>(y <span class="sc">&gt;</span> <span class="dv">0</span>))</span>
+<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a>  mu <span class="ot">&lt;-</span> <span class="fu">weighted.mean</span>(y, w)</span>
+<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a>  r  <span class="ot">&lt;-</span> y <span class="sc">/</span> mu</span>
+<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>(w <span class="sc">*</span> r <span class="sc">*</span> <span class="fu">log</span>(r)) <span class="sc">/</span> <span class="fu">sum</span>(w)</span>
+<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a>theil_T0 <span class="ot">&lt;-</span> <span class="cf">function</span>(y, <span class="at">w =</span> <span class="fu">rep</span>(<span class="dv">1</span>, <span class="fu">length</span>(y))) {</span>
+<span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stopifnot</span>(<span class="fu">all</span>(y <span class="sc">&gt;</span> <span class="dv">0</span>))</span>
+<span id="cb9-66"><a href="#cb9-66" aria-hidden="true" tabindex="-1"></a>  mu <span class="ot">&lt;-</span> <span class="fu">weighted.mean</span>(y, w)</span>
+<span id="cb9-67"><a href="#cb9-67" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>(w <span class="sc">*</span> <span class="fu">log</span>(mu <span class="sc">/</span> y)) <span class="sc">/</span> <span class="fu">sum</span>(w)</span>
+<span id="cb9-68"><a href="#cb9-68" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-69"><a href="#cb9-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-70"><a href="#cb9-70" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">60</span>, <span class="dv">80</span>)</span>
+<span id="cb9-71"><a href="#cb9-71" aria-hidden="true" tabindex="-1"></a><span class="fu">theil_T1</span>(y)   <span class="co"># 0.1809</span></span>
+<span id="cb9-72"><a href="#cb9-72" aria-hidden="true" tabindex="-1"></a><span class="fu">theil_T0</span>(y)   <span class="co"># 0.2114</span></span>
+<span id="cb9-73"><a href="#cb9-73" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-74"><a href="#cb9-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-75"><a href="#cb9-75" aria-hidden="true" tabindex="-1"></a><span class="fu">### Con paquetes de CRAN</span></span>
+<span id="cb9-76"><a href="#cb9-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-77"><a href="#cb9-77" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Paquete <span class="pp">|</span> $T_1$ <span class="pp">|</span> $T_0$ <span class="pp">|</span> Pesos <span class="pp">|</span> Descomposición <span class="pp">|</span> Errores estándar <span class="pp">|</span></span>
+<span id="cb9-78"><a href="#cb9-78" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|---|---|---|</span></span>
+<span id="cb9-79"><a href="#cb9-79" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`ineq`</span> <span class="pp">|</span> <span class="in">`Theil(y, parameter = 0)`</span> <span class="pp">|</span> <span class="in">`Theil(y, parameter = 1)`</span> <span class="pp">|</span> No <span class="pp">|</span> No <span class="pp">|</span> No <span class="pp">|</span></span>
+<span id="cb9-80"><a href="#cb9-80" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`dineq`</span> <span class="pp">|</span> <span class="in">`theil.wtd(y, weights)`</span> <span class="pp">|</span> <span class="in">`mld.wtd(y, weights)`</span> <span class="pp">|</span> Sí <span class="pp">|</span> <span class="in">`theil_decomp()`</span>, <span class="in">`mld_decomp()`</span> <span class="pp">|</span> No <span class="pp">|</span></span>
+<span id="cb9-81"><a href="#cb9-81" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`IC2`</span> <span class="pp">|</span> <span class="in">`calcGEI(y, w, alpha = 1)`</span> <span class="pp">|</span> <span class="in">`calcGEI(y, w, alpha = 0)`</span> <span class="pp">|</span> Sí <span class="pp">|</span> <span class="in">`decompGEI()`</span> <span class="pp">|</span> No <span class="pp">|</span></span>
+<span id="cb9-82"><a href="#cb9-82" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`convey`</span> <span class="pp">|</span> <span class="in">`svygei(~y, des, epsilon = 1)`</span> <span class="pp">|</span> <span class="in">`svygei(~y, des, epsilon = 0)`</span> <span class="pp">|</span> Diseño muestral <span class="pp">|</span> <span class="in">`svygeidec()`</span> <span class="pp">|</span> Sí, por linealización <span class="pp">|</span></span>
+<span id="cb9-83"><a href="#cb9-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-84"><a href="#cb9-84" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning appearance="simple"}</span>
+<span id="cb9-85"><a href="#cb9-85" aria-hidden="true" tabindex="-1"></a>**Cuidado con `ineq`:** en <span class="in">`Theil()`</span>, <span class="in">`parameter = 0`</span> devuelve $T_1$ y cualquier otro valor devuelve $T_0$, al revés de lo que sugiere la notación GE($\alpha$). Además, para $T_1$ elimina en silencio las rentas nulas. Compruébalo siempre con el ejemplo anterior.</span>
+<span id="cb9-86"><a href="#cb9-86" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb9-87"><a href="#cb9-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-88"><a href="#cb9-88" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb9-89"><a href="#cb9-89" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ineq)</span>
+<span id="cb9-90"><a href="#cb9-90" aria-hidden="true" tabindex="-1"></a><span class="fu">Theil</span>(y, <span class="at">parameter =</span> <span class="dv">0</span>)   <span class="co"># 0.1809 -&gt; T1</span></span>
+<span id="cb9-91"><a href="#cb9-91" aria-hidden="true" tabindex="-1"></a><span class="fu">Theil</span>(y, <span class="at">parameter =</span> <span class="dv">1</span>)   <span class="co"># 0.2114 -&gt; T0</span></span>
+<span id="cb9-92"><a href="#cb9-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-93"><a href="#cb9-93" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dineq)</span>
+<span id="cb9-94"><a href="#cb9-94" aria-hidden="true" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">3</span>)</span>
+<span id="cb9-95"><a href="#cb9-95" aria-hidden="true" tabindex="-1"></a><span class="fu">theil.wtd</span>(y, <span class="at">weights =</span> w) <span class="co"># 0.2125</span></span>
+<span id="cb9-96"><a href="#cb9-96" aria-hidden="true" tabindex="-1"></a><span class="fu">mld.wtd</span>(y, <span class="at">weights =</span> w)   <span class="co"># 0.2710</span></span>
+<span id="cb9-97"><a href="#cb9-97" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-98"><a href="#cb9-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-99"><a href="#cb9-99" aria-hidden="true" tabindex="-1"></a>Con datos de encuesta (ECV/EU-SILC), <span class="in">`convey`</span> es la opción más completa, porque tiene en cuenta el diseño muestral al calcular los errores estándar:</span>
+<span id="cb9-100"><a href="#cb9-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-101"><a href="#cb9-101" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb9-102"><a href="#cb9-102" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survey); <span class="fu">library</span>(convey)</span>
+<span id="cb9-103"><a href="#cb9-103" aria-hidden="true" tabindex="-1"></a>des <span class="ot">&lt;-</span> <span class="fu">svydesign</span>(<span class="at">ids =</span> <span class="sc">~</span>psu, <span class="at">strata =</span> <span class="sc">~</span>estrato, <span class="at">weights =</span> <span class="sc">~</span>peso, <span class="at">data =</span> ecv)</span>
+<span id="cb9-104"><a href="#cb9-104" aria-hidden="true" tabindex="-1"></a>des <span class="ot">&lt;-</span> <span class="fu">convey_prep</span>(des)</span>
+<span id="cb9-105"><a href="#cb9-105" aria-hidden="true" tabindex="-1"></a><span class="fu">svygei</span>(<span class="sc">~</span>renta_eq, des, <span class="at">epsilon =</span> <span class="dv">0</span>)   <span class="co"># T0 con su error estándar</span></span>
+<span id="cb9-106"><a href="#cb9-106" aria-hidden="true" tabindex="-1"></a><span class="fu">svygei</span>(<span class="sc">~</span>renta_eq, des, <span class="at">epsilon =</span> <span class="dv">1</span>)   <span class="co"># T1 con su error estándar</span></span>
+<span id="cb9-107"><a href="#cb9-107" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-108"><a href="#cb9-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-109"><a href="#cb9-109" aria-hidden="true" tabindex="-1"></a>Los nombres de los argumentos pueden cambiar entre versiones. Antes de usar una función, consulta su ayuda (<span class="in">`?decompGEI`</span>, <span class="in">`?svygeidec`</span>).</span>
+<span id="cb9-110"><a href="#cb9-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-111"><a href="#cb9-111" aria-hidden="true" tabindex="-1"></a><span class="fu">## Descomposición entre y dentro de grupos</span></span>
+<span id="cb9-112"><a href="#cb9-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-113"><a href="#cb9-113" aria-hidden="true" tabindex="-1"></a>En el ejemplo, dos regiones explican el 72 % de la desigualdad total según $T_1$ y el 68 % según $T_0$. Esta función aplica las fórmulas anteriores a cualquier variable de grupo:</span>
+<span id="cb9-114"><a href="#cb9-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-115"><a href="#cb9-115" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb9-116"><a href="#cb9-116" aria-hidden="true" tabindex="-1"></a>theil_decomp <span class="ot">&lt;-</span> <span class="cf">function</span>(y, g, <span class="at">w =</span> <span class="fu">rep</span>(<span class="dv">1</span>, <span class="fu">length</span>(y)), <span class="at">tipo =</span> <span class="fu">c</span>(<span class="st">"T1"</span>, <span class="st">"T0"</span>)) {</span>
+<span id="cb9-117"><a href="#cb9-117" aria-hidden="true" tabindex="-1"></a>  tipo <span class="ot">&lt;-</span> <span class="fu">match.arg</span>(tipo)</span>
+<span id="cb9-118"><a href="#cb9-118" aria-hidden="true" tabindex="-1"></a>  mu  <span class="ot">&lt;-</span> <span class="fu">weighted.mean</span>(y, w)</span>
+<span id="cb9-119"><a href="#cb9-119" aria-hidden="true" tabindex="-1"></a>  grp <span class="ot">&lt;-</span> <span class="fu">split</span>(<span class="fu">seq_along</span>(y), g)</span>
+<span id="cb9-120"><a href="#cb9-120" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">sapply</span>(grp, <span class="cf">function</span>(i) {</span>
+<span id="cb9-121"><a href="#cb9-121" aria-hidden="true" tabindex="-1"></a>    p   <span class="ot">&lt;-</span> <span class="fu">sum</span>(w[i]) <span class="sc">/</span> <span class="fu">sum</span>(w)              <span class="co"># proporción de población</span></span>
+<span id="cb9-122"><a href="#cb9-122" aria-hidden="true" tabindex="-1"></a>    mug <span class="ot">&lt;-</span> <span class="fu">weighted.mean</span>(y[i], w[i])       <span class="co"># media del grupo</span></span>
+<span id="cb9-123"><a href="#cb9-123" aria-hidden="true" tabindex="-1"></a>    s   <span class="ot">&lt;-</span> p <span class="sc">*</span> mug <span class="sc">/</span> mu                    <span class="co"># proporción de renta</span></span>
+<span id="cb9-124"><a href="#cb9-124" aria-hidden="true" tabindex="-1"></a>    Tg  <span class="ot">&lt;-</span> <span class="cf">if</span> (tipo <span class="sc">==</span> <span class="st">"T1"</span>) <span class="fu">theil_T1</span>(y[i], w[i]) <span class="cf">else</span> <span class="fu">theil_T0</span>(y[i], w[i])</span>
+<span id="cb9-125"><a href="#cb9-125" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (tipo <span class="sc">==</span> <span class="st">"T1"</span>) <span class="fu">c</span>(<span class="at">p =</span> p, <span class="at">s =</span> s, <span class="at">T_g =</span> Tg, <span class="at">dentro =</span> s <span class="sc">*</span> Tg, <span class="at">entre =</span> s <span class="sc">*</span> <span class="fu">log</span>(mug <span class="sc">/</span> mu))</span>
+<span id="cb9-126"><a href="#cb9-126" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>              <span class="fu">c</span>(<span class="at">p =</span> p, <span class="at">s =</span> s, <span class="at">T_g =</span> Tg, <span class="at">dentro =</span> p <span class="sc">*</span> Tg, <span class="at">entre =</span> p <span class="sc">*</span> <span class="fu">log</span>(mu <span class="sc">/</span> mug))</span>
+<span id="cb9-127"><a href="#cb9-127" aria-hidden="true" tabindex="-1"></a>  }))</span>
+<span id="cb9-128"><a href="#cb9-128" aria-hidden="true" tabindex="-1"></a>  W <span class="ot">&lt;-</span> <span class="fu">sum</span>(res[, <span class="st">"dentro"</span>]); B <span class="ot">&lt;-</span> <span class="fu">sum</span>(res[, <span class="st">"entre"</span>])</span>
+<span id="cb9-129"><a href="#cb9-129" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">grupos =</span> res,</span>
+<span id="cb9-130"><a href="#cb9-130" aria-hidden="true" tabindex="-1"></a>       <span class="at">resumen =</span> <span class="fu">c</span>(<span class="at">total =</span> W <span class="sc">+</span> B, <span class="at">dentro =</span> W, <span class="at">entre =</span> B, <span class="at">pct_entre =</span> <span class="dv">100</span> <span class="sc">*</span> B <span class="sc">/</span> (W <span class="sc">+</span> B)))</span>
+<span id="cb9-131"><a href="#cb9-131" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-132"><a href="#cb9-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-133"><a href="#cb9-133" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"A"</span>, <span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"B"</span>, <span class="st">"B"</span>)</span>
+<span id="cb9-134"><a href="#cb9-134" aria-hidden="true" tabindex="-1"></a><span class="fu">theil_decomp</span>(y, g, <span class="at">tipo =</span> <span class="st">"T1"</span>)<span class="sc">$</span>resumen</span>
+<span id="cb9-135"><a href="#cb9-135" aria-hidden="true" tabindex="-1"></a><span class="fu">theil_decomp</span>(y, g, <span class="at">tipo =</span> <span class="st">"T0"</span>)<span class="sc">$</span>resumen</span>
+<span id="cb9-136"><a href="#cb9-136" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-137"><a href="#cb9-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-138"><a href="#cb9-138" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Índice <span class="pp">|</span> Total <span class="pp">|</span> Dentro <span class="pp">|</span> Entre <span class="pp">|</span> % entre <span class="pp">|</span></span>
+<span id="cb9-139"><a href="#cb9-139" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|---|---|</span></span>
+<span id="cb9-140"><a href="#cb9-140" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> $T_1$ <span class="pp">|</span> 0,1809 <span class="pp">|</span> 0,0501 <span class="pp">|</span> 0,1308 <span class="pp">|</span> 72,3 % <span class="pp">|</span></span>
+<span id="cb9-141"><a href="#cb9-141" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> $T_0$ <span class="pp">|</span> 0,2114 <span class="pp">|</span> 0,0676 <span class="pp">|</span> 0,1438 <span class="pp">|</span> 68,0 % <span class="pp">|</span></span>
+<span id="cb9-142"><a href="#cb9-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-143"><a href="#cb9-143" aria-hidden="true" tabindex="-1"></a>En ambos casos dentro + entre reproduce exactamente el total, lo que sirve como comprobación. Con paquetes, el mismo resultado se obtiene con <span class="in">`dineq::theil_decomp(y, g, w)`</span> y <span class="in">`dineq::mld_decomp(y, g, w)`</span>, con <span class="in">`IC2::decompGEI(y, g, w, alpha = 1)`</span>, o con <span class="in">`convey::svygeidec(~y, ~g, des, epsilon = 1)`</span> si hay diseño muestral.</span>
+<span id="cb9-144"><a href="#cb9-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-145"><a href="#cb9-145" aria-hidden="true" tabindex="-1"></a><span class="fu">## Ejemplo completo: renta por regiones</span></span>
+<span id="cb9-146"><a href="#cb9-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-147"><a href="#cb9-147" aria-hidden="true" tabindex="-1"></a>Este ejemplo simula rentas log-normales en cuatro regiones con medias y dispersiones distintas, calcula los dos índices, los descompone y representa la contribución de cada región. Los valores exactos dependen de la semilla; lo que importa es la interpretación.</span>
+<span id="cb9-148"><a href="#cb9-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-149"><a href="#cb9-149" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb9-150"><a href="#cb9-150" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
+<span id="cb9-151"><a href="#cb9-151" aria-hidden="true" tabindex="-1"></a>regiones <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb9-152"><a href="#cb9-152" aria-hidden="true" tabindex="-1"></a>  <span class="at">region =</span> <span class="fu">c</span>(<span class="st">"Norte"</span>, <span class="st">"Sur"</span>, <span class="st">"Este"</span>, <span class="st">"Oeste"</span>),</span>
+<span id="cb9-153"><a href="#cb9-153" aria-hidden="true" tabindex="-1"></a>  <span class="at">n      =</span> <span class="fu">c</span>(<span class="dv">400</span>, <span class="dv">300</span>, <span class="dv">200</span>, <span class="dv">100</span>),</span>
+<span id="cb9-154"><a href="#cb9-154" aria-hidden="true" tabindex="-1"></a>  <span class="at">media  =</span> <span class="fu">c</span>(<span class="fl">9.9</span>, <span class="fl">9.5</span>, <span class="fl">10.1</span>, <span class="fl">9.7</span>),   <span class="co"># media de log(renta)</span></span>
+<span id="cb9-155"><a href="#cb9-155" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd     =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.7</span>, <span class="fl">0.6</span>, <span class="fl">0.4</span>)</span>
+<span id="cb9-156"><a href="#cb9-156" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-157"><a href="#cb9-157" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(<span class="fu">seq_len</span>(<span class="fu">nrow</span>(regiones)), <span class="cf">function</span>(k) {</span>
+<span id="cb9-158"><a href="#cb9-158" aria-hidden="true" tabindex="-1"></a>  <span class="fu">with</span>(regiones[k, ], <span class="fu">data.frame</span>(<span class="at">region =</span> region,</span>
+<span id="cb9-159"><a href="#cb9-159" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">renta  =</span> <span class="fu">rlnorm</span>(n, <span class="at">meanlog =</span> media, <span class="at">sdlog =</span> sd)))</span>
+<span id="cb9-160"><a href="#cb9-160" aria-hidden="true" tabindex="-1"></a>}))</span>
+<span id="cb9-161"><a href="#cb9-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-162"><a href="#cb9-162" aria-hidden="true" tabindex="-1"></a><span class="co"># Índices globales</span></span>
+<span id="cb9-163"><a href="#cb9-163" aria-hidden="true" tabindex="-1"></a><span class="fu">theil_T1</span>(datos<span class="sc">$</span>renta)</span>
+<span id="cb9-164"><a href="#cb9-164" aria-hidden="true" tabindex="-1"></a><span class="fu">theil_T0</span>(datos<span class="sc">$</span>renta)</span>
+<span id="cb9-165"><a href="#cb9-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-166"><a href="#cb9-166" aria-hidden="true" tabindex="-1"></a><span class="co"># Descomposición por región</span></span>
+<span id="cb9-167"><a href="#cb9-167" aria-hidden="true" tabindex="-1"></a>dT0 <span class="ot">&lt;-</span> <span class="fu">theil_decomp</span>(datos<span class="sc">$</span>renta, datos<span class="sc">$</span>region, <span class="at">tipo =</span> <span class="st">"T0"</span>)</span>
+<span id="cb9-168"><a href="#cb9-168" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(dT0<span class="sc">$</span>grupos, <span class="dv">4</span>)</span>
+<span id="cb9-169"><a href="#cb9-169" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(dT0<span class="sc">$</span>resumen, <span class="dv">4</span>)</span>
+<span id="cb9-170"><a href="#cb9-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-171"><a href="#cb9-171" aria-hidden="true" tabindex="-1"></a><span class="co"># Contribución de cada región a la desigualdad "dentro"</span></span>
+<span id="cb9-172"><a href="#cb9-172" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb9-173"><a href="#cb9-173" aria-hidden="true" tabindex="-1"></a>contrib <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">region =</span> <span class="fu">rownames</span>(dT0<span class="sc">$</span>grupos),</span>
+<span id="cb9-174"><a href="#cb9-174" aria-hidden="true" tabindex="-1"></a>                      <span class="at">dentro =</span> dT0<span class="sc">$</span>grupos[, <span class="st">"dentro"</span>])</span>
+<span id="cb9-175"><a href="#cb9-175" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(contrib, <span class="fu">aes</span>(<span class="fu">reorder</span>(region, dentro), dentro)) <span class="sc">+</span></span>
+<span id="cb9-176"><a href="#cb9-176" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"#E07B20"</span>) <span class="sc">+</span> <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb9-177"><a href="#cb9-177" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Contribución a T0 (dentro de regiones)"</span>)</span>
+<span id="cb9-178"><a href="#cb9-178" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-179"><a href="#cb9-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-180"><a href="#cb9-180" aria-hidden="true" tabindex="-1"></a>Cómo leer el resultado:</span>
+<span id="cb9-181"><a href="#cb9-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-182"><a href="#cb9-182" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`pct_entre`</span> indica qué parte de la desigualdad se debe a que las regiones tienen rentas medias distintas. Una política de convergencia regional solo puede actuar sobre esa parte.</span>
+<span id="cb9-183"><a href="#cb9-183" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>La columna <span class="in">`dentro`</span> muestra qué regiones aportan más desigualdad interna. Depende tanto de su desigualdad propia (<span class="in">`T_g`</span>) como de su tamaño (<span class="in">`p`</span>).</span>
+<span id="cb9-184"><a href="#cb9-184" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Si $T_1$ y $T_0$ dan mensajes distintos, la desigualdad se concentra en colas diferentes: $T_1$ reacciona a la parte alta y $T_0$ a la parte baja.</span>
+<span id="cb9-185"><a href="#cb9-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-186"><a href="#cb9-186" aria-hidden="true" tabindex="-1"></a><span class="fu">## Ejemplo: descomposición por sexo</span></span>
+<span id="cb9-187"><a href="#cb9-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-188"><a href="#cb9-188" aria-hidden="true" tabindex="-1"></a>En este ejemplo, la brecha entre mujeres y hombres explica alrededor del 23 % de la desigualdad total; el 77 % restante se debe a la desigualdad dentro de cada sexo. Los datos son diez rentas (en miles de euros), cinco de mujeres y cinco de hombres:</span>
+<span id="cb9-189"><a href="#cb9-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-190"><a href="#cb9-190" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb9-191"><a href="#cb9-191" aria-hidden="true" tabindex="-1"></a>renta <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">15</span>, <span class="dv">18</span>, <span class="dv">22</span>, <span class="dv">30</span>,   <span class="co"># mujeres</span></span>
+<span id="cb9-192"><a href="#cb9-192" aria-hidden="true" tabindex="-1"></a>           <span class="dv">16</span>, <span class="dv">20</span>, <span class="dv">25</span>, <span class="dv">35</span>, <span class="dv">50</span>)   <span class="co"># hombres</span></span>
+<span id="cb9-193"><a href="#cb9-193" aria-hidden="true" tabindex="-1"></a>sexo  <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Mujer"</span>, <span class="st">"Hombre"</span>), <span class="at">each =</span> <span class="dv">5</span>)</span>
+<span id="cb9-194"><a href="#cb9-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-195"><a href="#cb9-195" aria-hidden="true" tabindex="-1"></a>d1 <span class="ot">&lt;-</span> <span class="fu">theil_decomp</span>(renta, sexo, <span class="at">tipo =</span> <span class="st">"T1"</span>)</span>
+<span id="cb9-196"><a href="#cb9-196" aria-hidden="true" tabindex="-1"></a>d0 <span class="ot">&lt;-</span> <span class="fu">theil_decomp</span>(renta, sexo, <span class="at">tipo =</span> <span class="st">"T0"</span>)</span>
+<span id="cb9-197"><a href="#cb9-197" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(d0<span class="sc">$</span>grupos, <span class="dv">4</span>)</span>
+<span id="cb9-198"><a href="#cb9-198" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">rbind</span>(<span class="at">T1 =</span> d1<span class="sc">$</span>resumen, <span class="at">T0 =</span> d0<span class="sc">$</span>resumen), <span class="dv">4</span>)</span>
+<span id="cb9-199"><a href="#cb9-199" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-200"><a href="#cb9-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-201"><a href="#cb9-201" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Grupo <span class="pp">|</span> Renta media <span class="pp">|</span> % población <span class="pp">|</span> % renta <span class="pp">|</span> $T_1$ del grupo <span class="pp">|</span> $T_0$ del grupo <span class="pp">|</span></span>
+<span id="cb9-202"><a href="#cb9-202" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|---|---|---|</span></span>
+<span id="cb9-203"><a href="#cb9-203" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Mujeres <span class="pp">|</span> 19,4 <span class="pp">|</span> 50 % <span class="pp">|</span> 39,9 % <span class="pp">|</span> 0,0502 <span class="pp">|</span> 0,0502 <span class="pp">|</span></span>
+<span id="cb9-204"><a href="#cb9-204" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Hombres <span class="pp">|</span> 29,2 <span class="pp">|</span> 50 % <span class="pp">|</span> 60,1 % <span class="pp">|</span> 0,0833 <span class="pp">|</span> 0,0833 <span class="pp">|</span></span>
+<span id="cb9-205"><a href="#cb9-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-206"><a href="#cb9-206" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Índice <span class="pp">|</span> Total <span class="pp">|</span> Dentro <span class="pp">|</span> Entre (brecha de género) <span class="pp">|</span> % entre <span class="pp">|</span></span>
+<span id="cb9-207"><a href="#cb9-207" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|---|---|</span></span>
+<span id="cb9-208"><a href="#cb9-208" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> $T_1$ <span class="pp">|</span> 0,0906 <span class="pp">|</span> 0,0701 <span class="pp">|</span> 0,0205 <span class="pp">|</span> 22,6 % <span class="pp">|</span></span>
+<span id="cb9-209"><a href="#cb9-209" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> $T_0$ <span class="pp">|</span> 0,0875 <span class="pp">|</span> 0,0667 <span class="pp">|</span> 0,0208 <span class="pp">|</span> 23,7 % <span class="pp">|</span></span>
+<span id="cb9-210"><a href="#cb9-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-211"><a href="#cb9-211" aria-hidden="true" tabindex="-1"></a>Cómo leerlo:</span>
+<span id="cb9-212"><a href="#cb9-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-213"><a href="#cb9-213" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>La parte **entre** mide cuánta desigualdad desaparecería si mujeres y hombres tuvieran la misma renta media. Es la medida de la brecha de género que ofrecen los índices de Theil.</span>
+<span id="cb9-214"><a href="#cb9-214" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>La parte **dentro** indica que, aun cerrando la brecha, quedaría la mayor parte de la desigualdad, sobre todo entre los hombres (índice del grupo 0,083 frente a 0,050).</span>
+<span id="cb9-215"><a href="#cb9-215" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Con datos de encuesta, la misma descomposición con su error estándar se obtiene con <span class="in">`convey::svygeidec(~renta, ~sexo, des, epsilon = 0)`</span>. Es lo que permite decir si la brecha ha cambiado de verdad entre dos años.</span>
+<span id="cb9-216"><a href="#cb9-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-217"><a href="#cb9-217" aria-hidden="true" tabindex="-1"></a>La variable de grupo puede ser cualquier otra: discapacidad, nacionalidad, nivel educativo, o cruces como sexo × región (<span class="in">`interaction(sexo, region)`</span>). Cuantos más grupos, más pequeños son y mayor es el sesgo, como se explica en la sección siguiente.</span>
+<span id="cb9-218"><a href="#cb9-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-219"><a href="#cb9-219" aria-hidden="true" tabindex="-1"></a><span class="fu">## Sesgo y precisión</span></span>
+<span id="cb9-220"><a href="#cb9-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-221"><a href="#cb9-221" aria-hidden="true" tabindex="-1"></a>Los estimadores muestrales de $T_0$ y $T_1$ tienen sesgo, que suele ser a la baja y es mayor en muestras pequeñas y con distribuciones de cola pesada. Por eso no deberían publicarse sin una medida de su precisión. El jackknife da a la vez una estimación del sesgo y del error estándar:</span>
+<span id="cb9-222"><a href="#cb9-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-223"><a href="#cb9-223" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-224"><a href="#cb9-224" aria-hidden="true" tabindex="-1"></a>\widehat{\text{sesgo}} = (n-1)\,(\bar T_{(\cdot)} - \hat T), \qquad</span>
+<span id="cb9-225"><a href="#cb9-225" aria-hidden="true" tabindex="-1"></a>\tilde T = \hat T - \widehat{\text{sesgo}}, \qquad</span>
+<span id="cb9-226"><a href="#cb9-226" aria-hidden="true" tabindex="-1"></a>\widehat{\text{Var}} = \frac{n-1}{n}\sum_i \big(\hat T_{(i)} - \bar T_{(\cdot)}\big)^2</span>
+<span id="cb9-227"><a href="#cb9-227" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-228"><a href="#cb9-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-229"><a href="#cb9-229" aria-hidden="true" tabindex="-1"></a>Calcular los $n$ índices «dejando uno fuera» repitiendo la fórmula cuesta $\mathcal{O}(n^2)$. Como $T_0$ y $T_1$ solo dependen de unas pocas sumas, todos se obtienen a la vez en $\mathcal{O}(n)$, lo que hace el jackknife viable con millones de observaciones:</span>
+<span id="cb9-230"><a href="#cb9-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-231"><a href="#cb9-231" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb9-232"><a href="#cb9-232" aria-hidden="true" tabindex="-1"></a>jackknife_theil <span class="ot">&lt;-</span> <span class="cf">function</span>(y, <span class="at">tipo =</span> <span class="fu">c</span>(<span class="st">"T1"</span>, <span class="st">"T0"</span>)) {</span>
+<span id="cb9-233"><a href="#cb9-233" aria-hidden="true" tabindex="-1"></a>  tipo <span class="ot">&lt;-</span> <span class="fu">match.arg</span>(tipo); n <span class="ot">&lt;-</span> <span class="fu">length</span>(y)</span>
+<span id="cb9-234"><a href="#cb9-234" aria-hidden="true" tabindex="-1"></a>  S1 <span class="ot">&lt;-</span> <span class="fu">sum</span>(y); S2 <span class="ot">&lt;-</span> <span class="fu">sum</span>(y <span class="sc">*</span> <span class="fu">log</span>(y)); L <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">log</span>(y))</span>
+<span id="cb9-235"><a href="#cb9-235" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (tipo <span class="sc">==</span> <span class="st">"T1"</span>) {</span>
+<span id="cb9-236"><a href="#cb9-236" aria-hidden="true" tabindex="-1"></a>    T    <span class="ot">&lt;-</span> S2 <span class="sc">/</span> S1 <span class="sc">-</span> <span class="fu">log</span>(S1 <span class="sc">/</span> n)</span>
+<span id="cb9-237"><a href="#cb9-237" aria-hidden="true" tabindex="-1"></a>    Tloo <span class="ot">&lt;-</span> (S2 <span class="sc">-</span> y <span class="sc">*</span> <span class="fu">log</span>(y)) <span class="sc">/</span> (S1 <span class="sc">-</span> y) <span class="sc">-</span> <span class="fu">log</span>((S1 <span class="sc">-</span> y) <span class="sc">/</span> (n <span class="sc">-</span> <span class="dv">1</span>))</span>
+<span id="cb9-238"><a href="#cb9-238" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb9-239"><a href="#cb9-239" aria-hidden="true" tabindex="-1"></a>    T    <span class="ot">&lt;-</span> <span class="fu">log</span>(S1 <span class="sc">/</span> n) <span class="sc">-</span> L <span class="sc">/</span> n</span>
+<span id="cb9-240"><a href="#cb9-240" aria-hidden="true" tabindex="-1"></a>    Tloo <span class="ot">&lt;-</span> <span class="fu">log</span>((S1 <span class="sc">-</span> y) <span class="sc">/</span> (n <span class="sc">-</span> <span class="dv">1</span>)) <span class="sc">-</span> (L <span class="sc">-</span> <span class="fu">log</span>(y)) <span class="sc">/</span> (n <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb9-241"><a href="#cb9-241" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb9-242"><a href="#cb9-242" aria-hidden="true" tabindex="-1"></a>  sesgo <span class="ot">&lt;-</span> (n <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> (<span class="fu">mean</span>(Tloo) <span class="sc">-</span> T)</span>
+<span id="cb9-243"><a href="#cb9-243" aria-hidden="true" tabindex="-1"></a>  ee    <span class="ot">&lt;-</span> <span class="fu">sqrt</span>((n <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">/</span> n <span class="sc">*</span> <span class="fu">sum</span>((Tloo <span class="sc">-</span> <span class="fu">mean</span>(Tloo))<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb9-244"><a href="#cb9-244" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="at">T =</span> T, <span class="at">sesgo =</span> sesgo, <span class="at">T_corregido =</span> T <span class="sc">-</span> sesgo, <span class="at">ee =</span> ee)</span>
+<span id="cb9-245"><a href="#cb9-245" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-246"><a href="#cb9-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-247"><a href="#cb9-247" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">jackknife_theil</span>(y, <span class="st">"T1"</span>), <span class="dv">4</span>)  <span class="co"># T 0.1809  sesgo -0.0296  T_corregido 0.2106  ee 0.0858</span></span>
+<span id="cb9-248"><a href="#cb9-248" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">jackknife_theil</span>(y, <span class="st">"T0"</span>), <span class="dv">4</span>)  <span class="co"># T 0.2114  sesgo -0.0372  T_corregido 0.2486  ee 0.1071</span></span>
+<span id="cb9-249"><a href="#cb9-249" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-250"><a href="#cb9-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-251"><a href="#cb9-251" aria-hidden="true" tabindex="-1"></a>Con solo seis observaciones, el error estándar es casi la mitad del índice: el ejemplo muestra por qué un valor puntual sin margen de error puede engañar.</span>
+<span id="cb9-252"><a href="#cb9-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-253"><a href="#cb9-253" aria-hidden="true" tabindex="-1"></a>Para intervalos de confianza, el bootstrap es la alternativa habitual. Con distribuciones asimétricas conviene usar el intervalo bootstrap-t o el BCa, mejor que el de percentiles:</span>
+<span id="cb9-254"><a href="#cb9-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-255"><a href="#cb9-255" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb9-256"><a href="#cb9-256" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(boot)</span>
+<span id="cb9-257"><a href="#cb9-257" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">boot</span>(datos<span class="sc">$</span>renta, <span class="cf">function</span>(d, i) <span class="fu">theil_T0</span>(d[i]), <span class="at">R =</span> <span class="dv">2000</span>)</span>
+<span id="cb9-258"><a href="#cb9-258" aria-hidden="true" tabindex="-1"></a><span class="fu">boot.ci</span>(b, <span class="at">type =</span> <span class="fu">c</span>(<span class="st">"perc"</span>, <span class="st">"bca"</span>))</span>
+<span id="cb9-259"><a href="#cb9-259" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-260"><a href="#cb9-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-261"><a href="#cb9-261" aria-hidden="true" tabindex="-1"></a>Con datos de encuesta, <span class="in">`convey::svygei()`</span> ya devuelve el error estándar por linealización, teniendo en cuenta estratos y conglomerados. THEILUMINA estudia cómo predecir y corregir el sesgo (OG1), cómo construir intervalos fiables (OG2) y cómo reducir el coste del jackknife (OG3), y lo integrará todo en el paquete **theil** (OG4).</span>
+<span id="cb9-262"><a href="#cb9-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-263"><a href="#cb9-263" aria-hidden="true" tabindex="-1"></a><span class="fu">## Errores frecuentes y buenas prácticas</span></span>
+<span id="cb9-264"><a href="#cb9-264" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-265"><a href="#cb9-265" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**Confundir $T_0$ y $T_1$.** Indica siempre cuál usas y comprueba la convención del paquete (en <span class="in">`ineq`</span>, <span class="in">`parameter = 0`</span> es $T_1$).</span>
+<span id="cb9-266"><a href="#cb9-266" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Rentas nulas o negativas.** Los logaritmos fallan o los paquetes las eliminan en silencio. Decide explícitamente qué hacer con ellas (excluirlas, acotarlas o usar otro índice de la familia GE) e informa de cuántas hay.</span>
+<span id="cb9-267"><a href="#cb9-267" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**Olvidar los pesos.** Con datos de encuesta, los índices sin ponderar no estiman la desigualdad de la población.</span>
+<span id="cb9-268"><a href="#cb9-268" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**Comparar sin margen de error.** Una diferencia entre regiones o años solo es relevante si supera la incertidumbre del estimador. Acompaña cada índice de su error estándar o de su intervalo de confianza.</span>
+<span id="cb9-269"><a href="#cb9-269" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>**Desagregar demasiado.** El sesgo crece al reducirse el tamaño de cada grupo. En descomposiciones con muchos grupos pequeños, corrige el sesgo o agrupa categorías.</span>
+<span id="cb9-270"><a href="#cb9-270" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>**No verificar la descomposición.** Dentro + entre debe coincidir con el total; si no coincide, hay un error en los pesos o en los grupos.</span>
+<span id="cb9-271"><a href="#cb9-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-272"><a href="#cb9-272" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb9-273"><a href="#cb9-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-274"><a href="#cb9-274" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> class</span><span class="op">=</span><span class="st">"source"</span><span class="dt">&gt;</span>Cómo citar: THEILUMINA (2026). *Guía práctica: índices de Theil en R*. Guías prácticas de THEILUMINA, Universidad de Granada. <span class="ot">&lt;https://jfmunozrosas.github.io/theilumina/guides/indices-theil-r-es.html&gt;</span><span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span></code><button title="Copiar al portapapeles" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>THEILUMINA · Research project proposal · Universidad de Granada · Last update: 16 November 2026</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Built with <a href="https://quarto.org">Quarto</a> · Reproducible research</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

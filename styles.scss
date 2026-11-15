@@ -167,3 +167,17 @@ table { font-size: .88rem; }
 .sym-ineq { color: $theil-orange; font-weight: 700; }
 .sym-tour { color: $theil-blue; }
 .visit-counter .vc-num { font-weight: 700; color: $theil-orange; }
+
+/* ---------- Video, infographic and guides ---------- */
+.video-wrap { margin: .5rem 0 1.5rem; }
+.video-wrap video { width: 100%; border-radius: 10px; box-shadow: 0 4px 18px rgba(0,0,0,.15); background: $theil-blue; }
+img.infographic, .infographic img { width: 100%; max-width: 900px; display: block; margin: 0 auto; border: 1px solid rgba($theil-frame, .35); border-radius: 8px; }
+.guide-logo { text-align: center; margin: .5rem 0 1.5rem; img { max-width: 480px; width: 70%; } }
+.guide-card {
+  border: 1px solid rgba($theil-frame, .45); border-left: 6px solid $theil-orange; border-radius: 8px;
+  padding: 1rem 1.25rem .5rem; margin-bottom: 1.25rem; background: #fff;
+  h3 { margin-top: 0; color: $theil-blue; }
+  .meta { font-size: .9rem; color: #555; }
+}
+.audience { display: flex; flex-wrap: wrap; gap: .5rem; margin: .5rem 0 1.25rem; }
+.conf-table td:first-child { white-space: nowrap; }

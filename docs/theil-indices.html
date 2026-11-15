@@ -75,7 +75,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-fc4708d37b6638c664457f50cc202a6b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-fa1e17b68db0e6c2c765344693dbaad9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -240,6 +240,10 @@ window.Quarto = {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-dissemination">    
         <li>
+    <a class="dropdown-item" href="./guides.html">
+ <span class="dropdown-text">Practical guides</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="./dissemination.html">
  <span class="dropdown-text">Seminars, conferences and stays</span></a>
   </li>  
@@ -320,6 +324,16 @@ window.Quarto = {
 </header>
 
 
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Looking for worked examples in R? See the <a href="./guides/theil-indices-r.html">practical guide to Theil indices in R</a> (also <a href="./guides/indices-theil-r-es.html">in Spanish</a>).</p>
+</div>
+</div>
+</div>
 <section id="definition" class="level2">
 <h2 class="anchored" data-anchor-id="definition">Definition</h2>
 <p>Let <span class="math inline">Y</span> be a positive random variable with mean <span class="math inline">\mu = E[Y]</span>. The Theil indices are members of the generalised entropy family <span class="math inline">GE(\alpha)</span>:</p>
@@ -918,105 +932,109 @@ T_0 = \underbrace{\sum_{g=1}^{G} p_g\, T_{0g}}_{\text{within}} + \underbrace{\su
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Definition, decomposition and estimation"</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">## Definition</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>Let $Y$ be a positive random variable with mean $\mu = E<span class="co">[</span><span class="ot">Y</span><span class="co">]</span>$. The Theil indices are members of the generalised entropy family $GE(\alpha)$:</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip appearance="simple"}</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>Looking for worked examples in R? See the <span class="co">[</span><span class="ot">practical guide to Theil indices in R</span><span class="co">](guides/theil-indices-r.qmd)</span> (also <span class="co">[</span><span class="ot">in Spanish</span><span class="co">](guides/indices-theil-r-es.qmd)</span>).</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>T_1 = GE(1) = E\left<span class="co">[</span><span class="ot">\frac{Y}{\mu}\log\frac{Y}{\mu}\right</span><span class="co">]</span>,</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>\qquad</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>T_0 = GE(0) = E\left<span class="co">[</span><span class="ot">\log\frac{\mu}{Y}\right</span><span class="co">]</span> = \log\mu - E<span class="co">[</span><span class="ot">\log Y</span><span class="co">]</span>.</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">## Definition</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>Let $Y$ be a positive random variable with mean $\mu = E<span class="co">[</span><span class="ot">Y</span><span class="co">]</span>$. The Theil indices are members of the generalised entropy family $GE(\alpha)$:</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>$T_1$ is the **Theil index** and $T_0$ the **mean logarithmic deviation** (MLD). Both are zero under perfect equality and increase with inequality. $T_1$ is more sensitive to the upper tail of the distribution, and $T_0$ to the lower tail.</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="fu">### Closed forms for common distributions</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>T_1 = GE(1) = E\left<span class="co">[</span><span class="ot">\frac{Y}{\mu}\log\frac{Y}{\mu}\right</span><span class="co">]</span>,</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>\qquad</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>T_0 = GE(0) = E\left<span class="co">[</span><span class="ot">\log\frac{\mu}{Y}\right</span><span class="co">]</span> = \log\mu - E<span class="co">[</span><span class="ot">\log Y</span><span class="co">]</span>.</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Distribution <span class="pp">|</span> $T_0$ <span class="pp">|</span> $T_1$ <span class="pp">|</span></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|</span></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Lognormal $(\mu_{\log}, \sigma)$ <span class="pp">|</span> $\sigma^2/2$ <span class="pp">|</span> $\sigma^2/2$ <span class="pp">|</span></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Pareto $(x_m, \alpha)$, $\alpha&gt;1$ <span class="pp">|</span> $\log\frac{\alpha}{\alpha-1} - \frac{1}{\alpha}$ <span class="pp">|</span> $\frac{1}{\alpha-1} - \log\frac{\alpha}{\alpha-1}$ <span class="pp">|</span></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Gamma $(k, \theta)$ <span class="pp">|</span> $\log k - \psi(k)$ <span class="pp">|</span> $\psi(k) + \frac{1}{k} - \log k$ <span class="pp">|</span></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>where $\psi(\cdot)$ is the digamma function.</span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="fu">## Additive decomposition</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>$T_1$ is the **Theil index** and $T_0$ the **mean logarithmic deviation** (MLD). Both are zero under perfect equality and increase with inequality. $T_1$ is more sensitive to the upper tail of the distribution, and $T_0$ to the lower tail.</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="fu">### Closed forms for common distributions</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Distribution <span class="pp">|</span> $T_0$ <span class="pp">|</span> $T_1$ <span class="pp">|</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Lognormal $(\mu_{\log}, \sigma)$ <span class="pp">|</span> $\sigma^2/2$ <span class="pp">|</span> $\sigma^2/2$ <span class="pp">|</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Pareto $(x_m, \alpha)$, $\alpha&gt;1$ <span class="pp">|</span> $\log\frac{\alpha}{\alpha-1} - \frac{1}{\alpha}$ <span class="pp">|</span> $\frac{1}{\alpha-1} - \log\frac{\alpha}{\alpha-1}$ <span class="pp">|</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Gamma $(k, \theta)$ <span class="pp">|</span> $\log k - \psi(k)$ <span class="pp">|</span> $\psi(k) + \frac{1}{k} - \log k$ <span class="pp">|</span></span>
 <span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>If the population is partitioned into $G$ groups with population shares $p_g$, income shares $s_g$, means $\mu_g$ and indices $T_{0g}$, $T_{1g}$:</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>where $\psi(\cdot)$ is the digamma function.</span>
 <span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>T_1 = \underbrace{\sum_{g=1}^{G} s_g\, T_{1g}}_{\text{within}} + \underbrace{\sum_{g=1}^{G} s_g \log\frac{\mu_g}{\mu}}_{\text{between}},</span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>\qquad</span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>T_0 = \underbrace{\sum_{g=1}^{G} p_g\, T_{0g}}_{\text{within}} + \underbrace{\sum_{g=1}^{G} p_g \log\frac{\mu}{\mu_g}}_{\text{between}}.</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="fu">## Additive decomposition</span></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>If the population is partitioned into $G$ groups with population shares $p_g$, income shares $s_g$, means $\mu_g$ and indices $T_{0g}$, $T_{1g}$:</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>This property makes the Theil indices the standard tool to identify the **sources** of inequality: by region, gender, age, education, sector, type of employment or municipality size.</span>
-<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a><span class="fu">## Plug-in estimators</span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>T_1 = \underbrace{\sum_{g=1}^{G} s_g\, T_{1g}}_{\text{within}} + \underbrace{\sum_{g=1}^{G} s_g \log\frac{\mu_g}{\mu}}_{\text{between}},</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>\qquad</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>T_0 = \underbrace{\sum_{g=1}^{G} p_g\, T_{0g}}_{\text{within}} + \underbrace{\sum_{g=1}^{G} p_g \log\frac{\mu}{\mu_g}}_{\text{between}}.</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>Given a sample $y_1,\dots,y_n$ with mean $\bar y$:</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>This property makes the Theil indices the standard tool to identify the **sources** of inequality: by region, gender, age, education, sector, type of employment or municipality size.</span>
 <span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>\widehat{T}_1 = \frac{1}{n}\sum_{i=1}^{n}\frac{y_i}{\bar y}\log\frac{y_i}{\bar y}</span>
-<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>= \frac{\sum_i y_i\log y_i}{\sum_i y_i} - \log\bar y,</span>
-<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>\qquad</span>
-<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>\widehat{T}_0 = \log\bar y - \frac{1}{n}\sum_{i=1}^{n}\log y_i .</span>
-<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
-<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>T1.hat <span class="ot">&lt;-</span> <span class="cf">function</span>(y) {</span>
-<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> <span class="fu">mean</span>(y)</span>
-<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>((y <span class="sc">/</span> m) <span class="sc">*</span> <span class="fu">log</span>(y <span class="sc">/</span> m))</span>
-<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>T0.hat <span class="ot">&lt;-</span> <span class="cf">function</span>(y) {</span>
-<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log</span>(<span class="fu">mean</span>(y)) <span class="sc">-</span> <span class="fu">mean</span>(<span class="fu">log</span>(y))</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a><span class="fu">## Plug-in estimators</span></span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>Given a sample $y_1,\dots,y_n$ with mean $\bar y$:</span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>\widehat{T}_1 = \frac{1}{n}\sum_{i=1}^{n}\frac{y_i}{\bar y}\log\frac{y_i}{\bar y}</span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>= \frac{\sum_i y_i\log y_i}{\sum_i y_i} - \log\bar y,</span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>\qquad</span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>\widehat{T}_0 = \log\bar y - \frac{1}{n}\sum_{i=1}^{n}\log y_i .</span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>T1.hat <span class="ot">&lt;-</span> <span class="cf">function</span>(y) {</span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> <span class="fu">mean</span>(y)</span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>((y <span class="sc">/</span> m) <span class="sc">*</span> <span class="fu">log</span>(y <span class="sc">/</span> m))</span>
 <span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>These estimators are consistent but biased in finite samples. The bias is negligible for symmetric, low-inequality data, but becomes severe under strong skewness and inequality. See the <span class="co">[</span><span class="ot">interactive bias explorer</span><span class="co">](simulation.qmd)</span>.</span>
-<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a><span class="fu">## Jackknife bias correction and variance</span></span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>T0.hat <span class="ot">&lt;-</span> <span class="cf">function</span>(y) {</span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log</span>(<span class="fu">mean</span>(y)) <span class="sc">-</span> <span class="fu">mean</span>(<span class="fu">log</span>(y))</span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a>Let $\widehat{T}_{(i)}$ be the estimator computed without observation $i$, and $\widehat{T}_{(\cdot)} = n^{-1}\sum_i \widehat{T}_{(i)}$. The jackknife bias-corrected estimator and variance estimator are</span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a>These estimators are consistent but biased in finite samples. The bias is negligible for symmetric, low-inequality data, but becomes severe under strong skewness and inequality. See the <span class="co">[</span><span class="ot">interactive bias explorer</span><span class="co">](simulation.qmd)</span>.</span>
 <span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>\widehat{T}^{\,J} = n\,\widehat{T} - (n-1)\,\widehat{T}_{(\cdot)},</span>
-<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>\qquad</span>
-<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>\widehat{V}_J = \frac{n-1}{n}\sum_{i=1}^{n}\left(\widehat{T}_{(i)} - \widehat{T}_{(\cdot)}\right)^2 .</span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a><span class="fu">## Jackknife bias correction and variance</span></span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>Let $\widehat{T}_{(i)}$ be the estimator computed without observation $i$, and $\widehat{T}_{(\cdot)} = n^{-1}\sum_i \widehat{T}_{(i)}$. The jackknife bias-corrected estimator and variance estimator are</span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a>The standard implementation recomputes the index $n$ times, with cost $O(n^2)$. Because $\widehat{T}_0$ and $\widehat{T}_1$ depend on the data only through a few sums, every leave-one-out value can be obtained by subtracting observation $i$ from those sums, with cost $O(n)$:</span>
-<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
-<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a><span class="co"># Leave-one-out values in O(n)</span></span>
-<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a>T.loo <span class="ot">&lt;-</span> <span class="cf">function</span>(y, <span class="at">index =</span> <span class="fu">c</span>(<span class="st">"T1"</span>, <span class="st">"T0"</span>)) {</span>
-<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a>  index <span class="ot">&lt;-</span> <span class="fu">match.arg</span>(index)</span>
-<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a>  n  <span class="ot">&lt;-</span> <span class="fu">length</span>(y)</span>
-<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>  Sy <span class="ot">&lt;-</span> <span class="fu">sum</span>(y)</span>
-<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a>  m.i <span class="ot">&lt;-</span> (Sy <span class="sc">-</span> y) <span class="sc">/</span> (n <span class="sc">-</span> <span class="dv">1</span>)                      <span class="co"># leave-one-out means</span></span>
-<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (index <span class="sc">==</span> <span class="st">"T1"</span>) {</span>
-<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a>    Sylogy <span class="ot">&lt;-</span> <span class="fu">sum</span>(y <span class="sc">*</span> <span class="fu">log</span>(y))</span>
-<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a>    (Sylogy <span class="sc">-</span> y <span class="sc">*</span> <span class="fu">log</span>(y)) <span class="sc">/</span> (Sy <span class="sc">-</span> y) <span class="sc">-</span> <span class="fu">log</span>(m.i)</span>
-<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
-<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a>    Slogy <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">log</span>(y))</span>
-<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a>    <span class="fu">log</span>(m.i) <span class="sc">-</span> (Slogy <span class="sc">-</span> <span class="fu">log</span>(y)) <span class="sc">/</span> (n <span class="sc">-</span> <span class="dv">1</span>)</span>
-<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a>jackknife.theil <span class="ot">&lt;-</span> <span class="cf">function</span>(y, <span class="at">index =</span> <span class="fu">c</span>(<span class="st">"T1"</span>, <span class="st">"T0"</span>)) {</span>
-<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a>  index <span class="ot">&lt;-</span> <span class="fu">match.arg</span>(index)</span>
-<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a>  n   <span class="ot">&lt;-</span> <span class="fu">length</span>(y)</span>
-<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a>  est <span class="ot">&lt;-</span> <span class="cf">if</span> (index <span class="sc">==</span> <span class="st">"T1"</span>) <span class="fu">T1.hat</span>(y) <span class="cf">else</span> <span class="fu">T0.hat</span>(y)</span>
-<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a>  loo <span class="ot">&lt;-</span> <span class="fu">T.loo</span>(y, index)</span>
-<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a>  m.loo <span class="ot">&lt;-</span> <span class="fu">mean</span>(loo)</span>
-<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">estimate  =</span> est,</span>
-<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a>       <span class="at">corrected =</span> n <span class="sc">*</span> est <span class="sc">-</span> (n <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> m.loo,</span>
-<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a>       <span class="at">variance  =</span> (n <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">/</span> n <span class="sc">*</span> <span class="fu">sum</span>((loo <span class="sc">-</span> m.loo)<span class="sc">^</span><span class="dv">2</span>))   <span class="co"># two-pass</span></span>
-<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a>These functions will be part of the R package **theil**, developed in WP4.</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a>\widehat{T}^{\,J} = n\,\widehat{T} - (n-1)\,\widehat{T}_{(\cdot)},</span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a>\qquad</span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a>\widehat{V}_J = \frac{n-1}{n}\sum_{i=1}^{n}\left(\widehat{T}_{(i)} - \widehat{T}_{(\cdot)}\right)^2 .</span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a>The standard implementation recomputes the index $n$ times, with cost $O(n^2)$. Because $\widehat{T}_0$ and $\widehat{T}_1$ depend on the data only through a few sums, every leave-one-out value can be obtained by subtracting observation $i$ from those sums, with cost $O(n)$:</span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a><span class="co"># Leave-one-out values in O(n)</span></span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a>T.loo <span class="ot">&lt;-</span> <span class="cf">function</span>(y, <span class="at">index =</span> <span class="fu">c</span>(<span class="st">"T1"</span>, <span class="st">"T0"</span>)) {</span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a>  index <span class="ot">&lt;-</span> <span class="fu">match.arg</span>(index)</span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a>  n  <span class="ot">&lt;-</span> <span class="fu">length</span>(y)</span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a>  Sy <span class="ot">&lt;-</span> <span class="fu">sum</span>(y)</span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a>  m.i <span class="ot">&lt;-</span> (Sy <span class="sc">-</span> y) <span class="sc">/</span> (n <span class="sc">-</span> <span class="dv">1</span>)                      <span class="co"># leave-one-out means</span></span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (index <span class="sc">==</span> <span class="st">"T1"</span>) {</span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a>    Sylogy <span class="ot">&lt;-</span> <span class="fu">sum</span>(y <span class="sc">*</span> <span class="fu">log</span>(y))</span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a>    (Sylogy <span class="sc">-</span> y <span class="sc">*</span> <span class="fu">log</span>(y)) <span class="sc">/</span> (Sy <span class="sc">-</span> y) <span class="sc">-</span> <span class="fu">log</span>(m.i)</span>
+<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a>    Slogy <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">log</span>(y))</span>
+<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a>    <span class="fu">log</span>(m.i) <span class="sc">-</span> (Slogy <span class="sc">-</span> <span class="fu">log</span>(y)) <span class="sc">/</span> (n <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a>jackknife.theil <span class="ot">&lt;-</span> <span class="cf">function</span>(y, <span class="at">index =</span> <span class="fu">c</span>(<span class="st">"T1"</span>, <span class="st">"T0"</span>)) {</span>
+<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a>  index <span class="ot">&lt;-</span> <span class="fu">match.arg</span>(index)</span>
+<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a>  n   <span class="ot">&lt;-</span> <span class="fu">length</span>(y)</span>
+<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a>  est <span class="ot">&lt;-</span> <span class="cf">if</span> (index <span class="sc">==</span> <span class="st">"T1"</span>) <span class="fu">T1.hat</span>(y) <span class="cf">else</span> <span class="fu">T0.hat</span>(y)</span>
+<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a>  loo <span class="ot">&lt;-</span> <span class="fu">T.loo</span>(y, index)</span>
+<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a>  m.loo <span class="ot">&lt;-</span> <span class="fu">mean</span>(loo)</span>
+<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">estimate  =</span> est,</span>
+<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a>       <span class="at">corrected =</span> n <span class="sc">*</span> est <span class="sc">-</span> (n <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> m.loo,</span>
+<span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a>       <span class="at">variance  =</span> (n <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">/</span> n <span class="sc">*</span> <span class="fu">sum</span>((loo <span class="sc">-</span> m.loo)<span class="sc">^</span><span class="dv">2</span>))   <span class="co"># two-pass</span></span>
+<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a>These functions will be part of the R package **theil**, developed in WP4.</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">

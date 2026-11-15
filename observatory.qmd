@@ -3,7 +3,7 @@ title: "Inequality observatory"
 subtitle: "Official inequality indicators from Eurostat, the World Bank and the Spanish Statistical Office (INE), and links to other inequality observatories"
 ---
 
-This observatory gathers public inequality indicators for European and world countries and for the Spanish regions. Eurostat and World Bank data are **downloaded live from the official sources** every time the page is opened, so they always show the latest release; INE data are downloaded every time the website is updated. Each chart can be explored by hovering over the points, and the data can be downloaded as CSV.
+This observatory gathers public inequality indicators for European and world countries and for the Spanish regions. Eurostat data are **downloaded live from the official source** every time the page is opened, so they always show the latest release; World Bank and INE data are downloaded every time the website is updated. Each chart can be explored by hovering over the points, and the data can be downloaded as CSV.
 
 ::: {.callout-note collapse="true"}
 ## Why Theil indices are rarely published, and what this observatory offers
@@ -180,24 +180,57 @@ euroData.ok ? DOM.download(new Blob([d3.csvFormat(euroData.rows)], {type: "text/
 
 ## World: Gini and Theil $T_0$ (World Bank PIP)
 
+```{r}
+#| label: wb-download
+#| include: false
+# World Bank Poverty and Inequality Platform (PIP): Gini and mean log deviation (Theil T0).
+# Downloaded every time the website is rendered (the PIP API does not allow direct requests
+# from web browsers). If the World Bank cannot be reached, the last downloaded copy is used.
+wb_file <- "data/wb_pip.csv"
+dir.create("data", showWarnings = FALSE)
+wb <- tryCatch({
+  tmp <- tempfile(fileext = ".csv")
+  download.file("https://api.worldbank.org/pip/v1/pip?country=all&year=all&fill_gaps=false&format=csv",
+                tmp, quiet = TRUE, mode = "wb")
+  x <- read.csv(tmp, stringsAsFactors = FALSE)
+  x <- x[x$reporting_level == "national",
+         c("country_code", "country_name", "reporting_year", "welfare_type", "gini", "mld")]
+  x <- unique(x)
+  if (nrow(x) == 0) stop("empty response")
+  write.csv(x, wb_file, row.names = FALSE, fileEncoding = "UTF-8")
+  x
+}, error = function(e) {
+  if (file.exists(wb_file)) read.csv(wb_file, fileEncoding = "UTF-8") else
+    data.frame(country_code = character(), country_name = character(), reporting_year = integer(),
+               welfare_type = character(), gini = numeric(), mld = numeric())
+})
+ojs_define(wbRaw = wb)
+```
+
 ```{ojs}
 //| echo: false
 wbData = {
-  try {
-    const res = await fetch("https://api.worldbank.org/pip/v1/pip?country=all&year=all&fill_gaps=false&format=json");
-    if (!res.ok) throw new Error(`World Bank PIP: HTTP ${res.status}`);
-    const js = await res.json();
-    const rows = [];
-    for (const r of js) {
-      if (r.reporting_level !== "national") continue;
-      const base = {code: r.country_code, country: r.country_name, year: +r.reporting_year, welfare: r.welfare_type};
-      if (r.gini != null) rows.push({...base, indicator: "Gini index", value: +r.gini});
-      if (r.mld != null) rows.push({...base, indicator: "Theil T0 (mean log deviation)", value: +r.mld});
+  // 1) Data downloaded when the website was rendered (reliable: no browser restrictions)
+  let recs = transpose(wbRaw);
+  let source = "render";
+  // 2) Fallback: try a live request from the browser
+  if (!recs.length) {
+    try {
+      const res = await fetch("https://api.worldbank.org/pip/v1/pip?country=all&year=all&fill_gaps=false&format=csv");
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      recs = d3.csvParse(await res.text()).filter(r => r.reporting_level === "national");
+      source = "live";
+    } catch (e) {
+      return {ok: false, error: `World Bank PIP: ${e.message}`, rows: []};
     }
-    return {ok: true, rows};
-  } catch (e) {
-    return {ok: false, error: e.message, rows: []};
   }
+  const rows = [];
+  for (const r of recs) {
+    const base = {code: r.country_code, country: r.country_name, year: +r.reporting_year, welfare: r.welfare_type};
+    if (r.gini !== null && r.gini !== "" && r.gini !== "NA" && Number.isFinite(+r.gini)) rows.push({...base, indicator: "Gini index", value: +r.gini});
+    if (r.mld !== null && r.mld !== "" && r.mld !== "NA" && Number.isFinite(+r.mld)) rows.push({...base, indicator: "Theil T0 (mean log deviation)", value: +r.mld});
+  }
+  return {ok: rows.length > 0, rows, source, error: rows.length ? "" : "no data"};
 }
 wbCountries = [...new Set(wbData.rows.map(r => r.country))].sort()
 viewof wbSel = Inputs.form({

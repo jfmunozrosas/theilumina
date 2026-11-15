@@ -4,6 +4,8 @@ project:
   resources:
     - "data/*.csv"
     - "images/brand/*"
+    - "images/theilumina_infographic.*"
+    - "media/*"
 
 website:
   title: "THEILUMINA"
@@ -46,6 +48,8 @@ website:
         text: Publications
       - text: Dissemination
         menu:
+          - href: guides.qmd
+            text: "Practical guides"
           - href: dissemination.qmd
             text: "Seminars, conferences and stays"
           - href: identity.qmd

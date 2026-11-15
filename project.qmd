@@ -5,7 +5,7 @@ subtitle: "Research project proposal · General objectives, work packages and ac
 
 {{< include _status.md >}}
 
-The research problems and questions that motivate these objectives are described in [Research problems and questions](research.qmd).
+The research problems and questions that motivate these objectives are described in [Research problems and questions](research.qmd). The [project infographic](images/theilumina_infographic.png) summarises the project on a single page.
 
 The project is organised into five work packages (WP), each aligned with a General Objective (GO). Each WP sets out Specific Objectives (SO) and Activities (A). A cross-cutting activity covers this website:
 

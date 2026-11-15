@@ -43,5 +43,14 @@
   },
   "research.qmd": {
     "research.html": "37623c3e"
+  },
+  "guides/indices-theil-r-es.qmd": {
+    "indices-theil-r-es.html": "d886fc04"
+  },
+  "guides/theil-indices-r.qmd": {
+    "theil-indices-r.html": "3115e8f7"
+  },
+  "guides.qmd": {
+    "guides.html": "9e3cd2de"
   }
 }

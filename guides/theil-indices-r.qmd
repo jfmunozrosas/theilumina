@@ -1,0 +1,273 @@
+---
+title: "A practical guide to Theil indices in R"
+subtitle: "Estimation, decomposition, bias and precision · THEILUMINA practical guides"
+date: "2026-11-15"
+---
+
+::: {.guide-logo}
+![](../images/brand/theilumina_logo_en.png){fig-alt="THEILUMINA logo"}
+:::
+
+::: {.callout-note appearance="simple"}
+[Versión en español](indices-theil-r-es.qmd) · [All practical guides](../guides.qmd)
+:::
+
+## Introduction
+
+This guide shows how to estimate Theil indices in R, how to decompose them into between-group and within-group components, and how to measure their bias and precision. All code uses base R or packages currently on CRAN.
+
+The two Theil indices belong to the generalised entropy family GE($\alpha$):
+
+- **$T_1$ (Theil's T index, GE(1))**: more sensitive to the top of the distribution.
+- **$T_0$ (mean log deviation, MLD, GE(0))**: more sensitive to the bottom.
+
+Both equal 0 under perfect equality, satisfy the Pigou–Dalton transfer principle, are scale invariant and, above all, are **additively decomposable**: total inequality is exactly the sum of a *between*-group part (regions, sex, sectors) and a *within*-group part. This property, which the Gini index lacks, is the main reason to use them.
+
+The **theil** R package developed in THEILUMINA will bring estimation, bias correction and inference together in a single tool. Until then, this guide relies on existing functions.
+
+## Formulas
+
+Let $y_1, \dots, y_n$ be positive incomes with sampling weights $w_i$ and weighted mean $\mu$ (unweighted: $w_i = 1$).
+
+$$
+T_1 = \frac{\sum_i w_i \frac{y_i}{\mu}\ln\frac{y_i}{\mu}}{\sum_i w_i}, \qquad
+T_0 = \frac{\sum_i w_i \ln\frac{\mu}{y_i}}{\sum_i w_i}, \qquad
+\mu = \frac{\sum_i w_i y_i}{\sum_i w_i}
+$$
+
+With $G$ groups, where $p_g$ is the population share of group $g$, $\mu_g$ its mean and $s_g = p_g \mu_g / \mu$ its income share:
+
+$$
+T_1 = \underbrace{\sum_g s_g\, T_{1,g}}_{\text{within}} + \underbrace{\sum_g s_g \ln\frac{\mu_g}{\mu}}_{\text{between}}, \qquad
+T_0 = \underbrace{\sum_g p_g\, T_{0,g}}_{\text{within}} + \underbrace{\sum_g p_g \ln\frac{\mu}{\mu_g}}_{\text{between}}
+$$
+
+In $T_1$, within-group inequality is weighted by income shares; in $T_0$, by population shares. This is why $T_0$ is preferred when every person should count equally, and why it is the only index whose between-group term does not depend on within-group inequality.
+
+Both indices require strictly positive incomes, since logarithms are undefined for zero or negative values.
+
+## Estimation in R
+
+### Base R
+
+Two short functions, with optional weights, are enough:
+
+```r
+theil_T1 <- function(y, w = rep(1, length(y))) {
+  stopifnot(all(y > 0))
+  mu <- weighted.mean(y, w)
+  r  <- y / mu
+  sum(w * r * log(r)) / sum(w)
+}
+
+theil_T0 <- function(y, w = rep(1, length(y))) {
+  stopifnot(all(y > 0))
+  mu <- weighted.mean(y, w)
+  sum(w * log(mu / y)) / sum(w)
+}
+
+y <- c(10, 20, 30, 40, 60, 80)
+theil_T1(y)   # 0.1809
+theil_T0(y)   # 0.2114
+```
+
+### CRAN packages
+
+| Package | $T_1$ | $T_0$ | Weights | Decomposition | Standard errors |
+|---|---|---|---|---|---|
+| `ineq` | `Theil(y, parameter = 0)` | `Theil(y, parameter = 1)` | No | No | No |
+| `dineq` | `theil.wtd(y, weights)` | `mld.wtd(y, weights)` | Yes | `theil_decomp()`, `mld_decomp()` | No |
+| `IC2` | `calcGEI(y, w, alpha = 1)` | `calcGEI(y, w, alpha = 0)` | Yes | `decompGEI()` | No |
+| `convey` | `svygei(~y, des, epsilon = 1)` | `svygei(~y, des, epsilon = 0)` | Survey design | `svygeidec()` | Yes, by linearisation |
+
+::: {.callout-warning appearance="simple"}
+**Beware of `ineq`:** in `Theil()`, `parameter = 0` returns $T_1$ and any other value returns $T_0$, the opposite of what the GE($\alpha$) notation suggests. It also silently drops zero incomes for $T_1$. Always check against the example above.
+:::
+
+```r
+library(ineq)
+Theil(y, parameter = 0)   # 0.1809 -> T1
+Theil(y, parameter = 1)   # 0.2114 -> T0
+
+library(dineq)
+w <- c(2, 1, 1, 1, 1, 3)
+theil.wtd(y, weights = w) # 0.2125
+mld.wtd(y, weights = w)   # 0.2710
+```
+
+For survey data (EU-SILC), `convey` is the most complete option because its standard errors account for the sampling design:
+
+```r
+library(survey); library(convey)
+des <- svydesign(ids = ~psu, strata = ~stratum, weights = ~weight, data = silc)
+des <- convey_prep(des)
+svygei(~eq_income, des, epsilon = 0)   # T0 with its standard error
+svygei(~eq_income, des, epsilon = 1)   # T1 with its standard error
+```
+
+Argument names may change across versions; check each function's help page (`?decompGEI`, `?svygeidec`) before use.
+
+## Between- and within-group decomposition
+
+In the example, two regions account for 72% of total inequality according to $T_1$ and 68% according to $T_0$. This function applies the formulas above to any grouping variable:
+
+```r
+theil_decomp <- function(y, g, w = rep(1, length(y)), type = c("T1", "T0")) {
+  type <- match.arg(type)
+  mu   <- weighted.mean(y, w)
+  grp  <- split(seq_along(y), g)
+  res  <- t(sapply(grp, function(i) {
+    p   <- sum(w[i]) / sum(w)              # population share
+    mug <- weighted.mean(y[i], w[i])       # group mean
+    s   <- p * mug / mu                    # income share
+    Tg  <- if (type == "T1") theil_T1(y[i], w[i]) else theil_T0(y[i], w[i])
+    if (type == "T1") c(p = p, s = s, T_g = Tg, within = s * Tg, between = s * log(mug / mu))
+    else              c(p = p, s = s, T_g = Tg, within = p * Tg, between = p * log(mu / mug))
+  }))
+  W <- sum(res[, "within"]); B <- sum(res[, "between"])
+  list(groups  = res,
+       summary = c(total = W + B, within = W, between = B, pct_between = 100 * B / (W + B)))
+}
+
+g <- c("A", "A", "A", "B", "B", "B")
+theil_decomp(y, g, type = "T1")$summary
+theil_decomp(y, g, type = "T0")$summary
+```
+
+| Index | Total | Within | Between | % between |
+|---|---|---|---|---|
+| $T_1$ | 0.1809 | 0.0501 | 0.1308 | 72.3% |
+| $T_0$ | 0.2114 | 0.0676 | 0.1438 | 68.0% |
+
+In both cases within + between reproduces the total exactly, which is a useful check. With packages, the same result comes from `dineq::theil_decomp(y, g, w)` and `dineq::mld_decomp(y, g, w)`, from `IC2::decompGEI(y, g, w, alpha = 1)`, or from `convey::svygeidec(~y, ~g, des, epsilon = 1)` for survey designs.
+
+## Full example: income by region
+
+This example simulates log-normal incomes in four regions with different means and spreads, computes both indices, decomposes them and plots each region's contribution. Exact values depend on the seed; what matters is the interpretation.
+
+```r
+set.seed(2026)
+regions <- data.frame(
+  region = c("North", "South", "East", "West"),
+  n      = c(400, 300, 200, 100),
+  mean   = c(9.9, 9.5, 10.1, 9.7),   # mean of log(income)
+  sd     = c(0.5, 0.7, 0.6, 0.4)
+)
+data <- do.call(rbind, lapply(seq_len(nrow(regions)), function(k) {
+  with(regions[k, ], data.frame(region = region,
+                                income = rlnorm(n, meanlog = mean, sdlog = sd)))
+}))
+
+# Overall indices
+theil_T1(data$income)
+theil_T0(data$income)
+
+# Decomposition by region
+dT0 <- theil_decomp(data$income, data$region, type = "T0")
+round(dT0$groups, 4)
+round(dT0$summary, 4)
+
+# Each region's contribution to within-region inequality
+library(ggplot2)
+contrib <- data.frame(region = rownames(dT0$groups),
+                      within = dT0$groups[, "within"])
+ggplot(contrib, aes(reorder(region, within), within)) +
+  geom_col(fill = "#E07B20") + coord_flip() +
+  labs(x = NULL, y = "Contribution to T0 (within regions)")
+```
+
+How to read the output:
+
+- `pct_between` is the share of inequality due to differences in regional mean incomes. Regional convergence policies can only act on this part.
+- The `within` column shows which regions contribute most internal inequality. It depends both on their own inequality (`T_g`) and on their size (`p`).
+- If $T_1$ and $T_0$ tell different stories, inequality is concentrated in different tails: $T_1$ reacts to the top and $T_0$ to the bottom.
+
+## Example: decomposition by sex
+
+In this example, the gap between women and men accounts for about 23% of total inequality; the remaining 77% is inequality within each sex. The data are ten incomes (in thousands of euros), five for women and five for men:
+
+```r
+income <- c(12, 15, 18, 22, 30,   # women
+            16, 20, 25, 35, 50)   # men
+sex    <- rep(c("Woman", "Man"), each = 5)
+
+d1 <- theil_decomp(income, sex, type = "T1")
+d0 <- theil_decomp(income, sex, type = "T0")
+round(d0$groups, 4)
+round(rbind(T1 = d1$summary, T0 = d0$summary), 4)
+```
+
+| Group | Mean income | Population share | Income share | Group $T_1$ | Group $T_0$ |
+|---|---|---|---|---|---|
+| Women | 19.4 | 50% | 39.9% | 0.0502 | 0.0502 |
+| Men | 29.2 | 50% | 60.1% | 0.0833 | 0.0833 |
+
+| Index | Total | Within | Between (gender gap) | % between |
+|---|---|---|---|---|
+| $T_1$ | 0.0906 | 0.0701 | 0.0205 | 22.6% |
+| $T_0$ | 0.0875 | 0.0667 | 0.0208 | 23.7% |
+
+How to read it:
+
+- The **between** term measures how much inequality would disappear if women and men had the same mean income. It is the gender-gap measure that Theil indices provide.
+- The **within** term shows that, even with the gap closed, most inequality would remain, especially among men (group index 0.083 against 0.050).
+- For survey data, the same decomposition with standard errors comes from `convey::svygeidec(~income, ~sex, des, epsilon = 0)`. This is what lets you say whether the gap has really changed between two years.
+
+The grouping variable can be anything else: disability, nationality, education level, or crossings such as sex × region (`interaction(sex, region)`). The more groups, the smaller each one and the larger the bias, as the next section explains.
+
+## Bias and precision
+
+Sample estimators of $T_0$ and $T_1$ are biased, usually downwards, and more so in small samples and with heavy-tailed distributions. They should therefore not be reported without a measure of precision. The jackknife gives both a bias estimate and a standard error:
+
+$$
+\widehat{\text{bias}} = (n-1)\,(\bar T_{(\cdot)} - \hat T), \qquad
+\tilde T = \hat T - \widehat{\text{bias}}, \qquad
+\widehat{\text{Var}} = \frac{n-1}{n}\sum_i \big(\hat T_{(i)} - \bar T_{(\cdot)}\big)^2
+$$
+
+Computing the $n$ leave-one-out indices by repeating the formula costs $\mathcal{O}(n^2)$. Because $T_0$ and $T_1$ depend only on a few sums, all of them can be obtained at once in $\mathcal{O}(n)$, which makes the jackknife feasible with millions of observations:
+
+```r
+jackknife_theil <- function(y, type = c("T1", "T0")) {
+  type <- match.arg(type); n <- length(y)
+  S1 <- sum(y); S2 <- sum(y * log(y)); L <- sum(log(y))
+  if (type == "T1") {
+    T    <- S2 / S1 - log(S1 / n)
+    Tloo <- (S2 - y * log(y)) / (S1 - y) - log((S1 - y) / (n - 1))
+  } else {
+    T    <- log(S1 / n) - L / n
+    Tloo <- log((S1 - y) / (n - 1)) - (L - log(y)) / (n - 1)
+  }
+  bias <- (n - 1) * (mean(Tloo) - T)
+  se   <- sqrt((n - 1) / n * sum((Tloo - mean(Tloo))^2))
+  c(T = T, bias = bias, T_corrected = T - bias, se = se)
+}
+
+round(jackknife_theil(y, "T1"), 4)  # T 0.1809  bias -0.0296  T_corrected 0.2106  se 0.0858
+round(jackknife_theil(y, "T0"), 4)  # T 0.2114  bias -0.0372  T_corrected 0.2486  se 0.1071
+```
+
+With only six observations the standard error is almost half the index: the example shows why a point value without a margin of error can mislead.
+
+For confidence intervals the bootstrap is the usual alternative. With skewed distributions, bootstrap-t or BCa intervals are preferable to percentile intervals:
+
+```r
+library(boot)
+b <- boot(data$income, function(d, i) theil_T0(d[i]), R = 2000)
+boot.ci(b, type = c("perc", "bca"))
+```
+
+For survey data, `convey::svygei()` already returns linearisation standard errors that account for strata and clusters. THEILUMINA studies how to predict and correct the bias (GO1), build reliable intervals (GO2) and reduce the cost of the jackknife (GO3), and will bring it all together in the **theil** package (GO4).
+
+## Common pitfalls and good practice
+
+1. **Mixing up $T_0$ and $T_1$.** Always state which one you use and check the package convention (in `ineq`, `parameter = 0` is $T_1$).
+2. **Zero or negative incomes.** Logarithms fail, or packages drop them silently. Decide explicitly how to handle them (exclude, bottom-code, or use another GE index) and report how many there are.
+3. **Ignoring weights.** With survey data, unweighted indices do not estimate population inequality.
+4. **Comparing without a margin of error.** A difference between regions or years only matters if it exceeds the estimator's uncertainty. Report each index with its standard error or confidence interval.
+5. **Over-disaggregating.** Bias grows as groups get smaller. In decompositions with many small groups, correct the bias or merge categories.
+6. **Not checking the decomposition.** Within + between must equal the total; if it does not, there is an error in the weights or the groups.
+
+---
+
+<p class="source">How to cite: THEILUMINA (2026). *A practical guide to Theil indices in R*. THEILUMINA practical guides, University of Granada. <https://jfmunozrosas.github.io/theilumina/guides/theil-indices-r.html></p>

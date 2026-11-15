@@ -3,6 +3,10 @@ title: "Theil indices"
 subtitle: "Definition, decomposition and estimation"
 ---
 
+::: {.callout-tip appearance="simple"}
+Looking for worked examples in R? See the [practical guide to Theil indices in R](guides/theil-indices-r.qmd) (also [in Spanish](guides/indices-theil-r-es.qmd)).
+:::
+
 ## Definition
 
 Let $Y$ be a positive random variable with mean $\mu = E[Y]$. The Theil indices are members of the generalised entropy family $GE(\alpha)$:

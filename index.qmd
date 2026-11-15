@@ -12,6 +12,17 @@ toc: false
 <p class="hero-badge"><span class="badge-status">Research project proposal · Under evaluation</span></p>
 :::
 
+## THEILUMINA in one minute
+
+```{=html}
+<div class="video-wrap">
+<video controls preload="metadata" playsinline poster="media/theilumina_video_poster.jpg">
+  <source src="media/theilumina_video_en.mp4" type="video/mp4">
+  Your browser cannot play this video. <a href="media/theilumina_video_en.mp4">Download it</a>.
+</video>
+</div>
+```
+
 ## Project status
 
 {{< include _status.md >}}
@@ -30,10 +41,18 @@ The project:
 - develops the open-source R package **theil**, with a C++ core;
 - transfers these methods to water economics, tourism, servitization and digital transformation of firms, and global convergence.
 
+## The project at a glance
+
+[![THEILUMINA infographic: why the project matters, its five work packages, who benefits and the team](images/theilumina_infographic.svg){fig-alt="THEILUMINA project infographic" .infographic}](images/theilumina_infographic.png)
+
+<p class="source">Click on the infographic to open it at full size. Download: [PNG](images/theilumina_infographic.png) · [SVG](images/theilumina_infographic.svg).</p>
+
 ## Latest news
 
 ::: {.news-mini}
-- **November 2026** · The THEILUMINA website is created for the research project proposal.
+- **November 2026** · New [Practical guides](guides.qmd) section, starting with a guide to estimating and decomposing Theil indices in R.
+- **November 2026** · [Conferences of interest in 2027](dissemination.qmd#upcoming-conferences-2027): ECINEQ, IARIW, ISI WSC, EcoSta and more.
+- **November 2026** · A one-minute video and an infographic present the project.
 :::
 
 [All news →](news.qmd){.btn .btn-outline-primary .btn-sm}
@@ -46,5 +65,6 @@ This website is a working tool for the research team and an open resource for ot
 2. **Reproducible research.** Anyone can run the code and obtain the same tables and figures.
 3. **Interactivity.** The [bias explorer](simulation.qmd) lets users see how bias changes with skewness, inequality and sample size.
 4. **Inequality observatory.** The [observatory](observatory.qmd) shows official inequality indicators (Gini, S80/S20 and Theil indices) from Eurostat, the World Bank and the Spanish Statistical Office (INE), with links to other inequality observatories.
-5. **Dissemination and internationalisation.** Results, data and software are openly available, and the [project identity](identity.qmd) can be freely used by co-authors and collaborators.
-6. **Collaboration.** External researchers interested in the project can [contact us](contact.qmd).
+5. **Practical guides.** The [practical guides](guides.qmd) explain in detail how to estimate, decompose and make inferences about Theil indices.
+6. **Dissemination and internationalisation.** Results, data and software are openly available, and the [project identity](identity.qmd) can be freely used by co-authors and collaborators.
+7. **Collaboration.** External researchers interested in the project can [contact us](contact.qmd).

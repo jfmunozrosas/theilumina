@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://jfmunozrosas.github.io/theilumina/theil-indices.html</loc>
-    <lastmod>2026-11-14T06:54:36.617Z</lastmod>
+    <lastmod>2026-11-15T14:15:58.450Z</lastmod>
   </url>
   <url>
     <loc>https://jfmunozrosas.github.io/theilumina/simulation.html</loc>
@@ -14,7 +14,7 @@
   </url>
   <url>
     <loc>https://jfmunozrosas.github.io/theilumina/observatory.html</loc>
-    <lastmod>2026-11-14T06:54:36.532Z</lastmod>
+    <lastmod>2026-11-15T14:15:58.573Z</lastmod>
   </url>
   <url>
     <loc>https://jfmunozrosas.github.io/theilumina/links.html</loc>
@@ -25,28 +25,40 @@
     <lastmod>2026-11-14T06:54:36.492Z</lastmod>
   </url>
   <url>
-    <loc>https://jfmunozrosas.github.io/theilumina/data-code.html</loc>
-    <lastmod>2026-11-14T06:54:36.467Z</lastmod>
+    <loc>https://jfmunozrosas.github.io/theilumina/guides/theil-indices-r.html</loc>
+    <lastmod>2026-11-15T14:15:49.327Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jfmunozrosas.github.io/theilumina/dissemination.html</loc>
+    <lastmod>2026-11-15T14:15:58.516Z</lastmod>
   </url>
   <url>
     <loc>https://jfmunozrosas.github.io/theilumina/contact.html</loc>
     <lastmod>2026-11-14T06:54:36.461Z</lastmod>
   </url>
   <url>
-    <loc>https://jfmunozrosas.github.io/theilumina/dissemination.html</loc>
-    <lastmod>2026-11-14T06:54:36.481Z</lastmod>
+    <loc>https://jfmunozrosas.github.io/theilumina/data-code.html</loc>
+    <lastmod>2026-11-14T06:54:36.467Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jfmunozrosas.github.io/theilumina/guides/indices-theil-r-es.html</loc>
+    <lastmod>2026-11-15T14:15:49.305Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jfmunozrosas.github.io/theilumina/guides.html</loc>
+    <lastmod>2026-11-15T14:15:49.519Z</lastmod>
   </url>
   <url>
     <loc>https://jfmunozrosas.github.io/theilumina/index.html</loc>
-    <lastmod>2026-11-14T06:54:36.502Z</lastmod>
+    <lastmod>2026-11-15T14:15:58.535Z</lastmod>
   </url>
   <url>
     <loc>https://jfmunozrosas.github.io/theilumina/news.html</loc>
-    <lastmod>2026-11-14T06:54:36.522Z</lastmod>
+    <lastmod>2026-11-15T14:15:58.555Z</lastmod>
   </url>
   <url>
     <loc>https://jfmunozrosas.github.io/theilumina/project.html</loc>
-    <lastmod>2026-11-14T06:54:36.544Z</lastmod>
+    <lastmod>2026-11-15T14:15:58.590Z</lastmod>
   </url>
   <url>
     <loc>https://jfmunozrosas.github.io/theilumina/research.html</loc>
@@ -54,6 +66,6 @@
   </url>
   <url>
     <loc>https://jfmunozrosas.github.io/theilumina/team.html</loc>
-    <lastmod>2026-11-14T06:54:36.607Z</lastmod>
+    <lastmod>2026-11-15T14:15:58.626Z</lastmod>
   </url>
 </urlset>

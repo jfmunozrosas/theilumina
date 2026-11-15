@@ -40,7 +40,7 @@ Click on a name to open the researcher's profile (Google Scholar or the Research
 ::: {.field-card}
 ### Applied Economics
 
-<p class="lines">Water · Well-being · Poverty</p>
+<p class="lines">Water · Well-being · Poverty · Tourism</p>
 
 - [Jorge Guardiola Wanden-Berghe](https://scholar.google.es/citations?user=GwRVIK8AAAAJ&hl=es&oi=ao) — University of Granada, Spain <span class="pill pill-role">Research team</span>
 - [Mª Nazaret Ibáñez Rueda](https://scholar.google.es/citations?user=8w_MCg0AAAAJ&hl=es&oi=ao) — University of León, Spain <span class="pill pill-role">Work team</span>
@@ -120,7 +120,7 @@ The team works at the Faculty of Economics and Business of the University of Gra
 
 The team has a consolidated record of joint research: methodological and applied researchers already publish together, which ensures that the methods developed in the project are transferred to the Social Sciences.
 
-![Co-authorship network of the THEILUMINA team. Each node shows the number of articles in JCR journals (SCIE/SSCI) of each researcher; each link shows the number of JCR articles co-authored. Filled nodes: members of the previous GiniUs project; white nodes: new members; squares: PhD students; dashed ring: researchers at foreign institutions. Sources: Google Scholar and Research Portal of the University of Granada; indexing according to the Web of Science Master Journal List (November 2026).](images/coauthorship_network.png){fig-alt="Co-authorship network of the THEILUMINA team" .lightbox}
+![Co-authorship network of the THEILUMINA team. Each node shows the number of articles in JCR journals of each researcher; each link shows the number of JCR articles co-authored. Filled nodes: members of the previous GiniUs project; white nodes: new members; squares: PhD students; dashed ring: researchers at foreign institutions. Sources: Google Scholar and Research Portal of the University of Granada; indexing according to the Web of Science Master Journal List (November 2026).](images/coauthorship_network.png){fig-alt="Co-authorship network of the THEILUMINA team" .lightbox}
 
 <p class="source">Download the network: [PNG](images/coauthorship_network.png) · [PDF](images/coauthorship_network.pdf) · [SVG](images/coauthorship_network.svg)</p>
 

@@ -1,0 +1,39 @@
+---
+title: "Practical guides"
+subtitle: "Disseminating the results of THEILUMINA and explaining Theil indices in detail"
+---
+
+::: {.guide-logo}
+![](images/brand/theilumina_logo_en.png){fig-alt="THEILUMINA logo"}
+:::
+
+This section gathers **practical guides** that disseminate the results of the project and explain Theil indices in detail: what they measure, how to **estimate** them, how to **decompose** them into inequality between and within groups, and how to make **inferences** about them (bias, standard errors and confidence intervals). Each guide includes worked examples with R code, **recommendations and good-practice advice**, and the most common pitfalls.
+
+The guides are written for the groups that produce, publish or use inequality indicators:
+
+::: {.audience}
+<span class="pill">Statistical offices (INE, regional institutes)</span>
+<span class="pill">International institutions (Eurostat, World Bank, OECD)</span>
+<span class="pill">Inequality observatories</span>
+<span class="pill">Public administrations and policy makers</span>
+<span class="pill">Researchers and students</span>
+<span class="pill">Society at large</span>
+:::
+
+New guides will be added as the project produces results, for example on bias correction (WP1), confidence intervals (WP2), the fast jackknife (WP3) and the **theil** R package (WP4).
+
+## Available guides
+
+::: {.guide-card}
+### A practical guide to Theil indices in R
+
+<p class="meta">November 2026 · English and Spanish · Level: introductory–intermediate</p>
+
+How to compute $T_0$ and $T_1$ with base R and current CRAN packages (`ineq`, `dineq`, `IC2`, `convey`), how to decompose them between and within groups (with examples by region and by sex), and how to estimate their bias and standard error with the jackknife and the bootstrap.
+
+[Read in English](guides/theil-indices-r.qmd){.btn .btn-primary .btn-sm} [Leer en español](guides/indices-theil-r-es.qmd){.btn .btn-outline-primary .btn-sm}
+:::
+
+::: {.callout-tip appearance="simple"}
+Would you like a guide on a specific topic, or to use these guides in a course or a statistical office? [Contact us](contact.qmd).
+:::

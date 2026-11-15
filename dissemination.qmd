@@ -12,8 +12,28 @@ To be completed.
 ## Conferences
 
 ::: {.pending}
-To be completed. Upcoming conferences of interest: ECINEQ, IARIW, ISI World Statistics Congress, COMPSTAT, EcoSta.
+Conferences where project results are presented will be listed here.
 :::
+
+### Upcoming conferences (2027) {#upcoming-conferences-2027}
+
+Conferences of interest for the project with confirmed dates for 2027. Dates and venues are taken from the official websites (checked in November 2026); please check them before planning a trip.
+
+::: {.conf-table}
+
+| Dates | Conference | Venue | Why it matters for THEILUMINA |
+|---|---|---|---|
+| February 2027 | [3rd III/LIS Comparative Economic Inequality Conference](https://inomics.com/conference/3rd-iiilis-comparative-economic-inequality-conference-1554545) | London School of Economics, London (UK) | Comparative measurement of income inequality |
+| 24–25 May 2027 | [IARIW–WIUT Conference: Measuring Income, Wealth, and Well-being in Central Asia, the Caucasus, and Neighboring Regions](https://iariw.org/iariw-wiut-conference-may-2027/) | Westminster International University in Tashkent (Uzbekistan) | Inequality measurement; abstracts due **25 November 2026**; selected papers in the *Review of Income and Wealth* |
+| 6–9 July 2027 | [10th International Conference on Econometrics and Statistics (EcoSta 2027)](https://www.cmstatistics.org/EcoSta2027/) | ShanghaiTech University, Shanghai (China) | Bias correction, inference and computational statistics (WP1–WP3) |
+| 11–15 July 2027 | [66th ISI World Statistics Congress (WSC 2027)](https://www.isi-next.org/conferences/isi-wsc2027/) | Lusaka (Zambia) | Official statistics and inequality indicators; transfer to statistical offices |
+| 19–23 July 2027 | [12th Conference of the European Survey Research Association (ESRA 2027)](https://www.europeansurveyresearch.org/) | Paris (France), jointly with WAPOR | Survey data, sampling weights and estimation from microdata |
+| 31 Aug – 3 Sep 2027 | [12th ECINEQ Conference](https://www.ecineq.org/2026/06/13/12th-ecineq-conference-2027/) | UNU-WIDER, Helsinki (Finland); policy event on 31 August | The main international meeting on economic inequality |
+| 22–24 September 2027 | [EnvStat27 – Environmental Statistics and Data Science](https://boku.ac.at/en/nwnr/stat/conferences-and-events/envstat27) | BOKU University, Vienna (Austria) | Statistical methods for water applications (WP5) |
+
+:::
+
+Other regular meetings of interest whose 2027 dates have not yet been announced: the Spring Servitization Conference, the useR! conference, the SEIO and ASEPELT congresses, COMPSTAT and CMStatistics.
 
 ## Research stays
 

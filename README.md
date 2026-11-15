@@ -17,10 +17,14 @@ theil-indices.qmd    definición, descomposición, estimadores y jackknife
 simulation.qmd       explorador interactivo del sesgo (se ejecuta en el navegador, sin servidor)
 data-code.qmd        código R para generar datos con un índice de Theil dado
 publications.qmd     publicaciones
-dissemination.qmd    seminarios, congresos, estancias
+dissemination.qmd    seminarios, congresos (incluye congresos de interés de 2027), estancias
+guides.qmd           sección "Practical guides" (guías de divulgación)
+guides/              guías: theil-indices-r.qmd (inglés) e indices-theil-r-es.qmd (español)
+media/               vídeo de presentación (Home) y su imagen de portada
+tools/add_dois.R     cambia los enlaces de Google Scholar de _prev_pubs.md por enlaces DOI (Crossref)
 links.qmd            enlaces
-observatory.qmd      observatorio (Eurostat y Banco Mundial en vivo; INE al renderizar, requiere R)
-images/              logo, red de coautorías, figuras del paper (images/paper/) y kit de identidad (images/brand/)
+observatory.qmd      observatorio (Eurostat en vivo; Banco Mundial e INE al renderizar, requiere R)
+images/              logo, infografía (theilumina_infographic.svg/png), red de coautorías, figuras del paper (images/paper/) y kit de identidad (images/brand/)
 data/                copia de los datos del INE (se crea al renderizar)
 ```
 
@@ -58,3 +62,9 @@ Para contenidos que necesiten servidor (Shiny), aloja la app en shinyapps.io y e
 **Datos del INE:** la página del observatorio contiene un bloque de R que descarga la tabla 67246 del INE al renderizar (solo usa R base) y guarda una copia en `data/ine_67246.csv`, que se usa si el INE no responde. Necesita R con los paquetes `rmarkdown` y `knitr`.
 
 **Contador de visitas:** usa GoatCounter (gratuito, sin cookies). Crea una cuenta en https://www.goatcounter.com con el código `theilumina` y activa en Settings la opción "Allow adding visitor counts on your website". El número aparece en el pie de todas las páginas. Si el código no está disponible, cámbialo en `_goatcounter.html`.
+
+**Datos del Banco Mundial:** igual que los del INE, se descargan al renderizar (la API del PIP no admite peticiones directas desde el navegador) y se guarda una copia en `data/wb_pip.csv`, que se usa si el Banco Mundial no responde.
+
+**Enlaces a los artículos:** los títulos de la tabla de publicaciones enlazan a Google Scholar. Para enlazar directamente al DOI de cada artículo, ejecuta una vez `Rscript tools/add_dois.R` (requiere conexión a internet y el paquete `jsonlite`); los títulos que no encuentre mantienen el enlace a Google Scholar.
+
+**Añadir una guía:** crea el archivo en `guides/` (copia una guía existente para mantener el logo y el formato) y añade una tarjeta `::: {.guide-card}` en `guides.qmd`.

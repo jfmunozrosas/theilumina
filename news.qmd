@@ -14,6 +14,24 @@ subtitle: "Project status and short news on the activity of the team"
 ::: {.news-list}
 
 ::: {.news-item}
+<span class="news-date">November 2026</span> <span class="news-tag tag-project">Dissemination</span>
+
+**New section: Practical guides.** The first [practical guide](guides.qmd) explains how to estimate Theil indices in R, decompose them by groups (regions, sex) and measure their bias and precision. Available in English and Spanish.
+:::
+
+::: {.news-item}
+<span class="news-date">November 2026</span> <span class="news-tag tag-project">Conferences</span>
+
+**Conferences of interest in 2027.** The [Dissemination page](dissemination.qmd#upcoming-conferences-2027) lists conferences with confirmed dates: III/LIS (February, London), IARIW–WIUT (May, Tashkent; abstracts due 25 November 2026), EcoSta (July, Shanghai), ISI World Statistics Congress (July, Lusaka), ESRA (July, Paris), ECINEQ (September, Helsinki) and EnvStat (September, Vienna).
+:::
+
+::: {.news-item}
+<span class="news-date">November 2026</span> <span class="news-tag tag-web">Website</span>
+
+**A one-minute video and an infographic** present the project on the [home page](index.qmd).
+:::
+
+::: {.news-item}
 <span class="news-date">November 2026</span> <span class="news-tag tag-web">Website</span>
 
 **The THEILUMINA website is created** for the research project proposal.
