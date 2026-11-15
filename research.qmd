@@ -53,7 +53,7 @@ The jackknife recomputes the estimator $n$ times, leaving out one observation ea
 
 ## Problem 4 · There is no open software for reliable Theil inference
 
-Existing software computes point estimates of Theil indices but does not offer bias diagnostics, bias corrections or reliable variance estimators and confidence intervals, and it does not scale to large samples.
+Existing software computes point estimates of Theil indices and, at most, bootstrap or linearisation standard errors (for example, the R packages `convey` and `inequality`). None offers bias diagnostics or bias corrections, jackknife variance estimators, or inference that remains reliable under strong skewness and scales to large samples.
 
 ::: {.rq}
 **Research question (WP4)**

@@ -80,6 +80,7 @@ theil_T0(y)   # 0.2114
 | `dineq` | `theil.wtd(y, weights)` | `mld.wtd(y, weights)` | Sí | `theil_decomp()`, `mld_decomp()` | No |
 | `IC2` | `calcGEI(y, w, alpha = 1)` | `calcGEI(y, w, alpha = 0)` | Sí | `decompGEI()` | No |
 | `convey` | `svygei(~y, des, epsilon = 1)` | `svygei(~y, des, epsilon = 0)` | Diseño muestral | `svygeidec()` | Sí, por linealización |
+| `inequality` | `iq_theil()` | `iq_theil()` | Sí | `iq_decompose()` | Bootstrap (`ci = TRUE`) |
 
 ::: {.callout-warning appearance="simple"}
 **Cuidado con `ineq`:** en `Theil()`, `parameter = 0` devuelve $T_1$ y cualquier otro valor devuelve $T_0$, al revés de lo que sugiere la notación GE($\alpha$). Además, para $T_1$ elimina en silencio las rentas nulas. Compruébalo siempre con el ejemplo anterior.
@@ -106,7 +107,7 @@ svygei(~renta_eq, des, epsilon = 0)   # T0 con su error estándar
 svygei(~renta_eq, des, epsilon = 1)   # T1 con su error estándar
 ```
 
-Los nombres de los argumentos pueden cambiar entre versiones. Antes de usar una función, consulta su ayuda (`?decompGEI`, `?svygeidec`).
+Los nombres de los argumentos pueden cambiar entre versiones. Antes de usar una función, consulta su ayuda (`?decompGEI`, `?svygeidec`, `?iq_theil`). El paquete `iIneq` calcula la contribución individual de cada observación a $T_0$ y $T_1$ y a sus descomposiciones. Ninguno de estos paquetes corrige el sesgo de los estimadores.
 
 ## Descomposición entre y dentro de grupos
 
@@ -226,7 +227,7 @@ $$
 \widehat{\text{Var}} = \frac{n-1}{n}\sum_i \big(\hat T_{(i)} - \bar T_{(\cdot)}\big)^2
 $$
 
-Calcular los $n$ índices «dejando uno fuera» repitiendo la fórmula cuesta $\mathcal{O}(n^2)$. Como $T_0$ y $T_1$ solo dependen de unas pocas sumas, todos se obtienen a la vez en $\mathcal{O}(n)$, lo que hace el jackknife viable con millones de observaciones:
+Calcular los $n$ índices «dejando uno fuera» repitiendo la fórmula cuesta $\mathcal{O}(n^2)$. Como $T_0$ y $T_1$ solo dependen de unas pocas sumas, todos se obtienen a la vez en $\mathcal{O}(n)$ (resultados preliminares de THEILUMINA; véase [Research problems](../research.qmd)), lo que hace el jackknife viable con millones de observaciones:
 
 ```r
 jackknife_theil <- function(y, tipo = c("T1", "T0")) {

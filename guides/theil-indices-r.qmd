@@ -79,6 +79,7 @@ theil_T0(y)   # 0.2114
 | `dineq` | `theil.wtd(y, weights)` | `mld.wtd(y, weights)` | Yes | `theil_decomp()`, `mld_decomp()` | No |
 | `IC2` | `calcGEI(y, w, alpha = 1)` | `calcGEI(y, w, alpha = 0)` | Yes | `decompGEI()` | No |
 | `convey` | `svygei(~y, des, epsilon = 1)` | `svygei(~y, des, epsilon = 0)` | Survey design | `svygeidec()` | Yes, by linearisation |
+| `inequality` | `iq_theil()` | `iq_theil()` | Yes | `iq_decompose()` | Bootstrap (`ci = TRUE`) |
 
 ::: {.callout-warning appearance="simple"}
 **Beware of `ineq`:** in `Theil()`, `parameter = 0` returns $T_1$ and any other value returns $T_0$, the opposite of what the GE($\alpha$) notation suggests. It also silently drops zero incomes for $T_1$. Always check against the example above.
@@ -105,7 +106,7 @@ svygei(~eq_income, des, epsilon = 0)   # T0 with its standard error
 svygei(~eq_income, des, epsilon = 1)   # T1 with its standard error
 ```
 
-Argument names may change across versions; check each function's help page (`?decompGEI`, `?svygeidec`) before use.
+Argument names may change across versions; check each function's help page (`?decompGEI`, `?svygeidec`, `?iq_theil`) before use. The package `iIneq` computes the individual contributions of each observation to $T_0$ and $T_1$ and to their decompositions. None of these packages corrects the bias of the estimators.
 
 ## Between- and within-group decomposition
 
@@ -225,7 +226,7 @@ $$
 \widehat{\text{Var}} = \frac{n-1}{n}\sum_i \big(\hat T_{(i)} - \bar T_{(\cdot)}\big)^2
 $$
 
-Computing the $n$ leave-one-out indices by repeating the formula costs $\mathcal{O}(n^2)$. Because $T_0$ and $T_1$ depend only on a few sums, all of them can be obtained at once in $\mathcal{O}(n)$, which makes the jackknife feasible with millions of observations:
+Computing the $n$ leave-one-out indices by repeating the formula costs $\mathcal{O}(n^2)$. Because $T_0$ and $T_1$ depend only on a few sums, all of them can be obtained at once in $\mathcal{O}(n)$ (THEILUMINA preliminary results; see [Research problems](../research.qmd)), which makes the jackknife feasible with millions of observations:
 
 ```r
 jackknife_theil <- function(y, type = c("T1", "T0")) {
