@@ -52,5 +52,8 @@
   },
   "guides.qmd": {
     "guides.html": "9e3cd2de"
+  },
+  "feedback.qmd": {
+    "feedback.html": "5a89e138"
   }
 }

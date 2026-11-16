@@ -58,6 +58,8 @@ website:
             text: "Links of interest"
       - href: contact.qmd
         text: Contact
+      - href: feedback.qmd
+        text: "Your opinion"
     right:
       - href: news.qmd
         text: "● Under evaluation"

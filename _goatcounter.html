@@ -25,3 +25,23 @@
     .catch(() => {});
 })();
 </script>
+
+<script>
+// ---- Download counter ----
+// Every click on a downloadable file (CSV data, figures, infographic, video, R code, guides...)
+// is recorded in GoatCounter as an event "download/<file name>" (no cookies, no personal data).
+(function () {
+  const EXT = /\.(csv|xlsx|zip|png|svg|jpg|pdf|mp4|r|rds|rdata|qmd|txt|json|docx)(\?|#|$)/i;
+  document.addEventListener("click", function (e) {
+    const a = e.target.closest ? e.target.closest("a") : null;
+    if (!a) return;
+    const href = a.getAttribute("href") || "";
+    if (!a.hasAttribute("download") && !EXT.test(href)) return;
+    let name = a.getAttribute("download") || href.split("#")[0].split("?")[0].split("/").pop() || "file";
+    const page = location.pathname.split("/").pop() || "index.html";
+    if (window.goatcounter && window.goatcounter.count) {
+      window.goatcounter.count({path: "download/" + name, title: "Download: " + name + " (from " + page + ")", event: true});
+    }
+  }, true);
+})();
+</script>

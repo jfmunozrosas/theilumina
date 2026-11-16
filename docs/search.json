@@ -252,67 +252,11 @@
     "text": "Common pitfalls and good practice\n\nMixing up T_0 and T_1. Always state which one you use and check the package convention (in ineq, parameter = 0 is T_1).\nZero or negative incomes. Logarithms fail, or packages drop them silently. Decide explicitly how to handle them (exclude, bottom-code, or use another GE index) and report how many there are.\nIgnoring weights. With survey data, unweighted indices do not estimate population inequality.\nComparing without a margin of error. A difference between regions or years only matters if it exceeds the estimator’s uncertainty. Report each index with its standard error or confidence interval.\nOver-disaggregating. Bias grows as groups get smaller. In decompositions with many small groups, correct the bias or merge categories.\nNot checking the decomposition. Within + between must equal the total; if it does not, there is an error in the weights or the groups.\n\n\n\nHow to cite: THEILUMINA (2026). A practical guide to Theil indices in R. THEILUMINA practical guides, University of Granada. https://jfmunozrosas.github.io/theilumina/guides/theil-indices-r.html"
   },
   {
-    "objectID": "dissemination.html",
-    "href": "dissemination.html",
-    "title": "Dissemination",
+    "objectID": "feedback.html",
+    "href": "feedback.html",
+    "title": "Your opinion",
     "section": "",
-    "text": "To be completed."
-  },
-  {
-    "objectID": "dissemination.html#seminars",
-    "href": "dissemination.html#seminars",
-    "title": "Dissemination",
-    "section": "",
-    "text": "To be completed."
-  },
-  {
-    "objectID": "dissemination.html#conferences",
-    "href": "dissemination.html#conferences",
-    "title": "Dissemination",
-    "section": "Conferences",
-    "text": "Conferences\n\nConferences where project results are presented will be listed here.\n\n\nUpcoming conferences (2027)\nConferences of interest for the project with confirmed dates for 2027. Dates and venues are taken from the official websites (checked in November 2026); please check them before planning a trip.\n\n\n\n\nDates\nConference\nVenue\nWhy it matters for THEILUMINA\n\n\n\n\nFebruary 2027\n3rd III/LIS Comparative Economic Inequality Conference\nLondon School of Economics, London (UK)\nComparative measurement of income inequality\n\n\n24–25 May 2027\nIARIW–WIUT Conference: Measuring Income, Wealth, and Well-being in Central Asia, the Caucasus, and Neighboring Regions\nWestminster International University in Tashkent (Uzbekistan)\nInequality measurement; abstracts due 25 November 2026; selected papers in the Review of Income and Wealth\n\n\n6–9 July 2027\n10th International Conference on Econometrics and Statistics (EcoSta 2027)\nShanghaiTech University, Shanghai (China)\nBias correction, inference and computational statistics (WP1–WP3)\n\n\n11–15 July 2027\n66th ISI World Statistics Congress (WSC 2027)\nLusaka (Zambia)\nOfficial statistics and inequality indicators; transfer to statistical offices\n\n\n19–23 July 2027\n12th Conference of the European Survey Research Association (ESRA 2027)\nParis (France), jointly with WAPOR\nSurvey data, sampling weights and estimation from microdata\n\n\n31 Aug – 3 Sep 2027\n12th ECINEQ Conference\nUNU-WIDER, Helsinki (Finland); policy event on 31 August\nThe main international meeting on economic inequality\n\n\n22–24 September 2027\nEnvStat27 – Environmental Statistics and Data Science\nBOKU University, Vienna (Austria)\nStatistical methods for water applications (WP5)\n\n\n\n\nOther regular meetings of interest whose 2027 dates have not yet been announced: the Spring Servitization Conference, the useR! conference, the SEIO and ASEPELT congresses, COMPSTAT and CMStatistics."
-  },
-  {
-    "objectID": "dissemination.html#research-stays",
-    "href": "dissemination.html#research-stays",
-    "title": "Dissemination",
-    "section": "Research stays",
-    "text": "Research stays\n\nTo be completed."
-  },
-  {
-    "objectID": "dissemination.html#inequality-in-the-news",
-    "href": "dissemination.html#inequality-in-the-news",
-    "title": "Dissemination",
-    "section": "Inequality in the news",
-    "text": "Inequality in the news\n\n2025 · Eurostat. Inequality in enlargement countries.\n2024 · World Bank. The geography of high inequality: monitoring the World Bank’s new indicator.\n2023 · World Bank. 2023 in nine charts: a growing inequality.\n2023 · World Economic Forum. Global inequality is a failure of imagination."
-  },
-  {
-    "objectID": "contact.html",
-    "href": "contact.html",
-    "title": "Contact and collaboration",
-    "section": "",
-    "text": "We welcome contact from external researchers and organisations, in particular in the transfer areas of the project:"
-  },
-  {
-    "objectID": "contact.html#send-us-a-message",
-    "href": "contact.html#send-us-a-message",
-    "title": "Contact and collaboration",
-    "section": "Send us a message",
-    "text": "Send us a message\nThe form opens your email application with the message ready to send. No data are stored on this website.\n\n\n  \n    Name\n      \n    Institution\n      \n    Area of interest\n      \n        Methods (bias, inference, computational efficiency)\n        R package theil\n        Water\n        Tourism\n        Firms: servitization, digital transformation and AI\n        Poverty and inequality measurement\n        Data sharing\n        Seminars, visits and research stays\n        Other\n      \n    Type of collaboration\n      \n        Joint research or co-authorship\n        Applying the methods to my data\n        Seminar or conference invitation\n        Research stay\n        Information about the project\n      \n    Message\n      \n    Prepare email"
-  },
-  {
-    "objectID": "contact.html#where-to-find-us",
-    "href": "contact.html#where-to-find-us",
-    "title": "Contact and collaboration",
-    "section": "Where to find us",
-    "text": "Where to find us\n\n\n\n  \n  \n    Facultad de Ciencias Económicas y EmpresarialesUniversidad de GranadaCampus Universitario de Cartuja, s/n18071 Granada, Spain\n    Department of Quantitative Methods for Economics and Business\n    jfmunoz@ugr.es\n    Open in OpenStreetMap ↗"
-  },
-  {
-    "objectID": "contact.html#other-ways-to-get-in-touch",
-    "href": "contact.html#other-ways-to-get-in-touch",
-    "title": "Contact and collaboration",
-    "section": "Other ways to get in touch",
-    "text": "Other ways to get in touch\n\nEmail: jfmunoz@ugr.es\nPrincipal investigators: Juan Francisco Muñoz Rosas and Encarnación Álvarez Verdejo, Department of Quantitative Methods for Economics and Business, Faculty of Economics and Business, University of Granada (Spain).\nCode and data: suggestions and issues can be posted in the GitHub repository.\nProject identity: logos for your presentations and publications are available on the identity page."
+    "text": "We would like to know whether this website is useful to you. Rate it with one click and, if you wish, tell us what you would improve or add: new data in the observatory, new practical guides, features of the theil R package, or anything else.\n\n  How satisfied are you with the THEILUMINA website?\n  \n    😞I don't like it\n    🙁Not much\n    😐It's OK\n    🙂Quite a lot\n    😄I like it\n  \n  Thank you for your opinion! You can also leave us a recommendation below.\n  \n\n  \n    Recommendations: what would you improve or add (data, guides, software, features)?\n    \n    \n      \n      Send recommendation\n    \n    Thank you! Your recommendation has been sent.\n  \n  Anonymous: no cookies or personal data are stored. Your rating is counted only once per browser.\n\n\n\nYou can also contact us to collaborate with the project.\n\n\n\n\n\n Back to top"
   },
   {
     "objectID": "data-code.html",
@@ -355,6 +299,69 @@
     "title": "Research data and R code",
     "section": "Datasets of the project",
     "text": "Datasets of the project\n\nThe simulated datasets and the R code of each publication will be released here (and in an OSF repository) once the corresponding paper is accepted."
+  },
+  {
+    "objectID": "contact.html",
+    "href": "contact.html",
+    "title": "Contact and collaboration",
+    "section": "",
+    "text": "We welcome contact from external researchers and organisations, in particular in the transfer areas of the project:"
+  },
+  {
+    "objectID": "contact.html#send-us-a-message",
+    "href": "contact.html#send-us-a-message",
+    "title": "Contact and collaboration",
+    "section": "Send us a message",
+    "text": "Send us a message\nThe form opens your email application with the message ready to send. No data are stored on this website.\n\n\n  \n    Name\n      \n    Institution\n      \n    Area of interest\n      \n        Methods (bias, inference, computational efficiency)\n        R package theil\n        Water\n        Tourism\n        Firms: servitization, digital transformation and AI\n        Poverty and inequality measurement\n        Data sharing\n        Seminars, visits and research stays\n        Other\n      \n    Type of collaboration\n      \n        Joint research or co-authorship\n        Applying the methods to my data\n        Seminar or conference invitation\n        Research stay\n        Information about the project\n      \n    Message\n      \n    Prepare email"
+  },
+  {
+    "objectID": "contact.html#where-to-find-us",
+    "href": "contact.html#where-to-find-us",
+    "title": "Contact and collaboration",
+    "section": "Where to find us",
+    "text": "Where to find us\n\n\n\n  \n  \n    Facultad de Ciencias Económicas y EmpresarialesUniversidad de GranadaCampus Universitario de Cartuja, s/n18071 Granada, Spain\n    Department of Quantitative Methods for Economics and Business\n    jfmunoz@ugr.es\n    Open in OpenStreetMap ↗"
+  },
+  {
+    "objectID": "contact.html#other-ways-to-get-in-touch",
+    "href": "contact.html#other-ways-to-get-in-touch",
+    "title": "Contact and collaboration",
+    "section": "Other ways to get in touch",
+    "text": "Other ways to get in touch\n\nEmail: jfmunoz@ugr.es\nPrincipal investigators: Juan Francisco Muñoz Rosas and Encarnación Álvarez Verdejo, Department of Quantitative Methods for Economics and Business, Faculty of Economics and Business, University of Granada (Spain).\nCode and data: suggestions and issues can be posted in the GitHub repository.\nProject identity: logos for your presentations and publications are available on the identity page."
+  },
+  {
+    "objectID": "dissemination.html",
+    "href": "dissemination.html",
+    "title": "Dissemination",
+    "section": "",
+    "text": "To be completed."
+  },
+  {
+    "objectID": "dissemination.html#seminars",
+    "href": "dissemination.html#seminars",
+    "title": "Dissemination",
+    "section": "",
+    "text": "To be completed."
+  },
+  {
+    "objectID": "dissemination.html#conferences",
+    "href": "dissemination.html#conferences",
+    "title": "Dissemination",
+    "section": "Conferences",
+    "text": "Conferences\n\nConferences where project results are presented will be listed here.\n\n\nUpcoming conferences (2027)\nConferences of interest for the project with confirmed dates for 2027. Dates and venues are taken from the official websites (checked in November 2026); please check them before planning a trip.\n\n\n\n\nDates\nConference\nVenue\nWhy it matters for THEILUMINA\n\n\n\n\nFebruary 2027\n3rd III/LIS Comparative Economic Inequality Conference\nLondon School of Economics, London (UK)\nComparative measurement of income inequality\n\n\n24–25 May 2027\nIARIW–WIUT Conference: Measuring Income, Wealth, and Well-being in Central Asia, the Caucasus, and Neighboring Regions\nWestminster International University in Tashkent (Uzbekistan)\nInequality measurement; abstracts due 25 November 2026; selected papers in the Review of Income and Wealth\n\n\n6–9 July 2027\n10th International Conference on Econometrics and Statistics (EcoSta 2027)\nShanghaiTech University, Shanghai (China)\nBias correction, inference and computational statistics (WP1–WP3)\n\n\n11–15 July 2027\n66th ISI World Statistics Congress (WSC 2027)\nLusaka (Zambia)\nOfficial statistics and inequality indicators; transfer to statistical offices\n\n\n19–23 July 2027\n12th Conference of the European Survey Research Association (ESRA 2027)\nParis (France), jointly with WAPOR\nSurvey data, sampling weights and estimation from microdata\n\n\n31 Aug – 3 Sep 2027\n12th ECINEQ Conference\nUNU-WIDER, Helsinki (Finland); policy event on 31 August\nThe main international meeting on economic inequality\n\n\n22–24 September 2027\nEnvStat27 – Environmental Statistics and Data Science\nBOKU University, Vienna (Austria)\nStatistical methods for water applications (WP5)\n\n\n\n\nOther regular meetings of interest whose 2027 dates have not yet been announced: the Spring Servitization Conference, the useR! conference, the SEIO and ASEPELT congresses, COMPSTAT and CMStatistics."
+  },
+  {
+    "objectID": "dissemination.html#research-stays",
+    "href": "dissemination.html#research-stays",
+    "title": "Dissemination",
+    "section": "Research stays",
+    "text": "Research stays\n\nTo be completed."
+  },
+  {
+    "objectID": "dissemination.html#inequality-in-the-news",
+    "href": "dissemination.html#inequality-in-the-news",
+    "title": "Dissemination",
+    "section": "Inequality in the news",
+    "text": "Inequality in the news\n\n2025 · Eurostat. Inequality in enlargement countries.\n2024 · World Bank. The geography of high inequality: monitoring the World Bank’s new indicator.\n2023 · World Bank. 2023 in nine charts: a growing inequality.\n2023 · World Economic Forum. Global inequality is a failure of imagination."
   },
   {
     "objectID": "guides/indices-theil-r-es.html#introducción",
@@ -474,6 +481,13 @@
     "title": "THEILUMINA",
     "section": "What this website offers",
     "text": "What this website offers\nThis website is a working tool for the research team and an open resource for other researchers:\n\nCommunication and collaboration. Data, R code, results and conclusions are shared among team members.\nReproducible research. Anyone can run the code and obtain the same tables and figures.\nInteractivity. The bias explorer lets users see how bias changes with skewness, inequality and sample size.\nInequality observatory. The observatory shows official inequality indicators (Gini, S80/S20 and Theil indices) from Eurostat, the World Bank and the Spanish Statistical Office (INE), with links to other inequality observatories.\nPractical guides. The practical guides explain in detail how to estimate, decompose and make inferences about Theil indices.\nDissemination and internationalisation. Results, data and software are openly available, and the project identity can be freely used by co-authors and collaborators.\nCollaboration. External researchers interested in the project can contact us."
+  },
+  {
+    "objectID": "index.html#your-opinion",
+    "href": "index.html#your-opinion",
+    "title": "THEILUMINA",
+    "section": "Your opinion",
+    "text": "Your opinion\nIs this website useful to you? Rate it with one click and leave us your recommendations.\n\n  How satisfied are you with the THEILUMINA website?\n  \n    😞I don't like it\n    🙁Not much\n    😐It's OK\n    🙂Quite a lot\n    😄I like it\n  \n  Thank you for your opinion! You can also leave us a recommendation below.\n  \n\n  \n    Recommendations: what would you improve or add (data, guides, software, features)?\n    \n    \n      \n      Send recommendation\n    \n    Thank you! Your recommendation has been sent.\n  \n  Anonymous: no cookies or personal data are stored. Your rating is counted only once per browser."
   },
   {
     "objectID": "news.html",

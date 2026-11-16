@@ -68,3 +68,5 @@ Para contenidos que necesiten servidor (Shiny), aloja la app en shinyapps.io y e
 **Enlaces a los artículos:** los títulos de la tabla de publicaciones enlazan a Google Scholar. Para enlazar directamente al DOI de cada artículo, ejecuta una vez `Rscript tools/add_dois.R` (requiere conexión a internet y el paquete `jsonlite`); los títulos que no encuentre mantienen el enlace a Google Scholar.
 
 **Añadir una guía:** crea el archivo en `guides/` (copia una guía existente para mantener el logo y el formato) y añade una tarjeta `::: {.guide-card}` en `guides.qmd`.
+
+**Encuesta de satisfacción y descargas (GoatCounter):** la encuesta (`_survey.qmd`, en la portada y en `feedback.qmd`) y el contador de descargas (`_goatcounter.html`) registran *eventos* en GoatCounter, sin cookies. En el panel de GoatCounter aparecen como `survey/satisfaction-1` … `survey/satisfaction-5`, `survey/recommendation` y `download/<fichero>`. Las recomendaciones se envían por correo; para recibirlas sin que el usuario abra su programa de correo, crea un formulario gratuito en https://formspree.io y pon su identificador en `FORMSPREE_ID` dentro de `_survey.qmd`.

@@ -75,7 +75,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-fa1e17b68db0e6c2c765344693dbaad9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-3118345953672cee2b0e858b9c884c4b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -263,6 +263,10 @@ window.Quarto = {
     <a class="nav-link" href="./contact.html"> 
 <span class="menu-text">Contact</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./feedback.html"> 
+<span class="menu-text">Your opinion</span></a>
+  </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
@@ -415,6 +419,116 @@ Click on the infographic to open it at full size. Download: <a href="images/thei
 <li><strong>Dissemination and internationalisation.</strong> Results, data and software are openly available, and the <a href="./identity.html">project identity</a> can be freely used by co-authors and collaborators.</li>
 <li><strong>Collaboration.</strong> External researchers interested in the project can <a href="./contact.html">contact us</a>.</li>
 </ol>
+</section>
+<section id="your-opinion" class="level2">
+<h2 class="anchored" data-anchor-id="your-opinion">Your opinion</h2>
+<p>Is this website useful to you? Rate it with one click and leave us your recommendations.</p>
+<div class="survey" id="theil-survey">
+  <p class="survey-q">How satisfied are you with the THEILUMINA website?</p>
+  <div class="survey-faces" role="group" aria-label="Satisfaction rating from 1 (I don't like it) to 5 (I like it)">
+    <button type="button" data-v="1"><span class="emo" aria-hidden="true">😞</span><span class="lab">I don't like it</span></button>
+    <button type="button" data-v="2"><span class="emo" aria-hidden="true">🙁</span><span class="lab">Not much</span></button>
+    <button type="button" data-v="3"><span class="emo" aria-hidden="true">😐</span><span class="lab">It's OK</span></button>
+    <button type="button" data-v="4"><span class="emo" aria-hidden="true">🙂</span><span class="lab">Quite a lot</span></button>
+    <button type="button" data-v="5"><span class="emo" aria-hidden="true">😄</span><span class="lab">I like it</span></button>
+  </div>
+  <p class="survey-thanks" hidden="">Thank you for your opinion! You can also leave us a recommendation below.</p>
+  <div class="survey-results" hidden=""></div>
+
+  <form class="survey-reco" id="theil-reco">
+    <label class="form-label" for="reco-text"><b>Recommendations</b>: what would you improve or add (data, guides, software, features)?</label>
+    <textarea class="form-control" id="reco-text" rows="4" maxlength="2000" required=""></textarea>
+    <div class="row g-2 mt-1">
+      <div class="col-md-6"><input class="form-control" id="reco-email" type="email" placeholder="Your email (optional, if you would like a reply)"></div>
+      <div class="col-md-6"><button class="btn btn-primary" type="submit">Send recommendation</button></div>
+    </div>
+    <p class="survey-sent" hidden="">Thank you! Your recommendation has been sent.</p>
+  </form>
+  <p class="survey-note">Anonymous: no cookies or personal data are stored. Your rating is counted only once per browser.</p>
+</div>
+
+<script>
+(function () {
+  // ---- Settings ----
+  const GC_CODE = "theilumina";          // GoatCounter code (same as the visit counter)
+  const FORMSPREE_ID = "";               // Optional: Formspree form ID (e.g. "xyzabcd"). Empty = send by email
+  const CONTACT_EMAIL = "jfmunoz@ugr.es";
+  const KEY = "theilumina-survey-v1";
+  const LABELS = ["I don't like it", "Not much", "It's OK", "Quite a lot", "I like it"];
+
+  const box = document.getElementById("theil-survey");
+  if (!box) return;
+  const store = {
+    get() { try { return localStorage.getItem(KEY); } catch (e) { return null; } },
+    set(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
+  };
+  const isLocal = ["localhost", "127.0.0.1"].includes(location.hostname);
+
+  function count(path, title) {
+    const go = () => window.goatcounter && window.goatcounter.count &&
+      window.goatcounter.count({path: path, title: title, event: true});
+    if (window.goatcounter && window.goatcounter.count) go(); else setTimeout(go, 2000);
+  }
+
+  async function showResults() {
+    if (isLocal) return;
+    const n = await Promise.all([1, 2, 3, 4, 5].map(v =>
+      fetch(`https://${GC_CODE}.goatcounter.com/counter/${encodeURIComponent("survey/satisfaction-" + v)}.json`)
+        .then(r => r.ok ? r.json() : {count: "0"})
+        .then(d => parseInt(String(d.count).replace(/\D/g, ""), 10) || 0)
+        .catch(() => 0)));
+    const total = n.reduce((a, b) => a + b, 0);
+    if (!total) return;
+    const mean = n.reduce((a, b, i) => a + b * (i + 1), 0) / total;
+    const res = box.querySelector(".survey-results");
+    res.innerHTML = `<p><b>Results so far</b> (${total} rating${total > 1 ? "s" : ""}; average ${mean.toFixed(1)} out of 5)</p>` +
+      n.map((c, i) => `<div class="sr-row"><span class="sr-lab">${["😞","🙁","😐","🙂","😄"][i]} ${LABELS[i]}</span>` +
+        `<span class="sr-bar"><span style="width:${(100 * c / total).toFixed(1)}%"></span></span><span class="sr-n">${Math.round(100 * c / total)}%</span></div>`).join("");
+    res.hidden = false;
+  }
+
+  function lock(v) {
+    box.querySelectorAll(".survey-faces button").forEach(b => {
+      b.disabled = true;
+      if (b.dataset.v === String(v)) b.classList.add("chosen");
+    });
+    box.querySelector(".survey-thanks").hidden = false;
+    showResults();
+  }
+
+  const prev = store.get();
+  if (prev) lock(prev);
+  box.querySelectorAll(".survey-faces button").forEach(b => b.addEventListener("click", () => {
+    if (store.get()) return;
+    const v = b.dataset.v;
+    count(`survey/satisfaction-${v}`, `Satisfaction ${v}/5: ${LABELS[v - 1]}`);
+    store.set(v);
+    setTimeout(() => lock(v), 400);
+  }));
+
+  document.getElementById("theil-reco").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const text = document.getElementById("reco-text").value.trim();
+    const email = document.getElementById("reco-email").value.trim();
+    if (!text) return;
+    count("survey/recommendation", "Recommendation sent");
+    if (FORMSPREE_ID) {
+      try {
+        const r = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+          method: "POST", headers: {"Accept": "application/json", "Content-Type": "application/json"},
+          body: JSON.stringify({recommendation: text, email: email || "(not given)", rating: store.get() || "(no rating)", page: location.pathname})
+        });
+        if (!r.ok) throw new Error(r.status);
+        e.target.querySelector(".survey-sent").hidden = false;
+        e.target.reset();
+        return;
+      } catch (err) { /* if it fails, fall back to email */ }
+    }
+    const body = `Recommendation:\n${text}\n\nRating: ${store.get() || "(no rating)"}\nEmail: ${email || "(not given)"}`;
+    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("[THEILUMINA] Website recommendation")}&body=${encodeURIComponent(body)}`;
+  });
+})();
+</script>
 
 
 <!-- -->
@@ -447,6 +561,26 @@ Click on the infographic to open it at full size. Download: <a href="images/thei
     .then(r => r.ok ? r.json() : null)
     .then(d => { if (d && d.count) show(String(d.count).replace(/\s/g, ".")); })
     .catch(() => {});
+})();
+</script>
+
+<script>
+// ---- Download counter ----
+// Every click on a downloadable file (CSV data, figures, infographic, video, R code, guides...)
+// is recorded in GoatCounter as an event "download/<file name>" (no cookies, no personal data).
+(function () {
+  const EXT = /\.(csv|xlsx|zip|png|svg|jpg|pdf|mp4|r|rds|rdata|qmd|txt|json|docx)(\?|#|$)/i;
+  document.addEventListener("click", function (e) {
+    const a = e.target.closest ? e.target.closest("a") : null;
+    if (!a) return;
+    const href = a.getAttribute("href") || "";
+    if (!a.hasAttribute("download") && !EXT.test(href)) return;
+    let name = a.getAttribute("download") || href.split("#")[0].split("?")[0].split("/").pop() || "file";
+    const page = location.pathname.split("/").pop() || "index.html";
+    if (window.goatcounter && window.goatcounter.count) {
+      window.goatcounter.count({path: "download/" + name, title: "Download: " + name + " (from " + page + ")", event: true});
+    }
+  }, true);
 })();
 </script>
 <script id="quarto-html-after-body" type="application/javascript">
@@ -968,7 +1102,13 @@ Click on the infographic to open it at full size. Download: <a href="images/thei
 <span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**Inequality observatory.** The <span class="co">[</span><span class="ot">observatory</span><span class="co">](observatory.qmd)</span> shows official inequality indicators (Gini, S80/S20 and Theil indices) from Eurostat, the World Bank and the Spanish Statistical Office (INE), with links to other inequality observatories.</span>
 <span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>**Practical guides.** The <span class="co">[</span><span class="ot">practical guides</span><span class="co">](guides.qmd)</span> explain in detail how to estimate, decompose and make inferences about Theil indices.</span>
 <span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>**Dissemination and internationalisation.** Results, data and software are openly available, and the <span class="co">[</span><span class="ot">project identity</span><span class="co">](identity.qmd)</span> can be freely used by co-authors and collaborators.</span>
-<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a><span class="ss">7. </span>**Collaboration.** External researchers interested in the project can <span class="co">[</span><span class="ot">contact us</span><span class="co">](contact.qmd)</span>.</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a><span class="ss">7. </span>**Collaboration.** External researchers interested in the project can <span class="co">[</span><span class="ot">contact us</span><span class="co">](contact.qmd)</span>.</span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a><span class="fu">## Your opinion</span></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>Is this website useful to you? Rate it with one click and leave us your recommendations.</span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>{{&lt; include _survey.qmd &gt;}}</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">

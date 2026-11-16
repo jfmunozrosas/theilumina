@@ -181,3 +181,30 @@ img.infographic, .infographic img { width: 100%; max-width: 900px; display: bloc
 }
 .audience { display: flex; flex-wrap: wrap; gap: .5rem; margin: .5rem 0 1.25rem; }
 .conf-table td:first-child { white-space: nowrap; }
+
+/* ---------- Satisfaction survey ---------- */
+.survey {
+  background: $theil-cream; border: 1px solid rgba($theil-frame, .35); border-radius: 10px;
+  padding: 1.25rem 1.5rem; margin: 1rem 0 1.5rem;
+  .survey-q { font-weight: 700; color: $theil-blue; font-size: 1.15rem; margin-bottom: .75rem; }
+  .survey-faces { display: flex; flex-wrap: wrap; gap: .6rem; margin-bottom: .75rem; }
+  .survey-faces button {
+    display: flex; flex-direction: column; align-items: center; gap: .2rem; min-width: 96px;
+    background: #fff; border: 2px solid rgba($theil-frame, .35); border-radius: 12px; padding: .5rem .6rem; cursor: pointer;
+    transition: transform .12s, border-color .12s;
+    .emo { font-size: 2.1rem; line-height: 1; }
+    .lab { font-size: .82rem; color: #444; }
+    &:hover:not(:disabled) { transform: translateY(-2px); border-color: $theil-orange; }
+    &:disabled { cursor: default; opacity: .55; }
+    &.chosen { opacity: 1; border-color: $theil-orange; background: rgba($theil-orange, .10); }
+  }
+  .survey-thanks, .survey-sent { color: darken($theil-orange, 15%); font-weight: 600; margin: .5rem 0; }
+  .survey-results { margin: .5rem 0 1rem; max-width: 560px; }
+  .sr-row { display: flex; align-items: center; gap: .6rem; font-size: .9rem; margin: .2rem 0; }
+  .sr-lab { width: 150px; }
+  .sr-bar { flex: 1; height: 12px; background: #e9e4dc; border-radius: 6px; overflow: hidden;
+    span { display: block; height: 100%; background: $theil-orange; } }
+  .sr-n { width: 42px; text-align: right; color: #555; }
+  .survey-reco { margin-top: 1rem; border-top: 1px solid rgba($theil-frame, .25); padding-top: 1rem; }
+  .survey-note { font-size: .8rem; color: #777; margin: .75rem 0 0; }
+}

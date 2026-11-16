@@ -75,7 +75,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="/theilumina/site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="/theilumina/site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="/theilumina/site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="/theilumina/site_libs/bootstrap/bootstrap-fa1e17b68db0e6c2c765344693dbaad9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="/theilumina/site_libs/bootstrap/bootstrap-3118345953672cee2b0e858b9c884c4b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -218,6 +218,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="nav-link" href="/theilumina/contact.html"> 
 <span class="menu-text">Contact</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="/theilumina/feedback.html"> 
+<span class="menu-text">Your opinion</span></a>
+  </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
@@ -301,6 +305,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     .then(r => r.ok ? r.json() : null)
     .then(d => { if (d && d.count) show(String(d.count).replace(/\s/g, ".")); })
     .catch(() => {});
+})();
+</script>
+
+<script>
+// ---- Download counter ----
+// Every click on a downloadable file (CSV data, figures, infographic, video, R code, guides...)
+// is recorded in GoatCounter as an event "download/<file name>" (no cookies, no personal data).
+(function () {
+  const EXT = /\.(csv|xlsx|zip|png|svg|jpg|pdf|mp4|r|rds|rdata|qmd|txt|json|docx)(\?|#|$)/i;
+  document.addEventListener("click", function (e) {
+    const a = e.target.closest ? e.target.closest("a") : null;
+    if (!a) return;
+    const href = a.getAttribute("href") || "";
+    if (!a.hasAttribute("download") && !EXT.test(href)) return;
+    let name = a.getAttribute("download") || href.split("#")[0].split("?")[0].split("/").pop() || "file";
+    const page = location.pathname.split("/").pop() || "index.html";
+    if (window.goatcounter && window.goatcounter.count) {
+      window.goatcounter.count({path: "download/" + name, title: "Download: " + name + " (from " + page + ")", event: true});
+    }
+  }, true);
 })();
 </script>
 <script id="quarto-html-after-body" type="application/javascript">

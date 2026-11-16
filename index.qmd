@@ -68,3 +68,9 @@ This website is a working tool for the research team and an open resource for ot
 5. **Practical guides.** The [practical guides](guides.qmd) explain in detail how to estimate, decompose and make inferences about Theil indices.
 6. **Dissemination and internationalisation.** Results, data and software are openly available, and the [project identity](identity.qmd) can be freely used by co-authors and collaborators.
 7. **Collaboration.** External researchers interested in the project can [contact us](contact.qmd).
+
+## Your opinion
+
+Is this website useful to you? Rate it with one click and leave us your recommendations.
+
+{{< include _survey.qmd >}}

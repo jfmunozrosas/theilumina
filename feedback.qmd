@@ -1,0 +1,11 @@
+---
+title: "Your opinion"
+subtitle: "Help us improve the THEILUMINA website"
+toc: false
+---
+
+We would like to know whether this website is useful to you. Rate it with one click and, if you wish, tell us what you would improve or add: new data in the observatory, new practical guides, features of the **theil** R package, or anything else.
+
+{{< include _survey.qmd >}}
+
+You can also [contact us](contact.qmd) to collaborate with the project.
