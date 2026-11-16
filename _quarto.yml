@@ -6,6 +6,9 @@ project:
     - "images/brand/*"
     - "images/theilumina_infographic.*"
     - "media/*"
+    - "js/*"
+    - "images/theilumina_social_card.png"
+    - "CITATION.cff"
 
 website:
   title: "THEILUMINA"
@@ -13,9 +16,14 @@ website:
   site-url: "https://jfmunozrosas.github.io/theilumina"   # <- cambiar por la URL definitiva
   favicon: images/logo_theilumina.png
   page-navigation: true
-  open-graph: true
-  twitter-card: true
-  image: images/logo_theilumina.png
+  open-graph:
+    image: images/theilumina_social_card.png
+    image-width: 1200
+    image-height: 630
+  twitter-card:
+    image: images/theilumina_social_card.png
+    card-style: summary_large_image
+  image: images/theilumina_social_card.png
   back-to-top-navigation: true
   navbar:
     logo: images/logo_theilumina.png
@@ -40,6 +48,12 @@ website:
             text: "Definition and estimation"
           - href: simulation.qmd
             text: "Interactive bias explorer"
+          - href: calculator.qmd
+            text: "Theil index calculator"
+          - href: practice.qmd
+            text: "Try it in R (in your browser)"
+          - href: glossary.qmd
+            text: "Glossary and FAQ"
           - href: data-code.qmd
             text: "Research data and R code"
       - href: observatory.qmd
@@ -50,12 +64,16 @@ website:
         menu:
           - href: guides.qmd
             text: "Practical guides"
+          - href: blog/index.qmd
+            text: "Blog"
           - href: dissemination.qmd
             text: "Seminars, conferences and stays"
           - href: identity.qmd
             text: "Logo and project identity"
           - href: links.qmd
             text: "Links of interest"
+          - href: cite.qmd
+            text: "How to cite"
       - href: contact.qmd
         text: Contact
       - href: feedback.qmd

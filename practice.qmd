@@ -1,0 +1,172 @@
+---
+title: "Try it in R"
+subtitle: "Run and modify R code on Theil indices directly in your browser, without installing anything"
+toc: true
+---
+
+The exercises on this page run **real R in your web browser** thanks to [webR](https://docs.r-wasm.org/webr/latest/). Edit the code and press **Run**. The first run downloads R (about 20 MB) and takes a few seconds; later runs are immediate. Nothing is installed on your computer, and your code and data are not sent anywhere.
+
+::: {.callout-tip appearance="simple"}
+These exercises follow the [practical guide to Theil indices in R](guides/theil-indices-r.qmd). They are suitable for classes, workshops and self-study.
+:::
+
+```{=html}
+<script type="module">
+  // webR is loaded only when the first exercise is run
+  let webRPromise = null;
+  async function getWebR(status) {
+    if (!webRPromise) {
+      webRPromise = (async () => {
+        status("Loading R in your browser (first time only)…");
+        const { WebR } = await import("https://webr.r-wasm.org/latest/webr.mjs");
+        const webR = new WebR();
+        await webR.init();
+        // Common functions available in every exercise
+        await webR.evalRVoid(`
+          theil_T1 <- function(y, w = rep(1, length(y))) { mu <- weighted.mean(y, w); r <- y / mu; sum(w * r * log(r)) / sum(w) }
+          theil_T0 <- function(y, w = rep(1, length(y))) { mu <- weighted.mean(y, w); sum(w * log(mu / y)) / sum(w) }
+        `);
+        return webR;
+      })();
+    }
+    return webRPromise;
+  }
+
+  async function run(box) {
+    const code = box.querySelector("textarea").value;
+    const out = box.querySelector(".ex-output");
+    const status = msg => { out.innerHTML = `<span class="ex-status">${msg}</span>`; };
+    const btn = box.querySelector(".ex-run");
+    btn.disabled = true;
+    try {
+      const webR = await getWebR(status);
+      status("Running…");
+      const shelter = await new webR.Shelter();
+      try {
+        const res = await shelter.captureR(code, {withAutoprint: true, captureStreams: true, captureConditions: false,
+                                                  captureGraphics: {width: 640, height: 400}});
+        out.innerHTML = "";
+        const pre = document.createElement("pre");
+        pre.textContent = res.output.map(o => o.data).join("\n");
+        if (res.output.some(o => o.type === "stderr")) pre.classList.add("ex-stderr");
+        if (pre.textContent.trim()) out.appendChild(pre);
+        for (const img of (res.images || [])) {
+          const c = document.createElement("canvas");
+          c.width = img.width; c.height = img.height; c.className = "ex-plot";
+          c.getContext("2d").drawImage(img, 0, 0);
+          out.appendChild(c);
+        }
+        if (!out.childNodes.length) status("Done (no output).");
+      } finally { await shelter.purge(); }
+    } catch (e) {
+      out.innerHTML = `<pre class="ex-stderr"></pre>`;
+      out.querySelector("pre").textContent = "Error: " + (e.message || e);
+    } finally { btn.disabled = false; }
+  }
+
+  document.querySelectorAll(".exercise").forEach(box => {
+    const ta = box.querySelector("textarea");
+    const original = ta.value;
+    box.querySelector(".ex-run").addEventListener("click", () => run(box));
+    box.querySelector(".ex-reset").addEventListener("click", () => { ta.value = original; box.querySelector(".ex-output").innerHTML = ""; });
+    ta.addEventListener("keydown", e => { if ((e.ctrlKey || e.metaKey) && e.key === "Enter") { e.preventDefault(); run(box); } });
+  });
+</script>
+```
+
+## Exercise 1. Computing $T_0$ and $T_1$
+
+The functions `theil_T0()` and `theil_T1()` are already loaded. Compute both indices for a small sample and check how they change if the richest person earns more.
+
+```{=html}
+<div class="exercise">
+<textarea spellcheck="false" rows="9">y <- c(10, 20, 30, 40, 60, 80)
+theil_T0(y)
+theil_T1(y)
+
+# What happens if the richest person earns 200 instead of 80?
+y2 <- c(10, 20, 30, 40, 60, 200)
+c(T0 = theil_T0(y2), T1 = theil_T1(y2))</textarea>
+<div class="ex-buttons"><button class="btn btn-primary btn-sm ex-run">▶ Run</button><button class="btn btn-outline-secondary btn-sm ex-reset">Reset</button><span class="ex-hint">Ctrl/Cmd + Enter</span></div>
+<div class="ex-output"></div>
+</div>
+```
+
+**Question.** Which index increases more? Remember that $T_1$ is more sensitive to the top of the distribution.
+
+## Exercise 2. Decomposition by sex
+
+Decompose inequality into the part due to differences between women and men (*between*) and the inequality within each sex (*within*).
+
+```{=html}
+<div class="exercise">
+<textarea spellcheck="false" rows="16">income <- c(12, 15, 18, 22, 30,   # women
+            16, 20, 25, 35, 50)   # men
+sex    <- rep(c("Woman", "Man"), each = 5)
+
+mu <- mean(income)
+p  <- tapply(income, sex, length) / length(income)   # population shares
+mg <- tapply(income, sex, mean)                       # group means
+T0g <- tapply(income, sex, theil_T0)                  # T0 within each group
+
+within  <- sum(p * T0g)
+between <- sum(p * log(mu / mg))
+c(total = theil_T0(income), within = within, between = between,
+  pct_between = 100 * between / (within + between))</textarea>
+<div class="ex-buttons"><button class="btn btn-primary btn-sm ex-run">▶ Run</button><button class="btn btn-outline-secondary btn-sm ex-reset">Reset</button><span class="ex-hint">Ctrl/Cmd + Enter</span></div>
+<div class="ex-output"></div>
+</div>
+```
+
+**Question.** Check that *within + between* equals the total. What share of inequality is due to the gender gap?
+
+## Exercise 3. The bias of the estimator: a small simulation
+
+Draw many samples from a skewed (log-normal) population and compare the average estimate of $T_0$ with its true value, $\sigma^2/2$.
+
+```{=html}
+<div class="exercise">
+<textarea spellcheck="false" rows="14">set.seed(1)
+sigma <- 1                  # larger sigma = more skewness and inequality
+true_T0 <- sigma^2 / 2
+n <- 20                     # try 20, 100 and 1000
+est <- replicate(2000, theil_T0(rlnorm(n, 0, sigma)))
+
+c(true = true_T0, mean_estimate = mean(est),
+  relative_bias = 100 * (mean(est) - true_T0) / true_T0)
+
+hist(est, breaks = 40, col = "#E07B20", border = "white",
+     main = paste("Estimates of T0, n =", n), xlab = "Estimate")
+abline(v = true_T0, lwd = 3, col = "#1F4E7A")</textarea>
+<div class="ex-buttons"><button class="btn btn-primary btn-sm ex-run">▶ Run</button><button class="btn btn-outline-secondary btn-sm ex-reset">Reset</button><span class="ex-hint">Ctrl/Cmd + Enter</span></div>
+<div class="ex-output"></div>
+</div>
+```
+
+**Question.** How does the relative bias change when $n$ increases? And when $\sigma$ increases?
+
+## Exercise 4. Jackknife bias correction and standard error
+
+Estimate the bias and the standard error of $T_0$ with the jackknife, and build a 95% confidence interval.
+
+```{=html}
+<div class="exercise">
+<textarea spellcheck="false" rows="15">set.seed(2)
+y <- rlnorm(50, 0, 1)
+n <- length(y)
+
+T0_hat <- theil_T0(y)
+T0_loo <- sapply(seq_len(n), function(i) theil_T0(y[-i]))   # leave-one-out estimates
+
+bias <- (n - 1) * (mean(T0_loo) - T0_hat)
+se   <- sqrt((n - 1) / n * sum((T0_loo - mean(T0_loo))^2))
+T0_corrected <- T0_hat - bias
+
+c(estimate = T0_hat, bias = bias, corrected = T0_corrected, se = se,
+  ci_lower = T0_corrected - 1.96 * se, ci_upper = T0_corrected + 1.96 * se)</textarea>
+<div class="ex-buttons"><button class="btn btn-primary btn-sm ex-run">▶ Run</button><button class="btn btn-outline-secondary btn-sm ex-reset">Reset</button><span class="ex-hint">Ctrl/Cmd + Enter</span></div>
+<div class="ex-output"></div>
+</div>
+```
+
+**Question.** Is the true value ($T_0 = 0.5$) inside the interval? Repeat with other seeds and sample sizes. The [calculator](calculator.qmd) applies the same method to your own data.

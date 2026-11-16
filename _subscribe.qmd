@@ -1,0 +1,30 @@
+```{=html}
+<div class="subscribe" id="theil-subscribe">
+  <div class="sub-text"><b>Stay informed.</b> Receive the news and blog posts of THEILUMINA by email, or follow the <a href="https://jfmunozrosas.github.io/theilumina/blog/index.xml">RSS feed</a>.</div>
+  <form class="sub-form" id="sub-form" method="post" target="_blank">
+    <input type="email" name="email" class="form-control" placeholder="Your email" required aria-label="Your email">
+    <button type="submit" class="btn btn-primary">Subscribe</button>
+  </form>
+  <p class="sub-note">You can unsubscribe at any time. Your email is used only to send THEILUMINA news.</p>
+</div>
+<script>
+(function () {
+  // Optional: username of a free Buttondown newsletter (https://buttondown.com). Empty = subscription by email to the team.
+  const BUTTONDOWN_USER = "";
+  const CONTACT_EMAIL = "jfmunoz@ugr.es";
+  const f = document.getElementById("sub-form");
+  if (!f) return;
+  if (BUTTONDOWN_USER) {
+    f.action = `https://buttondown.com/api/emails/embed-subscribe/${BUTTONDOWN_USER}`;
+  } else {
+    f.addEventListener("submit", e => {
+      e.preventDefault();
+      const email = f.querySelector("input").value.trim();
+      const body = `Please subscribe this email address to THEILUMINA news: ${email}`;
+      window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("[THEILUMINA] Subscribe to news")}&body=${encodeURIComponent(body)}`;
+    });
+  }
+  if (window.goatcounter) f.addEventListener("submit", () => window.goatcounter.count && window.goatcounter.count({path: "subscribe", title: "Newsletter subscription", event: true}));
+})();
+</script>
+```

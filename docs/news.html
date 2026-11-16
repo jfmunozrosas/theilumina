@@ -75,7 +75,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-3118345953672cee2b0e858b9c884c4b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-aea4922fdeef62532e06e3147212e8b0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -108,16 +108,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <meta property="og:title" content="Status and news – THEILUMINA">
 <meta property="og:description" content="Project status and short news on the activity of the team">
-<meta property="og:image" content="https://jfmunozrosas.github.io/theilumina/images/logo_theilumina.png">
+<meta property="og:image" content="https://jfmunozrosas.github.io/theilumina/images/theilumina_social_card.png">
 <meta property="og:site_name" content="THEILUMINA">
-<meta property="og:image:height" content="130">
-<meta property="og:image:width" content="394">
+<meta property="og:image:height" content="630">
+<meta property="og:image:width" content="1200">
 <meta name="twitter:title" content="Status and news – THEILUMINA">
 <meta name="twitter:description" content="Project status and short news on the activity of the team">
-<meta name="twitter:image" content="https://jfmunozrosas.github.io/theilumina/images/logo_theilumina.png">
-<meta name="twitter:image-height" content="130">
-<meta name="twitter:image-width" content="394">
+<meta name="twitter:image" content="https://jfmunozrosas.github.io/theilumina/images/theilumina_social_card.png">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image-height" content="630">
+<meta name="twitter:image-width" content="1200">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -178,6 +178,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Interactive bias explorer</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="./calculator.html">
+ <span class="dropdown-text">Theil index calculator</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./practice.html">
+ <span class="dropdown-text">Try it in R (in your browser)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./glossary.html">
+ <span class="dropdown-text">Glossary and FAQ</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="./data-code.html">
  <span class="dropdown-text">Research data and R code</span></a>
   </li>  
@@ -201,6 +213,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Practical guides</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="./blog/index.html">
+ <span class="dropdown-text">Blog</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="./dissemination.html">
  <span class="dropdown-text">Seminars, conferences and stays</span></a>
   </li>  
@@ -211,6 +227,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li>
     <a class="dropdown-item" href="./links.html">
  <span class="dropdown-text">Links of interest</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./cite.html">
+ <span class="dropdown-text">How to cite</span></a>
   </li>  
     </ul>
   </li>
@@ -320,6 +340,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="news" class="level2">
 <h2 class="anchored" data-anchor-id="news">News</h2>
 <!-- Add new entries at the top, using the same format: date, tag and one or two sentences. -->
+<div class="subscribe" id="theil-subscribe">
+  <div class="sub-text"><b>Stay informed.</b> Receive the news and blog posts of THEILUMINA by email, or follow the <a href="https://jfmunozrosas.github.io/theilumina/blog/index.xml">RSS feed</a>.</div>
+  <form class="sub-form" id="sub-form" method="post" target="_blank">
+    <input type="email" name="email" class="form-control" placeholder="Your email" required="" aria-label="Your email">
+    <button type="submit" class="btn btn-primary">Subscribe</button>
+  </form>
+  <p class="sub-note">You can unsubscribe at any time. Your email is used only to send THEILUMINA news.</p>
+</div>
+<script>
+(function () {
+  // Optional: username of a free Buttondown newsletter (https://buttondown.com). Empty = subscription by email to the team.
+  const BUTTONDOWN_USER = "";
+  const CONTACT_EMAIL = "jfmunoz@ugr.es";
+  const f = document.getElementById("sub-form");
+  if (!f) return;
+  if (BUTTONDOWN_USER) {
+    f.action = `https://buttondown.com/api/emails/embed-subscribe/${BUTTONDOWN_USER}`;
+  } else {
+    f.addEventListener("submit", e => {
+      e.preventDefault();
+      const email = f.querySelector("input").value.trim();
+      const body = `Please subscribe this email address to THEILUMINA news: ${email}`;
+      window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("[THEILUMINA] Subscribe to news")}&body=${encodeURIComponent(body)}`;
+    });
+  }
+  if (window.goatcounter) f.addEventListener("submit", () => window.goatcounter.count && window.goatcounter.count({path: "subscribe", title: "Newsletter subscription", event: true}));
+})();
+</script>
 <div class="news-list">
 <div class="news-item">
 <p><span class="news-date">November 2026</span> <span class="news-tag tag-project">Dissemination</span></p>
@@ -865,37 +913,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- Add new entries at the top, using the same format: date, tag and one or two sentences. --&gt;</span></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>::: {.news-list}</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>{{&lt; include _subscribe.qmd &gt;}}</span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>::: {.news-item}</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"news-date"</span><span class="dt">&gt;</span>November 2026<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span> <span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"news-tag tag-project"</span><span class="dt">&gt;</span>Dissemination<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>**New section: Practical guides.** The first <span class="co">[</span><span class="ot">practical guide</span><span class="co">](guides.qmd)</span> explains how to estimate Theil indices in R, decompose them by groups (regions, sex) and measure their bias and precision. Available in English and Spanish.</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>::: {.news-item}</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"news-date"</span><span class="dt">&gt;</span>November 2026<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span> <span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"news-tag tag-project"</span><span class="dt">&gt;</span>Conferences<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>**Conferences of interest in 2027.** The <span class="co">[</span><span class="ot">Dissemination page</span><span class="co">](dissemination.qmd#upcoming-conferences-2027)</span> lists conferences with confirmed dates: III/LIS (February, London), IARIW–WIUT (May, Tashkent; abstracts due 25 November 2026), EcoSta (July, Shanghai), ISI World Statistics Congress (July, Lusaka), ESRA (July, Paris), ECINEQ (September, Helsinki) and EnvStat (September, Vienna).</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>::: {.news-item}</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"news-date"</span><span class="dt">&gt;</span>November 2026<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span> <span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"news-tag tag-web"</span><span class="dt">&gt;</span>Website<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>**A one-minute video and an infographic** present the project on the <span class="co">[</span><span class="ot">home page</span><span class="co">](index.qmd)</span>.</span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>::: {.news-item}</span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"news-date"</span><span class="dt">&gt;</span>November 2026<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span> <span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"news-tag tag-web"</span><span class="dt">&gt;</span>Website<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>**The THEILUMINA website is created** for the research project proposal.</span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>::: {.news-list}</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>::: {.news-item}</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"news-date"</span><span class="dt">&gt;</span>November 2026<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span> <span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"news-tag tag-project"</span><span class="dt">&gt;</span>Dissemination<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>**New section: Practical guides.** The first <span class="co">[</span><span class="ot">practical guide</span><span class="co">](guides.qmd)</span> explains how to estimate Theil indices in R, decompose them by groups (regions, sex) and measure their bias and precision. Available in English and Spanish.</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>::: {.news-item}</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"news-date"</span><span class="dt">&gt;</span>November 2026<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span> <span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"news-tag tag-project"</span><span class="dt">&gt;</span>Conferences<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>**Conferences of interest in 2027.** The <span class="co">[</span><span class="ot">Dissemination page</span><span class="co">](dissemination.qmd#upcoming-conferences-2027)</span> lists conferences with confirmed dates: III/LIS (February, London), IARIW–WIUT (May, Tashkent; abstracts due 25 November 2026), EcoSta (July, Shanghai), ISI World Statistics Congress (July, Lusaka), ESRA (July, Paris), ECINEQ (September, Helsinki) and EnvStat (September, Vienna).</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>::: {.news-item}</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"news-date"</span><span class="dt">&gt;</span>November 2026<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span> <span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"news-tag tag-web"</span><span class="dt">&gt;</span>Website<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>**A one-minute video and an infographic** present the project on the <span class="co">[</span><span class="ot">home page</span><span class="co">](index.qmd)</span>.</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>::: {.news-item}</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"news-date"</span><span class="dt">&gt;</span>November 2026<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span> <span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"news-tag tag-web"</span><span class="dt">&gt;</span>Website<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>**The THEILUMINA website is created** for the research project proposal.</span>
 <span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip appearance="simple"}</span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>Would you like to collaborate or receive news about the project? <span class="co">[</span><span class="ot">Contact us</span><span class="co">](contact.qmd)</span>.</span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip appearance="simple"}</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>Would you like to collaborate or receive news about the project? <span class="co">[</span><span class="ot">Contact us</span><span class="co">](contact.qmd)</span>.</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">

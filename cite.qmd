@@ -1,0 +1,47 @@
+---
+title: "How to cite"
+subtitle: "Citing the website, the guides, the calculator and the software of THEILUMINA"
+---
+
+If you use the materials, data or tools of THEILUMINA in your work, please cite them. Thank you: citations help us show the impact of the project.
+
+## Website and observatory
+
+> THEILUMINA (2026). *THEILUMINA: Illuminating inequality with Theil indices* [website]. University of Granada. <https://jfmunozrosas.github.io/theilumina/>
+
+```bibtex
+@misc{theilumina_web,
+  author       = {{THEILUMINA project}},
+  title        = {{THEILUMINA}: Illuminating inequality with {Theil} indices},
+  year         = {2026},
+  howpublished = {\url{https://jfmunozrosas.github.io/theilumina/}},
+  note         = {University of Granada. Accessed: YYYY-MM-DD}
+}
+```
+
+When you use data from the [observatory](observatory.qmd), please also cite the original source (Eurostat, World Bank or INE), which is indicated under each chart.
+
+## Practical guide
+
+> THEILUMINA (2026). *A practical guide to Theil indices in R*. THEILUMINA practical guides, University of Granada. <https://jfmunozrosas.github.io/theilumina/guides/theil-indices-r.html>
+
+## Theil index calculator
+
+> THEILUMINA (2026). *Theil index calculator* [online tool]. University of Granada. <https://jfmunozrosas.github.io/theilumina/calculator.html>
+
+## Software
+
+- **theil** (R package, under development in THEILUMINA): the citation will be published here when it is released on CRAN.
+- **giniVarCI** (R package, developed in the GiniUs project): see `citation("giniVarCI")` in R, or its DOI on CRAN: <https://doi.org/10.32614/CRAN.package.giniVarCI>.
+
+## Publications
+
+The articles of the team are listed in [Publications](publications.qmd), with links to each paper.
+
+## Citation file and DOI
+
+The GitHub repository of the website includes a [`CITATION.cff`](https://github.com/jfmunozrosas/theilumina/blob/main/CITATION.cff) file, so GitHub shows a **"Cite this repository"** button with the reference in APA and BibTeX formats.
+
+::: {.callout-note appearance="simple"}
+**Permanent DOI (Zenodo).** Each version of the code and data of THEILUMINA can receive a permanent DOI through [Zenodo](https://zenodo.org), the open repository of CERN and the European Commission. When a DOI is available, it will be shown here.
+:::

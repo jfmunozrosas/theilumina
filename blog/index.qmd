@@ -1,0 +1,14 @@
+---
+title: "Blog"
+subtitle: "Short posts on inequality measurement, Theil indices and the results of THEILUMINA"
+listing:
+  contents: posts
+  sort: "date desc"
+  type: default
+  categories: true
+  feed: true
+page-layout: full
+title-block-banner: false
+---
+
+{{< include ../_subscribe.qmd >}}

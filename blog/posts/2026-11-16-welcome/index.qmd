@@ -1,0 +1,20 @@
+---
+title: "Welcome to the THEILUMINA blog"
+date: "2026-11-16"
+categories: [news]
+description: "What you will find in this blog and how to follow it."
+image: ../../../images/logo_theilumina.png
+---
+
+THEILUMINA studies how to measure inequality reliably with **Theil indices**: how to correct the bias of their estimators, how to obtain margins of error that can be trusted, how to compute them efficiently with large samples and how to apply them in the social sciences (water, tourism, firms and global convergence).
+
+In this blog we will publish **short, non-technical posts** on:
+
+- the results of the project, explained for a broad audience;
+- data stories based on the [inequality observatory](../../../observatory.qmd);
+- practical advice on estimating, decomposing and interpreting Theil indices;
+- news on the **theil** R package, seminars and conferences.
+
+To start, you can try the new [Theil index calculator](../../../calculator.qmd) with your own data, or run the [R exercises in your browser](../../../practice.qmd).
+
+You can follow the blog with its **RSS feed** or subscribe by email at the top of the [blog page](../../index.qmd).

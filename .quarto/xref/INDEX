@@ -55,5 +55,29 @@
   },
   "feedback.qmd": {
     "feedback.html": "5a89e138"
+  },
+  "blog/index.qmd": {
+    "index.html": "a1c45172"
+  },
+  "blog/posts/2026-11-16-between-within/index.qmd": {
+    "index.html": "488b0a30"
+  },
+  "blog/posts/2026-11-16-margin-of-error/index.qmd": {
+    "index.html": "4f19bf2c"
+  },
+  "blog/posts/2026-11-16-welcome/index.qmd": {
+    "index.html": "5e21e464"
+  },
+  "calculator.qmd": {
+    "calculator.html": "ca21ebec"
+  },
+  "cite.qmd": {
+    "cite.html": "f77bb932"
+  },
+  "glossary.qmd": {
+    "glossary.html": "8daec6bd"
+  },
+  "practice.qmd": {
+    "practice.html": "0ef038ec"
   }
 }

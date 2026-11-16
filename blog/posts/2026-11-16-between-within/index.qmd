@@ -1,0 +1,30 @@
+---
+title: "Between and within: what the Theil decomposition tells us"
+date: "2026-11-16"
+categories: [decomposition, gender]
+description: "Theil indices split inequality into the part due to differences between groups and the part within them. An example by sex."
+---
+
+The main advantage of Theil indices over the Gini index is that they are **additively decomposable**: total inequality is exactly the sum of
+
+- **between-group inequality**, which would disappear if all groups had the same mean income, and
+- **within-group inequality**, which would remain even then.
+
+## An example by sex
+
+Consider ten incomes (in thousands of euros): 12, 15, 18, 22 and 30 for five women, and 16, 20, 25, 35 and 50 for five men. The mean income of women is 19.4 and that of men 29.2.
+
+| Index | Total | Within | Between (gender gap) | % between |
+|---|---|---|---|---|
+| $T_0$ | 0.0875 | 0.0667 | 0.0208 | 23.7% |
+| $T_1$ | 0.0906 | 0.0701 | 0.0205 | 22.6% |
+
+The gender gap accounts for **about 23% of total inequality**. Closing it would reduce inequality, but most of it would remain, especially among men, whose own index (0.083) is higher than that of women (0.050).
+
+## Why it matters for policy
+
+The decomposition tells us **where inequality is**: between regions or within them, between women and men or within each sex, between sectors or within them. This guides policy: regional convergence policies act on the between-region part, while redistribution within regions acts on the within part.
+
+Because the groups are often small, their indices can be noticeably biased. Correcting this bias and quantifying the margin of error of each component is one of the objectives of THEILUMINA.
+
+Try the decomposition with your own data in the [calculator](../../../calculator.qmd) (choose a grouping variable), or run it in R in [exercise 2](../../../practice.qmd#exercise-2.-decomposition-by-sex).

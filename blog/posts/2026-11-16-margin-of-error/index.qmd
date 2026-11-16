@@ -1,0 +1,23 @@
+---
+title: "Why an inequality index needs a margin of error"
+date: "2026-11-16"
+categories: [bias, inference]
+description: "Inequality indices are estimated from samples. Without their bias and margin of error, a difference between two regions or two years may be just noise."
+---
+
+Inequality indices published by statistical offices and used in research are almost always **estimated from samples**, such as household surveys. Like any estimate, they have two sources of error:
+
+- **Bias:** on average, the estimator does not hit the true value. Theil estimators tend to **underestimate** inequality, and more so in small samples and with skewed distributions such as income or wealth.
+- **Variability:** each sample gives a different value. The standard error and the confidence interval measure how much.
+
+## A small example
+
+Take six incomes: 10, 20, 30, 40, 60 and 80. The usual estimate of the mean log deviation is $T_0 = 0.211$. The jackknife, which recomputes the index leaving out one observation at a time, estimates a bias of $-0.037$ (about $-18\%$) and a standard error of $0.107$. The bias-corrected estimate is $0.249$, with a 95% interval from $0.04$ to $0.46$.
+
+With six observations the example is extreme, but the message is general: **the margin of error can be as large as the differences we want to interpret**. If two regions have indices of 0.21 and 0.25, we cannot conclude that inequality differs between them without looking at their margins of error.
+
+## What THEILUMINA does
+
+The project studies when the bias is important, how to predict and correct it, and how to build confidence intervals that keep their coverage with skewed data, as well as fast algorithms that make these methods feasible with millions of observations.
+
+You can apply the jackknife to your own data with the [Theil index calculator](../../../calculator.qmd), or see the full method in the [practical guide](../../../guides/theil-indices-r.qmd).

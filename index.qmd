@@ -50,6 +50,7 @@ The project:
 ## Latest news
 
 ::: {.news-mini}
+- **November 2026** · New tools: [Theil index calculator](calculator.qmd), [R exercises in your browser](practice.qmd), [world inequality map](observatory.qmd#world-map-of-inequality), [blog](blog/index.qmd) and [glossary](glossary.qmd).
 - **November 2026** · New [Practical guides](guides.qmd) section, starting with a guide to estimating and decomposing Theil indices in R.
 - **November 2026** · [Conferences of interest in 2027](dissemination.qmd#upcoming-conferences-2027): ECINEQ, IARIW, ISI WSC, EcoSta and more.
 - **November 2026** · A one-minute video and an infographic present the project.
@@ -65,7 +66,7 @@ This website is a working tool for the research team and an open resource for ot
 2. **Reproducible research.** Anyone can run the code and obtain the same tables and figures.
 3. **Interactivity.** The [bias explorer](simulation.qmd) lets users see how bias changes with skewness, inequality and sample size.
 4. **Inequality observatory.** The [observatory](observatory.qmd) shows official inequality indicators (Gini, S80/S20 and Theil indices) from Eurostat, the World Bank and the Spanish Statistical Office (INE), with links to other inequality observatories.
-5. **Practical guides.** The [practical guides](guides.qmd) explain in detail how to estimate, decompose and make inferences about Theil indices.
+5. **Practical guides and tools.** The [practical guides](guides.qmd) explain in detail how to estimate, decompose and make inferences about Theil indices; the [calculator](calculator.qmd) applies them to your own data and the [R exercises](practice.qmd) run in your browser.
 6. **Dissemination and internationalisation.** Results, data and software are openly available, and the [project identity](identity.qmd) can be freely used by co-authors and collaborators.
 7. **Collaboration.** External researchers interested in the project can [contact us](contact.qmd).
 

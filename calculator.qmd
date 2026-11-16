@@ -1,0 +1,53 @@
+---
+title: "Theil index calculator"
+subtitle: "Compute Theil indices, their decomposition, bias and standard errors with your own data"
+toc: false
+html-table-processing: none
+---
+
+Paste your data or upload a CSV file to obtain the Theil indices $T_0$ (mean log deviation) and $T_1$, their **jackknife bias** and **standard error**, a **bias-corrected estimate with a 95% confidence interval**, and, if you choose a grouping variable, the **decomposition into between-group and within-group inequality**.
+
+::: {.callout-note appearance="simple"}
+**Your data never leave your computer.** All calculations run in your browser; nothing is uploaded or stored. The jackknife is computed in $\mathcal{O}(n)$ with the closed-form expressions of THEILUMINA's preliminary results, so it is instantaneous even with hundreds of thousands of observations.
+:::
+
+```{=html}
+<script src="js/theil-calc.js"></script>
+<div class="calc">
+  <div class="calc-step">
+    <h3>1. Your data</h3>
+    <p>Paste a list of incomes (one per line, or separated by spaces or semicolons), <b>or</b> a table with a header row (CSV, semicolon- or tab-separated, e.g. copied from Excel), <b>or</b> upload a file.</p>
+    <textarea id="calc-input" class="form-control" rows="9" placeholder="income;sex&#10;12;Woman&#10;16;Man&#10;..."></textarea>
+    <div class="calc-row">
+      <input id="calc-file" type="file" accept=".csv,.txt,.tsv" class="form-control" aria-label="Upload a CSV file">
+      <button type="button" class="btn btn-outline-primary btn-sm" data-example="list">Example: list of incomes</button>
+      <button type="button" class="btn btn-outline-primary btn-sm" data-example="sex">Example: incomes by sex</button>
+      <button type="button" class="btn btn-outline-primary btn-sm" data-example="regions">Example: 2,000 simulated incomes in 4 regions</button>
+    </div>
+  </div>
+
+  <div class="calc-step" id="calc-cols" hidden>
+    <h3>2. Variables</h3>
+    <div class="calc-row">
+      <label>Income variable <select id="calc-y" class="form-select"></select></label>
+      <label>Groups (optional) <select id="calc-g" class="form-select"></select></label>
+      <label>Sampling weights (optional) <select id="calc-w" class="form-select"></select></label>
+    </div>
+  </div>
+
+  <div class="calc-row"><button type="button" id="calc-run" class="btn btn-primary">Compute</button></div>
+  <div id="calc-msg"></div>
+  <div id="calc-out"></div>
+</div>
+
+<script src="js/calculator-ui.js"></script>
+```
+
+## How to interpret the results
+
+- **Estimate:** the usual (plug-in) estimator of each index.
+- **Jackknife bias:** estimated bias of that estimator. Theil estimators are usually **biased downwards**, especially in small samples and with heavy-tailed distributions.
+- **Bias-corrected estimate:** estimate minus the jackknife bias.
+- **Standard error and 95% interval:** precision of the estimate. Differences between groups, regions or years should be interpreted in the light of these margins of error.
+
+The **theil** R package, under development in THEILUMINA, will provide these and more accurate methods (bias prediction, improved confidence intervals and complex survey designs).

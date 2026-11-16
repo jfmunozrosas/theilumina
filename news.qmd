@@ -11,6 +11,8 @@ subtitle: "Project status and short news on the activity of the team"
 
 <!-- Add new entries at the top, using the same format: date, tag and one or two sentences. -->
 
+{{< include _subscribe.qmd >}}
+
 ::: {.news-list}
 
 ::: {.news-item}

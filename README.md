@@ -70,3 +70,13 @@ Para contenidos que necesiten servidor (Shiny), aloja la app en shinyapps.io y e
 **Añadir una guía:** crea el archivo en `guides/` (copia una guía existente para mantener el logo y el formato) y añade una tarjeta `::: {.guide-card}` en `guides.qmd`.
 
 **Encuesta de satisfacción y descargas (GoatCounter):** la encuesta (`_survey.qmd`, en la portada y en `feedback.qmd`) y el contador de descargas (`_goatcounter.html`) registran *eventos* en GoatCounter, sin cookies. En el panel de GoatCounter aparecen como `survey/satisfaction-1` … `survey/satisfaction-5`, `survey/recommendation` y `download/<fichero>`. Las recomendaciones se envían por correo; para recibirlas sin que el usuario abra su programa de correo, crea un formulario gratuito en https://formspree.io y pon su identificador en `FORMSPREE_ID` dentro de `_survey.qmd`.
+
+**Herramientas nuevas (noviembre 2026):**
+- `calculator.qmd` + `js/theil-calc.js`: calculadora de índices de Theil (todo en el navegador; jackknife en O(n)).
+- `practice.qmd`: ejercicios de R ejecutables en el navegador con webR (no requiere instalar ninguna extensión).
+- `observatory.qmd`: mapa mundial (Banco Mundial PIP; mapa de Natural Earth cargado desde jsDelivr).
+- `blog/`: blog con feed RSS (`blog/index.xml`). Para escribir una entrada, crea una carpeta en `blog/posts/` con un `index.qmd` (copia una existente).
+- `_subscribe.qmd`: suscripción por correo. Para usar un boletín gratuito, crea una cuenta en https://buttondown.com y pon tu usuario en `BUTTONDOWN_USER`.
+- `cite.qmd` y `CITATION.cff` (GitHub muestra el botón "Cite this repository"). Para obtener un DOI permanente: conecta el repositorio en https://zenodo.org (GitHub → Zenodo) y crea una *release* en GitHub.
+- `glossary.qmd`: glosario y preguntas frecuentes.
+- `images/theilumina_social_card.png`: imagen que se muestra al compartir la web en redes sociales.

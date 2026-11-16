@@ -208,3 +208,33 @@ img.infographic, .infographic img { width: 100%; max-width: 900px; display: bloc
   .survey-reco { margin-top: 1rem; border-top: 1px solid rgba($theil-frame, .25); padding-top: 1rem; }
   .survey-note { font-size: .8rem; color: #777; margin: .75rem 0 0; }
 }
+
+/* ---------- Calculator ---------- */
+.calc { margin: 1rem 0 2rem; }
+.calc-step { background: $theil-cream; border-radius: 10px; padding: 1rem 1.25rem; margin-bottom: 1rem; border-left: 5px solid $theil-orange;
+  h3 { margin-top: 0; font-size: 1.15rem; } }
+.calc-row { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; margin: .6rem 0;
+  label { display: flex; flex-direction: column; font-size: .9rem; min-width: 200px; }
+  input[type=file] { max-width: 320px; } }
+#calc-input { font-family: SFMono-Regular, Consolas, monospace; font-size: .9rem; }
+.calc-table { font-size: .92rem; td, th { white-space: nowrap; } }
+#calc-out { overflow-x: auto; }
+.calc-note { font-size: .85rem; color: #666; }
+
+/* ---------- R exercises (webR) ---------- */
+.exercise { border: 1px solid rgba($theil-frame, .45); border-radius: 10px; margin: .75rem 0 1.25rem; overflow: hidden;
+  textarea { width: 100%; border: 0; border-bottom: 1px solid rgba($theil-frame, .3); padding: .75rem 1rem;
+    font-family: SFMono-Regular, Consolas, monospace; font-size: .9rem; background: #FBFAF7; resize: vertical; }
+  .ex-buttons { display: flex; gap: .5rem; align-items: center; padding: .5rem .75rem; background: #fff; }
+  .ex-hint { font-size: .8rem; color: #888; margin-left: auto; }
+  .ex-output { padding: 0 .75rem .5rem; background: #fff;
+    pre { background: #F4F1EA; padding: .6rem .8rem; border-radius: 6px; margin: .25rem 0; font-size: .85rem; white-space: pre-wrap; }
+    pre.ex-stderr { background: #FBEAEA; color: #8a1f1f; }
+    .ex-status { color: #666; font-style: italic; font-size: .9rem; } }
+  canvas.ex-plot { max-width: 100%; height: auto; display: block; margin: .25rem 0; }
+}
+
+/* ---------- Subscription ---------- */
+.subscribe { background: $theil-cream; border-left: 5px solid $theil-blue; border-radius: 8px; padding: 1rem 1.25rem; margin: 0 0 1.5rem;
+  .sub-form { display: flex; flex-wrap: wrap; gap: .5rem; margin: .6rem 0 .3rem; input { max-width: 320px; } }
+  .sub-note { font-size: .8rem; color: #777; margin: 0; } }

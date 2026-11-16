@@ -261,6 +261,51 @@ wbData.ok ? DOM.download(new Blob([d3.csvFormat(wbData.rows)], {type: "text/csv"
 
 <p class="source">Source: World Bank, [Poverty and Inequality Platform (PIP)](https://pip.worldbank.org). National estimates; depending on the country, they refer to income or consumption (shown when hovering). The mean log deviation is the Theil index $T_0$.</p>
 
+### World map of inequality
+
+The map shows, for each country, the **most recent estimate available up to the selected year** (at most five years earlier). Hover over a country to see its value, year and whether it refers to income or consumption.
+
+```{ojs}
+//| echo: false
+worldGeo = fetch("https://cdn.jsdelivr.net/gh/nvkelso/natural-earth-vector@master/geojson/ne_110m_admin_0_countries.geojson")
+  .then(r => r.ok ? r.json() : null).catch(() => null)
+wbYears = wbData.ok ? d3.extent(wbData.rows, r => r.year) : [2000, 2024]
+viewof wbMap = Inputs.form({
+  indicator: Inputs.radio(["Theil T0 (mean log deviation)", "Gini index"], {label: "Indicator", value: "Theil T0 (mean log deviation)"}),
+  year: Inputs.range(wbYears, {label: "Year", step: 1, value: wbYears[1]})
+})
+wbMapValues = {
+  const m = new Map();
+  if (!wbData.ok) return m;
+  const rows = wbData.rows.filter(r => r.indicator === wbMap.indicator && r.year <= wbMap.year && r.year >= wbMap.year - 5)
+    .sort((a, b) => b.year - a.year);
+  for (const r of rows) if (!m.has(r.code)) m.set(r.code, r);
+  return m;
+}
+```
+
+```{ojs}
+//| echo: false
+(wbData.ok && worldGeo) ? Plot.plot({
+  projection: "equal-earth", width: 1000, height: 520,
+  color: {type: "quantile", n: 6, scheme: "YlOrRd", legend: true, label: wbMap.indicator,
+          tickFormat: v => wbMap.indicator === "Gini index" ? v.toFixed(2) : v.toFixed(3)},
+  marks: [
+    Plot.sphere({fill: "#F7F4EE", stroke: "#ddd"}),
+    Plot.geo(worldGeo, {fill: "#e6e2da", stroke: "white", strokeWidth: 0.4}),
+    Plot.geo(worldGeo.features.filter(f => wbMapValues.has(f.properties.ADM0_A3) || wbMapValues.has(f.properties.ISO_A3)), {
+      fill: f => (wbMapValues.get(f.properties.ADM0_A3) ?? wbMapValues.get(f.properties.ISO_A3)).value,
+      stroke: "white", strokeWidth: 0.4,
+      tip: true,
+      title: f => { const r = wbMapValues.get(f.properties.ADM0_A3) ?? wbMapValues.get(f.properties.ISO_A3);
+                    return `${r.country} (${r.year}, ${r.welfare})\n${wbMap.indicator}: ${r.value.toFixed(3)}`; }
+    })
+  ]
+}) : (wbData.ok ? html`<p class="pending">The world map could not be loaded. Please try again later.</p>` : html``)
+```
+
+<p class="source">Grey: no estimate in the five years up to the selected year. Colours split the countries with data into six groups of similar size (sextiles). Map: [Natural Earth](https://www.naturalearthdata.com/) (public domain).</p>
+
 ## Spain: inequality by region (INE)
 
 The Spanish Statistical Office (INE) publishes the **Gini index** and the **S80/S20 ratio** of equivalised disposable income for Spain and its 19 regions (autonomous communities and cities), from the Living Conditions Survey (ECV). The data are downloaded from the INE API every time the website is rendered.

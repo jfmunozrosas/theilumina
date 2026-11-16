@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>THEILUMINA</title>
+<link>https://jfmunozrosas.github.io/theilumina/blog/</link>
+<atom:link href="https://jfmunozrosas.github.io/theilumina/blog/index.xml" rel="self" type="application/rss+xml"/>
+<description>Research project proposal (under evaluation). Illuminating inequality with Theil indices: bias, precision, computational efficiency and decomposition, with multidisciplinary applications.</description>
+<image>
+<url>https://jfmunozrosas.github.io/theilumina/images/theilumina_social_card.png</url>
+<title>THEILUMINA</title>
+<link>https://jfmunozrosas.github.io/theilumina/blog/</link>
+<height>76</height>
+<width>144</width>
+</image>
+<generator>quarto-1.7.32</generator>
+<lastBuildDate>Sun, 15 Nov 2026 23:00:00 GMT</lastBuildDate>
+<item>
+  <title>Between and within: what the Theil decomposition tells us</title>
+  <dc:creator>THEILUMINA team</dc:creator>
+  <link>https://jfmunozrosas.github.io/theilumina/blog/posts/2026-11-16-between-within/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>The main advantage of Theil indices over the Gini index is that they are <strong>additively decomposable</strong>: total inequality is exactly the sum of</p>
+<ul>
+<li><strong>between-group inequality</strong>, which would disappear if all groups had the same mean income, and</li>
+<li><strong>within-group inequality</strong>, which would remain even then.</li>
+</ul>
+<section id="an-example-by-sex" class="level2">
+<h2 class="anchored" data-anchor-id="an-example-by-sex">An example by sex</h2>
+<p>Consider ten incomes (in thousands of euros): 12, 15, 18, 22 and 30 for five women, and 16, 20, 25, 35 and 50 for five men. The mean income of women is 19.4 and that of men 29.2.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Index</th>
+<th>Total</th>
+<th>Within</th>
+<th>Between (gender gap)</th>
+<th>% between</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><img src="https://latex.codecogs.com/png.latex?T_0"></td>
+<td>0.0875</td>
+<td>0.0667</td>
+<td>0.0208</td>
+<td>23.7%</td>
+</tr>
+<tr class="even">
+<td><img src="https://latex.codecogs.com/png.latex?T_1"></td>
+<td>0.0906</td>
+<td>0.0701</td>
+<td>0.0205</td>
+<td>22.6%</td>
+</tr>
+</tbody>
+</table>
+<p>The gender gap accounts for <strong>about 23% of total inequality</strong>. Closing it would reduce inequality, but most of it would remain, especially among men, whose own index (0.083) is higher than that of women (0.050).</p>
+</section>
+<section id="why-it-matters-for-policy" class="level2">
+<h2 class="anchored" data-anchor-id="why-it-matters-for-policy">Why it matters for policy</h2>
+<p>The decomposition tells us <strong>where inequality is</strong>: between regions or within them, between women and men or within each sex, between sectors or within them. This guides policy: regional convergence policies act on the between-region part, while redistribution within regions acts on the within part.</p>
+<p>Because the groups are often small, their indices can be noticeably biased. Correcting this bias and quantifying the margin of error of each component is one of the objectives of THEILUMINA.</p>
+<p>Try the decomposition with your own data in the <a href="../../../calculator.html">calculator</a> (choose a grouping variable), or run it in R in <a href="../../../practice.html#exercise-2.-decomposition-by-sex">exercise 2</a>.</p>
+
+
+<!-- -->
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a> ]]></description>
+  <category>decomposition</category>
+  <category>gender</category>
+  <guid>https://jfmunozrosas.github.io/theilumina/blog/posts/2026-11-16-between-within/</guid>
+  <pubDate>Sun, 15 Nov 2026 23:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Why an inequality index needs a margin of error</title>
+  <dc:creator>THEILUMINA team</dc:creator>
+  <link>https://jfmunozrosas.github.io/theilumina/blog/posts/2026-11-16-margin-of-error/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Inequality indices published by statistical offices and used in research are almost always <strong>estimated from samples</strong>, such as household surveys. Like any estimate, they have two sources of error:</p>
+<ul>
+<li><strong>Bias:</strong> on average, the estimator does not hit the true value. Theil estimators tend to <strong>underestimate</strong> inequality, and more so in small samples and with skewed distributions such as income or wealth.</li>
+<li><strong>Variability:</strong> each sample gives a different value. The standard error and the confidence interval measure how much.</li>
+</ul>
+<section id="a-small-example" class="level2">
+<h2 class="anchored" data-anchor-id="a-small-example">A small example</h2>
+<p>Take six incomes: 10, 20, 30, 40, 60 and 80. The usual estimate of the mean log deviation is <img src="https://latex.codecogs.com/png.latex?T_0%20=%200.211">. The jackknife, which recomputes the index leaving out one observation at a time, estimates a bias of <img src="https://latex.codecogs.com/png.latex?-0.037"> (about <img src="https://latex.codecogs.com/png.latex?-18%5C%25">) and a standard error of <img src="https://latex.codecogs.com/png.latex?0.107">. The bias-corrected estimate is <img src="https://latex.codecogs.com/png.latex?0.249">, with a 95% interval from <img src="https://latex.codecogs.com/png.latex?0.04"> to <img src="https://latex.codecogs.com/png.latex?0.46">.</p>
+<p>With six observations the example is extreme, but the message is general: <strong>the margin of error can be as large as the differences we want to interpret</strong>. If two regions have indices of 0.21 and 0.25, we cannot conclude that inequality differs between them without looking at their margins of error.</p>
+</section>
+<section id="what-theilumina-does" class="level2">
+<h2 class="anchored" data-anchor-id="what-theilumina-does">What THEILUMINA does</h2>
+<p>The project studies when the bias is important, how to predict and correct it, and how to build confidence intervals that keep their coverage with skewed data, as well as fast algorithms that make these methods feasible with millions of observations.</p>
+<p>You can apply the jackknife to your own data with the <a href="../../../calculator.html">Theil index calculator</a>, or see the full method in the <a href="../../../guides/theil-indices-r.html">practical guide</a>.</p>
+
+
+<!-- -->
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a> ]]></description>
+  <category>bias</category>
+  <category>inference</category>
+  <guid>https://jfmunozrosas.github.io/theilumina/blog/posts/2026-11-16-margin-of-error/</guid>
+  <pubDate>Sun, 15 Nov 2026 23:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Welcome to the THEILUMINA blog</title>
+  <dc:creator>THEILUMINA team</dc:creator>
+  <link>https://jfmunozrosas.github.io/theilumina/blog/posts/2026-11-16-welcome/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>THEILUMINA studies how to measure inequality reliably with <strong>Theil indices</strong>: how to correct the bias of their estimators, how to obtain margins of error that can be trusted, how to compute them efficiently with large samples and how to apply them in the social sciences (water, tourism, firms and global convergence).</p>
+<p>In this blog we will publish <strong>short, non-technical posts</strong> on:</p>
+<ul>
+<li>the results of the project, explained for a broad audience;</li>
+<li>data stories based on the <a href="../../../observatory.html">inequality observatory</a>;</li>
+<li>practical advice on estimating, decomposing and interpreting Theil indices;</li>
+<li>news on the <strong>theil</strong> R package, seminars and conferences.</li>
+</ul>
+<p>To start, you can try the new <a href="../../../calculator.html">Theil index calculator</a> with your own data, or run the <a href="../../../practice.html">R exercises in your browser</a>.</p>
+<p>You can follow the blog with its <strong>RSS feed</strong> or subscribe by email at the top of the <a href="../../../blog/index.html">blog page</a>.</p>
+
+
+<!-- -->
+
+
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a> ]]></description>
+  <category>news</category>
+  <guid>https://jfmunozrosas.github.io/theilumina/blog/posts/2026-11-16-welcome/</guid>
+  <pubDate>Sun, 15 Nov 2026 23:00:00 GMT</pubDate>
+  <media:content url="https://jfmunozrosas.github.io/theilumina/images/logo_theilumina.png" medium="image" type="image/png" height="48" width="144"/>
+</item>
+</channel>
+</rss>

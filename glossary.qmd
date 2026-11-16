@@ -1,0 +1,74 @@
+---
+title: "Glossary and FAQ"
+subtitle: "Key concepts on Theil indices and frequently asked questions"
+---
+
+## Glossary
+
+Theil index $T_1$
+: Generalised entropy index GE(1), proposed by Henri Theil (1967). It is more sensitive to differences at the **top** of the distribution. It is 0 under perfect equality and its maximum, $\ln n$, is reached when one person has all the income.
+
+Theil index $T_0$ (mean log deviation, MLD)
+: Generalised entropy index GE(0). It is the average of $\ln(\mu / y_i)$ and is more sensitive to differences at the **bottom** of the distribution. The World Bank publishes it for most countries.
+
+Generalised entropy family GE($\alpha$)
+: Family of inequality indices that includes $T_0$ ($\alpha = 0$) and $T_1$ ($\alpha = 1$). The parameter $\alpha$ sets the sensitivity to different parts of the distribution: the lower $\alpha$, the more weight on low incomes.
+
+Additive decomposition
+: Total inequality equals **between-group** inequality plus **within-group** inequality. Theil indices satisfy it exactly; the Gini index does not.
+
+Between-group inequality
+: Inequality that would remain if every person had the mean income of their group. It measures the gaps between groups (regions, sexes, sectors…).
+
+Within-group inequality
+: Weighted sum of the inequality inside each group: by population shares in $T_0$ and by income shares in $T_1$.
+
+Bias of an estimator
+: Difference between the average value of an estimator over all possible samples and the true value. Theil estimators are usually biased **downwards**.
+
+Relative bias
+: Bias divided by the true value, in percent. In THEILUMINA: negligible if below 2%, mild between 2% and 5%, moderate between 5% and 10%, and severe above 10%.
+
+Skewness and heavy tails
+: Income and wealth distributions have a long right tail: few people with very high values. The heavier the tail, the larger the bias and the harder the inference for inequality indices.
+
+Jackknife
+: Resampling method that recomputes the estimator leaving out one observation at a time. It estimates the bias and the variance of the estimator. THEILUMINA obtains closed-form expressions that compute it in $\mathcal{O}(n)$ operations.
+
+Bootstrap
+: Resampling method that draws many samples with replacement from the data to approximate the distribution of an estimator and build confidence intervals.
+
+Delta method
+: Approximation of the variance of an estimator based on a first-order Taylor expansion. It is fast, but can be unreliable with heavy-tailed distributions.
+
+Confidence interval and coverage
+: Range of values that contains the true value with a given probability (e.g. 95%). An interval has good **coverage** when that probability is achieved in practice.
+
+Superpopulation
+: Framework in which the observed data (even a census, such as all the countries in the world) are treated as a realisation of an underlying random process, which justifies statistical inference on them.
+
+## Frequently asked questions
+
+**Why use Theil indices instead of the Gini index?**
+Because they can be decomposed exactly into between- and within-group inequality, and because the family offers indices with different sensitivity to the bottom ($T_0$) and the top ($T_1$) of the distribution. The Gini index remains useful and is often reported together with them.
+
+**Should I use $T_0$ or $T_1$?**
+It depends on the question. $T_0$ weights every person equally in the decomposition and is more sensitive to low incomes; $T_1$ weights by income shares and is more sensitive to high incomes. Reporting both is good practice.
+
+**Can I compute Theil indices with zero or negative incomes?**
+No: they use logarithms of income. Zero and negative values must be handled explicitly (excluded, bottom-coded or analysed with another index) and the number of affected observations should be reported.
+
+**Is the bias important in practice?**
+It can be. With small samples, small groups in a decomposition or very skewed distributions, the relative bias of the usual estimators can exceed 10%. Try the [bias explorer](simulation.qmd) or the [calculator](calculator.qmd) to see it.
+
+**How can I obtain a margin of error for my index?**
+With the jackknife or the bootstrap, or with linearisation if your data come from a survey with a complex design (e.g. the R package `convey`). The [calculator](calculator.qmd) and the [practical guide](guides/theil-indices-r.qmd) show how.
+
+**Where can I find official data on inequality?**
+In the [observatory](observatory.qmd) (Eurostat, World Bank and INE) and in the [links of interest](links.qmd).
+
+**When will the theil R package be available?**
+It is one of the main results of THEILUMINA (work package 4). Announcements will be published in the [blog](blog/index.qmd) and in the [news](news.qmd).
+
+**Can I use the materials of this website in my classes?**
+Yes, citing the source as indicated in [How to cite](cite.qmd).

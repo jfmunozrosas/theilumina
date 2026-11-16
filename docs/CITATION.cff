@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use materials, data or tools from this website, please cite it as below."
+title: "THEILUMINA: Illuminating inequality with Theil indices"
+type: software
+authors:
+  - name: "THEILUMINA project, University of Granada"
+date-released: 2026-11-16
+url: "https://jfmunozrosas.github.io/theilumina/"
+repository-code: "https://github.com/jfmunozrosas/theilumina"
+abstract: >-
+  Website, inequality observatory, practical guides, Theil index calculator and R code of
+  THEILUMINA, a research project on bias, precision, computational efficiency and
+  decomposition of Theil inequality indices, with multidisciplinary applications.
+keywords:
+  - Theil index
+  - inequality
+  - mean log deviation
+  - jackknife
+  - bias correction
+  - decomposition
+  - R
