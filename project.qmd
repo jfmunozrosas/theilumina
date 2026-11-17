@@ -7,6 +7,8 @@ subtitle: "Research project proposal · General objectives, work packages and ac
 
 The research problems and questions that motivate these objectives are described in [Research problems and questions](research.qmd). The [project infographic](images/theilumina_infographic.png) summarises the project on a single page.
 
+THEILUMINA builds on the results of the previous project [GiniUs](https://jfmunozrosas.github.io/ginius/){target="_blank"} (PID2022-136235NB-I00), whose objective on the bias of the Gini index has been achieved; its methods, software (giniVarCI) and dissemination tools (one-minute videos, impact page) are the starting point of this proposal.
+
 The project is organised into five work packages (WP), each aligned with a General Objective (GO). Each WP sets out Specific Objectives (SO) and Activities (A). A cross-cutting activity covers this website:
 
 - **A1.** Update the project's interactive website to disseminate results, share data and code, and support reproducibility.

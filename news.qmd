@@ -18,6 +18,12 @@ subtitle: "Project status and short news on the activity of the team"
 ::: {.news-item}
 <span class="news-date">November 2026</span> <span class="news-tag tag-project">Dissemination</span>
 
+**Impact of the team's publications and videos.** The table of [previous publications of the team](publications.qmd#previous-publications) now shows, for each article, its open-access version, its one-minute video, its citations (Dimensions) and its online attention (Altmetric), as on the website of the previous project [GiniUs](https://jfmunozrosas.github.io/ginius/). Watch the [videos](https://jfmunozrosas.github.io/ginius/videos.html).
+:::
+
+::: {.news-item}
+<span class="news-date">November 2026</span> <span class="news-tag tag-project">Dissemination</span>
+
 **New section: Practical guides.** The first [practical guide](guides.qmd) explains how to estimate Theil indices in R, decompose them by groups (regions, sex) and measure their bias and precision. Available in English and Spanish.
 :::
 

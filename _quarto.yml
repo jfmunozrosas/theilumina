@@ -40,6 +40,8 @@ website:
             text: "Objectives, work packages and activities"
           - href: news.qmd
             text: "Status and news"
+          - href: https://jfmunozrosas.github.io/ginius/
+            text: "Previous project: GiniUs ↗"
       - href: team.qmd
         text: Team
       - text: Theil indices
@@ -66,6 +68,8 @@ website:
             text: "Practical guides"
           - href: blog/index.qmd
             text: "Blog"
+          - href: https://jfmunozrosas.github.io/ginius/videos.html
+            text: "One-minute videos of our research (GiniUs) ↗"
           - href: dissemination.qmd
             text: "Seminars, conferences and stays"
           - href: identity.qmd
@@ -86,10 +90,10 @@ website:
         href: https://github.com/jfmunozrosas/theilumina   # <- cambiar
         aria-label: GitHub
   page-footer:
-    left: "THEILUMINA · Research project proposal · Universidad de Granada · Last update: 16 November 2026"
+    left: "THEILUMINA · Research project proposal · Universidad de Granada · Previous project: [GiniUs](https://jfmunozrosas.github.io/ginius/) · Last update: 17 November 2026"
     right: "Built with [Quarto](https://quarto.org) · Reproducible research"
 
-date-modified: "2026-11-16"
+date-modified: "2026-11-17"
 
 format:
   html:

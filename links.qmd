@@ -2,6 +2,10 @@
 title: "Links of interest"
 ---
 
+## Projects of the team
+
+- [GiniUs](https://jfmunozrosas.github.io/ginius/): previous project of the team (PID2022-136235NB-I00) on the Gini index, with open tools, an impact page and [one-minute videos](https://jfmunozrosas.github.io/ginius/videos.html) of the team's research.
+
 ## Websites on inequality
 
 - [World Inequality Lab](https://inequalitylab.world/en/)

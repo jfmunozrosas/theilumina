@@ -29,7 +29,7 @@ toc: false
 
 ## About THEILUMINA
 
-**THEILUMINA** is a **research project proposal** led by the University of Granada (Spain) that develops new methods to estimate Theil inequality indices ($T_0$ and $T_1$) and to make reliable inferences about them. It builds on the previous project GiniUs (PID2022-136235NB-I00) on the Gini index, which produced the R package [giniVarCI](https://cran.r-project.org/package=giniVarCI).
+**THEILUMINA** is a **research project proposal** led by the University of Granada (Spain) that develops new methods to estimate Theil inequality indices ($T_0$ and $T_1$) and to make reliable inferences about them. It builds on the previous project [GiniUs](https://jfmunozrosas.github.io/ginius/){target="_blank"} (PID2022-136235NB-I00) on the Gini index, which produced the R package [giniVarCI](https://cran.r-project.org/package=giniVarCI).
 
 Theil indices are widely used because, unlike the Gini index, they can be additively decomposed into inequality **between** groups and inequality **within** groups. However, their estimators can be severely biased, and their confidence intervals unreliable, when data are highly skewed and unequal, which is precisely where measuring inequality matters most. The [research problems and questions](research.qmd) page illustrates these problems with preliminary results.
 
@@ -41,6 +41,22 @@ The project:
 - develops the open-source R package **theil**, with a C++ core;
 - transfers these methods to water economics, tourism, servitization and digital transformation of firms, and global convergence.
 
+## From GiniUs to THEILUMINA
+
+::: {.ginius-box}
+<img class="ginius-logo" src="https://jfmunozrosas.github.io/ginius/images/logo_ginius.png" alt="GiniUs logo">
+**GiniUs** (PID2022-136235NB-I00) is the previous project of the team, on the bias and inference of the **Gini index**. THEILUMINA extends its methods to Theil indices. On the [GiniUs website](https://jfmunozrosas.github.io/ginius/){target="_blank"} you can find its results, open tools (Gini index calculator, missing data simulator, R exercises), the [Impact page](https://jfmunozrosas.github.io/ginius/impact.html){target="_blank"} and **one-minute videos** that explain the team's articles in plain language.
+
+[Visit GiniUs →](https://jfmunozrosas.github.io/ginius/){.btn .btn-outline-primary .btn-sm target="_blank"} [All the videos →](https://jfmunozrosas.github.io/ginius/videos.html){.btn .btn-outline-primary .btn-sm target="_blank"}
+:::
+
+::: {.video-grid}
+<a href="https://jfmunozrosas.github.io/ginius/videos.html#gini-practical-guide" target="_blank"><img src="https://jfmunozrosas.github.io/ginius/media/videos/gini-practical-guide.jpg" alt="Video: How to estimate the Gini index without errors"><span class="vt">How to estimate the Gini index without errors</span></a>
+<a href="https://jfmunozrosas.github.io/ginius/videos.html#gini-bias" target="_blank"><img src="https://jfmunozrosas.github.io/ginius/media/videos/gini-bias.jpg" alt="Video: The bias of the Gini index"><span class="vt">The bias of the Gini index</span></a>
+<a href="https://jfmunozrosas.github.io/ginius/videos.html#happy-and-poor" target="_blank"><img src="https://jfmunozrosas.github.io/ginius/media/videos/happy-and-poor.jpg" alt="Video: The “happy and poor” paradox"><span class="vt">The “happy and poor” paradox</span></a>
+<a href="https://jfmunozrosas.github.io/ginius/videos.html#water-sanitation-growth" target="_blank"><img src="https://jfmunozrosas.github.io/ginius/media/videos/water-sanitation-growth.jpg" alt="Video: Does growth make access to water more equal?"><span class="vt">Does growth make access to water more equal?</span></a>
+:::
+
 ## The project at a glance
 
 [![THEILUMINA infographic: why the project matters, its five work packages, who benefits and the team](images/theilumina_infographic.svg){fig-alt="THEILUMINA project infographic" .infographic}](images/theilumina_infographic.png)
@@ -50,6 +66,7 @@ The project:
 ## Latest news
 
 ::: {.news-mini}
+- **November 2026** · [Previous publications of the team](publications.qmd#previous-publications) now show open access, [one-minute videos](https://jfmunozrosas.github.io/ginius/videos.html), citations and online attention, as in the previous project [GiniUs](https://jfmunozrosas.github.io/ginius/).
 - **November 2026** · New tools: [Theil index calculator](calculator.qmd), [R exercises in your browser](practice.qmd), [world inequality map](observatory.qmd#world-map-of-inequality), [blog](blog/index.qmd) and [glossary](glossary.qmd).
 - **November 2026** · New [Practical guides](guides.qmd) section, starting with a guide to estimating and decomposing Theil indices in R.
 - **November 2026** · [Conferences of interest in 2027](dissemination.qmd#upcoming-conferences-2027): ECINEQ, IARIW, ISI WSC, EcoSta and more.

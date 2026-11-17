@@ -238,3 +238,16 @@ img.infographic, .infographic img { width: 100%; max-width: 900px; display: bloc
 .subscribe { background: $theil-cream; border-left: 5px solid $theil-blue; border-radius: 8px; padding: 1rem 1.25rem; margin: 0 0 1.5rem;
   .sub-form { display: flex; flex-wrap: wrap; gap: .5rem; margin: .6rem 0 .3rem; input { max-width: 320px; } }
   .sub-note { font-size: .8rem; color: #777; margin: 0; } }
+
+/* Impact columns and links to the GiniUs project */
+.oa-link { display: inline-block; padding: 0 .45rem; border-radius: 10px; font-size: .78em; font-weight: 600;
+  background: rgba(46, 125, 50, .12); color: #2E7D32 !important; text-decoration: none; white-space: nowrap; }
+.oa-link:hover { background: #2E7D32; color: #fff !important; }
+.vid-link { display: inline-block; padding: 0 .45rem; border-radius: 10px; font-size: .78em; font-weight: 600;
+  background: rgba($theil-orange, .15); color: darken($theil-orange, 15%) !important; text-decoration: none; white-space: nowrap; }
+.vid-link:hover { background: $theil-orange; color: #fff !important; }
+.video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; margin: 1rem 0 1.2rem;
+  a { text-decoration: none; color: inherit; } img { width: 100%; border-radius: 8px; border: 1px solid #e3e8ef; }
+  .vt { display: block; font-size: .88rem; font-weight: 600; margin-top: .35rem; line-height: 1.25; } }
+.ginius-box { border-left: 5px solid #1A5FA8; background: #F4F8FD; border-radius: 10px; padding: .9rem 1.1rem; margin: 1rem 0 1.4rem;
+  img.ginius-logo { height: 46px; float: right; margin: 0 0 .4rem 1rem; } }

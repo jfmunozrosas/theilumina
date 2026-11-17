@@ -120,7 +120,7 @@ The team works at the Faculty of Economics and Business of the University of Gra
 
 The team has a consolidated record of joint research: methodological and applied researchers already publish together, which ensures that the methods developed in the project are transferred to the Social Sciences.
 
-![Co-authorship network of the THEILUMINA team. Each node shows the number of articles in JCR journals of each researcher; each link shows the number of JCR articles co-authored. Filled nodes: members of the previous GiniUs project; white nodes: new members; squares: PhD students; dashed ring: researchers at foreign institutions. Sources: Google Scholar and Research Portal of the University of Granada; indexing according to the Web of Science Master Journal List (November 2026).](images/coauthorship_network.png){fig-alt="Co-authorship network of the THEILUMINA team" .lightbox}
+![Co-authorship network of the THEILUMINA team. Each node shows the number of articles in JCR journals of each researcher; each link shows the number of JCR articles co-authored. Filled nodes: members of the previous project GiniUs (https://jfmunozrosas.github.io/ginius); white nodes: new members; squares: PhD students; dashed ring: researchers at foreign institutions. Sources: Google Scholar and Research Portal of the University of Granada; indexing according to the Web of Science Master Journal List (November 2026).](images/coauthorship_network.png){fig-alt="Co-authorship network of the THEILUMINA team" .lightbox}
 
 <p class="source">Download the network: [PNG](images/coauthorship_network.png) · [PDF](images/coauthorship_network.pdf) · [SVG](images/coauthorship_network.svg)</p>
 
